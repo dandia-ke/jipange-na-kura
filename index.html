@@ -36,26 +36,39 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 32px;
+      padding: 10px 16px;
       background: var(--black);
       border-bottom: 3px solid var(--green);
+      min-height: 52px;
     }
     .logo {
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; font-weight: 900;
+      font-size: 1.25rem; font-weight: 900;
       color: var(--white); letter-spacing: -0.5px;
+      white-space: nowrap; flex-shrink: 0;
     }
     .logo span { color: var(--gold); }
-    .nav-flag { display: flex; gap: 4px; align-items: center; }
-    .nav-flag div { width: 20px; height: 12px; border-radius: 2px; }
+    .nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .nav-flag { display: flex; gap: 3px; align-items: center; }
+    .nav-flag div { width: 16px; height: 10px; border-radius: 2px; }
     .f-black { background: #222; border: 1px solid #555; }
     .f-red   { background: var(--red); }
     .f-green { background: var(--green); }
     .f-white { background: #ccc; }
+    .nav-dir-btn {
+      background: var(--green); color: white; border: none; border-radius: 6px;
+      padding: 6px 10px; font-family: 'DM Sans', sans-serif; font-size: 0.75rem;
+      font-weight: 600; cursor: pointer; transition: background 0.15s; white-space: nowrap;
+    }
+    .nav-dir-btn:hover { background: var(--green-light); }
+    @media(max-width: 400px) {
+      .nav-dir-btn { font-size: 0.7rem; padding: 5px 8px; }
+      .nav-flag { display: none; }
+    }
 
     /* ── SCREENS ── */
     .screen {
-      display: none; min-height: 100vh; padding-top: 72px;
+      display: none; min-height: 100vh; padding-top: 56px;
     }
     .screen.active { display: flex; flex-direction: column; }
 
@@ -198,6 +211,16 @@
     }
     .polling-item:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(212,160,23,0.12); }
     .polling-item.highlighted { border-color: var(--gold); background: #fffdf5; }
+    .polling-item.selected-station {
+      border-color: var(--green) !important; background: #f0faf4 !important;
+    }
+    .polling-item.selected-station .polling-dot {
+      background: var(--green); color: white;
+    }
+    .polling-item.selected-station::after {
+      content: '✓ Selected'; display: block; font-size: 0.68rem; font-weight: 700;
+      color: var(--green); margin-top: 4px; letter-spacing: 0.5px;
+    }
     .polling-dot {
       width: 28px; height: 28px; border-radius: 50%;
       background: var(--gold); color: var(--black); flex-shrink: 0;
@@ -775,8 +798,8 @@
 <!-- NAV -->
 <nav>
   <div class="logo" onclick="restart()" style="cursor:pointer;">Jipange Na <span>Kura</span></div>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <button class="nav-dir-btn" onclick="showDirectory()">📋 Leaders Directory</button>
+  <div class="nav-right">
+    <button class="nav-dir-btn" onclick="showDirectory()">📋 Directory</button>
     <div class="nav-flag">
       <div class="f-black"></div>
       <div class="f-red"></div>
@@ -1213,6 +1236,7 @@
   let geoCountyLayer = null; // admin1 county layer
   let geoWardLayer   = null; // ward layer
   const WARD_GEO_LOOKUP = {}; // UPPERCASE constituency key → sorted title-case ward names array
+  let wardLayerLoaded = false; // load ward GeoJSON only when needed
   const wardLayerLookup = {}; // "CONSTITUENCY|WARD" → Leaflet layer (built on GeoJSON load)
   let highlightedWardLayer = null; // currently highlighted ward Leaflet layer
   let pendingGpsCoords  = null; // { lat, lng } stored while waiting for GeoJSON layers to load
@@ -1396,7 +1420,7 @@
     // Load all GeoJSON layers
     loadCountyLayer();
     loadConstituencyLayer();
-    loadWardLayer();
+    // Ward layer loaded on-demand after location confirmed — saves ~2MB on initial load
     kenyaMap.on('zoomend', updateWardLayerVisibility);
     kenyaMap.on('click', onMapClick);
 
@@ -1556,6 +1580,9 @@
 
   // ── LOAD WARD LAYER ──
   function loadWardLayer() {
+    if (wardLayerLoaded) { updateWardLayerVisibility(); return; }
+    wardLayerLoaded = true;
+    showToast('Loading ward boundaries…', 4000);
     fetch('kenya_wards.geojson')
       .then(r => r.json())
       .then(data => {
@@ -1607,7 +1634,11 @@
           }
         }
       })
-      .catch(() => console.warn('Ward GeoJSON not found — place kenya_wards.geojson next to the HTML file'));
+      .catch(err => {
+        wardLayerLoaded = false; // allow retry
+        console.warn('Ward GeoJSON not found:', err);
+        showToast('Ward map unavailable — check kenya_wards.geojson is uploaded', 4000);
+      });
   }
 
   function defaultWardStyle() {
@@ -2234,6 +2265,7 @@
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('screen-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   function showToast(msg, duration = 2500) {
@@ -2621,6 +2653,10 @@
         item.className = 'polling-item';
         item.id = `polling-item-${station.index}`;
         item.onclick = () => focusPollingStation(station);
+        // Restore selected state if this was previously selected
+        if (state.selectedPollingStation && state.selectedPollingStation.name === station.name) {
+          item.classList.add('selected-station');
+        }
         const mapsQuery = encodeURIComponent(`${station.name}, ${station.ward}, ${state.location.constituency}, Kenya`);
         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
         item.innerHTML = `
@@ -2653,18 +2689,24 @@
   }
 
   function focusPollingStation(station) {
-    // Save to state
     state.selectedPollingStation = station;
-    showToast(`✓ Polling station selected: ${station.name}`);
+    showToast(`✓ Polling station saved: ${station.name}`);
 
-    if (!kenyaMap || !station.lat || !station.lng) {
-      return;
+    // Visual: mark as selected (green) vs just highlighted (gold)
+    document.querySelectorAll('.polling-item').forEach(el => {
+      el.classList.remove('highlighted', 'selected-station');
+    });
+    const el = document.getElementById(`polling-item-${station.index}`);
+    if (el) {
+      el.classList.add('selected-station');
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
+
+    if (!kenyaMap || !station.lat || !station.lng) return;
     kenyaMap.flyTo([station.lat, station.lng], 15, { duration: 1.2 });
     if (pollingMarkers[station.index]) {
       setTimeout(() => pollingMarkers[station.index].openPopup(), 1300);
     }
-    highlightPollingItem(station.index);
   }
 
   function highlightPollingItem(index) {
@@ -2696,6 +2738,7 @@
       state.shuffledPools[seat.key] = shuffle(seat.getPool());
     });
 
+    loadWardLayer();
     renderSeat();
     showScreen(3);
   }
@@ -3124,13 +3167,13 @@
   function fetchCountyCSV(county) {
     if (!county || loadedCountyFiles.has(county)) return;
     loadedCountyFiles.add(county);
-    const folder = 'Counties Polling Station/';
+    const folder = 'polling-stations/';
     const candidates = [
-      `${folder}${county} Polling Stations.csv`,
-      `${folder}${county.toUpperCase().replace(/\s+/g, '-')} Polling Stations.csv`,
-      `${folder}${county.toUpperCase()} Polling Stations.csv`,
-      `${folder}${county.toUpperCase().replace(/-/g, ' - ')} Polling Stations.csv`,
-      `${folder}${county.toUpperCase()} CITY Polling Stations.csv`,
+      `${folder}${county.toUpperCase()}.csv`,
+      `${folder}${county.toUpperCase().replace(/\s+/g, '-')}.csv`,
+      `${folder}${county.replace(/\s+/g, '-')}.csv`,
+      `${folder}${county}.csv`,
+      `${folder}${county.toUpperCase().replace(/[^A-Z0-9]/g, '-')}.csv`,
     ];
     function tryNext(i) {
       if (i >= candidates.length) {
@@ -3400,6 +3443,7 @@
     if (state.currentSeat >= SEATS.length) {
       buildBallot();
       showScreen(4);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       renderSeat();
     }
