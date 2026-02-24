@@ -461,7 +461,11 @@
     }
     .profile-hero-placeholder {
       width: 100%; height: 100%; display: flex; align-items: center;
-      justify-content: center; font-size: 5rem;
+      justify-content: center; font-size: 5rem; overflow: hidden;
+      position: absolute; inset: 0;
+    }
+    .profile-hero-placeholder img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
     }
     .profile-hero-overlay {
       position: absolute; inset: 0;
@@ -750,7 +754,7 @@
     .dir-card.empty-slot { cursor: default; opacity: 0.7; }
     .dir-card.empty-slot:hover { transform: none; border-color: var(--border); box-shadow: none; }
 
-    .dir-card-photo {
+    .dir-card-photo { position: relative;
       height: 110px; display: flex; align-items: center; justify-content: center;
       font-size: 3.2rem; position: relative;
     }
@@ -903,6 +907,12 @@
       <div class="loc-status" id="loc-status">
         <span class="spinner"></span> Fetching your location from GPS…
       </div>
+      <div id="gps-privacy-note" style="display:none;font-size:0.72rem;color:var(--grey);text-align:center;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:4px;">
+        🔒 Your location stays in your browser — never stored or shared
+      </div>
+      <button class="btn-primary" id="btn-confirm-location" onclick="confirmLocation()" style="width:100%;justify-content:center;display:none;">
+        Confirm & Load Candidates →
+      </button>
     </div>
 
     <!-- Manual Panel -->
@@ -974,6 +984,9 @@
           </select>
         </div>
       </div>
+      <button class="btn-manual-go" onclick="applyManualLocation()">
+        Load My Candidates →
+      </button>
     </div>
 
     <!-- IEBC Verification Panel -->
@@ -1044,13 +1057,6 @@
       </div>
       <div class="polling-list" id="polling-list"></div>
     </div>
-
-    <div id="gps-privacy-note" style="display:none;font-size:0.72rem;color:var(--grey);text-align:center;margin-bottom:8px;align-items:center;justify-content:center;gap:4px;">
-      🔒 Your location stays in your browser — never stored or shared
-    </div>
-    <button class="btn-primary" id="btn-confirm-location" onclick="confirmLocation()" style="width:100%;justify-content:center;display:none;margin-top:16px;">
-      Confirm & Load Candidates →
-    </button>
   </div>
 
 </section>
@@ -2287,12 +2293,8 @@
   // ══════════════════════════════════════════════════
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    const screen = document.getElementById('screen-' + id);
-    screen.classList.add('active');
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    screen.querySelectorAll('*').forEach(el => { if (el.scrollTop) el.scrollTop = 0; });
+    document.getElementById('screen-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   function showToast(msg, duration = 2500) {
@@ -3326,7 +3328,6 @@
     showToast(`Ward selected: ${ward}`);
     // Refresh polling stations immediately so the list updates as soon as ward is chosen
     showPollingStations();
-    document.getElementById('btn-confirm-location').style.display = 'flex';
   }
 
   function applyManualLocation() {
@@ -3368,9 +3369,6 @@
   // SCREEN 3: SEAT SELECTOR
   // ══════════════════════════════════════════════════
   function renderSeat() {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
     const seat = SEATS[state.currentSeat];
     // Use pre-shuffled pool; fall back to live pool if somehow missing
     const pool = (state.shuffledPools && state.shuffledPools[seat.key]) || seat.getPool();
@@ -3473,6 +3471,7 @@
     if (state.currentSeat >= SEATS.length) {
       buildBallot();
       showScreen(4);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       renderSeat();
     }
@@ -3599,6 +3598,154 @@
         manifesto: ["Kapsowar hospital upgrade","Youth training centres","Irrigation for Marakwet farmers"] },
     ],
   };
+  // ══════ CURRENT LEADERS 2022–2027 (auto-generated) ══════
+  // Alias: Nairobi = Nairobi City in dropdown
+  function getDirCandidates(key) {
+    return DIRECTORY_CANDIDATES[key] ||
+           DIRECTORY_CANDIDATES[key.replace('NAIROBI|','NAIROBI CITY|')] ||
+           DIRECTORY_CANDIDATES[key.replace('NAIROBI CITY|','NAIROBI|')] || [];
+  }
+  DIRECTORY_CANDIDATES['MOMBASA|governor']=[{name:'Abdullswamad Shariff Nassir',party:'ODM',seat:'governor',county:'Mombasa',photo:'photos/governors/mombasa.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Mombasa County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MOMBASA|senator']=[{name:'Mohamed Faki Mwinyihaji',party:'ODM',seat:'senator',county:'Mombasa',photo:'photos/senators/mombasa.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Mombasa County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MOMBASA|womenrep']=[{name:'Zamzam Mohamed',party:'ODM',seat:'womenrep',county:'Mombasa',photo:'photos/women-reps/mombasa.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Mombasa County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KWALE|governor']=[{name:'Fatuma Mohamed Achani',party:'UDA',seat:'governor',county:'Kwale',photo:'photos/governors/kwale.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kwale County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KWALE|senator']=[{name:'Issa Juma Boy',party:'ODM',seat:'senator',county:'Kwale',photo:'photos/senators/kwale.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kwale County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KWALE|womenrep']=[{name:'Fatuma Hamisi Masito',party:'UDA',seat:'womenrep',county:'Kwale',photo:'photos/women-reps/kwale.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kwale County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KILIFI|governor']=[{name:'Gideon Maitha Mung’aro',party:'ODM',seat:'governor',county:'Kilifi',photo:'photos/governors/kilifi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kilifi County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KILIFI|senator']=[{name:'Stewart Madzayo',party:'ODM',seat:'senator',county:'Kilifi',photo:'photos/senators/kilifi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kilifi County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KILIFI|womenrep']=[{name:'Gertrude Mbeyu',party:'ODM',seat:'womenrep',county:'Kilifi',photo:'photos/women-reps/kilifi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kilifi County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TANA RIVER|governor']=[{name:'Dhadho Gaddae Godhana',party:'ODM',seat:'governor',county:'Tana River',photo:'photos/governors/tana_river.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Tana River County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TANA RIVER|senator']=[{name:'Danson Buya Mungatana',party:'Jubilee',seat:'senator',county:'Tana River',photo:'photos/senators/tana_river.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Tana River County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TANA RIVER|womenrep']=[{name:'Amina Dika',party:'ODM',seat:'womenrep',county:'Tana River',photo:'photos/women-reps/tana_river.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Tana River County 2022–2027']}];
+  DIRECTORY_CANDIDATES['LAMU|governor']=[{name:'Issa Abdalla Timamy',party:'ANC',seat:'governor',county:'Lamu',photo:'photos/governors/lamu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Lamu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['LAMU|senator']=[{name:'Joseph Githuku',party:'UDA',seat:'senator',county:'Lamu',photo:'photos/senators/lamu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Lamu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['LAMU|womenrep']=[{name:'Muthoni Marubu',party:'UDA',seat:'womenrep',county:'Lamu',photo:'photos/women-reps/lamu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Lamu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TAITA TAVETA|governor']=[{name:'Andrew Mwadime',party:'Independent',seat:'governor',county:'Taita Taveta',photo:'photos/governors/taita_taveta.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Taita Taveta County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TAITA TAVETA|senator']=[{name:'Johnes Mwaruma',party:'ODM',seat:'senator',county:'Taita Taveta',photo:'photos/senators/taita_taveta.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Taita Taveta County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TAITA TAVETA|womenrep']=[{name:'Lydia Haika Mizighi',party:'ODM',seat:'womenrep',county:'Taita Taveta',photo:'photos/women-reps/taita_taveta.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Taita Taveta County 2022–2027']}];
+  DIRECTORY_CANDIDATES['GARISSA|governor']=[{name:'Nathif Adam Jama',party:'ODM',seat:'governor',county:'Garissa',photo:'photos/governors/garissa.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Garissa County 2022–2027']}];
+  DIRECTORY_CANDIDATES['GARISSA|senator']=[{name:'Abdulkadir Haji',party:'UDA',seat:'senator',county:'Garissa',photo:'photos/senators/garissa.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Garissa County 2022–2027']}];
+  DIRECTORY_CANDIDATES['GARISSA|womenrep']=[{name:'Edo Udgoon Siyad',party:'ODM',seat:'womenrep',county:'Garissa',photo:'photos/women-reps/garissa.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Garissa County 2022–2027']}];
+  DIRECTORY_CANDIDATES['WAJIR|governor']=[{name:'Ahmed Abdullahi',party:'ODM',seat:'governor',county:'Wajir',photo:'photos/governors/wajir.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Wajir County 2022–2027']}];
+  DIRECTORY_CANDIDATES['WAJIR|senator']=[{name:'Abass Sheikh Mohamed',party:'ODM',seat:'senator',county:'Wajir',photo:'photos/senators/wajir.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Wajir County 2022–2027']}];
+  DIRECTORY_CANDIDATES['WAJIR|womenrep']=[{name:'Fatuma Abdi Jehow',party:'ODM',seat:'womenrep',county:'Wajir',photo:'photos/women-reps/wajir.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Wajir County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MANDERA|governor']=[{name:'Mohamed Adan Khalif',party:'UDM',seat:'governor',county:'Mandera',photo:'photos/governors/mandera.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Mandera County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MANDERA|senator']=[{name:'Ali Roba',party:'ODM',seat:'senator',county:'Mandera',photo:'photos/senators/mandera.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Mandera County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MANDERA|womenrep']=[{name:'Umul Ker Kassim',party:'ODM',seat:'womenrep',county:'Mandera',photo:'photos/women-reps/mandera.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Mandera County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MARSABIT|governor']=[{name:'Mohamud Mohamed Ali',party:'UDM',seat:'governor',county:'Marsabit',photo:'photos/governors/marsabit.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Marsabit County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MARSABIT|senator']=[{name:'Mohamed Chute',party:'ODM',seat:'senator',county:'Marsabit',photo:'photos/senators/marsabit.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Marsabit County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MARSABIT|womenrep']=[{name:'Naomi Waqo',party:'UDA',seat:'womenrep',county:'Marsabit',photo:'photos/women-reps/marsabit.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Marsabit County 2022–2027']}];
+  DIRECTORY_CANDIDATES['ISIOLO|governor']=[{name:'Abdi Ibrahim Hassan',party:'Jubilee',seat:'governor',county:'Isiolo',photo:'photos/governors/isiolo.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Isiolo County 2022–2027']}];
+  DIRECTORY_CANDIDATES['ISIOLO|senator']=[{name:'Fatuma Dullo',party:'UDA',seat:'senator',county:'Isiolo',photo:'photos/senators/isiolo.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Isiolo County 2022–2027']}];
+  DIRECTORY_CANDIDATES['ISIOLO|womenrep']=[{name:'Mumina Bonaya',party:'ODM',seat:'womenrep',county:'Isiolo',photo:'photos/women-reps/isiolo.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Isiolo County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MERU|governor']=[{name:'Isaac Mutuma',party:'Independent',seat:'governor',county:'Meru',photo:'photos/governors/meru.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Meru County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MERU|senator']=[{name:'Kathuri Murungi',party:'UDA',seat:'senator',county:'Meru',photo:'photos/senators/meru.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Meru County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MERU|womenrep']=[{name:'Elizabeth Karambu',party:'Independent',seat:'womenrep',county:'Meru',photo:'photos/women-reps/meru.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Meru County 2022–2027']}];
+  DIRECTORY_CANDIDATES['THARAKA-NITHI|governor']=[{name:'Muthomi Njuki',party:'UDA',seat:'governor',county:'Tharaka-Nithi',photo:'photos/governors/tharaka_nithi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Tharaka-Nithi County 2022–2027']}];
+  DIRECTORY_CANDIDATES['THARAKA-NITHI|senator']=[{name:'Julius Mwenda',party:'UDA',seat:'senator',county:'Tharaka-Nithi',photo:'photos/senators/tharaka_nithi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Tharaka-Nithi County 2022–2027']}];
+  DIRECTORY_CANDIDATES['THARAKA-NITHI|womenrep']=[{name:'Susan Ngugi',party:'UDA',seat:'womenrep',county:'Tharaka-Nithi',photo:'photos/women-reps/tharaka_nithi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Tharaka-Nithi County 2022–2027']}];
+  DIRECTORY_CANDIDATES['EMBU|governor']=[{name:'Cecily Mbarire',party:'UDA',seat:'governor',county:'Embu',photo:'photos/governors/embu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Embu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['EMBU|senator']=[{name:'Alexander Mundigi',party:'UDA',seat:'senator',county:'Embu',photo:'photos/senators/embu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Embu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['EMBU|womenrep']=[{name:'Jane Wanjiru',party:'UDA',seat:'womenrep',county:'Embu',photo:'photos/women-reps/embu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Embu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KITUI|governor']=[{name:'Julius Malombe',party:'Wiper',seat:'governor',county:'Kitui',photo:'photos/governors/kitui.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kitui County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KITUI|senator']=[{name:'Enoch Wambua',party:'Wiper',seat:'senator',county:'Kitui',photo:'photos/senators/kitui.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kitui County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KITUI|womenrep']=[{name:'Irene Kasalu',party:'Wiper',seat:'womenrep',county:'Kitui',photo:'photos/women-reps/kitui.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kitui County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MACHAKOS|governor']=[{name:'Wavinya Ndeti',party:'Wiper',seat:'governor',county:'Machakos',photo:'photos/governors/machakos.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Machakos County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MACHAKOS|senator']=[{name:'Agnes Kavindu',party:'Wiper',seat:'senator',county:'Machakos',photo:'photos/senators/machakos.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Machakos County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MACHAKOS|womenrep']=[{name:'Joyce Kamene',party:'Wiper',seat:'womenrep',county:'Machakos',photo:'photos/women-reps/machakos.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Machakos County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MAKUENI|governor']=[{name:'Mutula Kilonzo Jr',party:'Wiper',seat:'governor',county:'Makueni',photo:'photos/governors/makueni.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Makueni County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MAKUENI|senator']=[{name:'Daniel Maanzo',party:'Wiper',seat:'senator',county:'Makueni',photo:'photos/senators/makueni.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Makueni County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MAKUENI|womenrep']=[{name:'Rose Museo',party:'Wiper',seat:'womenrep',county:'Makueni',photo:'photos/women-reps/makueni.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Makueni County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NYANDARUA|governor']=[{name:'Moses Kiarie Badilisha',party:'UDA',seat:'governor',county:'Nyandarua',photo:'photos/governors/nyandarua.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Nyandarua County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NYANDARUA|senator']=[{name:'John Methu',party:'UDA',seat:'senator',county:'Nyandarua',photo:'photos/senators/nyandarua.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Nyandarua County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NYANDARUA|womenrep']=[{name:'Faith Gitau',party:'UDA',seat:'womenrep',county:'Nyandarua',photo:'photos/women-reps/nyandarua.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Nyandarua County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NYERI|governor']=[{name:'Mutahi Kahiga',party:'UDA',seat:'governor',county:'Nyeri',photo:'photos/governors/nyeri.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Nyeri County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NYERI|senator']=[{name:'Wahome Wamatinga',party:'UDA',seat:'senator',county:'Nyeri',photo:'photos/senators/nyeri.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Nyeri County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NYERI|womenrep']=[{name:'Rahab Mukami',party:'UDA',seat:'womenrep',county:'Nyeri',photo:'photos/women-reps/nyeri.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Nyeri County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KIRINYAGA|governor']=[{name:'Anne Waiguru',party:'UDA',seat:'governor',county:'Kirinyaga',photo:'photos/governors/kirinyaga.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kirinyaga County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KIRINYAGA|senator']=[{name:'James Murango',party:'UDA',seat:'senator',county:'Kirinyaga',photo:'photos/senators/kirinyaga.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kirinyaga County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KIRINYAGA|womenrep']=[{name:'Jane Maina',party:'UDA',seat:'womenrep',county:'Kirinyaga',photo:'photos/women-reps/kirinyaga.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kirinyaga County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MURANG’A|governor']=[{name:'Irungu Kang’ata',party:'UDA',seat:'governor',county:'Murang’a',photo:'photos/governors/murang’a.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Murang’a County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MURANG’A|senator']=[{name:'Joe Nyutu',party:'ODM',seat:'senator',county:'Murang’a',photo:'photos/senators/murang’a.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Murang’a County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MURANG’A|womenrep']=[{name:'Betty Maina',party:'ODM',seat:'womenrep',county:'Murang’a',photo:'photos/women-reps/murang’a.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Murang’a County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KIAMBU|governor']=[{name:'Kimani Wamatangi',party:'UDA',seat:'governor',county:'Kiambu',photo:'photos/governors/kiambu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kiambu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KIAMBU|senator']=[{name:'Karungo Thangwa',party:'UDA',seat:'senator',county:'Kiambu',photo:'photos/senators/kiambu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kiambu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KIAMBU|womenrep']=[{name:'Ann Wamuratha',party:'UDA',seat:'womenrep',county:'Kiambu',photo:'photos/women-reps/kiambu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kiambu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TURKANA|governor']=[{name:'Jeremiah Lomorukai',party:'ODM',seat:'governor',county:'Turkana',photo:'photos/governors/turkana.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Turkana County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TURKANA|senator']=[{name:'James Lomenen',party:'ODM',seat:'senator',county:'Turkana',photo:'photos/senators/turkana.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Turkana County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TURKANA|womenrep']=[{name:'Cecilia Ngitit',party:'ODM',seat:'womenrep',county:'Turkana',photo:'photos/women-reps/turkana.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Turkana County 2022–2027']}];
+  DIRECTORY_CANDIDATES['WEST POKOT|governor']=[{name:'Simon Kachapin',party:'UDA',seat:'governor',county:'West Pokot',photo:'photos/governors/west_pokot.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving West Pokot County 2022–2027']}];
+  DIRECTORY_CANDIDATES['WEST POKOT|senator']=[{name:'Julius Murgor',party:'UDA',seat:'senator',county:'West Pokot',photo:'photos/senators/west_pokot.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for West Pokot County 2022–2027']}];
+  DIRECTORY_CANDIDATES['WEST POKOT|womenrep']=[{name:'Rael Aleutum',party:'UDA',seat:'womenrep',county:'West Pokot',photo:'photos/women-reps/west_pokot.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for West Pokot County 2022–2027']}];
+  DIRECTORY_CANDIDATES['SAMBURU|governor']=[{name:'Jonathan Lelelit',party:'UDA',seat:'governor',county:'Samburu',photo:'photos/governors/samburu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Samburu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['SAMBURU|senator']=[{name:'Steve Lelegwe',party:'UDA',seat:'senator',county:'Samburu',photo:'photos/senators/samburu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Samburu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['SAMBURU|womenrep']=[{name:'Pauline Lenguris',party:'UDA',seat:'womenrep',county:'Samburu',photo:'photos/women-reps/samburu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Samburu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TRANS NZOIA|governor']=[{name:'George Natembeya',party:'DAP-K',seat:'governor',county:'Trans Nzoia',photo:'photos/governors/trans_nzoia.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Trans Nzoia County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TRANS NZOIA|senator']=[{name:'Allan Chesang',party:'UDA',seat:'senator',county:'Trans Nzoia',photo:'photos/senators/trans_nzoia.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Trans Nzoia County 2022–2027']}];
+  DIRECTORY_CANDIDATES['TRANS NZOIA|womenrep']=[{name:'Lilian Chebet',party:'UDA',seat:'womenrep',county:'Trans Nzoia',photo:'photos/women-reps/trans_nzoia.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Trans Nzoia County 2022–2027']}];
+  DIRECTORY_CANDIDATES['UASIN GISHU|governor']=[{name:'Jonathan Bii',party:'UDA',seat:'governor',county:'Uasin Gishu',photo:'photos/governors/uasin_gishu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Uasin Gishu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['UASIN GISHU|senator']=[{name:'Jackson Mandago',party:'UDA',seat:'senator',county:'Uasin Gishu',photo:'photos/senators/uasin_gishu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Uasin Gishu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['UASIN GISHU|womenrep']=[{name:'Gladys Boss',party:'UDA',seat:'womenrep',county:'Uasin Gishu',photo:'photos/women-reps/uasin_gishu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Uasin Gishu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['ELGEYO-MARAKWET|governor']=[{name:'Wisley Rotich',party:'UDA',seat:'governor',county:'Elgeyo-Marakwet',photo:'photos/governors/elgeyo_marakwet.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Elgeyo-Marakwet County 2022–2027']}];
+  DIRECTORY_CANDIDATES['ELGEYO-MARAKWET|senator']=[{name:'William Kisang',party:'UDA',seat:'senator',county:'Elgeyo-Marakwet',photo:'photos/senators/elgeyo_marakwet.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Elgeyo-Marakwet County 2022–2027']}];
+  DIRECTORY_CANDIDATES['ELGEYO-MARAKWET|womenrep']=[{name:'Caroline Ng’elechei',party:'UDA',seat:'womenrep',county:'Elgeyo-Marakwet',photo:'photos/women-reps/elgeyo_marakwet.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Elgeyo-Marakwet County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NANDI|governor']=[{name:'Stephen Sang',party:'UDA',seat:'governor',county:'Nandi',photo:'photos/governors/nandi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Nandi County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NANDI|senator']=[{name:'Samson Cherarkey',party:'UDA',seat:'senator',county:'Nandi',photo:'photos/senators/nandi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Nandi County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NANDI|womenrep']=[{name:'Cynthia Muge',party:'UDA',seat:'womenrep',county:'Nandi',photo:'photos/women-reps/nandi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Nandi County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BARINGO|governor']=[{name:'Benjamin Cheboi',party:'UDA',seat:'governor',county:'Baringo',photo:'photos/governors/baringo.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Baringo County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BARINGO|senator']=[{name:'William Cheptumo',party:'UDA',seat:'senator',county:'Baringo',photo:'photos/senators/baringo.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Baringo County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BARINGO|womenrep']=[{name:'Florence Jematia',party:'UDA',seat:'womenrep',county:'Baringo',photo:'photos/women-reps/baringo.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Baringo County 2022–2027']}];
+  DIRECTORY_CANDIDATES['LAIKIPIA|governor']=[{name:'Joshua Irungu',party:'UDA',seat:'governor',county:'Laikipia',photo:'photos/governors/laikipia.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Laikipia County 2022–2027']}];
+  DIRECTORY_CANDIDATES['LAIKIPIA|senator']=[{name:'John Kinyua',party:'UDA',seat:'senator',county:'Laikipia',photo:'photos/senators/laikipia.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Laikipia County 2022–2027']}];
+  DIRECTORY_CANDIDATES['LAIKIPIA|womenrep']=[{name:'Jane Kagiri',party:'UDA',seat:'womenrep',county:'Laikipia',photo:'photos/women-reps/laikipia.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Laikipia County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NAKURU|governor']=[{name:'Susan Kihika',party:'UDA',seat:'governor',county:'Nakuru',photo:'photos/governors/nakuru.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Nakuru County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NAKURU|senator']=[{name:'Tabitha Karanja',party:'UDA',seat:'senator',county:'Nakuru',photo:'photos/senators/nakuru.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Nakuru County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NAKURU|womenrep']=[{name:'Liza Chelule',party:'UDA',seat:'womenrep',county:'Nakuru',photo:'photos/women-reps/nakuru.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Nakuru County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NAROK|governor']=[{name:'Patrick Ole Ntutu',party:'UDA',seat:'governor',county:'Narok',photo:'photos/governors/narok.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Narok County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NAROK|senator']=[{name:'Ledama Ole Kina',party:'ODM',seat:'senator',county:'Narok',photo:'photos/senators/narok.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Narok County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NAROK|womenrep']=[{name:'Rebecca Tonkei',party:'UDA',seat:'womenrep',county:'Narok',photo:'photos/women-reps/narok.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Narok County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KAJIADO|governor']=[{name:'Joseph Ole Lenku',party:'ODM',seat:'governor',county:'Kajiado',photo:'photos/governors/kajiado.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kajiado County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KAJIADO|senator']=[{name:'Seki Kanar',party:'ODM',seat:'senator',county:'Kajiado',photo:'photos/senators/kajiado.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kajiado County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KAJIADO|womenrep']=[{name:'Leah Sankaire',party:'ODM',seat:'womenrep',county:'Kajiado',photo:'photos/women-reps/kajiado.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kajiado County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KERICHO|governor']=[{name:'Eric Mutai',party:'UDA',seat:'governor',county:'Kericho',photo:'photos/governors/kericho.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kericho County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KERICHO|senator']=[{name:'Aaron Cheruiyot',party:'UDA',seat:'senator',county:'Kericho',photo:'photos/senators/kericho.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kericho County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KERICHO|womenrep']=[{name:'Beatrice Kemei',party:'UDA',seat:'womenrep',county:'Kericho',photo:'photos/women-reps/kericho.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kericho County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BOMET|governor']=[{name:'Hillary Barchok',party:'UDA',seat:'governor',county:'Bomet',photo:'photos/governors/bomet.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Bomet County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BOMET|senator']=[{name:'Hillary Sigei',party:'UDA',seat:'senator',county:'Bomet',photo:'photos/senators/bomet.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Bomet County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BOMET|womenrep']=[{name:'Linet Chepkorir',party:'UDA',seat:'womenrep',county:'Bomet',photo:'photos/women-reps/bomet.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Bomet County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KAKAMEGA|governor']=[{name:'Fernandes Barasa',party:'ODM',seat:'governor',county:'Kakamega',photo:'photos/governors/kakamega.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kakamega County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KAKAMEGA|senator']=[{name:'Boni Khalwale',party:'UDA',seat:'senator',county:'Kakamega',photo:'photos/senators/kakamega.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kakamega County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KAKAMEGA|womenrep']=[{name:'Elsie Muhanda',party:'ODM',seat:'womenrep',county:'Kakamega',photo:'photos/women-reps/kakamega.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kakamega County 2022–2027']}];
+  DIRECTORY_CANDIDATES['VIHIGA|governor']=[{name:'Wilber Ottichilo',party:'ODM',seat:'governor',county:'Vihiga',photo:'photos/governors/vihiga.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Vihiga County 2022–2027']}];
+  DIRECTORY_CANDIDATES['VIHIGA|senator']=[{name:'Godfrey Osotsi',party:'ODM',seat:'senator',county:'Vihiga',photo:'photos/senators/vihiga.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Vihiga County 2022–2027']}];
+  DIRECTORY_CANDIDATES['VIHIGA|womenrep']=[{name:'Beatrice Adagala',party:'ODM',seat:'womenrep',county:'Vihiga',photo:'photos/women-reps/vihiga.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Vihiga County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BUNGOMA|governor']=[{name:'Kenneth Lusaka',party:'FORD Kenya',seat:'governor',county:'Bungoma',photo:'photos/governors/bungoma.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Bungoma County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BUNGOMA|senator']=[{name:'David Wakoli',party:'UDA',seat:'senator',county:'Bungoma',photo:'photos/senators/bungoma.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Bungoma County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BUNGOMA|womenrep']=[{name:'Catherine Nanjala',party:'UDA',seat:'womenrep',county:'Bungoma',photo:'photos/women-reps/bungoma.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Bungoma County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BUSIA|governor']=[{name:'Paul Otuoma',party:'ODM',seat:'governor',county:'Busia',photo:'photos/governors/busia.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Busia County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BUSIA|senator']=[{name:'Okiya Omtatah',party:'ODM',seat:'senator',county:'Busia',photo:'photos/senators/busia.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Busia County 2022–2027']}];
+  DIRECTORY_CANDIDATES['BUSIA|womenrep']=[{name:'Catherine Omanyo',party:'ODM',seat:'womenrep',county:'Busia',photo:'photos/women-reps/busia.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Busia County 2022–2027']}];
+  DIRECTORY_CANDIDATES['SIAYA|governor']=[{name:'James Orengo',party:'ODM',seat:'governor',county:'Siaya',photo:'photos/governors/siaya.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Siaya County 2022–2027']}];
+  DIRECTORY_CANDIDATES['SIAYA|senator']=[{name:'Oburu Oginga',party:'ODM',seat:'senator',county:'Siaya',photo:'photos/senators/siaya.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Siaya County 2022–2027']}];
+  DIRECTORY_CANDIDATES['SIAYA|womenrep']=[{name:'Christine Ombaka',party:'ODM',seat:'womenrep',county:'Siaya',photo:'photos/women-reps/siaya.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Siaya County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KISUMU|governor']=[{name:'Anyang’ Nyong’o',party:'ODM',seat:'governor',county:'Kisumu',photo:'photos/governors/kisumu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kisumu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KISUMU|senator']=[{name:'Tom Ojienda',party:'ODM',seat:'senator',county:'Kisumu',photo:'photos/senators/kisumu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kisumu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KISUMU|womenrep']=[{name:'Ruth Odinga',party:'ODM',seat:'womenrep',county:'Kisumu',photo:'photos/women-reps/kisumu.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kisumu County 2022–2027']}];
+  DIRECTORY_CANDIDATES['HOMA BAY|governor']=[{name:'Gladys Wanga',party:'ODM',seat:'governor',county:'Homa Bay',photo:'photos/governors/homa_bay.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Homa Bay County 2022–2027']}];
+  DIRECTORY_CANDIDATES['HOMA BAY|senator']=[{name:'Moses Kajwang',party:'ODM',seat:'senator',county:'Homa Bay',photo:'photos/senators/homa_bay.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Homa Bay County 2022–2027']}];
+  DIRECTORY_CANDIDATES['HOMA BAY|womenrep']=[{name:'Joyce Atieno',party:'ODM',seat:'womenrep',county:'Homa Bay',photo:'photos/women-reps/homa_bay.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Homa Bay County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MIGORI|governor']=[{name:'Ochilo Ayacko',party:'ODM',seat:'governor',county:'Migori',photo:'photos/governors/migori.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Migori County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MIGORI|senator']=[{name:'Eddy Oketch',party:'ODM',seat:'senator',county:'Migori',photo:'photos/senators/migori.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Migori County 2022–2027']}];
+  DIRECTORY_CANDIDATES['MIGORI|womenrep']=[{name:'Dennitah Ghati',party:'ODM',seat:'womenrep',county:'Migori',photo:'photos/women-reps/migori.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Migori County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KISII|governor']=[{name:'Simba Arati',party:'ODM',seat:'governor',county:'Kisii',photo:'photos/governors/kisii.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Kisii County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KISII|senator']=[{name:'Richard Onyonka',party:'ODM',seat:'senator',county:'Kisii',photo:'photos/senators/kisii.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Kisii County 2022–2027']}];
+  DIRECTORY_CANDIDATES['KISII|womenrep']=[{name:'Dorice Donya',party:'ODM',seat:'womenrep',county:'Kisii',photo:'photos/women-reps/kisii.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Kisii County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NYAMIRA|governor']=[{name:'Amos Nyaribo',party:'UPA',seat:'governor',county:'Nyamira',photo:'photos/governors/nyamira.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Nyamira County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NYAMIRA|senator']=[{name:'Okongo Mogeni',party:'ODM',seat:'senator',county:'Nyamira',photo:'photos/senators/nyamira.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Nyamira County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NYAMIRA|womenrep']=[{name:'Jerusha Momanyi',party:'ODM',seat:'womenrep',county:'Nyamira',photo:'photos/women-reps/nyamira.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Nyamira County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NAIROBI CITY|governor']=[{name:'Johnson Sakaja',party:'UDA',seat:'governor',county:'Nairobi City',photo:'photos/governors/nairobi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Serving Nairobi City County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NAIROBI CITY|senator']=[{name:'Edwin Sifuna',party:'ODM',seat:'senator',county:'Nairobi City',photo:'photos/senators/nairobi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Senator for Nairobi City County 2022–2027']}];
+  DIRECTORY_CANDIDATES['NAIROBI CITY|womenrep']=[{name:'Esther Passaris',party:'Jubilee',seat:'womenrep',county:'Nairobi City',photo:'photos/women-reps/nairobi.png',verified:true,ballotNo:1,age:'—',prevSeats:'Elected 2022',manifesto:['Women Representative for Nairobi City County 2022–2027']}];
 
   // Seat definitions for directory
   const DIR_SEATS = [
@@ -3797,7 +3944,7 @@
       if (seat.scope === 'county') {
         if (!county) continue;
         const key   = `${county.toUpperCase()}|${seat.key}`;
-        const cands = DIRECTORY_CANDIDATES[key] || [];
+        const cands = getDirCandidates(key);
         if (cands.length) cards += cands.map((cd,i) => dirCandCard(cd, i, `${seat.label} · ${county}`, key)).join('');
         else              cards += dirEmptySlot(seat.label, county, seat.key);
         continue;
@@ -3828,16 +3975,25 @@
 
   function dirCandCard(cand, idx, roleLabel, lookupKey) {
     const contacts = buildContactLinks(cand, 'dir-contact-btn');
+    const photoHtml = cand.photo
+      ? `<img src="${cand.photo}" alt="${cand.name}"
+             style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"
+             onerror="this.parentNode.innerHTML='<span style=\'font-size:2.2rem;\'>' + (cand.emoji||'👤') + '</span>'">`
+      : `<span style="font-size:2.2rem;">${cand.emoji || '👤'}</span>`;
+    const verifiedBadge = cand.verified
+      ? `<span style="display:inline-block;font-size:0.62rem;background:#f0faf4;color:var(--green);border:1px solid #b6e0c8;border-radius:10px;padding:2px 6px;font-weight:700;margin-top:4px;">✓ IEBC 2022</span>`
+      : '';
     return `
       <div class="dir-card" onclick="openDirProfile(${JSON.stringify(JSON.stringify({lookupKey, idx}))})">
-        <div class="dir-card-photo" style="background:linear-gradient(135deg,${cand.bg||'#f3f4f6'},#e5e7eb)">
-          ${cand.emoji || '👤'}
-          <div class="dir-card-ballot">${cand.number || '?'}</div>
+        <div class="dir-card-photo" style="background:linear-gradient(135deg,${cand.bg||'#f3f4f6'},#e5e7eb);overflow:hidden;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:center;">
+          ${photoHtml}
+          <div class="dir-card-ballot">${cand.ballotNo || cand.number || ''}</div>
           <div class="dir-card-party-badge">${cand.party || ''}</div>
         </div>
         <div class="dir-card-body">
           <div class="dir-card-name">${cand.name}</div>
-          <div class="dir-card-seat">${roleLabel}</div>
+          ${verifiedBadge}
+          <div class="dir-card-seat" style="margin-top:4px;">${roleLabel}</div>
           <div class="dir-card-contacts">${contacts || '<span style="font-size:0.72rem;color:#bbb;">No contacts listed</span>'}</div>
         </div>
       </div>`;
@@ -3869,7 +4025,7 @@
   function openDirProfile(packedJson) {
     // packedJson is double-encoded JSON string from onclick attr
     const { lookupKey, idx } = JSON.parse(packedJson);
-    const cands = DIRECTORY_CANDIDATES[lookupKey] || DIRECTORY_CANDIDATES['presidential'] || [];
+    const cands = (lookupKey ? (getDirCandidates ? getDirCandidates(lookupKey) : DIRECTORY_CANDIDATES[lookupKey]) : null) || DIRECTORY_CANDIDATES['presidential'] || [];
     const cand = cands[idx];
     if (!cand) return;
 
@@ -3881,18 +4037,29 @@
 
   // ── Update openProfile to also handle contacts + directory mode ──
   function openProfileRaw(cand, directoryMode) {
-    document.getElementById('profile-hero-placeholder').textContent = cand.emoji || '👤';
-    document.getElementById('profile-hero-placeholder').style.background =
-      `linear-gradient(135deg, ${cand.bg || '#f3f4f6'}, #ddd)`;
+    // Photo or emoji in hero
+    const heroEl = document.getElementById('profile-hero-placeholder');
+    if (cand.photo) {
+      heroEl.innerHTML = `<img src="${cand.photo}" alt="${cand.name}"
+        style="width:100%;height:100%;object-fit:cover;object-position:top;"
+        onerror="this.parentNode.innerHTML='${cand.emoji||'👤'}'">`;
+      heroEl.style.background = 'none';
+    } else {
+      heroEl.textContent = cand.emoji || '👤';
+      heroEl.style.background = `linear-gradient(135deg, ${cand.bg || '#f3f4f6'}, #ddd)`;
+    }
     document.getElementById('profile-name').textContent = cand.name;
-    document.getElementById('profile-sub').textContent = `${cand.party} · Ballot No. ${cand.number}`;
+    const ballotPart = cand.ballotNo ? `Ballot No. ${cand.ballotNo}` : (cand.number ? `Ballot No. ${cand.number}` : '');
+    const verifiedPart = cand.verified ? '✓ IEBC Verified' : '';
+    document.getElementById('profile-sub').textContent = [cand.party, ballotPart, verifiedPart].filter(Boolean).join(' · ');
     document.getElementById('ps-age').textContent    = cand.age || '—';
-    document.getElementById('ps-number').textContent = `#${cand.number || '?'}`;
-    document.getElementById('ps-seats').textContent  = (cand.prevSeats || []).length;
+    document.getElementById('ps-number').textContent = cand.ballotNo ? `#${cand.ballotNo}` : (cand.number ? `#${cand.number}` : '—');
+    document.getElementById('ps-seats').textContent  = typeof cand.prevSeats === 'string' ? cand.prevSeats : (Array.isArray(cand.prevSeats) ? (cand.prevSeats.length || '—') : '—');
     document.getElementById('ps-party-detail').textContent = cand.partyDetail || cand.party || '—';
 
     const prevEl = document.getElementById('ps-prev-seats');
-    prevEl.innerHTML = (cand.prevSeats || ['No previous positions on record']).map(s =>
+    const prevSeatsArr = Array.isArray(cand.prevSeats) ? cand.prevSeats : (cand.prevSeats ? [cand.prevSeats] : ['No previous positions on record']);
+    prevEl.innerHTML = prevSeatsArr.map(s =>
       `<div class="prev-seat-item"><div class="prev-seat-dot"></div><span>${s}</span></div>`).join('');
 
     const manEl = document.getElementById('ps-manifesto');
