@@ -2289,8 +2289,12 @@
   // ══════════════════════════════════════════════════
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById('screen-' + id).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    const screen = document.getElementById('screen-' + id);
+    screen.classList.add('active');
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    screen.querySelectorAll('*').forEach(el => { if (el.scrollTop) el.scrollTop = 0; });
   }
 
   function showToast(msg, duration = 2500) {
@@ -3467,7 +3471,6 @@
     if (state.currentSeat >= SEATS.length) {
       buildBallot();
       showScreen(4);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       renderSeat();
     }
