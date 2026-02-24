@@ -974,9 +974,6 @@
           </select>
         </div>
       </div>
-      <button class="btn-manual-go" onclick="applyManualLocation()">
-        Load My Candidates →
-      </button>
     </div>
 
     <!-- IEBC Verification Panel -->
@@ -3329,6 +3326,7 @@
     showToast(`Ward selected: ${ward}`);
     // Refresh polling stations immediately so the list updates as soon as ward is chosen
     showPollingStations();
+    document.getElementById('btn-confirm-location').style.display = 'flex';
   }
 
   function applyManualLocation() {
