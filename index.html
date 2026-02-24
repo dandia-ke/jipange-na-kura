@@ -1,0 +1,3860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jipange Na Kura — Plan Your Vote</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --green: #1a6b3c;
+      --green-light: #2d9b5a;
+      --red: #c0392b;
+      --gold: #d4a017;
+      --cream: #faf7f2;
+      --grey: #6b7280;
+      --grey-light: #f3f0eb;
+      --white: #ffffff;
+      --border: #e2ddd6;
+      --shadow: 0 4px 24px rgba(0,0,0,0.10);
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--black);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── TOP NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px;
+      background: var(--black);
+      border-bottom: 3px solid var(--green);
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--white); letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--gold); }
+    .nav-flag { display: flex; gap: 4px; align-items: center; }
+    .nav-flag div { width: 20px; height: 12px; border-radius: 2px; }
+    .f-black { background: #222; border: 1px solid #555; }
+    .f-red   { background: var(--red); }
+    .f-green { background: var(--green); }
+    .f-white { background: #ccc; }
+
+    /* ── SCREENS ── */
+    .screen {
+      display: none; min-height: 100vh; padding-top: 72px;
+    }
+    .screen.active { display: flex; flex-direction: column; }
+
+    /* ── SCREEN 1: HERO ── */
+    #screen-1 {
+      background: var(--black);
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: repeating-linear-gradient(45deg, var(--green) 0, var(--green) 1px, transparent 0, transparent 50%);
+      background-size: 20px 20px;
+    }
+    .stripe-bar {
+      position: absolute; top: 72px; left: 0; right: 0; height: 5px;
+      background: linear-gradient(to right, var(--black) 33%, var(--red) 33%, var(--red) 66%, var(--green) 66%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; max-width: 680px; padding: 60px 32px;
+    }
+    .hero-badge {
+      display: inline-block; background: var(--green); color: var(--white);
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900; line-height: 1;
+      color: var(--white); margin-bottom: 16px;
+    }
+    .hero-title em { color: var(--gold); font-style: normal; }
+    .hero-sub {
+      font-size: 1.1rem; color: #9ca3af; line-height: 1.7;
+      margin-bottom: 44px; font-weight: 300;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--green); color: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+      border: none; border-radius: 6px; padding: 16px 36px;
+      cursor: pointer; transition: all 0.2s;
+      letter-spacing: 0.3px;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(26,107,60,0.4); }
+    .btn-primary svg { width: 18px; height: 18px; }
+    .steps-preview {
+      margin-top: 56px; display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+    }
+    .step-item {
+      display: flex; align-items: center; gap: 10px; color: #6b7280; font-size: 0.85rem;
+    }
+    .step-num {
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 1.5px solid #374151; display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 600; color: #9ca3af;
+    }
+
+    /* ── SCREEN 2: LOCATION ── */
+    #screen-2 { background: var(--cream); justify-content: center; align-items: center; flex-direction: row; gap: 0; padding: 72px 0 0; }
+    .loc-map-panel {
+      flex: 1; height: calc(100vh - 72px);
+      position: relative; background: #0d1117;
+    }
+    #kenya-map { width: 100%; height: 100%; }
+    .map-overlay-badge {
+      position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+      background: rgba(10,10,10,0.85); backdrop-filter: blur(8px);
+      color: white; padding: 8px 18px; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; z-index: 500; white-space: nowrap;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .loc-form-panel {
+      width: 420px; min-width: 340px; height: calc(100vh - 72px);
+      overflow-y: auto; padding: 40px 36px;
+      background: var(--white); border-left: 1px solid var(--border);
+      display: flex; flex-direction: column; justify-content: flex-start;
+    }
+    @media(max-width: 768px) {
+      #screen-2 { flex-direction: column; }
+      .loc-map-panel { flex: none; height: 260px; width: 100%; }
+      .loc-form-panel { width: 100%; height: auto; padding: 28px 24px; }
+    }
+    .card {
+      background: var(--white); border-radius: 16px;
+      box-shadow: var(--shadow); max-width: 540px; width: 90%; padding: 48px 44px;
+      border: 1px solid var(--border);
+    }
+    .card-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 10px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700; margin-bottom: 10px; line-height: 1.15;
+    }
+    .card-sub { color: var(--grey); font-size: 0.95rem; line-height: 1.6; margin-bottom: 32px; }
+    .loc-display {
+      background: var(--grey-light); border-radius: 10px; padding: 20px 24px;
+      margin-bottom: 24px; border: 1px solid var(--border);
+    }
+    .loc-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; }
+    .loc-row:not(:last-child) { border-bottom: 1px solid var(--border); }
+    .loc-key { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); }
+    .loc-val { font-size: 0.95rem; font-weight: 600; color: var(--black); }
+    .loc-val.loading { color: var(--grey); font-style: italic; font-weight: 400; }
+    .spinner {
+      width: 18px; height: 18px; border: 2px solid var(--border);
+      border-top-color: var(--green); border-radius: 50%;
+      animation: spin 0.8s linear infinite; display: inline-block;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loc-status { display: flex; align-items: center; gap: 10px; color: var(--grey); font-size: 0.88rem; margin-bottom: 28px; }
+
+    /* ── POLLING STATIONS ── */
+    .polling-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--grey-light); border: 1.5px solid var(--border);
+      border-radius: 10px; padding: 13px 18px; cursor: pointer;
+      margin-bottom: 16px; transition: all 0.18s;
+    }
+    .polling-toggle:hover { border-color: var(--gold); background: #fffdf5; }
+    .polling-toggle.active { border-color: var(--gold); background: #fffdf5; }
+    .polling-toggle-left { display: flex; align-items: center; gap: 10px; }
+    .polling-toggle-icon { font-size: 1.2rem; }
+    .polling-toggle-text strong { display: block; font-size: 0.88rem; font-weight: 700; }
+    .polling-toggle-text span { font-size: 0.76rem; color: var(--grey); }
+    .polling-toggle-arrow { font-size: 0.8rem; color: var(--grey); transition: transform 0.2s; }
+    .polling-toggle.active .polling-toggle-arrow { transform: rotate(180deg); }
+    .polling-list { display: none; margin-bottom: 16px; }
+    .polling-list.open { display: block; max-height: 260px; overflow-y: auto; scroll-behavior: smooth; }
+    .polling-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 14px; border-radius: 8px; cursor: pointer;
+      border: 1.5px solid var(--border); background: var(--white);
+      margin-bottom: 8px; transition: all 0.15s;
+    }
+    .polling-item:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(212,160,23,0.12); }
+    .polling-item.highlighted { border-color: var(--gold); background: #fffdf5; }
+    .polling-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--gold); color: var(--black); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; margin-top: 1px;
+    }
+    .polling-name { font-weight: 700; font-size: 0.88rem; line-height: 1.3; }
+    .polling-address { font-size: 0.76rem; color: var(--grey); margin-top: 2px; }
+    .polling-stream { font-size: 0.72rem; color: var(--green); font-weight: 600; margin-top: 3px; }
+    .polling-divider {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--grey); margin: 4px 0 8px; padding-left: 2px;
+    }
+
+    /* ── LOCATION METHOD TOGGLE ── */
+    .loc-method-tabs {
+      display: flex; gap: 8px; margin-bottom: 24px;
+    }
+    .loc-tab {
+      flex: 1; padding: 11px 8px; border-radius: 8px; cursor: pointer;
+      border: 2px solid var(--border); background: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
+      text-align: center; transition: all 0.18s; color: var(--grey);
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .loc-tab:hover { border-color: var(--green); color: var(--black); }
+    .loc-tab.active { border-color: var(--green); background: #f0faf4; color: var(--green); }
+
+    .loc-panel { display: none; }
+    .loc-panel.active { display: block; }
+
+    /* ── IEBC VERIFICATION PANEL ── */
+    .iebc-info-box {
+      background: #f0faf4; border: 1.5px solid #b6e0c8; border-radius: 10px;
+      padding: 13px 15px; margin-bottom: 14px;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .iebc-info-box .iebc-icon { font-size: 1.4rem; line-height: 1; flex-shrink: 0; }
+    .iebc-info-box p { margin: 0; font-size: 0.83rem; color: #1a6b3c; line-height: 1.55; }
+    .iebc-info-box p strong { color: #0f4023; }
+    .iebc-frame-wrap {
+      position: relative; border-radius: 10px; overflow: hidden;
+      border: 1.5px solid var(--border); background: #f9f9f9;
+    }
+    .iebc-frame-wrap iframe {
+      display: block; width: 100%; height: 420px; border: none;
+    }
+    .iebc-fallback {
+      text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--grey);
+    }
+    .iebc-fallback a {
+      color: var(--green); font-weight: 600; text-decoration: none;
+    }
+    .iebc-fallback a:hover { text-decoration: underline; }
+    .iebc-divider {
+      display: flex; align-items: center; gap: 10px;
+      margin: 16px 0; font-size: 0.78rem; color: var(--grey);
+    }
+    .iebc-divider::before, .iebc-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .btn-iebc-confirm {
+      width: 100%; padding: 13px; border-radius: 10px; cursor: pointer;
+      border: 2px solid var(--green); background: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 600;
+      color: var(--green); transition: all 0.18s; display: flex;
+      align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-iebc-confirm:hover { background: #f0faf4; transform: translateY(-1px); }
+
+    /* Manual form */
+    .manual-form { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); }
+    .form-select, .form-input {
+      width: 100%; padding: 11px 14px; border-radius: 8px;
+      border: 1.5px solid var(--border); background: var(--white);
+      font-family: 'DM Sans', sans-serif; font-size: 0.92rem; color: var(--black);
+      appearance: none; outline: none; transition: border-color 0.15s;
+    }
+    .form-select:focus, .form-input:focus { border-color: var(--green); }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; cursor: pointer; }
+    .btn-manual-go {
+      width: 100%; padding: 13px; border-radius: 8px; background: var(--green);
+      color: white; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      border: none; cursor: pointer; transition: background 0.15s;
+    }
+    .btn-manual-go:hover { background: var(--green-light); }
+    #screen-3 { background: var(--cream); }
+    .selector-wrap {
+      max-width: 780px; width: 95%; margin: 0 auto; padding: 48px 20px;
+    }
+    .progress-bar-wrap { margin-bottom: 40px; }
+    .progress-labels {
+      display: flex; justify-content: space-between;
+      font-size: 0.75rem; font-weight: 600; color: var(--grey); margin-bottom: 8px;
+    }
+    .progress-track {
+      height: 6px; background: var(--border); border-radius: 10px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--green), var(--green-light));
+      border-radius: 10px; transition: width 0.4s ease;
+    }
+    .seat-header { margin-bottom: 32px; }
+    .seat-tag {
+      display: inline-block; background: #fff3cd; color: #856404;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+      border: 1px solid #ffd56b;
+    }
+    .seat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700; line-height: 1.15; margin-bottom: 6px;
+    }
+    .seat-desc { color: var(--grey); font-size: 0.9rem; }
+    .candidates-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;
+    }
+    @media(max-width: 560px) { .candidates-grid { grid-template-columns: 1fr; } }
+
+    .candidate-card {
+      background: var(--white); border: 2px solid var(--border);
+      border-radius: 14px; cursor: pointer;
+      transition: all 0.18s; position: relative; overflow: hidden;
+    }
+    .candidate-card:hover { border-color: var(--green); box-shadow: 0 6px 20px rgba(26,107,60,0.13); transform: translateY(-2px); }
+    .candidate-card.selected { border-color: var(--green); background: #f0faf4; }
+    .candidate-card.selected::after {
+      content: '✓'; position: absolute; top: 10px; right: 10px;
+      width: 24px; height: 24px; background: var(--green); color: white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 800; z-index: 2;
+      line-height: 24px; text-align: center;
+    }
+
+    /* Photo section */
+    .cand-photo-wrap {
+      width: 100%; height: 140px; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #e8f5e9 0%, #f3f0eb 100%);
+    }
+    .cand-photo {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      display: block;
+    }
+    .cand-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+    }
+    .cand-ballot-num {
+      position: absolute; bottom: 8px; left: 10px;
+      font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900;
+      color: white; text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      line-height: 1;
+    }
+    .cand-party-badge {
+      position: absolute; bottom: 8px; right: 10px;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 20px;
+    }
+
+    /* Card body */
+    .cand-body { padding: 12px 14px 14px; }
+    .cand-name { font-weight: 700; font-size: 0.92rem; line-height: 1.3; margin-bottom: 2px; }
+    .cand-age-party { color: var(--grey); font-size: 0.76rem; margin-bottom: 10px; }
+    .cand-actions { display: flex; gap: 8px; }
+    .btn-select-cand {
+      flex: 1; padding: 8px 0; border-radius: 6px; font-size: 0.78rem; font-weight: 600;
+      border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+      background: var(--green); color: white; transition: background 0.15s;
+    }
+    .btn-select-cand:hover { background: var(--green-light); }
+    .candidate-card.selected .btn-select-cand { background: #0d5c30; }
+    .btn-info-cand {
+      padding: 8px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 600;
+      border: 1.5px solid var(--border); background: transparent; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; color: var(--black); transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .btn-info-cand:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── CANDIDATE PROFILE MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 900;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+      align-items: flex-end; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    @media(min-width: 640px) { .modal-overlay { align-items: center; } }
+
+    .profile-drawer {
+      background: var(--white); width: 100%; max-width: 560px;
+      border-radius: 20px 20px 0 0; max-height: 92vh; overflow-y: auto;
+      animation: slideUp 0.3s ease;
+    }
+    @media(min-width: 640px) {
+      .profile-drawer { border-radius: 20px; max-height: 85vh; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(60px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+
+    .profile-hero {
+      position: relative; height: 200px; overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+    .profile-hero-img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top;
+      opacity: 0.7;
+    }
+    .profile-hero-placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center;
+      justify-content: center; font-size: 5rem;
+    }
+    .profile-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    }
+    .profile-hero-info {
+      position: absolute; bottom: 18px; left: 20px; right: 60px;
+    }
+    .profile-hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900; color: white; line-height: 1.2;
+    }
+    .profile-hero-sub { color: #d1d5db; font-size: 0.82rem; margin-top: 3px; }
+    .profile-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(0,0,0,0.5); border: none; color: white;
+      font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .profile-body { padding: 24px 22px 32px; }
+
+    .profile-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px;
+    }
+    .profile-stat {
+      text-align: center; background: var(--grey-light); border-radius: 10px; padding: 12px 8px;
+    }
+    .profile-stat .val { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; line-height: 1; }
+    .profile-stat .lbl { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); margin-top: 4px; }
+
+    .profile-section { margin-bottom: 20px; }
+    .profile-section-title {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--green); margin-bottom: 10px; padding-bottom: 6px;
+      border-bottom: 1.5px solid #e8f5e9;
+    }
+    .profile-section p { font-size: 0.88rem; line-height: 1.7; color: #374151; }
+
+    .prev-seats-list { display: flex; flex-direction: column; gap: 8px; }
+    .prev-seat-item {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--grey-light); border-radius: 8px; padding: 10px 12px;
+    }
+    .prev-seat-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    .prev-seat-item span { font-size: 0.84rem; font-weight: 500; }
+
+    .manifesto-points { display: flex; flex-direction: column; gap: 8px; }
+    .manifesto-point {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 0.84rem; line-height: 1.5;
+    }
+    .manifesto-point::before { content: '→'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    .profile-select-btn {
+      width: 100%; padding: 14px; border-radius: 10px; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700;
+      background: var(--green); color: white; cursor: pointer; margin-top: 8px;
+      transition: background 0.15s;
+    }
+    .profile-select-btn:hover { background: var(--green-light); }
+    .profile-select-btn.already-selected { background: #0d5c30; }
+    .btn-row { display: flex; gap: 12px; justify-content: space-between; align-items: center; }
+    .btn-secondary {
+      background: transparent; border: 1.5px solid var(--border);
+      color: var(--black); padding: 12px 24px; border-radius: 6px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--grey); background: var(--grey-light); }
+    .btn-skip {
+      background: transparent; border: none; color: var(--grey);
+      font-size: 0.85rem; cursor: pointer; text-decoration: underline;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── SCREEN 4: BALLOT PREVIEW ── */
+    #screen-4 { background: var(--cream); }
+    .ballot-wrap {
+      max-width: 860px; width: 95%; margin: 0 auto; padding: 48px 20px 80px;
+    }
+    .ballot-header { text-align: center; margin-bottom: 44px; }
+    .ballot-header .card-label { color: var(--red); }
+    .ballot-official {
+      background: var(--white); border-radius: 16px; overflow: hidden;
+      box-shadow: var(--shadow); border: 2px solid var(--black);
+    }
+    .ballot-top {
+      background: var(--black); padding: 24px 32px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+    }
+    .ballot-coat { font-size: 2rem; }
+    .ballot-official-text { color: var(--white); }
+    .ballot-official-text h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700;
+    }
+    .ballot-official-text p { font-size: 0.78rem; color: #9ca3af; margin-top: 2px; }
+    .ballot-meta {
+      background: var(--grey-light); padding: 14px 32px;
+      display: flex; gap: 32px; flex-wrap: wrap; border-bottom: 1px solid var(--border);
+    }
+    .ballot-meta-item { }
+    .ballot-meta-item .k { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); }
+    .ballot-meta-item .v { font-size: 0.9rem; font-weight: 600; }
+    .ballot-seats { padding: 0 32px 32px; }
+    .ballot-seat-section { margin-top: 28px; }
+    .ballot-seat-label {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--green); border-bottom: 2px solid var(--green);
+      padding-bottom: 6px; margin-bottom: 14px;
+    }
+    .ballot-choice {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--grey-light); border-radius: 8px; padding: 14px 18px;
+      border: 1px solid var(--border);
+    }
+    .ballot-checkbox {
+      width: 28px; height: 28px; border: 2px solid var(--black);
+      border-radius: 3px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ballot-checkbox.marked { background: var(--green); border-color: var(--green); }
+    .ballot-checkbox.marked::after { content: '✓'; color: white; font-size: 0.9rem; font-weight: 700; }
+    .ballot-checkbox.skipped { border-style: dashed; border-color: #ccc; }
+    .ballot-choice-info { flex: 1; }
+    .ballot-choice-name { font-weight: 700; font-size: 0.95rem; }
+    .ballot-choice-party { font-size: 0.8rem; color: var(--grey); }
+    .ballot-choice-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--border); }
+    .ballot-skipped { color: var(--grey); font-style: italic; font-size: 0.85rem; }
+    .ballot-footer-bar {
+      background: var(--black); padding: 16px 32px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
+      gap: 10px;
+    }
+    .ballot-footer-bar p { color: #9ca3af; font-size: 0.75rem; }
+    .ballot-footer-bar strong { color: var(--gold); }
+    .ballot-actions {
+      display: flex; gap: 12px; margin-top: 28px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-print {
+      background: var(--black); color: var(--white);
+      padding: 14px 28px; border-radius: 6px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 600; border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 8px; transition: all 0.2s;
+    }
+    .btn-print:hover { background: #222; }
+    .btn-restart {
+      background: var(--green); color: var(--white);
+      padding: 14px 28px; border-radius: 6px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 600; border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 8px; transition: all 0.2s;
+    }
+    .btn-restart:hover { background: var(--green-light); }
+    .disclaimer {
+      text-align: center; margin-top: 20px; padding: 14px 24px;
+      background: #fff8e1; border-radius: 8px; border: 1px solid #ffe082;
+      font-size: 0.82rem; color: #7d5a00; line-height: 1.6;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--black); color: var(--white); padding: 12px 24px;
+      border-radius: 8px; font-size: 0.88rem; font-weight: 500;
+      transition: transform 0.3s; z-index: 999; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media print {
+      nav, .ballot-actions, .btn-row, .disclaimer { display: none !important; }
+      #screen-4 { padding-top: 0 !important; }
+      .ballot-official { box-shadow: none; }
+    }
+
+    /* entrance animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .screen.active .hero-content,
+    .screen.active .card,
+    .screen.active .selector-wrap,
+    .screen.active .ballot-wrap { animation: fadeUp 0.45s ease both; }
+    /* ── CONSTITUENCY TOOLTIP & DAGORETTI POPUP ── */
+    .constituency-tooltip {
+      background: rgba(26,60,107,0.88) !important; color: white !important;
+      border: none !important; font-family: 'DM Sans', sans-serif !important;
+      font-size: 0.78rem !important; font-weight: 600 !important;
+      padding: 4px 10px !important; border-radius: 4px !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important;
+    }
+    .constituency-tooltip::before { display: none !important; }
+    .dagoretti-popup .leaflet-popup-content-wrapper {
+      border-radius: 12px !important; padding: 0 !important; overflow: hidden;
+    }
+    .dagoretti-popup .leaflet-popup-content { margin: 0 !important; padding: 16px !important; }
+
+  
+    /* ── NAV DIRECTORY BUTTON ── */
+    .nav-dir-btn {
+      background: var(--green); color: white; border: none; border-radius: 6px;
+      padding: 7px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+      font-weight: 600; cursor: pointer; transition: background 0.15s; white-space: nowrap;
+    }
+    .nav-dir-btn:hover { background: var(--green-light); }
+
+    /* ── SCREEN 5: LEADERS DIRECTORY ── */
+    #screen-5 { background: var(--cream); }
+    .dir-wrap { max-width: 1000px; margin: 0 auto; padding: 32px 20px 80px; width: 100%; }
+
+    .dir-hero {
+      background: linear-gradient(135deg, var(--black) 0%, #1a3a1a 100%);
+      border-radius: 16px; padding: 32px 28px; margin-bottom: 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 28px;
+      border: 1px solid #2d5a2d; flex-wrap: wrap;
+    }
+    @media(max-width:600px) {
+      .dir-hero { flex-direction: column; align-items: flex-start; }
+      .dir-hero > div:last-child { flex-direction: row; gap: 16px; width: 100%; }
+      .dir-hero > div:last-child .dir-hero-stat { border-left: none !important; padding-left: 0 !important; }
+    }
+    .dir-hero-text h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900;
+      color: white; margin-bottom: 6px; line-height: 1.2;
+    }
+    .dir-hero-text h2 em { color: var(--gold); font-style: normal; }
+    .dir-hero-text p { color: #9ca3af; font-size: 0.85rem; max-width: 400px; line-height: 1.5; }
+    .dir-hero-stat { text-align: center; flex-shrink: 0; }
+    .dir-hero-stat-num {
+      font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900;
+      color: var(--gold); line-height: 1;
+    }
+    .dir-hero-stat-lbl { color: #9ca3af; font-size: 0.72rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+    /* Browse controls */
+    .dir-controls {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; margin-bottom: 20px;
+    }
+    @media(max-width:780px) { .dir-controls { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:480px) { .dir-controls { grid-template-columns: 1fr; } }
+    .dir-ward-group { transition: opacity 0.2s; }
+    .dir-ward-group.hidden { opacity: 0.35; pointer-events: none; }
+    .dir-controls label {
+      display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--grey); margin-bottom: 6px;
+    }
+    .dir-select {
+      width: 100%; padding: 10px 12px; border-radius: 8px;
+      border: 1.5px solid var(--border); background: white;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+      appearance: none; cursor: pointer; color: var(--black);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center;
+      padding-right: 32px;
+    }
+    .dir-select:focus { outline: none; border-color: var(--green); }
+
+    /* Seat filter tabs */
+    .dir-seat-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .dir-seat-tab {
+      padding: 7px 16px; border-radius: 20px; border: 1.5px solid var(--border);
+      background: white; font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+      font-weight: 600; cursor: pointer; transition: all 0.15s; color: var(--grey);
+    }
+    .dir-seat-tab:hover { border-color: var(--green); color: var(--black); }
+    .dir-seat-tab.active { border-color: var(--green); background: #f0faf4; color: var(--green); }
+
+    .dir-context-bar {
+      font-size: 0.82rem; color: var(--grey); margin-bottom: 20px; padding: 10px 14px;
+      background: white; border-radius: 8px; border-left: 3px solid var(--gold);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* Candidate grid */
+    .dir-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;
+    }
+
+    /* Candidate card */
+    .dir-card {
+      background: white; border-radius: 14px; overflow: hidden;
+      border: 1.5px solid var(--border); transition: all 0.18s; cursor: pointer;
+      display: flex; flex-direction: column;
+    }
+    .dir-card:hover { border-color: var(--green); box-shadow: 0 4px 20px rgba(26,107,60,0.12); transform: translateY(-2px); }
+    .dir-card.empty-slot { cursor: default; opacity: 0.7; }
+    .dir-card.empty-slot:hover { transform: none; border-color: var(--border); box-shadow: none; }
+
+    .dir-card-photo {
+      height: 110px; display: flex; align-items: center; justify-content: center;
+      font-size: 3.2rem; position: relative;
+    }
+    .dir-card-ballot {
+      position: absolute; top: 8px; left: 8px; width: 24px; height: 24px;
+      border-radius: 50%; background: var(--gold); color: #000;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 800;
+    }
+    .dir-card-party-badge {
+      position: absolute; top: 8px; right: 8px;
+      font-size: 0.62rem; font-weight: 700; padding: 3px 7px;
+      border-radius: 10px; background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(0,0,0,0.12); color: #374151; max-width: 90px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .dir-card-body { padding: 12px 14px 14px; flex: 1; display: flex; flex-direction: column; }
+    .dir-card-name { font-weight: 700; font-size: 0.9rem; line-height: 1.3; margin-bottom: 2px; }
+    .dir-card-seat { font-size: 0.72rem; color: var(--grey); margin-bottom: 10px; }
+    .dir-card-contacts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; }
+
+    .dir-contact-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 9px; border-radius: 5px; font-size: 0.68rem; font-weight: 600;
+      text-decoration: none; transition: opacity 0.15s; border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .dir-contact-btn:hover { opacity: 0.8; }
+    .dir-contact-x        { background: #000; color: white; }
+    .dir-contact-email    { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+    .dir-contact-facebook { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+    .dir-contact-profile  { background: #f0faf4; color: var(--green); border-color: #b6dfc4; }
+
+    /* Empty slot card */
+    .dir-empty-inner { padding: 24px 16px; text-align: center; }
+    .dir-empty-icon { font-size: 2rem; margin-bottom: 8px; }
+    .dir-empty-msg { font-size: 0.78rem; color: var(--grey); line-height: 1.5; margin-bottom: 12px; }
+    .dir-submit-btn {
+      display: inline-block; padding: 8px 16px; border-radius: 6px;
+      background: var(--green); color: white; font-size: 0.75rem; font-weight: 600;
+      text-decoration: none; font-family: 'DM Sans', sans-serif;
+    }
+    .dir-submit-btn:hover { background: var(--green-light); }
+
+    /* Profile drawer — contact section */
+    .profile-contacts { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .profile-contact-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 14px; border-radius: 7px; font-size: 0.78rem; font-weight: 600;
+      text-decoration: none; transition: opacity 0.15s;
+    }
+    .profile-contact-link:hover { opacity: 0.8; }
+    .pc-x        { background: #000; color: white; }
+    .pc-email    { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+    .pc-facebook { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
+    /* Back button in directory */
+    .dir-back-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: none; border: 1.5px solid var(--border); border-radius: 6px;
+      padding: 8px 14px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+      font-weight: 600; cursor: pointer; color: var(--black); margin-bottom: 24px;
+      transition: all 0.15s;
+    }
+    .dir-back-btn:hover { border-color: var(--green); color: var(--green); }
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="restart()" style="cursor:pointer;">Jipange Na <span>Kura</span></div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="nav-dir-btn" onclick="showDirectory()">📋 Leaders Directory</button>
+    <div class="nav-flag">
+      <div class="f-black"></div>
+      <div class="f-red"></div>
+      <div class="f-green"></div>
+      <div class="f-white"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- SCREEN 1: HERO -->
+<section id="screen-1" class="screen active">
+  <div class="hero-bg"></div>
+  <div class="stripe-bar"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🇰🇪 Jipange Na Kura — Election Planning Tool</div>
+    <h1 class="hero-title">Know Your<br/><em>Ballot</em> Before<br/>You Vote</h1>
+    <p class="hero-sub">Jipange Na Kura detects your location, finds your candidates across<br/>all 6 seats, and generates your personal ballot plan.</p>
+    <button class="btn-primary" onclick="startApp()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Detect My Location
+    </button>
+    <div class="steps-preview">
+      <div class="step-item"><div class="step-num">1</div> Detect Location</div>
+      <div class="step-item"><div class="step-num">2</div> Confirm Constituency</div>
+      <div class="step-item"><div class="step-num">3</div> Choose Candidates</div>
+      <div class="step-item"><div class="step-num">4</div> Get Ballot Plan</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 2: LOCATION CONFIRM -->
+<section id="screen-2" class="screen">
+
+  <!-- LEFT: MAP PANEL -->
+  <div class="loc-map-panel">
+    <div class="map-overlay-badge" id="map-badge">📡 Detecting your location…</div>
+    <div id="kenya-map"></div>
+  </div>
+
+  <!-- RIGHT: FORM PANEL -->
+  <div class="loc-form-panel">
+    <div class="card-label">📍 Your Location</div>
+    <h2 class="card-title">Find your constituency</h2>
+    <p class="card-sub">Use GPS to auto-detect, or enter your details manually.</p>
+
+    <!-- Method tabs -->
+    <div class="loc-method-tabs">
+      <button class="loc-tab active" id="tab-gps" onclick="switchTab('gps')">
+        📡 Detect via GPS
+      </button>
+      <button class="loc-tab" id="tab-manual" onclick="switchTab('manual')">
+        ✏️ Enter Manually
+      </button>
+      <button class="loc-tab" id="tab-iebc" onclick="switchTab('iebc')">
+        🪪 Verify via IEBC
+      </button>
+    </div>
+
+    <!-- GPS Panel -->
+    <div class="loc-panel active" id="panel-gps">
+      <div class="loc-display">
+        <div class="loc-row">
+          <span class="loc-key">County</span>
+          <span class="loc-val" id="loc-county"><span class="spinner"></span></span>
+        </div>
+        <div class="loc-row">
+          <span class="loc-key">Constituency</span>
+          <span class="loc-val" id="loc-constituency"><span class="spinner"></span></span>
+        </div>
+        <div class="loc-row">
+          <span class="loc-key">Ward</span>
+          <span class="loc-val" id="loc-ward"><span class="spinner"></span></span>
+        </div>
+      </div>
+      <div class="loc-status" id="loc-status">
+        <span class="spinner"></span> Fetching your location from GPS…
+      </div>
+      <button class="btn-primary" id="btn-confirm-location" onclick="confirmLocation()" style="width:100%;justify-content:center;display:none;">
+        Confirm & Load Candidates →
+      </button>
+    </div>
+
+    <!-- Manual Panel -->
+    <div class="loc-panel" id="panel-manual">
+      <div class="manual-form">
+        <div class="form-group">
+          <label class="form-label">County</label>
+          <select class="form-select" id="manual-county" onchange="onCountyChange()">
+            <option value="">— Select County —</option>
+            <option>Baringo</option>
+            <option>Bomet</option>
+            <option>Bungoma</option>
+            <option>Busia</option>
+            <option>Elgeyo-Marakwet</option>
+            <option>Embu</option>
+            <option>Garissa</option>
+            <option>Homa Bay</option>
+            <option>Isiolo</option>
+            <option>Kajiado</option>
+            <option>Kakamega</option>
+            <option>Kericho</option>
+            <option>Kiambu</option>
+            <option>Kilifi</option>
+            <option>Kirinyaga</option>
+            <option>Kisii</option>
+            <option>Kisumu</option>
+            <option>Kitui</option>
+            <option>Kwale</option>
+            <option>Laikipia</option>
+            <option>Lamu</option>
+            <option>Machakos</option>
+            <option>Makueni</option>
+            <option>Mandera</option>
+            <option>Marsabit</option>
+            <option>Meru</option>
+            <option>Migori</option>
+            <option>Mombasa</option>
+            <option>Murang'a</option>
+            <option>Nairobi</option>
+            <option>Nakuru</option>
+            <option>Nandi</option>
+            <option>Narok</option>
+            <option>Nyamira</option>
+            <option>Nyandarua</option>
+            <option>Nyeri</option>
+            <option>Samburu</option>
+            <option>Siaya</option>
+            <option>Taita Taveta</option>
+            <option>Tana River</option>
+            <option>Tharaka-Nithi</option>
+            <option>Trans Nzoia</option>
+            <option>Turkana</option>
+            <option>Uasin Gishu</option>
+            <option>Vihiga</option>
+            <option>Wajir</option>
+            <option>West Pokot</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Constituency</label>
+          <select class="form-select" id="manual-constituency" onchange="onConstituencyChange()">
+            <option value="">— Select County first —</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ward</label>
+          <select class="form-select" id="manual-ward" onchange="onWardChange()">
+            <option value="">— Select Constituency first —</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-manual-go" onclick="applyManualLocation()">
+        Load My Candidates →
+      </button>
+    </div>
+
+    <!-- IEBC Verification Panel -->
+    <div class="loc-panel" id="panel-iebc">
+      <div class="iebc-info-box">
+        <span class="iebc-icon">🪪</span>
+        <p>Enter your <strong>National ID / Passport No.</strong> and <strong>Year of Birth</strong> on the official IEBC portal below. Your registration details — including your ward — will appear on that page. Then click the button below to enter them here.</p>
+      </div>
+      <div class="iebc-frame-wrap">
+        <iframe id="iebc-frame" src="about:blank"
+          title="IEBC Voter Verification"
+          sandbox="allow-forms allow-scripts allow-same-origin allow-popups">
+        </iframe>
+      </div>
+      <div class="iebc-fallback">
+        Can't see the form above?
+        <a href="https://verify.iebc.or.ke/" target="_blank" rel="noopener noreferrer">
+          Open IEBC portal in a new tab ↗
+        </a>
+      </div>
+      <div class="iebc-divider">Once you've confirmed your ward</div>
+      <button class="btn-iebc-confirm" onclick="switchTab('manual')">
+        ✏️ Enter My Details Manually →
+      </button>
+    </div>
+
+    <!-- Polling Stations (shared, shown after either method confirms) -->
+    <div id="polling-section" style="display:none; margin-top: 16px;">
+      <div class="polling-toggle" id="polling-toggle" onclick="togglePollingList()">
+        <div class="polling-toggle-left">
+          <div class="polling-toggle-icon">🏫</div>
+          <div class="polling-toggle-text">
+            <strong>Polling Stations Near You</strong>
+            <span id="polling-count-label">Loading stations…</span>
+          </div>
+        </div>
+        <div class="polling-toggle-arrow">▼</div>
+      </div>
+      <div class="polling-list" id="polling-list"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SCREEN 3: SEAT SELECTOR -->
+<section id="screen-3" class="screen">
+  <div class="selector-wrap">
+    <div class="progress-bar-wrap">
+      <div class="progress-labels">
+        <span id="progress-label">Seat 1 of 6</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="seat-header">
+      <div class="seat-tag" id="seat-tag">Presidential</div>
+      <h2 class="seat-title" id="seat-title">Choose your President</h2>
+      <p class="seat-desc" id="seat-desc">The President leads the executive branch and serves a 5-year term.</p>
+    </div>
+
+    <div class="candidates-grid" id="candidates-grid">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" id="btn-back" onclick="prevSeat()">← Back</button>
+      <button class="btn-primary" id="btn-next" onclick="nextSeat()">Next Seat →</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 4: BALLOT PREVIEW -->
+<section id="screen-4" class="screen">
+  <div class="ballot-wrap">
+    <div class="ballot-header">
+      <div class="card-label">🗳️ Your Ballot Plan</div>
+      <h2 style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:900;">Your Personal Ballot Summary</h2>
+      <p style="color:var(--grey);margin-top:8px;">Take a screenshot or print this before going to the polling station.</p>
+    </div>
+
+    <div class="ballot-official">
+      <div class="ballot-top">
+        <div>
+          <div style="font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:900; color:var(--white);">Jipange Na <span style="color:var(--gold);">Kura</span></div>
+          <div style="font-size:0.75rem; color:#9ca3af; margin-top:2px;">Republic of Kenya — Personal Ballot Plan</div>
+        </div>
+        <div style="color: var(--gold); font-size: 0.78rem; font-weight: 600; background: rgba(212,160,23,0.15); border: 1px solid rgba(212,160,23,0.3); padding: 5px 12px; border-radius: 20px;">UNOFFICIAL PLANNING AID</div>
+      </div>
+
+      <div class="ballot-meta">
+        <div class="ballot-meta-item"><div class="k">County</div><div class="v" id="b-county">—</div></div>
+        <div class="ballot-meta-item"><div class="k">Constituency</div><div class="v" id="b-constituency">—</div></div>
+        <div class="ballot-meta-item"><div class="k">Ward</div><div class="v" id="b-ward">—</div></div>
+      </div>
+
+      <!-- Polling Station Row -->
+      <div id="b-polling-row" style="display:none; padding: 14px 32px; background: #fffdf5; border-bottom: 1px solid #ffe082;">
+        <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--grey); margin-bottom:6px;">Your Polling Station</div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">🏫</div>
+          <div>
+            <div style="font-weight:700; font-size:0.95rem;" id="b-polling-name">—</div>
+            <div style="font-size:0.8rem; color:var(--grey);" id="b-polling-address">—</div>
+            <div style="font-size:0.75rem; color:var(--green); font-weight:600; margin-top:2px;" id="b-polling-streams">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ballot-seats" id="ballot-seats-list">
+        <!-- populated by JS -->
+      </div>
+
+      <div class="ballot-footer-bar">
+        <p>Generated by <strong>Jipange Na Kura</strong> — Not an official IEBC document</p>
+        <p id="ballot-date"></p>
+      </div>
+    </div>
+
+    <div class="ballot-actions">
+      <button class="btn-print" onclick="window.print()">
+        🖨️ Print Ballot Plan
+      </button>
+      <button class="btn-restart" onclick="restart()">
+        ↺ Start Over
+      </button>
+    </div>
+
+    <div class="disclaimer">
+      ⚠️ <strong>This is NOT an official ballot paper.</strong> Jipange Na Kura is an independent civic planning tool to help you prepare before visiting your polling station. Always follow official IEBC guidance on Election Day. Candidate data shown is for demonstration purposes — integrate live IEBC data for production use.
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN 5: LEADERS DIRECTORY -->
+<section id="screen-5" class="screen">
+  <div class="dir-wrap">
+    <!-- Back button -->
+    <button class="dir-back-btn" onclick="closeDirectory()">← Back to Ballot Planner</button>
+
+    <!-- Hero -->
+    <div class="dir-hero">
+      <div class="dir-hero-text">
+        <h2>Kenya <em>Leaders</em> Directory</h2>
+        <p>Browse candidates standing for all 6 seats across 47 counties, 290 constituencies and 1,450 wards.
+           Filter by county, constituency and seat type to find your candidates and their contact details.</p>
+      </div>
+      <div style="display:flex;gap:24px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;">
+        <div class="dir-hero-stat">
+          <div class="dir-hero-stat-num">47</div>
+          <div class="dir-hero-stat-lbl">Counties</div>
+        </div>
+        <div class="dir-hero-stat" style="border-left:1px solid #2d5a2d;padding-left:24px;">
+          <div class="dir-hero-stat-num">290</div>
+          <div class="dir-hero-stat-lbl">Constituencies</div>
+        </div>
+        <div class="dir-hero-stat" style="border-left:1px solid #2d5a2d;padding-left:24px;">
+          <div class="dir-hero-stat-num">1,450</div>
+          <div class="dir-hero-stat-lbl">Wards</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Browse controls -->
+    <div class="dir-controls">
+      <div>
+        <label>County</label>
+        <select class="dir-select" id="dir-county" onchange="onDirCountyChange()">
+          <option value="">— All Counties —</option>
+        </select>
+      </div>
+      <div>
+        <label>Constituency</label>
+        <select class="dir-select" id="dir-constituency" onchange="onDirConstChange()">
+          <option value="">— All Constituencies —</option>
+        </select>
+      </div>
+      <div>
+        <label>Seat Type</label>
+        <select class="dir-select" id="dir-seat-type" onchange="onDirSeatTypeChange()">
+          <option value="">— All Seats —</option>
+          <option value="president">🇰🇪 Presidential</option>
+          <option value="governor">🏛 County Governor</option>
+          <option value="senator">🏛 County Senator</option>
+          <option value="women_rep">♀ Women Representative</option>
+          <option value="mp">🗳 National Assembly MP</option>
+          <option value="mca">🏘 Ward MCA</option>
+        </select>
+      </div>
+      <div class="dir-ward-group hidden" id="dir-ward-group">
+        <label>Ward <span style="color:var(--green);font-size:0.68rem;">(MCA only)</span></label>
+        <select class="dir-select" id="dir-ward" onchange="renderDirectory()">
+          <option value="">— All Wards —</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Context bar -->
+    <div class="dir-context-bar" id="dir-context-bar">
+      📋 Select a county or constituency above to browse candidates
+    </div>
+
+    <!-- Candidate grid -->
+    <div class="dir-grid" id="dir-grid">
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--grey);font-size:0.9rem;">
+        Choose a county above to see candidates
+      </div>
+    </div>
+
+    <!-- Submit CTA -->
+    <div style="margin-top:40px;padding:24px;background:white;border-radius:14px;border:1.5px solid var(--border);text-align:center;">
+      <div style="font-size:1.5rem;margin-bottom:8px;">📬</div>
+      <div style="font-weight:700;font-size:1rem;margin-bottom:6px;">Are you a candidate?</div>
+      <div style="font-size:0.84rem;color:var(--grey);margin-bottom:16px;max-width:400px;margin-left:auto;margin-right:auto;">
+        Submit your profile — name, party, contacts and manifesto — to appear in this directory.
+        All submissions are reviewed before publishing.
+      </div>
+      <a href="/cdn-cgi/l/email-protection#fd99948f989e89928f84bd97948d9c939a9c939c96888f9cd39698c28e889f97989e89c0be9c939994999c8998ddad8f929b949198ddae889f90948e8e949293" class="dir-submit-btn">
+        ✉ Submit Your Profile
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CANDIDATE PROFILE MODAL -->
+<div class="modal-overlay" id="profile-modal" onclick="closeProfile(event)">
+  <div class="profile-drawer" id="profile-drawer">
+    <div class="profile-hero" id="profile-hero">
+      <div class="profile-hero-placeholder" id="profile-hero-placeholder">👤</div>
+      <div class="profile-hero-overlay"></div>
+      <div class="profile-hero-info">
+        <div class="profile-hero-name" id="profile-name">—</div>
+        <div class="profile-hero-sub" id="profile-sub">—</div>
+      </div>
+      <button class="profile-close" onclick="closeProfileDirect()">✕</button>
+    </div>
+    <div class="profile-body">
+      <div class="profile-stats">
+        <div class="profile-stat"><div class="val" id="ps-age">—</div><div class="lbl">Age</div></div>
+        <div class="profile-stat"><div class="val" id="ps-number">—</div><div class="lbl">Ballot No.</div></div>
+        <div class="profile-stat"><div class="val" id="ps-seats">—</div><div class="lbl">Prev. Seats</div></div>
+      </div>
+
+      <div class="profile-section">
+        <div class="profile-section-title">Party & Affiliation</div>
+        <p id="ps-party-detail">—</p>
+      </div>
+
+      <div class="profile-section">
+        <div class="profile-section-title">Previous Positions Held</div>
+        <div class="prev-seats-list" id="ps-prev-seats"></div>
+      </div>
+
+      <div class="profile-section">
+        <div class="profile-section-title">Key Manifesto Points</div>
+        <div class="manifesto-points" id="ps-manifesto"></div>
+      </div>
+
+      <!-- Contact links — shown when candidate has social/contact info -->
+      <div class="profile-contacts" id="ps-contacts" style="display:none;"></div>
+
+      <button class="profile-select-btn" id="profile-select-btn" onclick="selectFromProfile()">
+        ✓ Select This Candidate
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  // ── MAP INSTANCE ──
+  let kenyaMap = null;
+  let userMarker = null;
+  let geoConstLayer = null;  // admin2 constituency layer
+  let geoCountyLayer = null; // admin1 county layer
+  let geoWardLayer   = null; // ward layer
+  const WARD_GEO_LOOKUP = {}; // UPPERCASE constituency key → sorted title-case ward names array
+  const wardLayerLookup = {}; // "CONSTITUENCY|WARD" → Leaflet layer (built on GeoJSON load)
+  let highlightedWardLayer = null; // currently highlighted ward Leaflet layer
+  let pendingGpsCoords  = null; // { lat, lng } stored while waiting for GeoJSON layers to load
+  let pendingClickCoords = null; // { lat, lng } stored when user clicks before ward layer loads
+
+  // Canonical key for a ward: normalise spaces + uppercase both parts
+  function buildWardKey(constName, wardName) {
+    return (constName || '').replace(/\s+/g, ' ').trim().toUpperCase() +
+           '|' +
+           (wardName  || '').trim().toUpperCase();
+  }
+
+  // ── POINT-IN-POLYGON (ray casting) ──
+  function pointInRing(lat, lng, ring) {
+    let inside = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      const xi = ring[i][0], yi = ring[i][1]; // GeoJSON is [lng, lat]
+      const xj = ring[j][0], yj = ring[j][1];
+      if (((yi > lat) !== (yj > lat)) && (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi)) {
+        inside = !inside;
+      }
+    }
+    return inside;
+  }
+
+  function pointInFeature(lat, lng, feature) {
+    const geom = feature.geometry;
+    if (!geom) return false;
+    if (geom.type === 'Polygon')      return pointInRing(lat, lng, geom.coordinates[0]);
+    if (geom.type === 'MultiPolygon') return geom.coordinates.some(p => pointInRing(lat, lng, p[0]));
+    return false;
+  }
+
+  const toTitle = s => s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+
+  // Try ward layer first (gives ward + constituency + county); fall back to constituency layer
+  function findLocationByPoint(lat, lng) {
+    if (geoWardLayer) {
+      for (const layer of geoWardLayer.getLayers()) {
+        if (pointInFeature(lat, lng, layer.feature)) {
+          const p = layer.feature.properties;
+          return {
+            ward:         toTitle(p.ward_name),
+            constituency: toTitle(p.constituency_name.replace(/\s+/g, ' ').trim()),
+            county:       toTitle(p.county_name),
+          };
+        }
+      }
+    }
+    if (geoConstLayer) {
+      for (const layer of geoConstLayer.getLayers()) {
+        if (pointInFeature(lat, lng, layer.feature)) {
+          const p      = layer.feature.properties;
+          const cData  = KENYA_CONSTITUENCIES[p.adm2_name];
+          return {
+            ward:         cData ? cData.ward : '',
+            constituency: p.adm2_name,
+            county:       p.adm1_name,
+          };
+        }
+      }
+    }
+    return null;
+  }
+
+  // Apply a successfully located result to state and update UI
+  function applyGpsResult(found) {
+    pendingGpsCoords = null;
+    state.location.constituency = found.constituency;
+    state.location.county       = found.county;
+    state.location.ward         = found.ward;
+    populateLocation();
+    highlightUserConstituency();
+    highlightUserCounty();
+    highlightUserWard();
+  }
+
+  // ── MAP CLICK SELECTION ──
+  // Clicking anywhere on the map detects county → constituency → ward via PiP
+  function onMapClick(e) {
+    const { lat, lng } = e.latlng;
+    const found = findLocationByPoint(lat, lng);
+
+    if (!found) {
+      showToast('Click inside Kenya to select a location');
+      return;
+    }
+
+    // Edge case: ward layer not yet loaded and Dagoretti returned from constituency layer
+    if (!geoWardLayer && found.constituency === 'Dagoretti') {
+      showDagorettiChoice(e.latlng);
+      return;
+    }
+
+    state.location.county       = found.county;
+    state.location.constituency = found.constituency;
+    state.location.ward         = found.ward;
+
+    // If ward layer not loaded yet, store coords so we can upgrade to ward-level
+    // precision once the GeoJSON finishes loading
+    if (!geoWardLayer) {
+      pendingClickCoords = { lat, lng };
+    } else {
+      pendingClickCoords = null;
+    }
+
+    // Update map highlights: county (blue) → constituency (gold) → ward (red)
+    highlightUserCounty();
+    highlightUserConstituency();
+    highlightUserWard();
+    // Re-apply visibility so the highlighted ward shows regardless of zoom level
+    updateWardLayerVisibility();
+
+    // Update the GPS detection panel display
+    updateLocationUI();
+
+    // Sync the manual dropdowns so both panels reflect the click
+    populateDropdownsFromState();
+
+    const loc = [found.ward, found.constituency].filter(Boolean).join(', ');
+    showToast(`📍 ${loc}`);
+  }
+
+  // Populate county → constituency → ward dropdowns from state.location
+  function populateDropdownsFromState() {
+    const county       = state.location.county;
+    const constituency = state.location.constituency;
+    const ward         = state.location.ward;
+
+    // County (hardcoded options in HTML — just set value)
+    const countyEl = document.getElementById('manual-county');
+    if (countyEl) countyEl.value = county;
+
+    // Constituency — rebuild from COUNTY_CONSTITUENCIES
+    const constList = COUNTY_CONSTITUENCIES[county] || [];
+    const constEl   = document.getElementById('manual-constituency');
+    if (constEl) {
+      constEl.innerHTML = '<option value="">— Select Constituency —</option>' +
+        constList.map(c => `<option value="${c}">${c}</option>`).join('');
+      constEl.value = constituency;
+    }
+
+    // Ward — rebuild from GeoJSON lookup (live) or static fallback
+    const geoKey  = (constituency || '').toUpperCase();
+    const wardList = WARD_GEO_LOOKUP[geoKey] || CONSTITUENCY_WARDS[constituency] || CONSTITUENCY_WARDS['default'] || [];
+    const wardEl  = document.getElementById('manual-ward');
+    if (wardEl) {
+      wardEl.innerHTML = '<option value="">— Select Ward —</option>' +
+        wardList.map(w => `<option value="${w}">${w}</option>`).join('');
+      wardEl.value = ward;
+    }
+  }
+
+  // ── GEO ALIAS: app constituency names → GeoJSON adm2_name ──
+  // Handles the Dagoretti North/South split (GeoJSON only has "Dagoretti")
+  const GEO_ALIAS = {
+    "Dagoretti North": "Dagoretti",
+    "Dagoretti South": "Dagoretti",
+    "Nairobi City":    "Nairobi",   // county alias
+    "Murang'a South":  "Murang'a",  // constituency alias — not in GeoJSON as separate
+    "Cental Imenti":   "Cental Imenti", // GeoJSON has typo, keep as-is
+  };
+
+  // Resolve app name → GeoJSON name
+  function geoName(name) { return GEO_ALIAS[name] || name; }
+
+  function initMap(lat, lng) {
+    if (kenyaMap) { kenyaMap.remove(); kenyaMap = null; geoConstLayer = null; geoCountyLayer = null; geoWardLayer = null; }
+
+    kenyaMap = L.map('kenya-map', {
+      center: [lat || 0.0236, lng || 37.9062],
+      zoom: lat ? 10 : 6,
+      zoomControl: true,
+      attributionControl: false,
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 18,
+    }).addTo(kenyaMap);
+
+    // Load all GeoJSON layers
+    loadCountyLayer();
+    loadConstituencyLayer();
+    loadWardLayer();
+    kenyaMap.on('zoomend', updateWardLayerVisibility);
+    kenyaMap.on('click', onMapClick);
+
+    if (lat && lng) {
+      addUserMarker(lat, lng);
+      kenyaMap.flyTo([lat, lng], 11, { duration: 1.8 });
+    }
+  }
+
+  function addUserMarker(lat, lng) {
+    if (userMarker) kenyaMap.removeLayer(userMarker);
+    const pulseIcon = L.divIcon({
+      className: '',
+      html: `<div style="width:20px;height:20px;border-radius:50%;background:#1a6b3c;border:3px solid #fff;box-shadow:0 0 0 0 rgba(26,107,60,0.7);animation:pulse-ring 1.4s ease-out infinite;"></div>`,
+      iconSize: [20, 20], iconAnchor: [10, 10],
+    });
+    userMarker = L.marker([lat, lng], { icon: pulseIcon }).addTo(kenyaMap);
+    L.circle([lat, lng], { radius: 3000, color: '#1a6b3c', fillColor: '#2d9b5a', fillOpacity: 0.12, weight: 1.5 }).addTo(kenyaMap);
+  }
+
+  // ── LOAD COUNTY LAYER (admin1) ──
+  function loadCountyLayer() {
+    fetch('ken_admin1.geojson')
+      .then(r => r.json())
+      .then(data => {
+        geoCountyLayer = L.geoJSON(data, {
+          style: { color: '#1a6b3c', weight: 1.5, fillColor: '#1a6b3c', fillOpacity: 0.0, opacity: 0.5 },
+          onEachFeature: (feature, layer) => {
+            layer.on('mouseover', () => { if (!isUserCounty(feature)) layer.setStyle({ fillOpacity: 0.08 }); });
+            layer.on('mouseout',  () => { if (!isUserCounty(feature)) layer.setStyle({ fillOpacity: 0.0 }); });
+          }
+        }).addTo(kenyaMap);
+        if (state.location.county) highlightUserCounty();
+      })
+      .catch(() => console.warn('County GeoJSON not found — place ken_admin1.geojson next to the HTML file'));
+  }
+
+  // ── LOAD CONSTITUENCY LAYER (admin2) ──
+  function loadConstituencyLayer() {
+    fetch('ken_admin2.geojson')
+      .then(r => r.json())
+      .then(data => {
+        geoConstLayer = L.geoJSON(data, {
+          style: defaultConstStyle,
+          onEachFeature: (feature, layer) => {
+            const name = feature.properties.adm2_name;
+            layer.bindTooltip(name, { sticky: true, className: 'constituency-tooltip', direction: 'top' });
+            layer.on('mouseover', () => { if (!isUserConst(feature)) layer.setStyle({ fillColor: '#1a6b3c', fillOpacity: 0.15, weight: 1.5 }); });
+            layer.on('mouseout',  () => { if (!isUserConst(feature)) layer.setStyle(defaultConstStyle()); });
+          }
+        }).addTo(kenyaMap);
+        if (state.location.constituency) highlightUserConstituency();
+        // If GPS fired before this layer was ready, resolve it now
+        if (pendingGpsCoords) {
+          const found = findLocationByPoint(pendingGpsCoords.lat, pendingGpsCoords.lng);
+          if (found) applyGpsResult(found);
+        }
+      })
+      .catch(() => console.warn('Constituency GeoJSON not found — place ken_admin2.geojson next to the HTML file'));
+  }
+
+  function defaultConstStyle() {
+    return { color: '#2d9b5a', weight: 0.8, fillColor: '#1a6b3c', fillOpacity: 0.0, opacity: 0.5 };
+  }
+
+  function isUserConst(feature)  { return feature.properties.adm2_name === geoName(state.location.constituency); }
+  function isUserCounty(feature) { return feature.properties.adm1_name === geoName(state.location.county); }
+
+  // ── CLICK ON A CONSTITUENCY POLYGON ──
+  function onConstituencyClick(feature, layer) {
+    const geoConstName = feature.properties.adm2_name;
+    const county       = feature.properties.adm1_name;
+
+    // Special case: Dagoretti is split into North & South
+    if (geoConstName === 'Dagoretti') {
+      showDagorettiChoice(feature.geometry.coordinates);
+      return;
+    }
+
+    // Resolve to app name (reverse alias lookup if needed)
+    const appConstName = geoConstName; // all others match 1:1
+
+    const constData = KENYA_CONSTITUENCIES[appConstName];
+    state.location.constituency = appConstName;
+    state.location.county = county;
+    state.location.ward = constData ? constData.ward : '';
+
+    updateLocationUI();
+    highlightUserConstituency();
+    highlightUserCounty();
+    kenyaMap.flyToBounds(layer.getBounds(), { padding: [40, 40], duration: 0.8 });
+  }
+
+  // ── DAGORETTI SPLIT CHOICE ──
+  function showDagorettiChoice(coordsOrLatLng) {
+    // Accept either polygon coords array or a L.LatLng object
+    const center = (coordsOrLatLng && coordsOrLatLng.lat !== undefined)
+      ? coordsOrLatLng
+      : L.geoJSON({ type: 'Feature', geometry: { type: 'Polygon', coordinates: coordsOrLatLng } }).getBounds().getCenter();
+
+    const popup = L.popup({ closeButton: true, className: 'dagoretti-popup', maxWidth: 240 })
+      .setLatLng(center)
+      .setContent(`
+        <div style="font-family:'DM Sans',sans-serif;padding:4px;">
+          <div style="font-weight:700;font-size:0.9rem;margin-bottom:12px;">Which part of Dagoretti?</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <button onclick="selectDagoretti('Dagoretti North')" style="padding:10px 16px;background:#1a6b3c;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.85rem;font-family:'DM Sans',sans-serif;">
+              📍 Dagoretti North<br><small style="font-weight:400;opacity:0.8;">Wards: Kilimani, Kawangware, Gatina, Kileleshwa, Kabiro</small>
+            </button>
+            <button onclick="selectDagoretti('Dagoretti South')" style="padding:10px 16px;background:#1a6b3c;color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.85rem;font-family:'DM Sans',sans-serif;">
+              📍 Dagoretti South<br><small style="font-weight:400;opacity:0.8;">Wards: Uthiru/Ruthimitu, Ondiri, Riruta, Waithaka</small>
+            </button>
+          </div>
+        </div>
+      `)
+      .openOn(kenyaMap);
+    // Store popup reference so we can close it
+    window._dagorettiPopup = popup;
+  }
+
+  window.selectDagoretti = function(choice) {
+    if (window._dagorettiPopup) kenyaMap.closePopup(window._dagorettiPopup);
+    const ward = choice === 'Dagoretti North' ? 'Kilimani' : 'Uthiru/Ruthimitu';
+    state.location.constituency = choice;
+    state.location.county = 'Nairobi';
+    state.location.ward = ward;
+    updateLocationUI();
+    highlightUserConstituency(); // highlights "Dagoretti" polygon for both
+    highlightUserCounty();
+    highlightUserWard();
+  };
+
+  // ── HIGHLIGHT HELPERS ──
+  function highlightUserConstituency() {
+    if (!geoConstLayer) return;
+    geoConstLayer.eachLayer(layer => {
+      const match = layer.feature.properties.adm2_name === geoName(state.location.constituency);
+      layer.setStyle(match
+        ? { color: '#1a3c6b', weight: 3, fillColor: '#d4a017', fillOpacity: 0.35 }
+        : defaultConstStyle()
+      );
+      if (match) layer.bringToFront();
+    });
+  }
+
+  function highlightUserCounty() {
+    if (!geoCountyLayer) return;
+    geoCountyLayer.eachLayer(layer => {
+      const match = layer.feature.properties.adm1_name === geoName(state.location.county);
+      layer.setStyle(match
+        ? { color: '#1a3c6b', weight: 3, fillColor: '#6b9fd4', fillOpacity: 0.12, dashArray: null }
+        : { color: '#1a6b3c', weight: 1.5, fillColor: '#1a6b3c', fillOpacity: 0.0, opacity: 0.5 }
+      );
+      if (match) layer.bringToFront();
+    });
+  }
+
+  // ── LOAD WARD LAYER ──
+  function loadWardLayer() {
+    fetch('kenya_wards.geojson')
+      .then(r => r.json())
+      .then(data => {
+        // Build constituency → wards lookup for dropdown population
+        data.features.forEach(f => {
+          const key = f.properties.constituency_name.replace(/\s+/g, ' ').trim().toUpperCase();
+          if (!WARD_GEO_LOOKUP[key]) WARD_GEO_LOOKUP[key] = new Set();
+          // Title-case the ward name for display
+          const display = f.properties.ward_name.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+          WARD_GEO_LOOKUP[key].add(display);
+        });
+        // Convert sets to sorted arrays
+        Object.keys(WARD_GEO_LOOKUP).forEach(k => {
+          WARD_GEO_LOOKUP[k] = [...WARD_GEO_LOOKUP[k]].sort();
+        });
+
+        geoWardLayer = L.geoJSON(data, {
+          style: defaultWardStyle,
+          onEachFeature: (feature, layer) => {
+            const p    = feature.properties;
+            const name = p.ward_name.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+            // Build O(1) lookup table
+            wardLayerLookup[buildWardKey(p.constituency_name, p.ward_name)] = layer;
+            layer.bindTooltip(name, { sticky: true, className: 'constituency-tooltip', direction: 'top' });
+            layer.on('mouseover', () => {
+              if (layer !== highlightedWardLayer) layer.setStyle({ fillColor: '#d4a017', fillOpacity: 0.25, weight: 1, opacity: 1 });
+            });
+            layer.on('mouseout', () => {
+              if (layer !== highlightedWardLayer) layer.setStyle(defaultWardStyle());
+            });
+          }
+        }).addTo(kenyaMap);
+        updateWardLayerVisibility();
+        if (state.location.ward) focusWardOnMap();
+        // If GPS fired before ward layer was ready, upgrade to ward-level precision now
+        if (pendingGpsCoords) {
+          const found = findLocationByPoint(pendingGpsCoords.lat, pendingGpsCoords.lng);
+          if (found) applyGpsResult(found);
+        }
+        // If a map click fired before ward layer was ready, upgrade to the correct ward now
+        if (pendingClickCoords) {
+          const found = findLocationByPoint(pendingClickCoords.lat, pendingClickCoords.lng);
+          if (found) {
+            pendingClickCoords = null;
+            state.location.ward = found.ward;
+            focusWardOnMap();
+            updateLocationUI();
+            populateDropdownsFromState();
+          }
+        }
+      })
+      .catch(() => console.warn('Ward GeoJSON not found — place kenya_wards.geojson next to the HTML file'));
+  }
+
+  function defaultWardStyle() {
+    return { color: '#d4a017', weight: 0.6, fillColor: '#d4a017', fillOpacity: 0.0, opacity: 0.0 };
+  }
+
+  // Match ward using the pre-built lookup key (no iteration needed)
+  function isUserWard(feature) {
+    if (!feature || !feature.properties) return false;
+    return buildWardKey(feature.properties.constituency_name, feature.properties.ward_name) ===
+           buildWardKey(state.location.constituency, state.location.ward);
+  }
+
+  // Highlight ward without zooming (GPS / map-click path)
+  function highlightUserWard() {
+    if (!geoWardLayer) return;
+    if (highlightedWardLayer) {
+      highlightedWardLayer.setStyle(defaultWardStyle());
+      highlightedWardLayer = null;
+    }
+    const key = buildWardKey(state.location.constituency, state.location.ward);
+    const wl  = wardLayerLookup[key];
+    if (wl) {
+      wl.setStyle({ color: '#c0392b', weight: 2.5, fillColor: '#c0392b', fillOpacity: 0.4, opacity: 1 });
+      wl.bringToFront();
+      highlightedWardLayer = wl;
+    }
+  }
+
+  // Highlight the selected ward AND fly the map into its bounds (manual-select path)
+  function focusWardOnMap() {
+    if (!geoWardLayer || !kenyaMap) return;
+    if (highlightedWardLayer) {
+      highlightedWardLayer.setStyle(defaultWardStyle());
+      highlightedWardLayer = null;
+    }
+    const key = buildWardKey(state.location.constituency, state.location.ward);
+    const wl  = wardLayerLookup[key];
+    if (wl) {
+      wl.setStyle({ color: '#c0392b', weight: 2.5, fillColor: '#c0392b', fillOpacity: 0.4, opacity: 1 });
+      wl.bringToFront();
+      highlightedWardLayer = wl;
+      kenyaMap.flyToBounds(wl.getBounds(), { padding: [60, 60], duration: 0.8 });
+    }
+  }
+
+  // Show ward borders at zoom >= 10; selected ward always stays red
+  function updateWardLayerVisibility() {
+    if (!geoWardLayer || !kenyaMap) return;
+    const zoom = kenyaMap.getZoom();
+    if (zoom >= 10) {
+      geoWardLayer.setStyle({ color: '#d4a017', weight: 0.6, fillColor: '#d4a017', fillOpacity: 0.0, opacity: 0.6 });
+    } else {
+      geoWardLayer.setStyle({ opacity: 0, fillOpacity: 0, weight: 0 });
+    }
+    // Re-apply selected ward highlight on top
+    if (highlightedWardLayer) {
+      highlightedWardLayer.setStyle({ color: '#c0392b', weight: 2.5, fillColor: '#c0392b', fillOpacity: 0.4, opacity: 1 });
+      highlightedWardLayer.bringToFront();
+    }
+  }
+
+  // ── UPDATE UI AFTER MAP CLICK ──
+  function updateLocationUI() {
+    document.getElementById('loc-county').textContent = state.location.county;
+    document.getElementById('loc-constituency').textContent = state.location.constituency;
+    document.getElementById('loc-ward').textContent = state.location.ward || 'Ward not on record — enter below';
+    document.getElementById('loc-status').innerHTML = '✅ Constituency selected from map.';
+    document.getElementById('btn-confirm-location').style.display = 'flex';
+    const badge = document.getElementById('map-badge');
+    if (badge) badge.textContent = `📍 ${state.location.constituency}, ${state.location.county}`;
+    highlightUserWard();
+    showPollingStations();
+  }
+  // ── FULL 290 CONSTITUENCY DATABASE (sourced from GeoJSON adm2) ──
+  const KENYA_CONSTITUENCIES = {
+    // NAIROBI (county = "Nairobi" — matches GeoJSON)
+    "Westlands":          { county: "Nairobi", ward: "Parklands/Highridge" },
+    "Dagoretti North":    { county: "Nairobi", ward: "Kilimani" },
+    "Dagoretti South":    { county: "Nairobi", ward: "Uthiru/Ruthimitu" },
+    "Langata":            { county: "Nairobi", ward: "Karen" },
+    "Kibra":              { county: "Nairobi", ward: "Laini Saba" },
+    "Roysambu":           { county: "Nairobi", ward: "Roysambu" },
+    "Kasarani":           { county: "Nairobi", ward: "Mwiki" },
+    "Ruaraka":            { county: "Nairobi", ward: "Lucky Summer" },
+    "Embakasi South":     { county: "Nairobi", ward: "Imara Daima" },
+    "Embakasi North":     { county: "Nairobi", ward: "Kariobangi North" },
+    "Embakasi Central":   { county: "Nairobi", ward: "Kayole North" },
+    "Embakasi East":      { county: "Nairobi", ward: "Upper Savannah" },
+    "Embakasi West":      { county: "Nairobi", ward: "Umoja I" },
+    "Makadara":           { county: "Nairobi", ward: "Maringo/Hamza" },
+    "Kamukunji":          { county: "Nairobi", ward: "Pumwani" },
+    "Starehe":            { county: "Nairobi", ward: "Nairobi Central" },
+    "Mathare":            { county: "Nairobi", ward: "Hospital" },
+    // KIAMBU
+    "Ruiru":              { county: "Kiambu", ward: "Gitothua" },
+    "Juja":               { county: "Kiambu", ward: "Kalimoni" },
+    "Thika Town":         { county: "Kiambu", ward: "Township" },
+    "Gatundu South":      { county: "Kiambu", ward: "Gatundu" },
+    "Gatundu North":      { county: "Kiambu", ward: "Githobokoni" },
+    "Githunguri":         { county: "Kiambu", ward: "Githunguri" },
+    "Kiambu":             { county: "Kiambu", ward: "Kiambu" },
+    "Kiambaa":            { county: "Kiambu", ward: "Cianda" },
+    "Kabete":             { county: "Kiambu", ward: "Kabete" },
+    "Kikuyu":             { county: "Kiambu", ward: "Kikuyu" },
+    "Limuru":             { county: "Kiambu", ward: "Limuru East" },
+    "Lari":               { county: "Kiambu", ward: "Lari/Kirenga" },
+    // MOMBASA
+    "Changamwe":          { county: "Mombasa", ward: "Chaani" },
+    "Jomvu":              { county: "Mombasa", ward: "Jomvu Kuu" },
+    "Kisauni":            { county: "Mombasa", ward: "Mjambere" },
+    "Nyali":              { county: "Mombasa", ward: "Kongowea" },
+    "Likoni":             { county: "Mombasa", ward: "Shika Adabu" },
+    "Mvita":              { county: "Mombasa", ward: "Mji Wa Kale/Makadara" },
+    // KISUMU
+    "Kisumu East":        { county: "Kisumu", ward: "Kajulu" },
+    "Kisumu West":        { county: "Kisumu", ward: "South West Kisumu" },
+    "Kisumu Central":     { county: "Kisumu", ward: "Railways" },
+    "Seme":               { county: "Kisumu", ward: "West Seme" },
+    "Nyando":             { county: "Kisumu", ward: "Awasi/Onjiko" },
+    "Muhoroni":           { county: "Kisumu", ward: "Muhoroni/Koru" },
+    "Nyakach":            { county: "Kisumu", ward: "South West Nyakach" },
+    // NAKURU
+    "Molo":               { county: "Nakuru", ward: "Molo" },
+    "Njoro":              { county: "Nakuru", ward: "Njoro" },
+    "Naivasha":           { county: "Nakuru", ward: "Naivasha East" },
+    "Gilgil":             { county: "Nakuru", ward: "Gilgil" },
+    "Kuresoi South":      { county: "Nakuru", ward: "Amalo" },
+    "Kuresoi North":      { county: "Nakuru", ward: "Kiptororo" },
+    "Subukia":            { county: "Nakuru", ward: "Subukia" },
+    "Rongai":             { county: "Nakuru", ward: "Rongai" },
+    "Bahati":             { county: "Nakuru", ward: "Bahati" },
+    "Nakuru Town West":   { county: "Nakuru", ward: "Nakuru East" },
+    "Nakuru Town East":   { county: "Nakuru", ward: "Biashara" },
+    // KAJIADO
+    "Kajiado North":      { county: "Kajiado", ward: "Olkeri" },
+    "Kajiado Central":    { county: "Kajiado", ward: "Purko" },
+    "Kajiado East":       { county: "Kajiado", ward: "Kajiado East" },
+    "Kajiado West":       { county: "Kajiado", ward: "Keekonyokie" },
+    "Kajiado South":      { county: "Kajiado", ward: "Loitokitok" },
+    // MACHAKOS
+    "Masinga":            { county: "Machakos", ward: "Masinga Central" },
+    "Yatta":              { county: "Machakos", ward: "Matuu" },
+    "Kangundo":           { county: "Machakos", ward: "Kangundo Central" },
+    "Matungulu":          { county: "Machakos", ward: "Matungulu North" },
+    "Kathiani":           { county: "Machakos", ward: "Kathiani Central" },
+    "Mavoko":             { county: "Machakos", ward: "Athi River" },
+    "Machakos Town":      { county: "Machakos", ward: "Machakos Central" },
+    "Mwala":              { county: "Machakos", ward: "Mwala" },
+    // UASIN GISHU
+    "Soy":                { county: "Uasin Gishu", ward: "Soy" },
+    "Turbo":              { county: "Uasin Gishu", ward: "Turbo" },
+    "Moiben":             { county: "Uasin Gishu", ward: "Moiben" },
+    "Ainabkoi":           { county: "Uasin Gishu", ward: "Ainabkoi/Olare" },
+    "Kapseret":           { county: "Uasin Gishu", ward: "Langas" },
+    "Kesses":             { county: "Uasin Gishu", ward: "Kesses" },
+    // KILIFI
+    "Kilifi North":       { county: "Kilifi", ward: "Kilifi North" },
+    "Kilifi South":       { county: "Kilifi", ward: "Kilifi South" },
+    "Kaloleni":           { county: "Kilifi", ward: "Kaloleni" },
+    "Rabai":              { county: "Kilifi", ward: "Rabai/Ruruma" },
+    "Ganze":              { county: "Kilifi", ward: "Ganze" },
+    "Malindi":            { county: "Kilifi", ward: "Malindi Town" },
+    "Magarini":           { county: "Kilifi", ward: "Magarini" },
+    // MERU
+    "Igembe South":       { county: "Meru", ward: "Maua" },
+    "Igembe Central":     { county: "Meru", ward: "Kangeta" },
+    "Igembe North":       { county: "Meru", ward: "Antuambui" },
+    "Tigania West":       { county: "Meru", ward: "Akithi" },
+    "Tigania East":       { county: "Meru", ward: "Tigania East" },
+    "North Imenti":       { county: "Meru", ward: "Municipality" },
+    "Buuri":              { county: "Meru", ward: "Timau" },
+    "Cental Imenti":      { county: "Meru", ward: "Meru Central" },
+    "South Imenti":       { county: "Meru", ward: "Abothuguchi West" },
+    // NYERI
+    "Tetu":               { county: "Nyeri", ward: "Dedan Kimathi" },
+    "Kieni":              { county: "Nyeri", ward: "Naromoru/Kiamathaga" },
+    "Mathira":            { county: "Nyeri", ward: "Mathira East" },
+    "Othaya":             { county: "Nyeri", ward: "Othaya" },
+    "Mukurweni":          { county: "Nyeri", ward: "Mukurweni" },
+    "Nyeri Town":         { county: "Nyeri", ward: "Rware" },
+    // MURANG'A
+    "Kiharu":             { county: "Murang'a", ward: "Wangu" },
+    "Kigumo":             { county: "Murang'a", ward: "Kigumo" },
+    "Maragwa":            { county: "Murang'a", ward: "Maragwa" },
+    "Kandara":            { county: "Murang'a", ward: "Kandara" },
+    "Gatanga":            { county: "Murang'a", ward: "Gatanga" },
+    "Mathioya":           { county: "Murang'a", ward: "Gitugi" },
+    "Kangema":            { county: "Murang'a", ward: "Kangema" },
+    // KIRINYAGA
+    "Mwea":               { county: "Kirinyaga", ward: "Mutithi" },
+    "Gichugu":            { county: "Kirinyaga", ward: "Kabare" },
+    "Ndia":               { county: "Kirinyaga", ward: "Mukure" },
+    "Kirinyaga Central":  { county: "Kirinyaga", ward: "Baragwi" },
+    // EMBU
+    "Manyatta":           { county: "Embu", ward: "Kamiu" },
+    "Runyenjes":          { county: "Embu", ward: "Kagaari South" },
+    "Mbeere South":       { county: "Embu", ward: "Mbeere South" },
+    "Mbeere North":       { county: "Embu", ward: "Mbeere North" },
+    // LAIKIPIA
+    "Laikipia West":      { county: "Laikipia", ward: "Githiga" },
+    "Laikipia East":      { county: "Laikipia", ward: "Laikipia East" },
+    "Laikipia North":     { county: "Laikipia", ward: "Laikipia North" },
+    // NYANDARUA
+    "Kinangop":           { county: "Nyandarua", ward: "Njabini/Kiburu" },
+    "Kipipiri":           { county: "Nyandarua", ward: "Kipipiri" },
+    "Ol Kalou":           { county: "Nyandarua", ward: "Ol Kalou" },
+    "Ol Jorok":           { county: "Nyandarua", ward: "Mirangine" },
+    "Ndaragwa":           { county: "Nyandarua", ward: "Ndaragwa" },
+    // TRANS NZOIA
+    "Cherangany":         { county: "Trans Nzoia", ward: "Cherangany/Suwerwa" },
+    "Endebess":           { county: "Trans Nzoia", ward: "Endebess" },
+    "Saboti":             { county: "Trans Nzoia", ward: "Saboti" },
+    "Kiminini":           { county: "Trans Nzoia", ward: "Kiminini" },
+    "Kwanza":             { county: "Trans Nzoia", ward: "Kwanza" },
+    // BUNGOMA
+    "Webuye East":        { county: "Bungoma", ward: "Webuye" },
+    "Webuye West":        { county: "Bungoma", ward: "Misikhu" },
+    "Kanduyi":            { county: "Bungoma", ward: "Bukembe West" },
+    "Bumula":             { county: "Bungoma", ward: "Bumula" },
+    "Kabuchai":           { county: "Bungoma", ward: "Kabuchai/Chwele" },
+    "Mt. Elgon":          { county: "Bungoma", ward: "Cheptais" },
+    "Sirisia":            { county: "Bungoma", ward: "Malakisi/South Kulisiru" },
+    "Tongaren":           { county: "Bungoma", ward: "Tongaren" },
+    "Kimilili":           { county: "Bungoma", ward: "Kimilili" },
+    // KAKAMEGA
+    "Lugari":             { county: "Kakamega", ward: "Lugari" },
+    "Likuyani":           { county: "Kakamega", ward: "Likuyani" },
+    "Malava":             { county: "Kakamega", ward: "Central Malava" },
+    "Lurambi":            { county: "Kakamega", ward: "Butsotso East" },
+    "Navakholo":          { county: "Kakamega", ward: "Navakholo" },
+    "Mumias West":        { county: "Kakamega", ward: "Mumias Central" },
+    "Mumias East":        { county: "Kakamega", ward: "Mumias East" },
+    "Matungu":            { county: "Kakamega", ward: "Koyonzo" },
+    "Butere":             { county: "Kakamega", ward: "Khumusalaba" },
+    "Khwisero":           { county: "Kakamega", ward: "Khwisero" },
+    "Shinyalu":           { county: "Kakamega", ward: "Shinyalu" },
+    "Ikolomani":          { county: "Kakamega", ward: "Idakho South" },
+    // VIHIGA
+    "Vihiga":             { county: "Vihiga", ward: "Vihiga" },
+    "Sabatia":            { county: "Vihiga", ward: "Wodanga" },
+    "Hamisi":             { county: "Vihiga", ward: "Shiru" },
+    "Luanda":             { county: "Vihiga", ward: "Luanda Central" },
+    "Emuhaya":            { county: "Vihiga", ward: "West Vihiga" },
+    // BUSIA
+    "Teso North":         { county: "Busia", ward: "Malaba Central" },
+    "Teso South":         { county: "Busia", ward: "Ang'urai South" },
+    "Nambale":            { county: "Busia", ward: "Nambale Township" },
+    "Matayos":            { county: "Busia", ward: "Bujumba" },
+    "Butula":             { county: "Busia", ward: "Butula" },
+    "Funyula":            { county: "Busia", ward: "Funyula" },
+    "Budalangi":          { county: "Busia", ward: "Budalangi Central" },
+    // SIAYA
+    "Alego Usonga":       { county: "Siaya", ward: "North Alego" },
+    "Gem":                { county: "Siaya", ward: "North Gem" },
+    "Bondo":              { county: "Siaya", ward: "Bondo Township" },
+    "Rarieda":            { county: "Siaya", ward: "North East Alego" },
+    "Ugenya":             { county: "Siaya", ward: "West Ugenya" },
+    "Ugunja":             { county: "Siaya", ward: "Ugunja" },
+    // HOMA BAY
+    "Kasipul":            { county: "Homa Bay", ward: "West Kasipul" },
+    "Kabondo Kasipul":    { county: "Homa Bay", ward: "Kabondo West" },
+    "Karachuonyo":        { county: "Homa Bay", ward: "North Karachuonyo" },
+    "Rangwe":             { county: "Homa Bay", ward: "East Gem" },
+    "Homa Bay Town":      { county: "Homa Bay", ward: "Homa Bay Central" },
+    "Ndhiwa":             { county: "Homa Bay", ward: "Ndhiwa" },
+    "Suba North":         { county: "Homa Bay", ward: "Mfangano Island" },
+    "Suba South":         { county: "Homa Bay", ward: "Ruma-Kaksingri" },
+    // MIGORI
+    "Rongo":              { county: "Migori", ward: "Rongo Central" },
+    "Awendo":             { county: "Migori", ward: "North Sakwa" },
+    "Suna East":          { county: "Migori", ward: "Migori Town" },
+    "Suna West":          { county: "Migori", ward: "Wasimbete" },
+    "Uriri":              { county: "Migori", ward: "West Uriri" },
+    "Nyatike":            { county: "Migori", ward: "Kachieng" },
+    "Kuria West":         { county: "Migori", ward: "Ntimaru West" },
+    "Kuria East":         { county: "Migori", ward: "Kuria East" },
+    // KISII
+    "Bonchari":           { county: "Kisii", ward: "Bonchari" },
+    "South Mugirango":    { county: "Kisii", ward: "Boochi/Tendere" },
+    "Bomachoge Borabu":   { county: "Kisii", ward: "Magombo" },
+    "Bobasi":             { county: "Kisii", ward: "Bobasi Central" },
+    "Bomachoge Chache":   { county: "Kisii", ward: "Bassi Central" },
+    "Nyaribari Masaba":   { county: "Kisii", ward: "Nyaribari Masaba" },
+    "Nyaribari Chache":   { county: "Kisii", ward: "Bogiakumu" },
+    "Kitutu Chache North":{ county: "Kisii", ward: "Monyerero" },
+    "Kitutu Chache South":{ county: "Kisii", ward: "Riana" },
+    // NYAMIRA
+    "Kitutu Masaba":      { county: "Nyamira", ward: "Gesima" },
+    "West Mugirango":     { county: "Nyamira", ward: "Bosamaro" },
+    "North Mugirango":    { county: "Nyamira", ward: "Bogetenga" },
+    "Borabu":             { county: "Nyamira", ward: "Borabu" },
+    // NANDI
+    "Tinderet":           { county: "Nandi", ward: "Tinderet" },
+    "Aldai":              { county: "Nandi", ward: "Kemeloi-Maraba" },
+    "Nandi Hills":        { county: "Nandi", ward: "Nandi Hills" },
+    "Chesumei":           { county: "Nandi", ward: "Koyo/Ndurio" },
+    "Emgwen":             { county: "Nandi", ward: "Emgwen" },
+    "Mosop":              { county: "Nandi", ward: "Kabiyet" },
+    // BARINGO
+    "Tiaty":              { county: "Baringo", ward: "Tirioko" },
+    "Baringo North":      { county: "Baringo", ward: "Baringo North" },
+    "Baringo Central":    { county: "Baringo", ward: "Kabartonjo" },
+    "Baringo South":      { county: "Baringo", ward: "Mogotio" },
+    "Eldama Ravine":      { county: "Baringo", ward: "Eldama Ravine" },
+    "Mogotio":            { county: "Baringo", ward: "Mogotio" },
+    // KERICHO
+    "Kipkelion East":     { county: "Kericho", ward: "Chepseon" },
+    "Kipkelion West":     { county: "Kericho", ward: "Kipkelion" },
+    "Ainamoi":            { county: "Kericho", ward: "Kipsitet" },
+    "Belgut":             { county: "Kericho", ward: "Waldai" },
+    "Sigowet/Soin":       { county: "Kericho", ward: "Sigowet" },
+    "Bureti":             { county: "Kericho", ward: "Bureti" },
+    // BOMET
+    "Sotik":              { county: "Bomet", ward: "Sotik" },
+    "Chepalungu":         { county: "Bomet", ward: "Kongasis" },
+    "Bomet East":         { county: "Bomet", ward: "Sigor/Barsyata" },
+    "Bomet Central":      { county: "Bomet", ward: "Silibwet Township" },
+    "Konoin":             { county: "Bomet", ward: "Kimulot" },
+    // NAROK
+    "Kilgoris":           { county: "Narok", ward: "Kilgoris Central" },
+    "Emurua Dikirr":      { county: "Narok", ward: "Emurua Dikirr" },
+    "Narok North":        { county: "Narok", ward: "Narok Town" },
+    "Narok East":         { county: "Narok", ward: "Mosiro" },
+    "Narok South":        { county: "Narok", ward: "Majimoto/Naroosura" },
+    "Narok West":         { county: "Narok", ward: "Melelo" },
+    // ELGEYO-MARAKWET
+    "Marakwet East":      { county: "Elgeyo-Marakwet", ward: "Lelan" },
+    "Marakwet West":      { county: "Elgeyo-Marakwet", ward: "Kapyego" },
+    "Keiyo North":        { county: "Elgeyo-Marakwet", ward: "Emsoo" },
+    "Keiyo South":        { county: "Elgeyo-Marakwet", ward: "Keiyo South" },
+    // KWALE
+    "Msambweni":          { county: "Kwale", ward: "Msambweni" },
+    "Lunga Lunga":        { county: "Kwale", ward: "Lunga Lunga" },
+    "Matuga":             { county: "Kwale", ward: "Tsimba Golini" },
+    "Kinango":            { county: "Kwale", ward: "Ndavaya" },
+    // TAITA TAVETA
+    "Taveta":             { county: "Taita Taveta", ward: "Taveta" },
+    "Wundanyi":           { county: "Taita Taveta", ward: "Wundanyi/Mbale" },
+    "Mwatate":            { county: "Taita Taveta", ward: "Mwatate" },
+    "Voi":                { county: "Taita Taveta", ward: "Voi" },
+    // TANA RIVER
+    "Garsen":             { county: "Tana River", ward: "Garsen South" },
+    "Galole":             { county: "Tana River", ward: "Wayu" },
+    "Bura":               { county: "Tana River", ward: "Bura" },
+    // LAMU
+    "Lamu East":          { county: "Lamu", ward: "Faza" },
+    "Lamu West":          { county: "Lamu", ward: "Shela" },
+    // THARAKA-NITHI
+    "Maara":              { county: "Tharaka-Nithi", ward: "Chiakariga" },
+    "Tharaka":            { county: "Tharaka-Nithi", ward: "Tharaka North" },
+    "Chuka/Igambang'ombe":              { county: "Tharaka-Nithi", ward: "Chuka" },
+    // ISIOLO
+    "Isiolo North":       { county: "Isiolo", ward: "Burat" },
+    "Isiolo South":       { county: "Isiolo", ward: "Garbatula" },
+    // MARSABIT
+    "Laisamis":           { county: "Marsabit", ward: "Logologo" },
+    "Moyale":             { county: "Marsabit", ward: "Moyale Township" },
+    "North Horr":         { county: "Marsabit", ward: "Dukana" },
+    "Saku":               { county: "Marsabit", ward: "Sagante/Jaldesa" },
+    // SAMBURU
+    "Samburu North":      { county: "Samburu", ward: "El Barta" },
+    "Samburu East":       { county: "Samburu", ward: "Waso" },
+    "Samburu West":       { county: "Samburu", ward: "Lodokejek" },
+    // TURKANA
+    "Turkana North":      { county: "Turkana", ward: "Lapur" },
+    "Turkana West":       { county: "Turkana", ward: "Kalobeyei" },
+    "Turkana Central":    { county: "Turkana", ward: "Kerio Delta" },
+    "Loima":              { county: "Turkana", ward: "Loima" },
+    "Turkana South":      { county: "Turkana", ward: "Kaputir" },
+    "Turkana East":       { county: "Turkana", ward: "Kapedo/Napeitom" },
+    // WEST POKOT
+    "Kacheliba":          { county: "West Pokot", ward: "Kacheliba" },
+    "Pokot South":        { county: "West Pokot", ward: "Alale" },
+    "Kapenguria":         { county: "West Pokot", ward: "Kapenguria" },
+    "Sigor":              { county: "West Pokot", ward: "Sekerr" },
+    // GARISSA
+    "Fafi":               { county: "Garissa", ward: "Nanighi" },
+    "Ijara":              { county: "Garissa", ward: "Ijara" },
+    "Dadaab":             { county: "Garissa", ward: "Dadaab" },
+    "Balambala":          { county: "Garissa", ward: "Balambala" },
+    "Lagdera":            { county: "Garissa", ward: "Modogashe" },
+    "Garissa Township":              { county: "Garissa", ward: "Township" },
+    // WAJIR
+    "Wajir North":        { county: "Wajir", ward: "Wajir North" },
+    "Wajir East":         { county: "Wajir", ward: "Wajir East" },
+    "Wajir West":         { county: "Wajir", ward: "Griftu" },
+    "Wajir South":        { county: "Wajir", ward: "Wajir South" },
+    "Tarbaj":             { county: "Wajir", ward: "Tarbaj" },
+    "Eldas":              { county: "Wajir", ward: "Eldas" },
+    // MANDERA
+    "Mandera North":      { county: "Mandera", ward: "Arabia" },
+    "Mandera South":      { county: "Mandera", ward: "Mandera South" },
+    "Mandera East":       { county: "Mandera", ward: "Mandera East" },
+    "Mandera West":       { county: "Mandera", ward: "Mandera West" },
+    "Lafey":              { county: "Mandera", ward: "Lafey" },
+    "Banissa":            { county: "Mandera", ward: "Banissa" },
+    // MAKUENI
+    "Mbooni":             { county: "Makueni", ward: "Mbooni" },
+    "Kaiti":              { county: "Makueni", ward: "Kaiti" },
+    "Makueni":            { county: "Makueni", ward: "Wote" },
+    "Kibwezi West":       { county: "Makueni", ward: "Masongaleni" },
+    "Kibwezi East":       { county: "Makueni", ward: "Mtito Andei" },
+    "Kilome":             { county: "Makueni", ward: "Kilome" },
+    // KITUI
+    "Mwingi North":       { county: "Kitui", ward: "Ngomeni" },
+    "Mwingi West":        { county: "Kitui", ward: "Kyuluni" },
+    "Mwingi Central":        { county: "Kitui", ward: "Mwingi Central" },
+    "Kitui West":         { county: "Kitui", ward: "Mutonguni" },
+    "Kitui Rural":        { county: "Kitui", ward: "Ikutha" },
+    "Kitui Central":      { county: "Kitui", ward: "Miambani" },
+    "Kitui East":         { county: "Kitui", ward: "Zombe/Mwitika" },
+    "Kitui South":        { county: "Kitui", ward: "Mutomo/Kibas" },
+  };
+
+  // ── Candidate database by seat & constituency ──
+  // Production: fetch from IEBC API: https://api.iebc.or.ke/
+  const CANDIDATES = {
+    president: [
+      {
+        name: "William Samoei Ruto", party: "Kenya Kwanza / UDA", number: 1,
+        color: "#fbbf24", bg: "#fffbeb", age: 57, photo: null, emoji: "👨🏾‍💼",
+        partyDetail: "United Democratic Alliance (UDA) under the Kenya Kwanza coalition. Running mate: Rigathi Gachagua.",
+        prevSeats: ["Deputy President of Kenya (2013–2022)", "MP for Eldoret North (1997–2013)", "Cabinet Minister – Agriculture (2008–2010)"],
+        manifesto: ["Bottom-up economic model to empower grassroots entrepreneurs", "Affordable fertiliser and support for small-scale farmers", "Affordable housing programme — 200,000 units per year", "Universal health coverage through the SHA programme", "Youth employment through SME funding and Hustler Fund"],
+      },
+      {
+        name: "Raila Amolo Odinga", party: "Azimio la Umoja", number: 2,
+        color: "#3b82f6", bg: "#eff6ff", age: 77, photo: null, emoji: "👨🏾‍⚖️",
+        partyDetail: "Orange Democratic Movement (ODM) under Azimio la Umoja – One Kenya Coalition. Running mate: Martha Karua.",
+        prevSeats: ["Prime Minister of Kenya (2008–2013)", "MP for Langata (1992–2017)", "Minister for Roads & Public Works (2003–2005)", "Secretary General, ODM (2007–present)"],
+        manifesto: ["Kazi Mtaani 2.0 — expanded public works for youth", "Universal Social Protection — stipends for elderly & vulnerable", "Free and subsidised healthcare at all public hospitals", "Revamp of the education system including CBC reforms", "Anti-corruption independent directorate"],
+      },
+      {
+        name: "George Wajackoyah", party: "Roots Party", number: 3,
+        color: "#10b981", bg: "#f0fdf4", age: 64, photo: null, emoji: "👨🏾‍🔬",
+        partyDetail: "Roots Party of Kenya. Advocate, professor, and former intelligence officer.",
+        prevSeats: ["Lecturer — University of Nairobi (Law)", "Former KGB & CIA consultant", "Human rights lawyer"],
+        manifesto: ["Legalise and export cannabis to pay national debt", "Abolish student loans — free university education", "Export hyena body parts for alternative revenue", "Radical anti-corruption — public asset seizure", "Reduce constituency development fund bureaucracy"],
+      },
+      {
+        name: "David Mwaure Waihiga", party: "Agano Party", number: 4,
+        color: "#8b5cf6", bg: "#f5f3ff", age: 58, photo: null, emoji: "👨🏾‍💼",
+        partyDetail: "Agano Party — Christian values-based political party. Running mate: Ruth Mucheru.",
+        prevSeats: ["Advocate of the High Court of Kenya", "Board Member — National Cohesion & Integration Commission"],
+        manifesto: ["Faith-based governance and moral leadership", "Fight corruption through divine accountability", "Strengthen family values in national policy", "Affordable healthcare through faith-based institutions", "Youth mentorship and values-based education"],
+      },
+    ],
+    governor: {
+      "Nairobi": [
+        {
+          name: "Johnson Sakaja", party: "UDA", number: 1,
+          color: "#fbbf24", bg: "#fffbeb", age: 38, photo: null, emoji: "👨🏾‍💼",
+          partyDetail: "United Democratic Alliance (UDA), Kenya Kwanza coalition.",
+          prevSeats: ["Senator for Nairobi (2017–2022)", "Nominated MP, National Assembly (2013–2017)"],
+          manifesto: ["Affordable housing in Nairobi informal settlements", "Decongestion of CBD through BRT transport", "Free WiFi and digital hubs in all 17 sub-counties", "Clean and green Nairobi — waste management overhaul"],
+        },
+        {
+          name: "Polycarp Igathe", party: "Azimio / Jubilee", number: 2,
+          color: "#3b82f6", bg: "#eff6ff", age: 47, photo: null, emoji: "👨🏾‍💼",
+          partyDetail: "Jubilee Party under Azimio la Umoja coalition.",
+          prevSeats: ["Deputy Governor, Nairobi (2017, resigned)", "CEO — Vivo Energy Kenya", "MD — Equity Bank"],
+          manifesto: ["Private sector-led economic growth for Nairobi", "Upgrade Nairobi roads and sewerage system", "Business-friendly city hall — reduce permit bureaucracy", "Nairobi as East Africa's premier tech & finance hub"],
+        },
+        {
+          name: "Agnes Kagure", party: "Independent", number: 3,
+          color: "#6b7280", bg: "#f9fafb", age: 42, photo: null, emoji: "👩🏾‍💼",
+          partyDetail: "Running as Independent candidate with grassroots support.",
+          prevSeats: ["Business Executive — Nairobi hospitality sector", "Chairperson, Women in Business Network"],
+          manifesto: ["Women and youth economic empowerment", "Slum upgrading and clean water access", "Mental health support in public hospitals", "Market infrastructure development"],
+        },
+      ],
+      "Nakuru": [
+        {
+          name: "Susan Kihika", party: "UDA", number: 1,
+          color: "#fbbf24", bg: "#fffbeb", age: 46, photo: null, emoji: "👩🏾‍💼",
+          partyDetail: "United Democratic Alliance (UDA).",
+          prevSeats: ["Senator for Nakuru County (2017–2022)", "Member of County Assembly — Nakuru"],
+          manifesto: ["Agri-processing industries to boost Nakuru farmers", "Affordable healthcare in all sub-county hospitals", "Tourism development — Lake Nakuru & Hell's Gate", "Women and youth enterprise fund"],
+        },
+        {
+          name: "Lee Kinyanjui", party: "Jubilee", number: 2,
+          color: "#ef4444", bg: "#fef2f2", age: 49, photo: null, emoji: "👨🏾‍💼",
+          partyDetail: "Jubilee Party.",
+          prevSeats: ["Governor, Nakuru County (2017–2022)", "CEO — Nakuru County Investment"],
+          manifesto: ["Continue infrastructure projects started 2017–2022", "Nakuru City development master plan", "Industrial park to attract manufacturing jobs", "Digital skills training for youth"],
+        },
+      ],
+      "default": [
+        { name: "Candidate A", party: "Party X", number: 1, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👤", partyDetail: "Local party affiliate.", prevSeats: ["Ward Representative"], manifesto: ["Improve local infrastructure", "Support small businesses"] },
+        { name: "Candidate B", party: "Party Y", number: 2, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👤", partyDetail: "Opposition party affiliate.", prevSeats: ["Civic leader"], manifesto: ["Healthcare reform", "Education bursaries"] },
+      ]
+    },
+    senator: {
+      "Nairobi": [
+        {
+          name: "Edwin Sifuna", party: "ODM", number: 1,
+          color: "#3b82f6", bg: "#eff6ff", age: 40, photo: null, emoji: "👨🏾‍⚖️",
+          partyDetail: "Orange Democratic Movement (ODM), Azimio coalition.",
+          prevSeats: ["ODM Nairobi Secretary General", "Lawyer — Sifuna & Associates Advocates"],
+          manifesto: ["Increase equitable share for Nairobi County", "Oversight of devolution funds", "Legal aid for Nairobi residents", "Senate champion for urban counties"],
+        },
+        {
+          name: "Michael Oroo", party: "UDA", number: 2,
+          color: "#fbbf24", bg: "#fffbeb", age: 44, photo: null, emoji: "👨🏾‍💼",
+          partyDetail: "United Democratic Alliance (UDA).",
+          prevSeats: ["Political party official — UDA Nairobi"],
+          manifesto: ["Champion bottom-up economy in Senate", "Affordable housing policy framework", "County revenue enhancement", "Devolution of more functions to Nairobi"],
+        },
+      ],
+      "default": [
+        { name: "Candidate A", party: "Party X", number: 1, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👤", partyDetail: "Local party.", prevSeats: ["Civic leader"], manifesto: ["Strengthen devolution", "County revenue accountability"] },
+        { name: "Candidate B", party: "Party Y", number: 2, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👤", partyDetail: "Opposition party.", prevSeats: ["County official"], manifesto: ["Healthcare access", "Infrastructure"] },
+      ]
+    },
+    women_rep: {
+      "Nairobi": [
+        {
+          name: "Esther Passaris", party: "ODM / Azimio", number: 1,
+          color: "#3b82f6", bg: "#eff6ff", age: 55, photo: null, emoji: "👩🏾‍💼",
+          partyDetail: "Orange Democratic Movement (ODM) under Azimio coalition.",
+          prevSeats: ["Women Rep, Nairobi County (2017–2022)", "Businesswoman & philanthropist"],
+          manifesto: ["Free sanitary products in all public schools", "Mental health clinics in every sub-county", "Digital skills for women and girls", "Expanded bursary fund for Nairobi women"],
+        },
+        {
+          name: "Millicent Omanga", party: "UDA", number: 2,
+          color: "#fbbf24", bg: "#fffbeb", age: 42, photo: null, emoji: "👩🏾‍💼",
+          partyDetail: "United Democratic Alliance (UDA).",
+          prevSeats: ["Nominated Senator, Nairobi (2017–2022)"],
+          manifesto: ["Women enterprise fund — zero-interest loans", "Upgrade maternal health wards in Nairobi hospitals", "Sports and talent development for Nairobi youth", "Affordable childcare and creche support"],
+        },
+      ],
+      "default": [
+        { name: "Candidate A", party: "Party X", number: 1, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👩🏾", partyDetail: "Local party.", prevSeats: ["Civic leader"], manifesto: ["Women empowerment", "Education"] },
+        { name: "Candidate B", party: "Party Y", number: 2, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👩🏾", partyDetail: "Opposition.", prevSeats: ["NGO leader"], manifesto: ["Healthcare", "Youth support"] },
+      ]
+    },
+    mp: {
+      "Westlands": [
+        {
+          name: "Tim Wanyonyi", party: "ODM", number: 1,
+          color: "#3b82f6", bg: "#eff6ff", age: 52, photo: null, emoji: "👨🏾‍💼",
+          partyDetail: "Orange Democratic Movement (ODM).",
+          prevSeats: ["MP for Westlands (2013–2022)", "Chairman — Parliamentary Committee on Transport"],
+          manifesto: ["Complete Westlands road dualling", "Upgrade Karen–Westlands cycling lane", "Affordable housing in Westlands", "Tech hub for Parklands area"],
+        },
+        {
+          name: "John Kiarie", party: "Jubilee", number: 2,
+          color: "#ef4444", bg: "#fef2f2", age: 38, photo: null, emoji: "👨🏾‍🎭",
+          partyDetail: "Jubilee Party.",
+          prevSeats: ["MP for Dagoretti South (2017–2022)", "Comedian & media personality"],
+          manifesto: ["Creative economy & arts sector support", "Youth employment in digital media", "Upgrade of Dagoretti market infrastructure", "Scholarship fund for Westlands students"],
+        },
+        {
+          name: "Kanini Kega", party: "UDA", number: 3,
+          color: "#fbbf24", bg: "#fffbeb", age: 45, photo: null, emoji: "👨🏾‍💼",
+          partyDetail: "United Democratic Alliance (UDA).",
+          prevSeats: ["MP for Kieni (2013–2022)", "Member — Public Accounts Committee"],
+          manifesto: ["Bottom-up economy — Westlands SME fund", "Affordable housing policy", "Road network upgrade", "Bursary expansion"],
+        },
+      ],
+      "default": [
+        { name: "Candidate A", party: "Party X", number: 1, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👤", partyDetail: "Local party.", prevSeats: ["Civic leader"], manifesto: ["Road infrastructure", "Local market development"] },
+        { name: "Candidate B", party: "Party Y", number: 2, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👤", partyDetail: "Opposition.", prevSeats: ["County official"], manifesto: ["Youth bursaries", "Healthcare"] },
+        { name: "Candidate C", party: "Independent", number: 3, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👤", partyDetail: "Independent candidate.", prevSeats: ["Business leader"], manifesto: ["Anti-corruption", "Constituency fund accountability"] },
+      ]
+    },
+    mca: {
+      "default": [
+        { name: "MCA Candidate A", party: "UDA", number: 1, color: "#fbbf24", bg: "#fffbeb", age: "—", emoji: "👤", partyDetail: "UDA affiliated.", prevSeats: ["Village elder"], manifesto: ["Ward road grading", "Borehole access"] },
+        { name: "MCA Candidate B", party: "ODM", number: 2, color: "#3b82f6", bg: "#eff6ff", age: "—", emoji: "👤", partyDetail: "ODM affiliated.", prevSeats: ["Civic mobiliser"], manifesto: ["Market stall upgrade", "Street lighting"] },
+        { name: "MCA Candidate C", party: "Independent", number: 3, color: "#6b7280", bg: "#f9fafb", age: "—", emoji: "👤", partyDetail: "Independent.", prevSeats: ["Youth leader"], manifesto: ["Youth sports ground", "Ward bursary fund"] },
+      ]
+    }
+  };
+
+  // ══════════════════════════════════════════════════
+  // APP STATE
+  // ══════════════════════════════════════════════════
+  const state = {
+    location: { county: null, constituency: null, ward: null },
+    selections: {},
+    currentSeat: 0,
+    selectedPollingStation: null,
+    shuffledPools: {},
+  };
+
+  const SEATS = [
+    {
+      key: "mca", label: "Ward MCA", title: "Choose your Ward Rep (MCA)",
+      desc: "The Member of County Assembly (MCA) represents your ward in the county assembly — the closest elected representative to your daily life.",
+      getPool: () => CANDIDATES.mca[state.location.ward] || CANDIDATES.mca["default"],
+    },
+    {
+      key: "mp", label: "National Assembly MP", title: "Choose your Member of Parliament",
+      desc: "Your constituency MP represents you in the National Assembly, making laws and overseeing national policy.",
+      getPool: () => CANDIDATES.mp[state.location.constituency] || CANDIDATES.mp["default"],
+    },
+    {
+      key: "women_rep", label: "Women Representative", title: "Choose your Women Rep",
+      desc: "The Women Representative is elected from your county to the National Assembly to champion women and special interest groups.",
+      getPool: () => CANDIDATES.women_rep[state.location.county] || CANDIDATES.women_rep["default"],
+    },
+    {
+      key: "senator", label: "County Senator", title: "Choose your Senator",
+      desc: "Senators represent counties in the Senate, oversee devolution funds, and legislate on matters affecting counties.",
+      getPool: () => CANDIDATES.senator[state.location.county] || CANDIDATES.senator["default"],
+    },
+    {
+      key: "governor", label: "County Governor", title: "Choose your Governor",
+      desc: "The Governor heads your county government and manages devolved functions including health, agriculture, and local infrastructure.",
+      getPool: () => CANDIDATES.governor[state.location.county] || CANDIDATES.governor["default"] || [],
+    },
+    {
+      key: "president", label: "Presidential", title: "Choose your President",
+      desc: "The President leads the executive branch and serves a 5-year term. Every registered Kenyan votes for the same presidential candidates.",
+      getPool: () => CANDIDATES.president,
+    },
+  ];
+
+  // ══════════════════════════════════════════════════
+  // NAVIGATION
+  // ══════════════════════════════════════════════════
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+  }
+
+  function showToast(msg, duration = 2500) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), duration);
+  }
+
+  // ══════════════════════════════════════════════════
+  // SCREEN 1 → 2: GET LOCATION
+  // ══════════════════════════════════════════════════
+  function startApp() {
+    showScreen(2);
+    setTimeout(() => {
+      initMap(null, null);
+      detectLocation(); // auto-start GPS on the GPS tab (default)
+    }, 100);
+  }
+
+  function detectLocation() {
+    if (!navigator.geolocation) {
+      fallbackLocation();
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      pos => reverseGeocode(pos.coords.latitude, pos.coords.longitude),
+      err => fallbackLocation(),
+      { timeout: 8000 }
+    );
+  }
+
+  function reverseGeocode(lat, lng) {
+    initMap(lat, lng);
+    pendingGpsCoords = { lat, lng };
+
+    // Retry PiP until a GeoJSON layer is ready (layers load asynchronously)
+    let attempts = 0;
+    function tryPiP() {
+      const found = findLocationByPoint(lat, lng);
+      if (found) {
+        applyGpsResult(found);
+      } else if (attempts < 12) {
+        attempts++;
+        setTimeout(tryPiP, 700); // retry every 700ms, up to ~8s
+      } else {
+        pendingGpsCoords = null;
+        fallbackLocation(); // give up — use Kenya centre default
+      }
+    }
+    setTimeout(tryPiP, 500);
+  }
+
+  function fallbackLocation() {
+    // Default: centre of Kenya for demo
+    initMap(0.0236, 37.9062);
+    setTimeout(() => {
+      state.location.constituency = "Nakuru Town East";
+      state.location.county = "Nakuru";
+      state.location.ward = "Biashara";
+      populateLocation();
+    }, 1200);
+  }
+
+  function populateLocation() {
+    document.getElementById('loc-county').textContent = state.location.county;
+    document.getElementById('loc-constituency').textContent = state.location.constituency;
+    document.getElementById('loc-ward').textContent = state.location.ward;
+    document.getElementById('loc-status').innerHTML = '✅ Location found successfully.';
+    document.getElementById('btn-confirm-location').style.display = 'flex';
+    const badge = document.getElementById('map-badge');
+    if (badge) badge.textContent = `📍 ${state.location.constituency}, ${state.location.county}`;
+    highlightUserWard();
+    // Fetch CSV for this county (GPS path skips onCountyChange, so we trigger it here)
+    fetchCountyCSV(state.location.county);
+    // Auto-load polling stations (will also run again after CSV finishes)
+    showPollingStations();
+  }
+
+  // ══════════════════════════════════════════════════
+  // POLLING STATIONS
+  // Production: fetch from IEBC API /polling-stations?constituency=X
+  // ══════════════════════════════════════════════════
+  const POLLING_STATIONS = {
+    "Nakuru Town East": [
+      { name: "Nakuru Primary School", address: "Kenyatta Ave, Nakuru", ward: "Biashara", streams: 4, lat: -0.2864, lng: 36.0727 },
+      { name: "St. Joseph's Primary School", address: "Hospital Rd, Nakuru", ward: "Biashara", streams: 3, lat: -0.2890, lng: 36.0685 },
+      { name: "Nakuru Day Secondary School", address: "Oginga Odinga Rd", ward: "Flamingo", streams: 5, lat: -0.2921, lng: 36.0802 },
+      { name: "Menengai Primary School", address: "Menengai Rd, Nakuru", ward: "Menengai", streams: 3, lat: -0.2750, lng: 36.0650 },
+      { name: "ACK Nakuru Cathedral Hall", address: "Church Rd, Nakuru", ward: "Biashara", streams: 2, lat: -0.2840, lng: 36.0710 },
+    ],
+    "Westlands": [
+      { name: "Westlands Primary School", address: "Westlands Rd, Nairobi", ward: "Parklands/Highridge", streams: 6, lat: -1.2641, lng: 36.8019 },
+      { name: "Parklands Primary School", address: "3rd Parklands Ave", ward: "Parklands/Highridge", streams: 4, lat: -1.2601, lng: 36.8100 },
+      { name: "Highridge Teachers Training College", address: "Highridge Rd", ward: "Parklands/Highridge", streams: 5, lat: -1.2550, lng: 36.8180 },
+      { name: "St. Austin's Primary School", address: "Muthithi Rd, Westlands", ward: "Parklands/Highridge", streams: 3, lat: -1.2670, lng: 36.8050 },
+    ],
+    "Roysambu": [
+      { name: "Roysambu Primary School", address: "Roysambu, Nairobi", ward: "Roysambu", streams: 5, lat: -1.2200, lng: 36.8800 },
+      { name: "Githurai Primary School", address: "Githurai 44, Nairobi", ward: "Githurai", streams: 4, lat: -1.2010, lng: 36.9010 },
+      { name: "TUK Ruaraka Campus", address: "Thika Road", ward: "Clay City", streams: 3, lat: -1.2300, lng: 36.8850 },
+    ],
+    "Kibra": [
+      { name: "Olympic Primary School", address: "Kibra, Nairobi", ward: "Laini Saba", streams: 6, lat: -1.3120, lng: 36.7790 },
+      { name: "Kibra Primary School", address: "Kibra Drive", ward: "Laini Saba", streams: 4, lat: -1.3200, lng: 36.7720 },
+      { name: "St. Cecilia Primary School", address: "Lindi, Kibra", ward: "Lindi", streams: 3, lat: -1.3180, lng: 36.7850 },
+    ],
+    "Kasarani": [
+      { name: "Kasarani Primary School", address: "Kasarani, Nairobi", ward: "Mwiki", streams: 5, lat: -1.2210, lng: 36.8990 },
+      { name: "Mwiki Primary School", address: "Mwiki Rd, Nairobi", ward: "Mwiki", streams: 4, lat: -1.2020, lng: 36.9150 },
+      { name: "Sunton Primary School", address: "Sunton, Kasarani", ward: "Clayworks", streams: 3, lat: -1.2100, lng: 36.9070 },
+    ],
+    "Kisumu Central": [
+      { name: "Kisumu Boys High School", address: "Oginga Odinga St, Kisumu", ward: "Railways", streams: 5, lat: -0.0930, lng: 34.7680 },
+      { name: "Kisumu Primary School", address: "Jomo Kenyatta Hwy", ward: "Railways", streams: 4, lat: -0.0960, lng: 34.7720 },
+      { name: "St. Teresa's Primary School", address: "Migosi, Kisumu", ward: "Migosi", streams: 3, lat: -0.0870, lng: 34.7800 },
+    ],
+    "Mvita": [
+      { name: "Mji wa Kale Primary School", address: "Old Town, Mombasa", ward: "Mji Wa Kale/Makadara", streams: 4, lat: -4.0660, lng: 39.6690 },
+      { name: "Allidina Visram High School", address: "Mombasa Island", ward: "Tudor", streams: 5, lat: -4.0560, lng: 39.6720 },
+      { name: "Mombasa Primary School", address: "Moi Ave, Mombasa", ward: "Mji Wa Kale/Makadara", streams: 3, lat: -4.0620, lng: 39.6660 },
+    ],
+    "default": [
+      { name: "Local Primary School A", address: "Main Street, Town Centre", ward: "Central", streams: 4, lat: null, lng: null },
+      { name: "Community Hall B", address: "Community Road", ward: "Central", streams: 3, lat: null, lng: null },
+      { name: "Secondary School C", address: "School Lane", ward: "East Ward", streams: 5, lat: null, lng: null },
+    ],
+  };
+
+  let pollingMarkers = [];
+  let pollingListOpen = false;
+
+  // ── AUTO-LOAD POLLING STATIONS FROM FOLDER ──
+  // Running total across all auto-loaded county files
+  let uploadedStationTotal = 0;
+  // Counties whose CSV file has already been fetched from the folder
+  const loadedCountyFiles = new Set();
+
+  // Title-case helper (handles ALL-CAPS IEBC data)
+  function titleCase(s) {
+    return (s || '').toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function parsePollingCSV(text) {
+    const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n')
+                      .split('\n').filter(l => l.trim());
+    if (lines.length < 2) throw new Error('File has no data rows');
+
+    // Normalise headers: collapse multiple spaces, lowercase, trim
+    const headers = parseCSVRow(lines[0])
+      .map(h => h.replace(/\s+/g, ' ').trim().toLowerCase());
+
+    function colIndex(aliases) {
+      for (const a of aliases) {
+        const i = headers.indexOf(a);
+        if (i !== -1) return i;
+      }
+      // Partial match fallback (e.g. "polling station name name" → "polling station name")
+      for (const a of aliases) {
+        const i = headers.findIndex(h => h.includes(a));
+        if (i !== -1) return i;
+      }
+      return -1;
+    }
+
+    const idx = {
+      // IEBC format: "polling station name name" (duplicate typo in their header)
+      name:         colIndex(['polling station name', 'polling station name name',
+                               'station name', 'name', 'centre', 'center']),
+      // IEBC format: "const. name" (note the period)
+      constituency: colIndex(['const. name', 'const name', 'constituency name',
+                               'constituency', 'const']),
+      // IEBC: "caw name" (County Assembly Ward)
+      ward:         colIndex(['caw name', 'ward name', 'ward']),
+      // IEBC: "reg. centre name" = the registration/polling centre building
+      address:      colIndex(['reg. centre name', 'reg centre name',
+                               'registration centre', 'address', 'location', 'venue']),
+      streams:      colIndex(['streams', 'polling streams', 'booths']),
+      lat:          colIndex(['lat', 'latitude']),
+      lng:          colIndex(['lng', 'lon', 'longitude']),
+    };
+
+    if (idx.name         === -1) throw new Error('Cannot find station name column');
+    if (idx.constituency === -1) throw new Error('Cannot find constituency column');
+
+    // Clear built-in sample data on the very first load
+    if (uploadedStationTotal === 0) {
+      Object.keys(POLLING_STATIONS).forEach(k => delete POLLING_STATIONS[k]);
+    }
+
+    // IEBC CSVs have one ROW per polling STREAM (not per station).
+    // The same school can appear 2–6 times with different Polling Station Codes.
+    // We deduplicate by (constituency + ward + reg_centre_name) and count streams.
+    // Key: "CONSTITUENCY|WARD|REG CENTRE NAME"
+    const stationMap = {}; // dedup key → station object
+
+    for (let i = 1; i < lines.length; i++) {
+      const row = parseCSVRow(lines[i]);
+      const get = (ci, def = '') => (ci !== -1 && row[ci] !== undefined)
+        ? row[ci].trim() : def;
+
+      const rawConst  = get(idx.constituency);
+      const rawWard   = get(idx.ward);
+      // Use Reg. Centre Name as the canonical station name (the actual building)
+      const rawAddr   = get(idx.address);
+      // Polling Station Name is usually identical to Reg. Centre Name in IEBC data
+      const rawName   = rawAddr || get(idx.name);
+      if (!rawName || !rawConst) continue;
+
+      const dedupKey = `${rawConst}|${rawWard}|${rawAddr}`;
+
+      if (stationMap[dedupKey]) {
+        // Another stream of the same station — just increment the count
+        stationMap[dedupKey].streams++;
+      } else {
+        stationMap[dedupKey] = {
+          name:    titleCase(rawName),
+          ward:    titleCase(rawWard),
+          address: titleCase(rawAddr),
+          streams: 1,
+          lat:     parseFloat(get(idx.lat, '')) || null,
+          lng:     parseFloat(get(idx.lng, '')) || null,
+          _constituency: titleCase(rawConst),
+        };
+      }
+    }
+
+    // Add deduplicated stations to POLLING_STATIONS
+    // Also collect ward names per constituency so CONSTITUENCY_WARDS stays in sync with CSV
+    const wardsByConst = {};
+    let count = 0;
+    Object.values(stationMap).forEach(s => {
+      const constituency = s._constituency;
+      if (!wardsByConst[constituency]) wardsByConst[constituency] = new Set();
+      wardsByConst[constituency].add(s.ward);
+      delete s._constituency;
+      if (!POLLING_STATIONS[constituency]) POLLING_STATIONS[constituency] = [];
+      POLLING_STATIONS[constituency].push(s);
+      count++;
+    });
+
+    // Overwrite static fallback with authoritative ward names from IEBC CSV
+    Object.entries(wardsByConst).forEach(([c, wardSet]) => {
+      CONSTITUENCY_WARDS[c] = [...wardSet].sort();
+    });
+
+    if (count === 0) throw new Error('No valid rows found — check column names');
+    return count;
+  }
+
+  // Minimal RFC 4180-compliant CSV row parser (handles quoted fields with commas/newlines)
+  function parseCSVRow(line) {
+    const result = [];
+    let field = '', inQuote = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (inQuote) {
+        if (c === '"' && line[i + 1] === '"') { field += '"'; i++; }
+        else if (c === '"') { inQuote = false; }
+        else { field += c; }
+      } else {
+        if (c === '"')  { inQuote = true; }
+        else if (c === ',') { result.push(field); field = ''; }
+        else { field += c; }
+      }
+    }
+    result.push(field);
+    return result;
+  }
+
+  function showPollingStations() {
+    const constituency = state.location.constituency;
+    const ward         = state.location.ward;
+    if (!constituency) return;
+
+    // Look up all stations for this constituency (exact match, then case-insensitive)
+    let allStations = POLLING_STATIONS[constituency];
+    if (!allStations) {
+      const key = Object.keys(POLLING_STATIONS)
+        .find(k => k.toLowerCase() === constituency.toLowerCase());
+      allStations = key ? POLLING_STATIONS[key] : null;
+    }
+
+    const section = document.getElementById('polling-section');
+    if (section) section.style.display = 'block';
+
+    if (!allStations || allStations.length === 0) {
+      const label = document.getElementById('polling-count-label');
+      if (label) label.textContent = `No stations loaded for ${constituency} yet`;
+      plotPollingMarkers([]);
+      renderPollingList([]);
+      return;
+    }
+
+    // Filter to selected ward so the list stays short and relevant
+    // Normalize hyphens↔spaces so "South-C" matches "South C" from CSV
+    const normWard = w => w.toLowerCase().replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+    let stations = ward
+      ? allStations.filter(s => s.ward && normWard(s.ward) === normWard(ward))
+      : allStations;
+
+    // If ward filter returns nothing, fall back to full constituency list
+    if (stations.length === 0) stations = allStations;
+
+    const label = document.getElementById('polling-count-label');
+    if (label) {
+      label.textContent = ward && stations.length < allStations.length
+        ? `${stations.length} stations in ${ward} ward`
+        : `${stations.length} stations in ${constituency}`;
+    }
+
+    plotPollingMarkers(stations);
+    renderPollingList(stations);
+  }
+
+  function plotPollingMarkers(stations) {
+    // Clear old markers
+    pollingMarkers.forEach(m => kenyaMap && kenyaMap.removeLayer(m));
+    pollingMarkers = [];
+
+    if (!kenyaMap) return;
+
+    stations.forEach((station, i) => {
+      if (!station.lat || !station.lng) return;
+
+      const icon = L.divIcon({
+        className: '',
+        html: `<div style="
+          width:32px;height:32px;border-radius:50%;
+          background:#d4a017;border:3px solid #fff;
+          display:flex;align-items:center;justify-content:center;
+          font-size:11px;font-weight:800;color:#000;
+          box-shadow:0 2px 8px rgba(0,0,0,0.4);
+          font-family:'DM Sans',sans-serif;
+        ">${i + 1}</div>`,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+      });
+
+      const marker = L.marker([station.lat, station.lng], { icon })
+        .addTo(kenyaMap)
+        .bindPopup(`
+          <div style="font-family:'DM Sans',sans-serif;min-width:180px;">
+            <div style="font-weight:700;font-size:0.9rem;margin-bottom:4px;">${station.name}</div>
+            <div style="font-size:0.78rem;color:#555;margin-bottom:4px;">📍 ${station.address}</div>
+            <div style="font-size:0.75rem;color:#1a6b3c;font-weight:600;">🗳️ ${station.streams} polling streams</div>
+            <div style="font-size:0.72rem;color:#777;margin-top:2px;">Ward: ${station.ward}</div>
+          </div>
+        `, { maxWidth: 220 });
+
+      pollingMarkers.push(marker);
+
+      // Highlight list item when marker clicked
+      marker.on('click', () => highlightPollingItem(i));
+    });
+  }
+
+  function renderPollingList(stations) {
+    const list = document.getElementById('polling-list');
+    if (!list) return;
+    list.innerHTML = '';
+
+    if (!stations || stations.length === 0) {
+      list.innerHTML = `<div style="padding:16px;text-align:center;color:#aaa;font-size:0.82rem;">
+        No polling stations loaded for this constituency.<br>Upload a CSV file above.
+      </div>`;
+      return;
+    }
+
+    // Group by ward
+    const byWard = {};
+    stations.forEach((s, i) => {
+      if (!byWard[s.ward]) byWard[s.ward] = [];
+      byWard[s.ward].push({ ...s, index: i });
+    });
+
+    Object.entries(byWard).forEach(([ward, wardStations]) => {
+      const divider = document.createElement('div');
+      divider.className = 'polling-divider';
+      divider.textContent = ward;
+      list.appendChild(divider);
+
+      wardStations.forEach(station => {
+        const item = document.createElement('div');
+        item.className = 'polling-item';
+        item.id = `polling-item-${station.index}`;
+        item.onclick = () => focusPollingStation(station);
+        const mapsQuery = encodeURIComponent(`${station.name}, ${station.ward}, ${state.location.constituency}, Kenya`);
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+        item.innerHTML = `
+          <div class="polling-dot">${station.index + 1}</div>
+          <div style="flex:1;">
+            <div class="polling-name">${station.name}</div>
+            <div class="polling-address">📍 ${station.address}</div>
+            <div class="polling-stream">🗳️ ${station.streams} streams · ${station.ward}</div>
+            <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer"
+               onclick="event.stopPropagation()"
+               style="display:inline-flex;align-items:center;gap:4px;margin-top:5px;
+                      font-size:0.73rem;color:#1a73e8;text-decoration:none;font-weight:600;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+              View on Google Maps
+            </a>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    });
+  }
+
+  function togglePollingList() {
+    const list = document.getElementById('polling-list');
+    const toggle = document.getElementById('polling-toggle');
+    if (!list || !toggle) return;
+    pollingListOpen = !pollingListOpen;
+    list.classList.toggle('open', pollingListOpen);
+    toggle.classList.toggle('active', pollingListOpen);
+  }
+
+  function focusPollingStation(station) {
+    // Save to state
+    state.selectedPollingStation = station;
+    showToast(`✓ Polling station selected: ${station.name}`);
+
+    if (!kenyaMap || !station.lat || !station.lng) {
+      return;
+    }
+    kenyaMap.flyTo([station.lat, station.lng], 15, { duration: 1.2 });
+    if (pollingMarkers[station.index]) {
+      setTimeout(() => pollingMarkers[station.index].openPopup(), 1300);
+    }
+    highlightPollingItem(station.index);
+  }
+
+  function highlightPollingItem(index) {
+    document.querySelectorAll('.polling-item').forEach(el => el.classList.remove('highlighted'));
+    const el = document.getElementById(`polling-item-${index}`);
+    if (el) {
+      el.classList.add('highlighted');
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  // ── Fisher-Yates shuffle — unbiased, in-place ──
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function confirmLocation() {
+    state.currentSeat = 0;
+    state.selections = {};
+
+    // Shuffle candidate order for each seat once — stays fixed for this session
+    state.shuffledPools = {};
+    SEATS.forEach(seat => {
+      state.shuffledPools[seat.key] = shuffle(seat.getPool());
+    });
+
+    renderSeat();
+    showScreen(3);
+  }
+
+  // ── ALL 47 COUNTIES WITH CONSTITUENCIES (for manual dropdowns) ──
+  const COUNTY_CONSTITUENCIES = {
+    "Nairobi":         ["Westlands","Dagoretti North","Dagoretti South","Langata","Kibra","Roysambu","Kasarani","Ruaraka","Embakasi South","Embakasi North","Embakasi Central","Embakasi East","Embakasi West","Makadara","Kamukunji","Starehe","Mathare"],
+    "Kiambu":          ["Ruiru","Juja","Thika Town","Gatundu South","Gatundu North","Githunguri","Kiambu","Kiambaa","Kabete","Kikuyu","Limuru","Lari"],
+    "Mombasa":         ["Changamwe","Jomvu","Kisauni","Nyali","Likoni","Mvita"],
+    "Kisumu":          ["Kisumu East","Kisumu West","Kisumu Central","Seme","Nyando","Muhoroni","Nyakach"],
+    "Nakuru":          ["Molo","Njoro","Naivasha","Gilgil","Kuresoi South","Kuresoi North","Subukia","Rongai","Bahati","Nakuru Town West","Nakuru Town East"],
+    "Kajiado":         ["Kajiado North","Kajiado Central","Kajiado East","Kajiado West","Kajiado South"],
+    "Machakos":        ["Masinga","Yatta","Kangundo","Matungulu","Kathiani","Mavoko","Machakos Town","Mwala"],
+    "Uasin Gishu":     ["Soy","Turbo","Moiben","Ainabkoi","Kapseret","Kesses"],
+    "Kilifi":          ["Kilifi North","Kilifi South","Kaloleni","Rabai","Ganze","Malindi","Magarini"],
+    "Meru":            ["Igembe South","Igembe Central","Igembe North","Tigania West","Tigania East","North Imenti","Buuri","Cental Imenti","South Imenti"],
+    "Nyeri":           ["Tetu","Kieni","Mathira","Othaya","Mukurweni","Nyeri Town"],
+    "Murang'a":       ["Kiharu","Kigumo","Maragwa","Kandara","Gatanga","Mathioya","Kangema"],
+    "Kirinyaga":       ["Mwea","Gichugu","Ndia","Kirinyaga Central"],
+    "Embu":            ["Manyatta","Runyenjes","Mbeere South","Mbeere North"],
+    "Laikipia":        ["Laikipia West","Laikipia East","Laikipia North"],
+    "Nyandarua":       ["Kinangop","Kipipiri","Ol Kalou","Ol Jorok","Ndaragwa"],
+    "Kericho":         ["Kipkelion East","Kipkelion West","Ainamoi","Belgut","Sigowet/Soin","Bureti"],
+    "Bomet":           ["Sotik","Chepalungu","Bomet East","Bomet Central","Konoin"],
+    "Narok":           ["Kilgoris","Emurua Dikirr","Narok North","Narok East","Narok South","Narok West"],
+    "Kakamega":        ["Lugari","Likuyani","Malava","Lurambi","Navakholo","Mumias West","Mumias East","Matungu","Butere","Khwisero","Shinyalu","Ikolomani"],
+    "Vihiga":          ["Vihiga","Sabatia","Hamisi","Luanda","Emuhaya"],
+    "Bungoma":         ["Webuye East","Webuye West","Kanduyi","Bumula","Kabuchai","Mt. Elgon","Sirisia","Tongaren","Kimilili"],
+    "Busia":           ["Teso North","Teso South","Nambale","Matayos","Butula","Funyula","Budalangi"],
+    "Siaya":           ["Alego Usonga","Gem","Bondo","Rarieda","Ugenya","Ugunja"],
+    "Homa Bay":        ["Kasipul","Kabondo Kasipul","Karachuonyo","Rangwe","Homa Bay Town","Ndhiwa","Suba North","Suba South"],
+    "Migori":          ["Rongo","Awendo","Suna East","Suna West","Uriri","Nyatike","Kuria West","Kuria East"],
+    "Kisii":           ["Bonchari","South Mugirango","Bomachoge Borabu","Bobasi","Bomachoge Chache","Nyaribari Masaba","Nyaribari Chache","Kitutu Chache North","Kitutu Chache South"],
+    "Nyamira":         ["Kitutu Masaba","West Mugirango","North Mugirango","Borabu"],
+    "Nandi":           ["Tinderet","Aldai","Nandi Hills","Chesumei","Emgwen","Mosop"],
+    "Baringo":         ["Tiaty","Baringo North","Baringo Central","Baringo South","Eldama Ravine","Mogotio"],
+    "Elgeyo-Marakwet": ["Marakwet East","Marakwet West","Keiyo North","Keiyo South"],
+    "Trans Nzoia":     ["Cherangany","Endebess","Saboti","Kiminini","Kwanza"],
+    "West Pokot":      ["Kacheliba","Pokot South","Kapenguria","Sigor"],
+    "Samburu":         ["Samburu North","Samburu East","Samburu West"],
+    "Turkana":         ["Turkana North","Turkana West","Turkana Central","Loima","Turkana South","Turkana East"],
+    "Isiolo":          ["Isiolo North","Isiolo South"],
+    "Marsabit":        ["Laisamis","Moyale","North Horr","Saku"],
+    "Mandera":         ["Mandera North","Mandera South","Mandera East","Mandera West","Lafey","Banissa"],
+    "Wajir":           ["Wajir North","Wajir East","Wajir West","Wajir South","Tarbaj","Eldas"],
+    "Garissa":         ["Fafi","Ijara","Dadaab","Balambala","Lagdera","Garissa Township"],
+    "Tana River":      ["Garsen","Galole","Bura"],
+    "Lamu":            ["Lamu East","Lamu West"],
+    "Taita Taveta":    ["Taveta","Wundanyi","Mwatate","Voi"],
+    "Kwale":           ["Msambweni","Lunga Lunga","Matuga","Kinango"],
+    "Makueni":         ["Mbooni","Kaiti","Makueni","Kibwezi West","Kibwezi East","Kilome"],
+    "Kitui":           ["Mwingi North","Mwingi West","Mwingi Central","Kitui West","Kitui Rural","Kitui Central","Kitui East","Kitui South"],
+    "Tharaka-Nithi":   ["Maara","Tharaka","Chuka/Igambang'ombe"],
+  };
+
+  function switchTab(tab) {
+    ['gps','manual','iebc'].forEach(t => {
+      document.getElementById(`tab-${t}`).classList.toggle('active', tab === t);
+      document.getElementById(`panel-${t}`).classList.toggle('active', tab === t);
+    });
+
+    if (tab === 'iebc') {
+      // Lazy-load the iframe the first time the tab is opened
+      const frame = document.getElementById('iebc-frame');
+      if (frame.src === 'about:blank' || frame.src === '') {
+        frame.src = 'https://verify.iebc.or.ke/';
+      }
+    }
+
+    if (tab === 'gps') {
+      // Re-trigger detection if not already done
+      const county = document.getElementById('loc-county');
+      if (county && county.querySelector('.spinner')) {
+        detectLocation();
+      }
+    }
+  }
+
+  // ── WARD DATA PER CONSTITUENCY ──
+  const CONSTITUENCY_WARDS = {
+    // Nairobi
+    "Westlands":         ["Parklands/Highridge","Karura","Kangemi","Mountain View","Kitisuru"],
+    "Dagoretti North":   ["Kilimani","Kawangware","Gatina","Kileleshwa","Kabiro"],
+    "Dagoretti South":   ["Uthiru/Ruthimitu","Ondiri","Riruta","Waithaka","Mutu-ini"],
+    "Langata":           ["Karen","Nairobi West","Mugumu-ini","South C","Nyayo Highrise"],
+    "Kibra":             ["Laini Saba","Lindi","Makina","Woodley/KGC","Sarang'ombe"],
+    "Roysambu":          ["Roysambu","Githurai","Kahawa West","Zimmerman","Kahawa"],
+    "Kasarani":          ["Mwiki","Kasarani","Njiru","Ruai","Clay City"],
+    "Ruaraka":           ["Lucky Summer","Korogocho","Utawala","Babadogo","Utalii"],
+    "Embakasi South":    ["Imara Daima","Kwa Njenga","Kwa Reuben","Pipeline","Kware"],
+    "Embakasi North":    ["Kariobangi North","Dandora I","Dandora II","Dandora III","Dandora IV"],
+    "Embakasi Central":  ["Kayole North","Kayole South","Kayole Central","Komarock","Matopeni/Spring Valley"],
+    "Embakasi East":     ["Upper Savannah","Lower Savannah","Embakasi","Utawala","Mihang'o"],
+    "Embakasi West":     ["Umoja I","Umoja II","Mowlem","Kariobangi South"],
+    "Makadara":          ["Maringo/Hamza","Viwandani","Harambee","Makongeni"],
+    "Kamukunji":         ["Pumwani","Eastleigh North","Eastleigh South","Airbase","California"],
+    "Starehe":           ["Nairobi Central","Ngara","Pangani","Ziwani/Kariokor","Landimawe","Nairobi South"],
+    "Mathare":           ["Hospital","Mabatini","Huruma","Ngei","Mlango Kubwa","Kiamaiko"],
+    // Nakuru
+    "Molo":              ["Molo","Mariashoni","Elburgon","Turi"],
+    "Njoro":             ["Njoro","Mauche","Kihingo","Lare","Nessuit"],
+    "Naivasha":          ["Naivasha East","Naivasha West","Biashara","Mai Mahiu","Maiella"],
+    "Gilgil":            ["Gilgil","Elementaita","Mbaruk/Eburu","Malewa West"],
+    "Kuresoi South":     ["Amalo","Keringet","Kiptagich","Tinet"],
+    "Kuresoi North":     ["Kiptororo","Nyota","Sirikwa","Kamwaura","Kuresoi"],
+    "Subukia":           ["Subukia","Waseges","Kabazi"],
+    "Rongai":            ["Rongai","Menengai West","Soin","Visoi","Mosop"],
+    "Bahati":            ["Bahati","Dundori","Kabatini","Kiamaina","Lanet/Umoja"],
+    "Nakuru Town West":  ["Nakuru East","Biashara","London","Kaptembwo","Shaabab"],
+    "Nakuru Town East":  ["Biashara","Kivumbini","Flamingo","Menengai","Nakuru East"],
+    // Kiambu
+    "Ruiru":             ["Gitothua","Biashara","Gatongora","Kahawa Sukari","Kahawa Wendani","Kimbo"],
+    "Juja":              ["Kalimoni","Murera","Theta","Juja Farm","Witeithie"],
+    "Thika Town":        ["Township","Kamenu","Gatuanyaga","Ngoliba","Hospital"],
+    "Gatundu South":     ["Gatundu","Kiganjo","Ndarugu","Ngenda"],
+    "Gatundu North":     ["Githobokoni","Chania","Mang'u","Kakuzi/Mitubiri"],
+    "Githunguri":        ["Githunguri","Ikinu","Ngewa","Komothai"],
+    "Kiambu":            ["Kiambu","Ting'ang'a","Ndenderu","Karuri","Cianda"],
+    "Kiambaa":           ["Cianda","Karuri","Ndenderu","Township","Kihara"],
+    "Kabete":            ["Kabete","Gitaru","Muguga","Nyadhuna","Kinoo"],
+    "Kikuyu":            ["Kikuyu","Kinoo","Sigona","Karai","Thogoto/Ndeiya"],
+    "Limuru":            ["Limuru East","Limuru Central","Ndeiya","Ngecha/Tigoni","Bibirioni"],
+    "Lari":              ["Lari/Kirenga","Kijabe","Nyanduma","Kinale","Kamburu"],
+    // Mombasa
+    "Changamwe":         ["Chaani","Changamwe","Port Reitz","Kipevu","Airport","Miritini"],
+    "Jomvu":             ["Jomvu Kuu","Mikindani","Miritini"],
+    "Kisauni":           ["Mjambere","Junda","Bamburi","Mwakirunge","Mtopanga","Magogoni"],
+    "Nyali":             ["Kongowea","Kadzandani","Mkomani","Ziwa La Ng'ombe","Frere Town"],
+    "Likoni":            ["Shika Adabu","Bofu","Likoni","Timbwani","Mtongwe"],
+    "Mvita":             ["Mji Wa Kale/Makadara","Tudor","Tononoka","Shimanzi/Ganjoni","Majengo"],
+    // Kwale
+    "Msambweni":         ["Gombato Bongwe","Ukunda","Kinondo","Ramisi"],
+    "Lunga Lunga":       ["Lunga Lunga","Mkange","Mwereni","Vanga"],
+    "Matuga":            ["Tsimba Golini","Waa","Tiwi","Mvindeni","Pongwe/Kikoneni"],
+    "Kinango":           ["Ndavaya","Puma","Kinango","Mackinnon Road","Chengoni/Samburu","Mwavumbo","Kasemeni"],
+    // Kisumu
+    "Kisumu Central":    ["Railways","Migosi","Shaurimoyo/Kaloleni","Market Milimani","Kondele"],
+    "Kisumu East":       ["Kajulu","Kolwa East","Manyatta B","Nyalenda A","Nyalenda B"],
+    "Kisumu West":       ["South West Kisumu","Central Kisumu","Kisumu North","West Kisumu"],
+    "Seme":              ["West Seme","Central Seme","East Seme","North Seme"],
+    "Nyando":            ["Awasi/Onjiko","Miwani","Ombeyi","Masogo/Nyang'oma","Chemilil"],
+    "Muhoroni":          ["Muhoroni/Koru","Miwani","Chemelil/Chemase","Ombeyi"],
+    "Nyakach":           ["South West Nyakach","West Nyakach","Central Nyakach","North East Nyakach","Nyakach East"],
+    // Uasin Gishu
+    "Soy":               ["Soy","Turbo","Kuinet/Kabiyet","Kipsomba","Ziwa"],
+    "Turbo":             ["Turbo","Huruma","Ngenyilel","Tapsagoi"],
+    "Moiben":            ["Moiben","Ainabkoi/Olare","Sergoit","Karuna/Meibeki"],
+    "Ainabkoi":          ["Ainabkoi/Olare","Kapsoya","Kaptagat"],
+    "Kapseret":          ["Langas","Ngeria","Simat/Kapseret","Kipkenyo","Megun"],
+    "Kesses":            ["Kesses","Sugoi","Kamagut","Racecourse"],
+    // Kajiado
+    "Kajiado North":     ["Olkeri","Ongata Rongai","Nkaimurunya","Oloolua","Ngong"],
+    "Kajiado Central":   ["Purko","Ildamat","Dalalekutuk","Matapato North","Matapato South"],
+    "Kajiado East":      ["Kajiado East","Kaputiei North","Kitengela","Oloosirkon/Sholinke","Kenyawa-Poka"],
+    "Kajiado West":      ["Keekonyokie","Iloodokilani","Magadi","Ewuaso Oonkidong'i","Central"],
+    "Kajiado South":     ["Loitokitok","Rombo","Mbirikani/Eselenkei","Kuku","Kimana"],
+    // Machakos
+    "Masinga":           ["Masinga Central","Ekalakala","Muthesya","Nguu/Masumba","Kivaa"],
+    "Yatta":             ["Matuu","Kithimba","Central","Mwania","Ndalani","Katangi","Ikombe"],
+    "Machakos Town":     ["Machakos Central","Mua","Mutituni","Kalama","Mbiuni","Muvuti/Kiini"],
+    "Mavoko":            ["Athi River","Kinanie","Muthwani","Syokimau/Mulolongo"],
+    // Machakos (remaining)
+    "Kangundo":          ["Kangundo North","Kangundo Central","Kangundo East","Kangundo West"],
+    "Matungulu":         ["Matungulu North","Matungulu East","Matungulu West","Tala"],
+    "Kathiani":          ["Mitaboni","Kathiani Central","Upper Kaewa/Iveti","Lower Kaewa"],
+    "Mwala":             ["Mbiuni","Makutano/Mwala","Mwala","Kisau/Kiteta","Wamunyu","Katheka Kai"],
+    // Kitui
+    "Mwingi North":      ["Ngomeni","Kyuso","Mumoni","Tseikuru","Tharaka"],
+    "Mwingi West":       ["Nguni","Nuu","Mui","Waita"],
+    "Mwingi Central":       ["Kyuusi","Waita","Migwani","Kiomo/Kyethani"],
+    "Kitui West":        ["Mutonguni","Kauwi","Matinyani","Kwa Mutonga/Kithumula"],
+    "Kitui Rural":       ["Kisasi","Mbitini","Kwavonza/Yatta","Kanyangi"],
+    "Kitui Central":     ["Miambani","Township","Kyangwithya West","Mulango","Kyangwithya East"],
+    "Kitui East":        ["Chuluni","Nzambani","Mutitu","Mutitu/Kaliku","Ikanga/Kyatune"],
+    "Kitui South":       ["Ikutha","Kwa Vonze","Athi","Mutha","Migwani"],
+    // Makueni
+    "Mbooni":            ["Tulimani","Mbooni","Kithungo/Kitundu","Kisau/Kiteta","Waia/Kako"],
+    "Kaiti":             ["Mukaa","Kilome","Kaiti","Kalamba","Nguu/Masumba"],
+    "Makueni":           ["Wote","Muvau/Mukuyuni","Mavindini","Kitise/Kithuki","Kathonzweni"],
+    "Kibwezi West":      ["Makindu","Nguumo","Kikumbulyu North","Kikumbulyu South","Emali/Mulala"],
+    "Kibwezi East":      ["Masongaleni","Mtito Andei","Thange","Ivingoni/Nzambani"],
+    "Kilome":            ["Mukaa","Kilome","Kasikeu","Kalamba"],
+    // Tharaka-Nithi
+    "Maara":             ["Muthambi","Ganga","Chogoria","Marimba","Mugumoni"],
+    "Tharaka":           ["Gatunga","Mukothima","Nkondi","Chiakariga","Marimanti"],
+    "Chuka/Igambang'ombe":             ["Marurui","Karingani","Magumoni","Mugumoni","Igambang'ombe"],
+    // Embu
+    "Manyatta":          ["Gaturi North","Gaturi South","Kagaari North","Kagaari South","Central"],
+    "Runyenjes":         ["Runyenjes Central","Kagaari South","Kirimari","Magwagwa","Nembure","Kariene"],
+    "Mbeere South":      ["Mbeti North","Mbeti South","Mavuria","Mwea","Kiambere"],
+    "Mbeere North":      ["Nthawa","Muminji","Evurore","Nginda","Makima","Ishiara"],
+    // Meru
+    "Igembe South":      ["Maua","Kiegoi/Antubochiu","Akachiu","Kanuni","Lare"],
+    "Igembe Central":    ["Athiru Gaiti","Akimbo","Igembe","Njia","Township","Antu"],
+    "Igembe North":      ["Mlima","Ntunene","Antubochiu","Githongo","Kangeta"],
+    "Tigania West":      ["Athiru Ruujine","Athnuru","Kiguchwa","Karama","Mbeu","Mikinduri"],
+    "Tigania East":      ["Thangatha","Mikinduri","Kanjoo","Ntunene","Amwari","Muthara"],
+    "North Imenti":      ["Municipality","Ntima East","Ntima West","Nyaki West","Nyaki East"],
+    "Buuri":             ["Timau","Kisima","Kiirua/Naari","Ruiri/Rwarera","Kibirichia"],
+    "Cental Imenti":     ["Nkubu","Ntima East","Ntima West","Abogeta East","Abogeta West","Igoji East","Igoji West"],
+    "South Imenti":      ["Abothuguchi West","Abothuguchi Central","Kiagu","Abogeta East","Abogeta West"],
+    // Kirinyaga
+    "Mwea":              ["Mutithi","Kangai","Wamumu","Nyangati","Murinduko","Gathigiriri","Tebere"],
+    "Gichugu":           ["Kabare","Baragwi","Njukiini","Ngariama","Kerugoya"],
+    "Ndia":              ["Gatiguru","Kiine","Karumandi","Mukure","Ndia","Mukuyu-ini"],
+    "Kirinyaga Central": ["Inoi","Kabare","Kerugoya","Baragwi","Mutira"],
+    // Murang'a
+    "Kiharu":            ["Wangu","Mugoini","Sabasaba","Gaichanjiru","Ithiru","Rwathia"],
+    "Kigumo":            ["Kigumo","Kangari","Kahumbu","Muthithi","Kinyona"],
+    "Maragwa":           ["Kimorori/Wempa","Makuyu","Kambiti","Kamahuha","Ichagaki","Nginda"],
+    "Kandara":           ["Ng'araria","Muruka","Kagundu-ini","Gaichanjiru","Ithiru","Rwathia"],
+    "Gatanga":           ["Ithanga","Kakuzi/Mitubiri","Mugumo-ini","Township","Gatanga","Kariara"],
+    "Mathioya":          ["Gitugi","Kiru","Kamacharia"],
+    "Kangema":           ["Muguru","Rwathia","Kanyenyaini"],
+    // Nyeri
+    "Tetu":              ["Dedan Kimathi","Wamagana","Aguthi-Gaaki"],
+    "Kieni":             ["Mwiyogo/Endarasha","Mugunda","Gatarakwa","Thegu River","Kabaru","Gakawa"],
+    "Mathira":           ["Ruguru","Karatina Town","Thaita","Konyu","Chinga","Mutamaiyu"],
+    "Othaya":            ["Mahiga","Iria-ini","Chinga","Karima","Mugunda","Gikondi"],
+    "Mukurweni":         ["Mukurweni","Naro Moru Township","Gatitu/Muruguru","Gikirigo","Mweiga"],
+    "Nyeri Town":        ["Gatitu/Muruguru","Rware","Kamakwa/Mukaro","Ruring'u","Thegenge"],
+    // Nyandarua
+    "Kinangop":          ["Njabini/Kiburu","Engineer","North Kinangop","Murungaru","Gathara"],
+    "Kipipiri":          ["Kipipiri","Geta","Githioro"],
+    "Ol Kalou":          ["Gathanji","Gatimu","Wanjohi","Ol Kalou","Ol Joro Orok"],
+    "Ol Jorok":          ["Mirangine","Karau","Kiriita","Olmoran","Shamata"],
+    "Ndaragwa":          ["Ndaragwa","Leshau","Ngorika","Shamata","Gatarakwa"],
+    // Laikipia
+    "Laikipia West":     ["Ol Moran","Rumuruti Township","Githiga","Igwamiti","Salama"],
+    "Laikipia East":     ["Nanyuki","Umande","Thingithu","Nairutia","Ndindika"],
+    "Laikipia North":    ["Sosian","Segera","Mukogodo East","Mukogodo West"],
+    // Kilifi
+    "Kilifi North":      ["Tezo","Sokoni","Kibarani","Dabaso","Matsangoni","Watamu","Mnarani"],
+    "Kilifi South":      ["Junju","Mwarakaya","Shimo La Tewa","Chasimba","Mtepeni"],
+    "Kaloleni":          ["Mariakani","Kayafungo","Kaloleni","Mwanamwinga","Mwele","Ruruma","Kambe/Ribe"],
+    "Rabai":             ["Rabai/Mwamdudu","Mwawesa","Ruruma","Kambe/Ribe","Kinango"],
+    "Ganze":             ["Ganze","Bamba","Jaribuni","Sokoni","Chasimba"],
+    "Malindi":           ["Shella","Ganda","Kakuyuni","Jilore","Adu","Garashi","Malindi Township"],
+    "Magarini":          ["Magarini","Goshi","Adu","Garashi","Rare","Marafa","Jaribuni"],
+    // Taita Taveta
+    "Taveta":            ["Chala","Mahoo","Bomani","Mboghoni","Mata"],
+    "Wundanyi":          ["Werugha","Wundanyi/Mbale","Ronge","Mwanda"],
+    "Mwatate":           ["Rong'e","Bura","Mwatate","Chawia","Wumingu/Kishushe"],
+    "Voi":               ["Marungu","Kaloleni","Ndara","Mbololo","Sagala","Wongonyi"],
+    // Lamu
+    "Lamu East":         ["Faza","Kiunga","Basuba"],
+    "Lamu West":         ["Shela","Mkomani","Hindi","Bahari","Pangani"],
+    // Tana River
+    "Garsen":            ["Kipini West","Garsen South","Kipini East","Garsen West","Garsen North","Garsen Central"],
+    "Galole":            ["Kinakomba","Mikinduni","Chewani","Wayu","Bura"],
+    "Bura":              ["Chewele","Tana North","Sala","Madogo"],
+    // Garissa
+    "Fafi":              ["Bura","Dekaharia","Jarajila","Fafi","Nanighi"],
+    "Ijara":             ["Ijara","Masalani","Sangailu","Hulugho"],
+    "Dadaab":            ["Dadaab","Lagoole","Abakaile","Township"],
+    "Balambala":         ["Balambala","Dambas","Jara Jara","Nano"],
+    "Lagdera":           ["Modogashe","Benane","Goreale","Maalimin","Baraki"],
+    "Garissa Township":             ["Township","Waberi","Hospital","Galbet","Iftin"],
+    // Wajir
+    "Wajir North":       ["Gurar","Bute","Griftu","Wajir North"],
+    "Wajir East":        ["Eldas","Tarbaj","Wajir East"],
+    "Wajir West":        ["Wagberi","Township","Barwaqo","Madiina","Ganda"],
+    "Wajir South":       ["Hadado/Athibohol","Sarman","Elben","Khorof Harar"],
+    "Tarbaj":            ["Tarbaj","Wargadud","Kutulo"],
+    "Eldas":             ["Eldas","Della","Lakole","Malkagufu"],
+    // Mandera
+    "Mandera North":     ["Ashabito","Guticha","Morothile","Rhamu","Rhamu Dimtu"],
+    "Mandera South":     ["Wargadud","Dandu","Shimbir Fatuma","Khalalio","Neboi"],
+    "Mandera East":      ["Neboi","Warankara","Libehia","Lagsure","Sala"],
+    "Mandera West":      ["Takaba","Takaba South","Kamuthe","Gither","Leyte"],
+    "Lafey":             ["Lafey","Sala","Wargadud"],
+    "Banissa":           ["Banissa","Dertu","Guba","Malkamari"],
+    // Marsabit
+    "Laisamis":          ["Laisamis","Logologo","Kargi/South Horr","Lontolio"],
+    "Moyale":            ["Moyale","Butiye","Sololo","Golbo","Uran","Obbu"],
+    "North Horr":        ["North Horr","Maikona","Turbi","Dukana"],
+    "Saku":              ["Sagante/Jaldesa","Karare","Marsabit Central"],
+    // Isiolo
+    "Isiolo North":      ["Wabera","Bulla Pesa","Chari","Cherab","Garbatulla","Kinna"],
+    "Isiolo South":      ["Sericho","Oldonyiro","Merti","Garba Tulla"],
+    // Turkana (from CSV — exact)
+    "Turkana North":     ["Kaaleng/Kaikor","Kaeris","Kibish","Lake Zone","Lapur","Nakalale"],
+    "Turkana West":      ["Kakuma","Kalobeyei","Letea","Lokichoggio","Lopur","Nanaam","Songot"],
+    "Turkana Central":   ["Kalokol","Kanamkemer","Kang'atotha","Kerio Delta","Lodwar Township"],
+    "Loima":             ["Kotaruk/Lobei","Loima","Lokiriama/Lorengippi","Turkwel"],
+    "Turkana South":     ["Kalapata","Kaputir","Katilu","Lobokat","Lokichar"],
+    "Turkana East":      ["Kapedo/Napeitom","Katilia","Lokori/Kochodin"],
+    // Samburu (from CSV — exact)
+    "Samburu North":     ["Angata Nanyokie","Baawa","El-Barta","Nachola","Ndoto","Nyiro"],
+    "Samburu East":      ["Wamba East","Wamba North","Wamba West","Waso"],
+    "Samburu West":      ["Lodokejek","Loosuk","Maralal","Poro","Suguta Marmar"],
+    // West Pokot (from CSV — exact)
+    "Kacheliba":         ["Alale","Kapchok","Kasei","Kiwawa","Kodich","Suam"],
+    "Pokot South":       ["Batei","Chepareria","Lelan","Tapach"],
+    "Kapenguria":        ["Endugh","Kapenguria","Mnagei","Riwo","Siyoi","Sook"],
+    "Sigor":             ["Lomut","Masool","Sekerr","Weiwei"],
+    // Trans Nzoia (from CSV — exact)
+    "Cherangany":        ["Chepsiro/Kiptoror","Cherangany/Suwerwa","Kaplamai","Makutano","Motosiet","Sinyerere","Sitatunga"],
+    "Endebess":          ["Chepchoina","Endebess","Matumbei"],
+    "Saboti":            ["Kinyoro","Machewa","Matisi","Saboti","Tuwani"],
+    "Kiminini":          ["Hospital","Kiminini","Nabiswa","Sikhendu","Sirende","Waitaluk"],
+    "Kwanza":            ["Bidii","Kapomboi","Keiyo","Kwanza"],
+    // Elgeyo-Marakwet (from CSV — exact)
+    "Marakwet East":     ["Embobut/Embulot","Endo","Kapyego","Sambirir"],
+    "Marakwet West":     ["Arror","Cherang'any/Chebororwa","Kapsowar","Lelan","Moiben/Kuserwo","Sengwer"],
+    "Keiyo North":       ["Emsoo","Kamariny","Kapchemutwa","Tambach"],
+    "Keiyo South":       ["Chepkorio","Kabiemit","Kaptarakwa","Metkei","Soy North","Soy South"],
+    // Baringo
+    "Tiaty":             ["Tirioko","Kolowa","Ribkwo","Silale","Churo/Amaya","Tangulbei/Korossi"],
+    "Baringo North":     ["Barwessa","Kabarnet","Saimo/Kipsaraman","Saimo/Soi","Ewalel/Chapchap"],
+    "Baringo Central":   ["Kabarnet","Sacho","Tenges","Ewalel/Chapchap","Kapkelelwa"],
+    "Baringo South":     ["Eldama Ravine","Lembus","Lembus Kwen","Ravine","Lembus Perkerra","Maji Mazuri"],
+    "Eldama Ravine":     ["Eldama Ravine","Lembus","Lembus Kwen","Ravine","Maji Mazuri"],
+    "Mogotio":           ["Mogotio","Emining","Kisanana"],
+    // Nandi
+    "Tinderet":          ["Songhor/Soba","Tindiret","Chemuche","Kapsimotwo","Cheboin"],
+    "Aldai":             ["Kabwareng","Terik","Kemeloi-Maraba","Tombogen","Nan","Munyaka"],
+    "Nandi Hills":       ["Nandi Hills","Chepkunyuk","Ol'lessos","Kabiyet"],
+    "Chesumei":          ["Kosirai","Lelmokwo/Ngechek","Chemundu/Kapng'etuny","Kibwareng"],
+    "Emgwen":            ["Kapsabet","Soy North","Kilibwoni","Kabisaga"],
+    "Mosop":             ["Songhor/Soba","Kopere","Kipkaren","Turbo"],
+    // Kericho
+    "Kipkelion East":    ["Kipkelion","Kunyak","Chepseon","Tendeno/Sorget"],
+    "Kipkelion West":    ["Londiani","Kiptiget","Sigor/Barsiele"],
+    "Ainamoi":           ["Ainamoi","Kapkugerwet","Kapsaos","Kipchebor","Kapseret"],
+    "Belgut":            ["Waldai","Cheptororiet/Seretut","Kabianga","Kapsuser"],
+    "Sigowet/Soin":      ["Chebelion","Sigowet","Kamasian","Soliat"],
+    "Bureti":            ["Bureti","Litein","Chepchabas","Tebesonik","Rongena/Manaret","Embomos"],
+    // Bomet
+    "Sotik":             ["Ndanai/Abosi","Chemagel","Kipsonoi","Kabiyet","Ndaraweta"],
+    "Chepalungu":        ["Kongasis","Nyangores","Sigor","Rongena/Manaret"],
+    "Bomet East":        ["Chemaner","Merigi","Kembu","Township","Longisa"],
+    "Bomet Central":     ["Silibwet Township","Ndaraweta","Singorwet","Chesoen","Mutarakwa"],
+    "Konoin":            ["Kimulot","Mogogosiek","Chepchabas","Kapcherop","Merigi"],
+    // Narok
+    "Kilgoris":          ["Shankoe","Keyian","Olmoran","Kilgoris Central","Lolgorian"],
+    "Emurua Dikirr":     ["Emurua Dikirr","Ntulele","Olokurto","Naroosura"],
+    "Narok North":       ["Narok Town","Kitetany","Nkoben","Mosiro","Ilkisonko"],
+    "Narok East":        ["Ol Pusimoru","Olorropil","Melelo","Loita","Sogoo","Mara"],
+    "Narok South":       ["Majimoto/Naroosura","Ololulung'a","Melelo","Loita","Mara"],
+    "Narok West":        ["Narok North","Suswa","Mau Narok","Mauche","Naikarra"],
+    // Kakamega
+    "Lugari":            ["Lugari","Lumakanda","Mautuma","Lwandeti","Likuyani"],
+    "Likuyani":          ["Likuyani","Sango","Nzoia","Moi's Bridge","Kibos"],
+    "Malava":            ["Shirere","Chekalini","East Kabras","Central Kabras","Butali/Chegulo","South Kabras","Manda-Shivanga"],
+    "Lurambi":           ["Sheywe","Mahiakalo","Ebubayi","West Kabras","Butsanga","Bunyala East","Bunyala West"],
+    "Navakholo":         ["Ingotse-Mathia","Shirere","Bunyala West","Butsotso Central","Navakholo"],
+    "Mumias West":       ["Mumias Central","Mumias North","East Wanga","Makunga","Matungu"],
+    "Mumias East":       ["Etenje","Musanda","Koyonzo","Khwisero","Malaha/Isongo/Makunga"],
+    "Matungu":           ["Koyonzo","Kholera","Khalaba","Butali/Chegulo","Lusheya/Lumino","Namamali"],
+    "Butere":            ["Butere Town","Marama West","Marama Central","Marama East","Marama North"],
+    "Khwisero":          ["West Khwisero","Khwisero Central","East Khwisero"],
+    "Shinyalu":          ["Shinyalu","Isukha West","Murhanda","Isukha Central","Isukha North","Virhembe"],
+    "Ikolomani":         ["Idakho East","Idakho West","Idakho North","Idakho South"],
+    // Vihiga
+    "Vihiga":            ["Vihiga","Luanda Township","Wodanga","Sabatia"],
+    "Sabatia":           ["West Sabatia","Chavakali","North Maragoli","Wodanga","Busali"],
+    "Hamisi":            ["Shiru","Gisambai","Muhudu","Shamakhokho","Banja","Base-Bomet"],
+    "Luanda":            ["Luanda Township","Wemilabi","Mwibona","Luanda South","Emabungo"],
+    "Emuhaya":           ["North East Bunyore","Central Bunyore","West Bunyore"],
+    // Bungoma
+    "Webuye East":       ["Ndivisi","Maraka","Butsotso East","Butsotso South","Butsotso Central"],
+    "Webuye West":       ["Sitikho","Matulo","Bokoli","Misikhu","Naibili"],
+    "Kanduyi":           ["Musikoma","East Sang'alo","Township","Khalaba","Mayanja","Marakaru/Tuuti"],
+    "Bumula":            ["Bumula","Khasoko","Kabula","Kimaeti","West Sang'alo/Navakholo","Siboti/Namamba"],
+    "Kabuchai":          ["Kabuchai/Chwele","West Nalondo","Bwake/Luuya","Mukuyuni"],
+    "Mt. Elgon":         ["Cheptais","Chesikaki","Chepyuk","Kapkateny","Kopsiro","Kaptama"],
+    "Sirisia":           ["Malakisi/South Kulisiru","Lwandanyi","Namwela","Murumba"],
+    "Tongaren":          ["Tongaren","Naitiri/Kabuyefwe","Milima","Ndalu/Tabani","Soysambu/Mitua"],
+    "Kimilili":          ["Kimilili","Maeni","Kamukuywa","Kibingei","Kapsokwony"],
+    // Busia
+    "Teso North":        ["Malaba North","Malaba South","Ang'urai South","Ang'urai North","Ang'urai East","Malaba Central"],
+    "Teso South":        ["Busia Central","Township","Kolanya","Ang'urai West","Port Victoria"],
+    "Nambale":           ["Nambale Township","Bukhayo North/Walatsi","Bukhayo East","Bukhayo Central"],
+    "Matayos":           ["Matayos","South Bukusu","Elugulu","Burumba","Namboboto Nambuku"],
+    "Butula":            ["Butula","Ndeeba","Marachi Central","Marachi East","Marachi North","Marachi West"],
+    "Funyula":           ["Funyula","Bukhayo West/Nambachi","Namboboto Nambuku","Mella"],
+    "Budalangi":         ["Bunyala North","Bunyala South","Bunyala Central","Budumbulyu","Sio Port"],
+    // Siaya
+    "Alego Usonga":      ["West Alego","Central Alego","Siaya Township","North Alego","South East Alego","Usonga"],
+    "Gem":               ["North Gem","West Gem","Central Gem","East Gem","South Gem"],
+    "Bondo":             ["Township","Usigu","North Uyoma","East Uyoma","West Uyoma"],
+    "Rarieda":           ["East Asembo","West Asembo","North Asembo","Central Asembo","South Asembo"],
+    "Ugenya":            ["North Ugenya","East Ugenya","Ukwala","South Ugenya"],
+    "Ugunja":            ["Ugunja","Sigomere","West Ugenya"],
+    // Homa Bay
+    "Kasipul":           ["West Kasipul","Central Kasipul","East Kasipul","South Kasipul"],
+    "Kabondo Kasipul":   ["Kabondo East","Kabondo West","Kokwanyo/Kakrao","Kojwach"],
+    "Karachuonyo":       ["North Karachuonyo","Central Karachuonyo","Kanyaluo","Kibiri","Wang'chieng","Kendu Bay Town"],
+    "Rangwe":            ["East Rangwe","Kagan","Kochia","West Rangwe"],
+    "Homa Bay Town":     ["Homa Bay Central","Homa Bay Arujo","Homa Bay West","Homa Bay East"],
+    "Ndhiwa":            ["Ndhiwa","Kwabwai","Kanyadoto","Kanyikela","Kabuoch North","Kabuoch South"],
+    "Suba North":        ["Gwassi South","Gwassi North","Kaksingri West","Ruma Kaksingri"],
+    "Suba South":        ["Kaksingri East","Suba East","Suba West","Lambwe"],
+    // Migori
+    "Rongo":             ["North Kabuoch","West Kabuoch","East Kabuoch","Miranga/Kabwao","Kochia"],
+    "Awendo":            ["North Sakwa","South Sakwa","West Sakwa","North Kamagambo","Central Kamagambo","East Kamagambo"],
+    "Suna East":         ["Wiga","Magunga","Wasweta II","God Jope","Suna Central"],
+    "Suna West":         ["Migori Central","Manyatta","Kwa","Uriri"],
+    "Uriri":             ["North Uriri","West Uriri","Central Uriri","South Uriri","God Jope"],
+    "Nyatike":           ["Kachieng'","Kanyamwa Kosewe","Kanyamwa Kologi","Gokeharaka/Getambwega","Muhuru"],
+    "Kuria West":        ["Masaba North","Ekerege","Ntimaru West","Ntimaru East","Nyarero","Masaba South"],
+    "Kuria East":        ["Gokeharaka/Getambwega","Ntimaru East","Kehancha","Mabera","Tagare"],
+    // Kisii
+    "Bonchari":          ["Riana","Bogiakumu","Marani","Nyamaiya","Bogeka"],
+    "South Mugirango":   ["Nyacheki","Chesoen","Bomwagamo","Bokeira","Magombo"],
+    "Bomachoge Borabu":  ["Boochi/Tendere","Bokianga","Masige East","Masige West","Bonyamatuta"],
+    "Bobasi":            ["Borabu/Chitago","Malamba","Nyacheki","Masige East","Bonyamatuta"],
+    "Bomachoge Chache":  ["Ichuni","Nyacheki","Moticho","Getenga","Magenche"],
+    "Nyaribari Masaba":  ["Manga","Moticho","Getenga","Magenche","Gesima"],
+    "Nyaribari Chache":  ["Kakrao","Township","Nyabururu","Kegogi","Bobaracho"],
+    "Kitutu Chache North":["Keumbu","Kiogoro","Birongo","Ibeno","Monyerero","Sensi"],
+    "Kitutu Chache South":["Kegogi","Bobaracho","Boikanga","Nyatieko","Giongorani"],
+    // Nyamira
+    "Kitutu Masaba":     ["Rigoma","Gachuba","Kemera","Magwagwa","Gesima"],
+    "West Mugirango":    ["Nyamarambe","Bosamaro","Bonyamatuta","Township"],
+    "North Mugirango":   ["Gesura","Ekerenyo","Magwagwa","Metembe"],
+    "Borabu":            ["Borabu","Metembe","Magwagwa","Gesima","Matongo"],
+    // Default fallback
+    "default":           ["Ward 1","Ward 2","Ward 3","Ward 4"],
+  };
+
+  // ── CSV FETCH ──
+  // Fetches the polling-stations CSV for a county (any path: GPS, manual, map-click).
+  // Tries multiple filename variants; updates POLLING_STATIONS and CONSTITUENCY_WARDS.
+  function fetchCountyCSV(county) {
+    if (!county || loadedCountyFiles.has(county)) return;
+    loadedCountyFiles.add(county);
+    const folder = 'Counties Polling Station/';
+    const candidates = [
+      `${folder}${county} Polling Stations.csv`,
+      `${folder}${county.toUpperCase().replace(/\s+/g, '-')} Polling Stations.csv`,
+      `${folder}${county.toUpperCase()} Polling Stations.csv`,
+      `${folder}${county.toUpperCase().replace(/-/g, ' - ')} Polling Stations.csv`,
+      `${folder}${county.toUpperCase()} CITY Polling Stations.csv`,
+    ];
+    function tryNext(i) {
+      if (i >= candidates.length) {
+        loadedCountyFiles.delete(county); // allow retry later
+        return;
+      }
+      fetch(candidates[i])
+        .then(r => { if (!r.ok) throw new Error('not found'); return r.text(); })
+        .then(text => {
+          const count = parsePollingCSV(text);
+          uploadedStationTotal += count;
+          showToast(`✅ ${count} stations loaded for ${county}`);
+          // If user already has a constituency from this county selected, refresh
+          // the ward dropdown now that CONSTITUENCY_WARDS has been updated from CSV
+          const curConst = state.location.constituency;
+          if (curConst && state.location.county === county &&
+              !WARD_GEO_LOOKUP[curConst.toUpperCase()]) {
+            const wardEl = document.getElementById('manual-ward');
+            if (wardEl) {
+              const savedWard = wardEl.value;
+              const newList  = CONSTITUENCY_WARDS[curConst] || [];
+              wardEl.innerHTML = '<option value="">— Select Ward —</option>' +
+                newList.map(w => `<option value="${w}">${w}</option>`).join('');
+              wardEl.value = savedWard;
+            }
+          }
+          if (state.location.ward) showPollingStations();
+        })
+        .catch(() => tryNext(i + 1));
+    }
+    tryNext(0);
+  }
+
+  // ── MANUAL FORM HANDLERS ──
+  function onCountyChange() {
+    const county = document.getElementById('manual-county').value;
+
+    // Reset downstream dropdowns
+    document.getElementById('manual-constituency').innerHTML = '<option value="">— Select Constituency —</option>';
+    document.getElementById('manual-ward').innerHTML = '<option value="">— Select Constituency first —</option>';
+
+    if (!county) return;
+
+    // Populate constituencies
+    const constList = COUNTY_CONSTITUENCIES[county] || [];
+    document.getElementById('manual-constituency').innerHTML =
+      '<option value="">— Select Constituency —</option>' +
+      constList.map(c => `<option value="${c}">${c}</option>`).join('');
+
+    // Auto-fetch polling stations CSV for this county
+    fetchCountyCSV(county);
+
+    // Zoom map to county boundary immediately
+    if (geoCountyLayer) {
+      geoCountyLayer.eachLayer(layer => {
+        if (layer.feature.properties.adm1_name === county) {
+          kenyaMap.flyToBounds(layer.getBounds(), { padding: [30, 30], duration: 0.9 });
+          // Temporarily highlight this county
+          geoCountyLayer.eachLayer(l => l.setStyle(
+            l.feature.properties.adm1_name === county
+              ? { color: '#1a3c6b', weight: 3, fillColor: '#3b82f6', fillOpacity: 0.15 }
+              : { color: '#1a6b3c', weight: 1.5, fillColor: '#1a6b3c', fillOpacity: 0.0, opacity: 0.5 }
+          ));
+          // If constituency layer exists, highlight all constituencies in this county
+          if (geoConstLayer) {
+            geoConstLayer.eachLayer(cl => {
+              cl.setStyle(cl.feature.properties.adm1_name === county
+                ? { color: '#1a3c6b', weight: 1, fillColor: '#3b82f6', fillOpacity: 0.10, opacity: 0.7 }
+                : defaultConstStyle()
+              );
+            });
+          }
+        }
+      });
+    }
+  }
+
+  function onConstituencyChange() {
+    const county = document.getElementById('manual-county').value;
+    const constituency = document.getElementById('manual-constituency').value;
+
+    // Populate ward dropdown — prefer live GeoJSON data, fall back to static list
+    const geoKey = constituency.toUpperCase();
+    const wardList = WARD_GEO_LOOKUP[geoKey] || CONSTITUENCY_WARDS[constituency] || CONSTITUENCY_WARDS["default"];
+    document.getElementById('manual-ward').innerHTML =
+      '<option value="">— Select Ward —</option>' +
+      wardList.map(w => `<option value="${w}">${w}</option>`).join('');
+
+    if (!constituency) return;
+
+    // Zoom map and highlight this constituency
+    if (geoConstLayer) {
+      geoConstLayer.eachLayer(layer => {
+        const fName = layer.feature.properties.adm2_name;
+        const isMatch = fName === geoName(constituency);
+        layer.setStyle(isMatch
+          ? { color: '#1a3c6b', weight: 2.5, fillColor: '#d4a017', fillOpacity: 0.35 }
+          : layer.feature.properties.adm1_name === county
+            ? { color: '#1a3c6b', weight: 1, fillColor: '#3b82f6', fillOpacity: 0.08, opacity: 0.7 }
+            : defaultConstStyle()
+        );
+        if (isMatch) {
+          layer.bringToFront();
+          kenyaMap.flyToBounds(layer.getBounds(), { padding: [60, 60], duration: 0.9 });
+          layer.openTooltip();
+        }
+      });
+    }
+  }
+
+  function onWardChange() {
+    const county = document.getElementById('manual-county').value;
+    const constituency = document.getElementById('manual-constituency').value;
+    const ward = document.getElementById('manual-ward').value;
+    if (!ward) return;
+    // Preview selection on map immediately — committed fully in applyManualLocation()
+    state.location.county = county;
+    state.location.constituency = constituency;
+    state.location.ward = ward;
+    if (geoWardLayer) {
+      focusWardOnMap();
+    }
+    // else: loadWardLayer() will call focusWardOnMap() when the GeoJSON finishes loading
+    showToast(`Ward selected: ${ward}`);
+    // Refresh polling stations immediately so the list updates as soon as ward is chosen
+    showPollingStations();
+  }
+
+  function applyManualLocation() {
+    const county = document.getElementById('manual-county').value;
+    const constituency = document.getElementById('manual-constituency').value;
+    const ward = document.getElementById('manual-ward').value;
+
+    if (!county)        { showToast('Please select your County'); return; }
+    if (!constituency)  { showToast('Please select your Constituency'); return; }
+    if (!ward)          { showToast('Please select your Ward'); return; }
+
+    state.location.county = county;
+    state.location.constituency = constituency;
+    state.location.ward = ward;
+
+    // Update GPS panel display
+    document.getElementById('loc-county').textContent = county;
+    document.getElementById('loc-constituency').textContent = constituency;
+    document.getElementById('loc-ward').textContent = ward;
+    document.getElementById('loc-status').innerHTML = '✅ Location confirmed manually.';
+    document.getElementById('btn-confirm-location').style.display = 'flex';
+
+    const badge = document.getElementById('map-badge');
+    if (badge) badge.textContent = `📍 ${constituency}, ${county}`;
+
+    // Apply gold highlight on map
+    highlightUserConstituency();
+    highlightUserCounty();
+    highlightUserWard();
+
+    showPollingStations();
+    showToast(`✓ Location confirmed: ${constituency}, ${county}`);
+
+    // Switch to GPS tab to show confirmation panel
+    switchTab('gps');
+  }
+
+  // ══════════════════════════════════════════════════
+  // SCREEN 3: SEAT SELECTOR
+  // ══════════════════════════════════════════════════
+  function renderSeat() {
+    const seat = SEATS[state.currentSeat];
+    // Use pre-shuffled pool; fall back to live pool if somehow missing
+    const pool = (state.shuffledPools && state.shuffledPools[seat.key]) || seat.getPool();
+    const pct = Math.round((state.currentSeat / SEATS.length) * 100);
+
+    document.getElementById('progress-label').textContent = `Seat ${state.currentSeat + 1} of ${SEATS.length}`;
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('seat-tag').textContent = seat.label;
+    document.getElementById('seat-title').textContent = seat.title;
+    document.getElementById('seat-desc').textContent = seat.desc;
+    document.getElementById('btn-back').style.visibility = state.currentSeat === 0 ? 'hidden' : 'visible';
+
+    const grid = document.getElementById('candidates-grid');
+    grid.innerHTML = '';
+    pool.forEach(cand => {
+      const selected = state.selections[seat.key]?.number === cand.number;
+      const div = document.createElement('div');
+      div.className = 'candidate-card' + (selected ? ' selected' : '');
+
+      div.innerHTML = `
+        <div class="cand-photo-wrap" style="background: linear-gradient(135deg, ${cand.bg} 0%, #f0f0f0 100%);">
+          <div class="cand-photo-placeholder">${cand.emoji || '👤'}</div>
+          <div class="cand-ballot-num">${cand.number}</div>
+          <div class="cand-party-badge" style="background:${cand.bg};color:${cand.color};border:1px solid ${cand.color}40">${cand.party}</div>
+        </div>
+        <div class="cand-body">
+          <div class="cand-name">${cand.name}</div>
+          <div class="cand-age-party">Age ${cand.age} · ${cand.party}</div>
+          <div class="cand-actions">
+            <button class="btn-select-cand" onclick="event.stopPropagation(); selectCandidate(${JSON.stringify(cand).replace(/"/g, '&quot;')})">${selected ? '✓ Selected' : 'Select'}</button>
+            <button class="btn-info-cand" onclick="event.stopPropagation(); openProfile(${JSON.stringify(cand).replace(/"/g, '&quot;')})">More Info</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(div);
+    });
+  }
+
+  // ── PROFILE MODAL ──
+  let profileCand = null;
+
+  function openProfile(cand) {
+    profileCand = cand;
+    const seat = SEATS[state.currentSeat];
+    const isSelected = state.selections[seat?.key]?.number === cand.number;
+
+    // Delegate to shared renderer (also used by directory)
+    openProfileRaw(cand, false);
+
+    // Override select button for ballot-planner context
+    const btn = document.getElementById('profile-select-btn');
+    btn.style.display = 'block';
+    if (isSelected) {
+      btn.textContent = '\u2713 Already Selected';
+      btn.classList.add('already-selected');
+    } else {
+      btn.textContent = '\u2713 Select ' + cand.name.split(' ')[0];
+      btn.classList.remove('already-selected');
+    }
+  }
+
+  function closeProfile(e) {
+    if (e.target === document.getElementById('profile-modal')) closeProfileDirect();
+  }
+  function closeProfileDirect() {
+    document.getElementById('profile-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function selectFromProfile() {
+    if (profileCand) {
+      selectCandidate(profileCand);
+      closeProfileDirect();
+    }
+  }
+
+  function selectCandidate(cand) {
+    const seat = SEATS[state.currentSeat];
+    state.selections[seat.key] = cand;
+    renderSeat();
+    showToast(`✓ Selected: ${cand.name}`);
+  }
+
+  function nextSeat() {
+    if (!state.selections[SEATS[state.currentSeat].key]) {
+      showToast("Please select a candidate or tap 'Skip this seat'");
+      return;
+    }
+    advanceSeat();
+  }
+
+  function skipSeat() {
+    state.selections[SEATS[state.currentSeat].key] = null;
+    advanceSeat();
+  }
+
+  function advanceSeat() {
+    state.currentSeat++;
+    if (state.currentSeat >= SEATS.length) {
+      buildBallot();
+      showScreen(4);
+    } else {
+      renderSeat();
+    }
+  }
+
+  function prevSeat() {
+    if (state.currentSeat > 0) {
+      state.currentSeat--;
+      renderSeat();
+    }
+  }
+
+  // ══════════════════════════════════════════════════
+  // SCREEN 4: BALLOT PREVIEW
+  // ══════════════════════════════════════════════════
+  function buildBallot() {
+    document.getElementById('b-county').textContent = state.location.county;
+    document.getElementById('b-constituency').textContent = state.location.constituency;
+    document.getElementById('b-ward').textContent = state.location.ward;
+    document.getElementById('ballot-date').textContent = new Date().toLocaleDateString('en-KE', { dateStyle: 'full' });
+
+    // Polling station
+    const pollingRow = document.getElementById('b-polling-row');
+    if (state.selectedPollingStation) {
+      const ps = state.selectedPollingStation;
+      document.getElementById('b-polling-name').textContent = ps.name;
+      document.getElementById('b-polling-address').textContent = `📍 ${ps.address}`;
+      document.getElementById('b-polling-streams').textContent = `🗳️ ${ps.streams} polling streams · ${ps.ward}`;
+      pollingRow.style.display = 'block';
+    } else {
+      // Show first station as a suggestion if none selected
+      const stations = POLLING_STATIONS[state.location.constituency] || POLLING_STATIONS["default"];
+      if (stations && stations.length > 0) {
+        const ps = stations[0];
+        document.getElementById('b-polling-name').textContent = ps.name + ' (suggested)';
+        document.getElementById('b-polling-address').textContent = `📍 ${ps.address}`;
+        document.getElementById('b-polling-streams').textContent = `🗳️ ${ps.streams} polling streams · ${ps.ward} — tap a station on the map to confirm`;
+        pollingRow.style.display = 'block';
+      }
+    }
+
+    const container = document.getElementById('ballot-seats-list');
+    container.innerHTML = '';
+
+    SEATS.forEach(seat => {
+      const cand = state.selections[seat.key];
+      const section = document.createElement('div');
+      section.className = 'ballot-seat-section';
+      
+      if (cand) {
+        section.innerHTML = `
+          <div class="ballot-seat-label">${seat.label}</div>
+          <div class="ballot-choice">
+            <div class="ballot-checkbox marked"></div>
+            <div class="ballot-choice-info">
+              <div class="ballot-choice-name">${cand.name}</div>
+              <div class="ballot-choice-party">${cand.party}</div>
+            </div>
+            <div class="ballot-choice-num">${cand.number}</div>
+          </div>
+        `;
+      } else {
+        section.innerHTML = `
+          <div class="ballot-seat-label">${seat.label}</div>
+          <div class="ballot-choice">
+            <div class="ballot-checkbox skipped"></div>
+            <div class="ballot-choice-info">
+              <div class="ballot-skipped">— No selection made for this seat —</div>
+            </div>
+          </div>
+        `;
+      }
+      container.appendChild(section);
+    });
+  }
+
+  function restart() {
+    state.selections = {};
+    state.currentSeat = 0;
+    state.selectedPollingStation = null;
+    state.shuffledPools = {};
+    showScreen(1);
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // LEADERS DIRECTORY — Screen 5
+  // ══════════════════════════════════════════════════════════════
+
+  // Sample directory candidates — real data submitted via profile form
+  // Key format: "CONSTITUENCY_NAME|seat_key" → array of candidates
+  // Contacts: twitter (X handle without @), email, facebook (page URL or username)
+  const DIRECTORY_CANDIDATES = {
+    // Presidential — same everywhere
+    "presidential": [
+      { name: "William Samoei Ruto", party: "UDA / Kenya Kwanza", emoji: "👨🏾‍💼", bg: "#fffbeb",
+        age: 57, number: 1,
+        twitter: "WilliamsRuto", email: null, facebook: "WilliamsRuto",
+        partyDetail: "United Democratic Alliance (UDA) under Kenya Kwanza coalition.",
+        prevSeats: ["President of Kenya (2022–present)","Deputy President (2013–2022)","MP Eldoret North (1997–2013)"],
+        manifesto: ["Bottom-up economic model","Affordable fertiliser for farmers","200,000 affordable housing units/year","Universal health via SHA","Youth SME funding — Hustler Fund"] },
+      { name: "Raila Amolo Odinga", party: "ODM / Azimio", emoji: "👨🏾‍💼", bg: "#fff0f0",
+        age: 79, number: 2,
+        twitter: "RailaOdinga", email: null, facebook: "RailaOdinga",
+        partyDetail: "Orange Democratic Movement under Azimio la Umoja coalition.",
+        prevSeats: ["Prime Minister (2008–2013)","MP Langata (1992–2017)","Secretary General ODM"],
+        manifesto: ["Kazi Mtaani 2.0","Universal Social Protection","Free healthcare at public hospitals","CBC education reforms","Anti-corruption directorate"] },
+    ],
+
+    // Marakwet East — MP
+    "MARAKWET EAST|mp": [
+      { name: "Owen Baya", party: "UDA", emoji: "👨🏾‍💼", bg: "#fffbeb",
+        age: 45, number: 1,
+        twitter: null, email: "info@owenbaya.co.ke", facebook: null,
+        partyDetail: "United Democratic Alliance (UDA)", prevSeats: ["Deputy Majority Leader, National Assembly"],
+        manifesto: ["Improved road network in Marakwet","Bursaries for needy students","Water projects in dry areas"] },
+    ],
+
+    // Marakwet West — MP
+    "MARAKWET WEST|mp": [
+      { name: "Timothy Toroitich", party: "UDA", emoji: "👨🏾‍💼", bg: "#fffbeb",
+        age: 48, number: 1,
+        twitter: null, email: null, facebook: null,
+        partyDetail: "United Democratic Alliance (UDA)", prevSeats: ["MCA Kapsowar Ward (2017–2022)"],
+        manifesto: ["Kapsowar hospital upgrade","Youth training centres","Irrigation for Marakwet farmers"] },
+    ],
+  };
+
+  // Seat definitions for directory
+  const DIR_SEATS = [
+    { key: "president",  label: "🇰🇪 Presidential",         scope: "national" },
+    { key: "governor",   label: "🏛 Governor",               scope: "county"   },
+    { key: "senator",    label: "🏛 Senator",                 scope: "county"   },
+    { key: "women_rep",  label: "♀ Women Rep",               scope: "county"   },
+    { key: "mp",         label: "🗳 MP",                      scope: "constituency" },
+    { key: "mca",        label: "🏘 MCA",                    scope: "ward"     },
+  ];
+
+  const SEAT_DESCRIPTIONS = {
+    president:  "Same candidates appear on every ballot across Kenya.",
+    governor:   "Elected per county — all constituencies in this county share the same governor candidates.",
+    senator:    "Elected per county — represents the county in the Senate.",
+    women_rep:  "Elected per county — represents women and special interest groups in the National Assembly.",
+    mp:         "Elected per constituency — represents this constituency in the National Assembly.",
+    mca:        "Elected per ward — the closest representative to your daily life.",
+  };
+
+  // ── Directory state ──
+  let dirCounty = '';
+  let dirConst  = '';
+
+  function showDirectory() {
+    populateDirCountyDropdown();
+    // Pre-fill from current session if user has already set location
+    if (state.location.county) {
+      document.getElementById('dir-county').value = state.location.county;
+      onDirCountyChange(true);
+      if (state.location.constituency) {
+        document.getElementById('dir-constituency').value = state.location.constituency;
+        dirConst = state.location.constituency;
+        populateDirWardDropdown();
+        if (state.location.ward) {
+          // Pre-select ward and reveal ward group
+          const wardSel = document.getElementById('dir-ward');
+          for (let o of wardSel.options) {
+            if (o.value.toLowerCase() === state.location.ward.toLowerCase()) {
+              wardSel.value = o.value; break;
+            }
+          }
+        }
+        onDirConstChange();
+      }
+    }
+    showScreen(5);
+  }
+
+  function closeDirectory() {
+    // Go back to wherever the user was
+    const prev = state.currentSeat !== undefined ? 3 : (state.location.constituency ? 2 : 1);
+    showScreen(prev);
+  }
+
+  function populateDirCountyDropdown() {
+    const sel = document.getElementById('dir-county');
+    const counties = Object.keys(COUNTY_CONSTITUENCIES).sort();
+    sel.innerHTML = '<option value="">— All Counties —</option>' +
+      counties.map(c => `<option value="${c}">${c}</option>`).join('');
+  }
+
+  function onDirCountyChange(silent) {
+    dirCounty = document.getElementById('dir-county').value;
+    dirConst  = '';
+    const constSel = document.getElementById('dir-constituency');
+    constSel.innerHTML = '<option value="">— All Constituencies —</option>';
+    if (dirCounty && COUNTY_CONSTITUENCIES[dirCounty]) {
+      COUNTY_CONSTITUENCIES[dirCounty].forEach(c => {
+        constSel.innerHTML += `<option value="${c}">${c}</option>`;
+      });
+    }
+    // Reset ward
+    document.getElementById('dir-ward').innerHTML = '<option value="">— All Wards —</option>';
+    if (!silent) renderDirectory();
+  }
+
+  function onDirConstChange() {
+    dirConst = document.getElementById('dir-constituency').value;
+    populateDirWardDropdown();
+    renderDirectory();
+  }
+
+  function onDirSeatTypeChange() {
+    const seatType = document.getElementById('dir-seat-type').value;
+    const wardGroup = document.getElementById('dir-ward-group');
+    if (seatType === 'mca') {
+      wardGroup.classList.remove('hidden');
+      populateDirWardDropdown();
+    } else {
+      wardGroup.classList.add('hidden');
+      document.getElementById('dir-ward').innerHTML = '<option value="">— All Wards —</option>';
+    }
+    renderDirectory();
+  }
+
+  function populateDirWardDropdown() {
+    const wardSel = document.getElementById('dir-ward');
+    const savedWard = wardSel.value;
+    wardSel.innerHTML = '<option value="">— All Wards —</option>';
+    if (!dirConst) return;
+
+    // Pull ward list from WARD_GEO_LOOKUP (populated from GeoJSON) or CONSTITUENCY_WARDS fallback
+    const geoKey  = dirConst.toUpperCase().replace(/\s+/g,' ').trim();
+    const wards   = WARD_GEO_LOOKUP[geoKey] || CONSTITUENCY_WARDS[dirConst] || CONSTITUENCY_WARDS['default'] || [];
+    wards.forEach(w => {
+      wardSel.innerHTML += `<option value="${w}"${w===savedWard?' selected':''}>${w}</option>`;
+    });
+  }
+
+  function renderDirectory() {
+    dirCounty = document.getElementById('dir-county').value;
+    dirConst  = document.getElementById('dir-constituency').value;
+    const seatFilter = document.getElementById('dir-seat-type').value;
+    const dirWard    = document.getElementById('dir-ward').value;
+
+    const grid    = document.getElementById('dir-grid');
+    const context = document.getElementById('dir-context-bar');
+
+    // Determine which seats to show
+    let seatsToShow = DIR_SEATS;
+    if (seatFilter) seatsToShow = DIR_SEATS.filter(s => s.key === seatFilter);
+
+    const hasConst  = !!dirConst;
+    const hasCounty = !!dirCounty;
+    const hasWard   = !!dirWard;
+
+    if (!hasCounty && !hasConst) {
+      context.textContent = '📋 Showing Presidential candidates — select a county to see local seats';
+      const pres = DIRECTORY_CANDIDATES['presidential'] || [];
+      grid.innerHTML = pres.length
+        ? pres.map((c,i) => dirCandCard(c, i, 'Presidential Race', null)).join('')
+        : '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--grey);">Select a county to browse candidates</div>';
+      return;
+    }
+
+    // Build context label
+    let ctxParts = [];
+    if (hasWard && seatFilter === 'mca') ctxParts.push(dirWard + ' Ward');
+    else if (hasConst) ctxParts.push(dirConst);
+    if (hasCounty) ctxParts.push(dirCounty + ' County');
+    if (seatFilter) ctxParts.push(DIR_SEATS.find(s=>s.key===seatFilter)?.label || seatFilter);
+    context.textContent = '📍 ' + ctxParts.join(' · ');
+
+    // Build cards
+    let cards = '';
+
+    for (const seat of seatsToShow) {
+      const county        = dirCounty;
+      const constituency  = hasConst ? dirConst : null;
+      const ward          = hasWard ? dirWard : null;
+
+      // MCA: require constituency; if ward selected, show only that ward's candidates
+      if (seat.key === 'mca') {
+        if (!hasConst) continue; // skip — too many wards to list
+
+        if (ward) {
+          // Show candidates for specific ward
+          const key  = `${constituency.toUpperCase()}|${ward.toUpperCase()}|mca`;
+          const key2 = `${ward.toUpperCase()}|mca`; // fallback simpler key
+          const cands = DIRECTORY_CANDIDATES[key] || DIRECTORY_CANDIDATES[key2] || [];
+          if (cands.length) {
+            cards += cands.map((cd,i) => dirCandCard(cd, i, `MCA · ${ward}`, key)).join('');
+          } else {
+            cards += dirEmptySlot('🏘 Ward MCA', ward, 'mca');
+          }
+        } else {
+          // No ward selected — show one slot per ward in constituency
+          const geoKey  = constituency.toUpperCase().replace(/\s+/g,' ').trim();
+          const wards   = WARD_GEO_LOOKUP[geoKey] || CONSTITUENCY_WARDS[constituency] || [];
+          if (!wards.length) {
+            cards += dirEmptySlot('🏘 Ward MCA', constituency, 'mca');
+          } else {
+            wards.forEach(w => {
+              const key  = `${constituency.toUpperCase()}|${w.toUpperCase()}|mca`;
+              const key2 = `${w.toUpperCase()}|mca`;
+              const cands = DIRECTORY_CANDIDATES[key] || DIRECTORY_CANDIDATES[key2] || [];
+              if (cands.length) {
+                cards += cands.map((cd,i) => dirCandCard(cd, i, `MCA · ${w}`, key)).join('');
+              } else {
+                cards += dirEmptySlot('🏘 MCA', w, 'mca');
+              }
+            });
+          }
+        }
+        continue;
+      }
+
+      // Non-MCA seats
+      if (seat.key === 'president') {
+        const cands = DIRECTORY_CANDIDATES['presidential'] || [];
+        cards += cands.map((cd,i) => dirCandCard(cd, i, 'Presidential Race', 'presidential')).join('');
+        continue;
+      }
+
+      if (seat.scope === 'county') {
+        if (!county) continue;
+        const key   = `${county.toUpperCase()}|${seat.key}`;
+        const cands = DIRECTORY_CANDIDATES[key] || [];
+        if (cands.length) cards += cands.map((cd,i) => dirCandCard(cd, i, `${seat.label} · ${county}`, key)).join('');
+        else              cards += dirEmptySlot(seat.label, county, seat.key);
+        continue;
+      }
+
+      if (seat.scope === 'constituency') {
+        if (!constituency) {
+          // List per-constituency in county
+          (COUNTY_CONSTITUENCIES[county] || []).forEach(c => {
+            const key   = `${c.toUpperCase()}|${seat.key}`;
+            const cands = DIRECTORY_CANDIDATES[key] || [];
+            if (cands.length) cards += cands.map((cd,i) => dirCandCard(cd, i, `${seat.label} · ${c}`, key)).join('');
+            else              cards += dirEmptySlot(seat.label, c, seat.key);
+          });
+          continue;
+        }
+        const key   = `${constituency.toUpperCase()}|${seat.key}`;
+        const cands = DIRECTORY_CANDIDATES[key] || [];
+        if (cands.length) cards += cands.map((cd,i) => dirCandCard(cd, i, `${seat.label} · ${constituency}`, key)).join('');
+        else              cards += dirEmptySlot(seat.label, constituency, seat.key);
+        continue;
+      }
+    }
+
+    grid.innerHTML = cards ||
+      '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--grey);">No candidates found for this selection</div>';
+  }
+
+  function dirCandCard(cand, idx, roleLabel, lookupKey) {
+    const contacts = buildContactLinks(cand, 'dir-contact-btn');
+    return `
+      <div class="dir-card" onclick="openDirProfile(${JSON.stringify(JSON.stringify({lookupKey, idx}))})">
+        <div class="dir-card-photo" style="background:linear-gradient(135deg,${cand.bg||'#f3f4f6'},#e5e7eb)">
+          ${cand.emoji || '👤'}
+          <div class="dir-card-ballot">${cand.number || '?'}</div>
+          <div class="dir-card-party-badge">${cand.party || ''}</div>
+        </div>
+        <div class="dir-card-body">
+          <div class="dir-card-name">${cand.name}</div>
+          <div class="dir-card-seat">${roleLabel}</div>
+          <div class="dir-card-contacts">${contacts || '<span style="font-size:0.72rem;color:#bbb;">No contacts listed</span>'}</div>
+        </div>
+      </div>`;
+  }
+
+  function dirEmptySlot(seatLabel, scopeLabel, seatKey) {
+    return `
+      <div class="dir-card empty-slot">
+        <div class="dir-empty-inner">
+          <div class="dir-empty-icon">🗳️</div>
+          <div class="dir-card-name" style="margin-bottom:4px;">${seatLabel}</div>
+          <div class="dir-card-seat" style="margin-bottom:8px;">${scopeLabel}</div>
+          <div class="dir-empty-msg">No candidate has submitted a profile for this seat yet.</div>
+          <a href="mailto:directory@jipanganakura.ke?subject=Profile: ${encodeURIComponent(seatLabel + ' - ' + scopeLabel)}" class="dir-submit-btn">
+            + Submit Profile
+          </a>
+        </div>
+      </div>`;
+  }
+
+  function buildContactLinks(cand, btnClass) {
+    let links = '';
+    if (cand.twitter)  links += `<a href="https://twitter.com/${cand.twitter}" target="_blank" class="${btnClass} dir-contact-x">𝕏 @${cand.twitter}</a>`;
+    if (cand.email)    links += `<a href="mailto:${cand.email}" class="${btnClass} dir-contact-email">✉ Email</a>`;
+    if (cand.facebook) links += `<a href="https://facebook.com/${cand.facebook}" target="_blank" class="${btnClass} dir-contact-facebook">f Facebook</a>`;
+    return links;
+  }
+
+  function openDirProfile(packedJson) {
+    // packedJson is double-encoded JSON string from onclick attr
+    const { lookupKey, idx } = JSON.parse(packedJson);
+    const cands = DIRECTORY_CANDIDATES[lookupKey] || DIRECTORY_CANDIDATES['presidential'] || [];
+    const cand = cands[idx];
+    if (!cand) return;
+
+    // Open the existing profile drawer in "directory mode"
+    // (no select button — they're browsing, not voting)
+    const isDirectoryMode = true;
+    openProfileRaw(cand, isDirectoryMode);
+  }
+
+  // ── Update openProfile to also handle contacts + directory mode ──
+  function openProfileRaw(cand, directoryMode) {
+    document.getElementById('profile-hero-placeholder').textContent = cand.emoji || '👤';
+    document.getElementById('profile-hero-placeholder').style.background =
+      `linear-gradient(135deg, ${cand.bg || '#f3f4f6'}, #ddd)`;
+    document.getElementById('profile-name').textContent = cand.name;
+    document.getElementById('profile-sub').textContent = `${cand.party} · Ballot No. ${cand.number}`;
+    document.getElementById('ps-age').textContent    = cand.age || '—';
+    document.getElementById('ps-number').textContent = `#${cand.number || '?'}`;
+    document.getElementById('ps-seats').textContent  = (cand.prevSeats || []).length;
+    document.getElementById('ps-party-detail').textContent = cand.partyDetail || cand.party || '—';
+
+    const prevEl = document.getElementById('ps-prev-seats');
+    prevEl.innerHTML = (cand.prevSeats || ['No previous positions on record']).map(s =>
+      `<div class="prev-seat-item"><div class="prev-seat-dot"></div><span>${s}</span></div>`).join('');
+
+    const manEl = document.getElementById('ps-manifesto');
+    manEl.innerHTML = (cand.manifesto || ['Manifesto not available']).map(m =>
+      `<div class="manifesto-point">${m}</div>`).join('');
+
+    // Contacts section
+    const contactsEl = document.getElementById('ps-contacts');
+    const contactLinks = buildContactLinks(cand, 'profile-contact-link').replace(
+      'dir-contact-x', 'pc-x').replace('dir-contact-email','pc-email').replace('dir-contact-facebook','pc-facebook');
+    // use proper CSS classes
+    const formattedLinks = (cand.twitter ? `<a href="https://twitter.com/${cand.twitter}" target="_blank" class="profile-contact-link pc-x">𝕏 @${cand.twitter}</a>` : '')
+      + (cand.email ? `<a href="mailto:${cand.email}" class="profile-contact-link pc-email">✉ Email</a>` : '')
+      + (cand.facebook ? `<a href="https://facebook.com/${cand.facebook}" target="_blank" class="profile-contact-link pc-facebook">f Facebook</a>` : '');
+
+    if (formattedLinks) {
+      contactsEl.innerHTML = formattedLinks;
+      contactsEl.style.display = 'flex';
+    } else {
+      contactsEl.style.display = 'none';
+    }
+
+    // Select button — hidden in directory browse mode
+    const btn = document.getElementById('profile-select-btn');
+    if (directoryMode) {
+      btn.style.display = 'none';
+    } else {
+      btn.style.display = 'block';
+      btn.textContent = `✓ Select ${cand.name.split(' ')[0]}`;
+         }
+
+    document.getElementById('profile-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+</script>
+</body>
+</html>
