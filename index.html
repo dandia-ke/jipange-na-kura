@@ -3369,6 +3369,9 @@
   // SCREEN 3: SEAT SELECTOR
   // ══════════════════════════════════════════════════
   function renderSeat() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     const seat = SEATS[state.currentSeat];
     // Use pre-shuffled pool; fall back to live pool if somehow missing
     const pool = (state.shuffledPools && state.shuffledPools[seat.key]) || seat.getPool();
