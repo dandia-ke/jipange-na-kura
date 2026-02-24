@@ -903,12 +903,6 @@
       <div class="loc-status" id="loc-status">
         <span class="spinner"></span> Fetching your location from GPS…
       </div>
-      <div id="gps-privacy-note" style="display:none;font-size:0.72rem;color:var(--grey);text-align:center;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:4px;">
-        🔒 Your location stays in your browser — never stored or shared
-      </div>
-      <button class="btn-primary" id="btn-confirm-location" onclick="confirmLocation()" style="width:100%;justify-content:center;display:none;">
-        Confirm & Load Candidates →
-      </button>
     </div>
 
     <!-- Manual Panel -->
@@ -1053,6 +1047,13 @@
       </div>
       <div class="polling-list" id="polling-list"></div>
     </div>
+
+    <div id="gps-privacy-note" style="display:none;font-size:0.72rem;color:var(--grey);text-align:center;margin-bottom:8px;align-items:center;justify-content:center;gap:4px;">
+      🔒 Your location stays in your browser — never stored or shared
+    </div>
+    <button class="btn-primary" id="btn-confirm-location" onclick="confirmLocation()" style="width:100%;justify-content:center;display:none;margin-top:16px;">
+      Confirm & Load Candidates →
+    </button>
   </div>
 
 </section>
