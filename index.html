@@ -261,20 +261,46 @@
     .iebc-info-box .iebc-icon { font-size: 1.4rem; line-height: 1; flex-shrink: 0; }
     .iebc-info-box p { margin: 0; font-size: 0.83rem; color: #1a6b3c; line-height: 1.55; }
     .iebc-info-box p strong { color: #0f4023; }
-    .iebc-frame-wrap {
-      position: relative; border-radius: 10px; overflow: hidden;
-      border: 1.5px solid var(--border); background: #f9f9f9;
+    .iebc-portal-card {
+      border: 1.5px solid var(--border); border-radius: 12px;
+      overflow: hidden; margin-bottom: 14px;
     }
-    .iebc-frame-wrap iframe {
-      display: block; width: 100%; height: 420px; border: none;
+    .iebc-portal-header {
+      background: var(--black); padding: 14px 18px;
+      display: flex; align-items: center; gap: 10px;
     }
-    .iebc-fallback {
-      text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--grey);
+    .iebc-portal-header span { color: white; font-weight: 700; font-size: 0.9rem; }
+    .iebc-portal-header small { color: #9ca3af; font-size: 0.72rem; display: block; margin-top: 2px; }
+    .iebc-portal-body {
+      padding: 20px 18px; background: white; text-align: center;
     }
-    .iebc-fallback a {
-      color: var(--green); font-weight: 600; text-decoration: none;
+    .iebc-steps {
+      display: flex; flex-direction: column; gap: 10px;
+      text-align: left; margin-bottom: 20px;
     }
-    .iebc-fallback a:hover { text-decoration: underline; }
+    .iebc-step-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.82rem; color: var(--grey); line-height: 1.5;
+    }
+    .iebc-step-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--green); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .iebc-open-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: white; border: none;
+      padding: 13px 24px; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; transition: background 0.15s; width: 100%;
+      justify-content: center;
+    }
+    .iebc-open-btn:hover { background: var(--green-light); }
+    .iebc-privacy-note {
+      font-size: 0.72rem; color: var(--grey); margin-top: 10px;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+    }
     .iebc-divider {
       display: flex; align-items: center; gap: 10px;
       margin: 16px 0; font-size: 0.78rem; color: var(--grey);
@@ -960,21 +986,51 @@
     <div class="loc-panel" id="panel-iebc">
       <div class="iebc-info-box">
         <span class="iebc-icon">🪪</span>
-        <p>Enter your <strong>National ID / Passport No.</strong> and <strong>Year of Birth</strong> on the official IEBC portal below. Your registration details — including your ward — will appear on that page. Then click the button below to enter them here.</p>
+        <p>Verify your voter registration on the official IEBC portal, then enter your ward details manually below.</p>
       </div>
-      <div class="iebc-frame-wrap">
-        <iframe id="iebc-frame" src="about:blank"
-          title="IEBC Voter Verification"
-          sandbox="allow-forms allow-scripts allow-same-origin allow-popups">
-        </iframe>
+
+      <div class="iebc-portal-card">
+        <div class="iebc-portal-header">
+          <div>
+            <span>🇰🇪 IEBC Voter Verification Portal</span>
+            <small>verify.iebc.or.ke — official IEBC website</small>
+          </div>
+        </div>
+        <div class="iebc-portal-body">
+          <div class="iebc-steps">
+            <div class="iebc-step-item">
+              <div class="iebc-step-num">1</div>
+              <span>Click the button below — the official IEBC portal opens in a new tab</span>
+            </div>
+            <div class="iebc-step-item">
+              <div class="iebc-step-num">2</div>
+              <span>Enter your <strong>National ID / Passport No.</strong> and <strong>Year of Birth</strong></span>
+            </div>
+            <div class="iebc-step-item">
+              <div class="iebc-step-num">3</div>
+              <span>Note your <strong>County, Constituency and Ward</strong> shown on that page</span>
+            </div>
+            <div class="iebc-step-item">
+              <div class="iebc-step-num">4</div>
+              <span>Come back here and enter those details manually below</span>
+            </div>
+          </div>
+
+          <a href="https://verify.iebc.or.ke/" target="_blank" rel="noopener noreferrer"
+             class="iebc-open-btn">
+            🔗 Open IEBC Portal
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+          <div class="iebc-privacy-note">
+            🔒 Opens in a new tab — your ID is entered directly on IEBC's secure site, not here
+          </div>
+        </div>
       </div>
-      <div class="iebc-fallback">
-        Can't see the form above?
-        <a href="https://verify.iebc.or.ke/" target="_blank" rel="noopener noreferrer">
-          Open IEBC portal in a new tab ↗
-        </a>
-      </div>
-      <div class="iebc-divider">Once you've confirmed your ward</div>
+
+      <div class="iebc-divider">Once you have confirmed your ward</div>
       <button class="btn-iebc-confirm" onclick="switchTab('manual')">
         ✏️ Enter My Details Manually →
       </button>
@@ -1337,7 +1393,7 @@
 
     // If ward layer not loaded yet, store coords so we can upgrade to ward-level
     // precision once the GeoJSON finishes loading
-    if (!geoWardLayer) {
+    if (false) { // ward layer disabled
       pendingClickCoords = { lat, lng };
     } else {
       pendingClickCoords = null;
@@ -1580,9 +1636,9 @@
 
   // ── LOAD WARD LAYER ──
   function loadWardLayer() {
-    if (wardLayerLoaded) { updateWardLayerVisibility(); return; }
-    wardLayerLoaded = true;
-    showToast('Loading ward boundaries…', 4000);
+    // Ward GeoJSON disabled — ward dropdowns use CONSTITUENCY_WARDS built into JS
+    // GPS/click detection uses county+constituency layers (lighter, already loaded)
+    return;
     fetch('kenya_wards.geojson')
       .then(r => r.json())
       .then(data => {
@@ -1654,51 +1710,17 @@
 
   // Highlight ward without zooming (GPS / map-click path)
   function highlightUserWard() {
-    if (!geoWardLayer) return;
-    if (highlightedWardLayer) {
-      highlightedWardLayer.setStyle(defaultWardStyle());
-      highlightedWardLayer = null;
-    }
-    const key = buildWardKey(state.location.constituency, state.location.ward);
-    const wl  = wardLayerLookup[key];
-    if (wl) {
-      wl.setStyle({ color: '#c0392b', weight: 2.5, fillColor: '#c0392b', fillOpacity: 0.4, opacity: 1 });
-      wl.bringToFront();
-      highlightedWardLayer = wl;
-    }
+    // Ward layer disabled for performance — no-op
   }
 
   // Highlight the selected ward AND fly the map into its bounds (manual-select path)
   function focusWardOnMap() {
-    if (!geoWardLayer || !kenyaMap) return;
-    if (highlightedWardLayer) {
-      highlightedWardLayer.setStyle(defaultWardStyle());
-      highlightedWardLayer = null;
-    }
-    const key = buildWardKey(state.location.constituency, state.location.ward);
-    const wl  = wardLayerLookup[key];
-    if (wl) {
-      wl.setStyle({ color: '#c0392b', weight: 2.5, fillColor: '#c0392b', fillOpacity: 0.4, opacity: 1 });
-      wl.bringToFront();
-      highlightedWardLayer = wl;
-      kenyaMap.flyToBounds(wl.getBounds(), { padding: [60, 60], duration: 0.8 });
-    }
+    // Ward layer disabled for performance — no-op
   }
 
   // Show ward borders at zoom >= 10; selected ward always stays red
   function updateWardLayerVisibility() {
-    if (!geoWardLayer || !kenyaMap) return;
-    const zoom = kenyaMap.getZoom();
-    if (zoom >= 10) {
-      geoWardLayer.setStyle({ color: '#d4a017', weight: 0.6, fillColor: '#d4a017', fillOpacity: 0.0, opacity: 0.6 });
-    } else {
-      geoWardLayer.setStyle({ opacity: 0, fillOpacity: 0, weight: 0 });
-    }
-    // Re-apply selected ward highlight on top
-    if (highlightedWardLayer) {
-      highlightedWardLayer.setStyle({ color: '#c0392b', weight: 2.5, fillColor: '#c0392b', fillOpacity: 0.4, opacity: 1 });
-      highlightedWardLayer.bringToFront();
-    }
+    // Ward layer disabled for performance — no-op
   }
 
   // ── UPDATE UI AFTER MAP CLICK ──
@@ -2738,7 +2760,6 @@
       state.shuffledPools[seat.key] = shuffle(seat.getPool());
     });
 
-    loadWardLayer();
     renderSeat();
     showScreen(3);
   }
