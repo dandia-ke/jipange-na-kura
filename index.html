@@ -109,6 +109,26 @@
       position: relative; z-index: 2;
       text-align: center; max-width: 680px; padding: 60px 32px;
     }
+    /* ── Visitor Counter ── */
+    .visitor-counter {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 30px; padding: 6px 14px; margin-bottom: 16px;
+      font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+    }
+    .visitor-counter-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #4ade80;
+      box-shadow: 0 0 6px #4ade80; animation: pulse-dot 2s infinite;
+    }
+    .visitor-counter-num {
+      color: #ffffff; font-size: 0.88rem; font-weight: 800;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.6; transform: scale(1.3); }
+    }
+
     .hero-badge {
       display: inline-block; background: var(--green); color: var(--white);
       font-size: 0.72rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
@@ -801,9 +821,7 @@
       cursor: pointer;
     }
     .dir-contact-btn:hover { opacity: 0.8; }
-    .dir-contact-x        { background: #000; color: white; }
     .dir-contact-email    { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
-    .dir-contact-facebook { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
     .dir-contact-profile  { background: #f0faf4; color: var(--green); border-color: #b6dfc4; }
 
     /* Empty slot card */
@@ -825,9 +843,7 @@
       text-decoration: none; transition: opacity 0.15s;
     }
     .profile-contact-link:hover { opacity: 0.8; }
-    .pc-x        { background: #000; color: white; }
     .pc-email    { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
-    .pc-facebook { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
 
     /* Back button in directory */
     .dir-back-btn {
@@ -912,9 +928,7 @@
       font-size: 0.78rem; font-weight: 800; text-decoration: none;
       transition: all 0.15s; flex-shrink: 0; cursor: pointer;
     }
-    .lb-x  { background: #0f0f0f; color: #fff; }
     .lb-x:hover { background: #333; }
-    .lb-fb { background: #1877f2; color: #fff; }
     .lb-fb:hover { background: #1557c0; }
     .lb-em { background: #ea4335; color: #fff; font-size: 0.85rem; }
     .lb-em:hover { background: #c5221f; }
@@ -1191,6 +1205,12 @@
     .cq-textarea:focus { outline: none; border-color: var(--green); }
 
   </style>
+  <!-- ══ ANALYTICS: GoatCounter ══
+       Replace YOURSITE with your GoatCounter subdomain from goatcounter.com
+       e.g. if your site is jipangenakura.goatcounter.com use "jipangenakura" -->
+  <script data-goatcounter="https://jipangenakura.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
 </head>
 <body>
 
@@ -1199,7 +1219,6 @@
   <div class="logo" onclick="restart()" style="cursor:pointer;">Jipange Na <span>Kura</span></div>
   <div class="nav-right">
     <button class="nav-lang-btn" id="nav-lang-btn" onclick="toggleLang()">🇰🇪 SW</button>
-    <button class="nav-dir-btn" onclick="showDirectory()" data-en="🏛 Leaders" data-sw="🏛 Viongozi">🏛 Leaders</button>
     <button class="nav-cand-btn" onclick="showCandidates()" data-en="🗳 Candidates" data-sw="🗳 Wagombea">🗳 Candidates</button>
     <button class="nav-watch-btn" onclick="showElectionWatch()" data-en="🔴 Watch" data-sw="🔴 Angalia" title="Election Day Reporting">🔴 Watch</button>
     <div class="nav-flag">
@@ -1216,6 +1235,14 @@
   <div class="hero-bg"></div>
   <div class="stripe-bar"></div>
   <div class="hero-content">
+
+    <!-- Visitor counter — live count via countapi.xyz -->
+    <div class="visitor-counter" id="visitor-counter" style="display:none;">
+      <div class="visitor-counter-dot"></div>
+      <span id="visitor-count-text"
+        data-en="Kenyans planning their vote"
+        data-sw="Wakenya wanaopanga kura yao">Kenyans planning their vote</span>
+    </div>
 
     <div class="hero-badge" data-en="🇰🇪 Jipange Na Kura — Kenya 2027 Elections" data-sw="🇰🇪 Jipange Na Kura — Uchaguzi Kenya 2027">🇰🇪 Jipange Na Kura — Kenya 2027 Elections</div>
 
@@ -1841,6 +1868,36 @@
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
+  // ── VISITOR COUNTER ──
+  // Uses countapi.xyz — free, no signup required.
+  // Namespace: jipangenakura.co.ke | Key: visitors
+  // Replace namespace with your actual domain once deployed.
+  (function() {
+    const NAMESPACE = 'jipangenakura.co.ke';
+    const KEY = 'visitors';
+    const url = `https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`;
+
+    fetch(url)
+      .then(r => r.json())
+      .then(data => {
+        const count = data.value || 0;
+        const formatted = count.toLocaleString('en-KE');
+        const isSw = typeof currentLang !== 'undefined' && currentLang === 'sw';
+        const label = isSw
+          ? `${formatted} Wakenya wanaopanga kura yao`
+          : `${formatted} Kenyans planning their vote`;
+
+        const el = document.getElementById('visitor-count-text');
+        if (el) el.textContent = label;
+
+        const wrap = document.getElementById('visitor-counter');
+        if (wrap) wrap.style.display = 'inline-flex';
+      })
+      .catch(() => {
+        // Silently fail — don't show counter if API unreachable
+      });
+  })();
+
   // ── MAP INSTANCE ──
   let kenyaMap = null;
   let userMarker = null;
@@ -3996,7 +4053,8 @@
       confirmBtn.style.opacity = '0.8';
     }
 
-    // The shared load button below polling stations is already shown by showPollingStations()
+    const loadWrapManual = document.getElementById('manual-load-wrap');
+    if (loadWrapManual) loadWrapManual.style.display = '';
   }
 
   function loadCandidatesFromManual() {
@@ -4767,9 +4825,7 @@
   }
 
   function closeDirectory() {
-    // Go back to wherever the user was
-    const prev = state.currentSeat !== undefined ? 3 : (state.location.constituency ? 2 : 1);
-    showScreen(prev);
+    showScreen(1);
   }
 
   function populateDirCountyDropdown() {
@@ -4987,9 +5043,7 @@
 
   function buildContactLinks(cand, btnClass) {
     let links = '';
-    if (cand.twitter)  links += `<a href="https://twitter.com/${cand.twitter}" target="_blank" class="${btnClass} dir-contact-x">𝕏 @${cand.twitter}</a>`;
     if (cand.email)    links += `<a href="mailto:${cand.email}" class="${btnClass} dir-contact-email">✉ Email</a>`;
-    if (cand.facebook) links += `<a href="https://facebook.com/${cand.facebook}" target="_blank" class="${btnClass} dir-contact-facebook">f Facebook</a>`;
     return links;
   }
 
@@ -5043,9 +5097,9 @@
     const contactLinks = buildContactLinks(cand, 'profile-contact-link').replace(
       'dir-contact-x', 'pc-x').replace('dir-contact-email','pc-email').replace('dir-contact-facebook','pc-facebook');
     // use proper CSS classes
-    const formattedLinks = (cand.twitter ? `<a href="https://twitter.com/${cand.twitter}" target="_blank" class="profile-contact-link pc-x">𝕏 @${cand.twitter}</a>` : '')
+    const formattedLinks = ''
       + (cand.email ? `<a href="mailto:${cand.email}" class="profile-contact-link pc-email">✉ Email</a>` : '')
-      + (cand.facebook ? `<a href="https://facebook.com/${cand.facebook}" target="_blank" class="profile-contact-link pc-facebook">f Facebook</a>` : '');
+;
 
     if (formattedLinks) {
       contactsEl.innerHTML = formattedLinks;
@@ -5193,13 +5247,11 @@
 
       // Social buttons shown directly on card
       const socialBtns = [
-        cand.twitter  ? `<a href="https://x.com/${cand.twitter}" target="_blank" onclick="event.stopPropagation()" class="leader-social-btn lb-x" title="@${cand.twitter} on X">𝕏</a>` : '',
-        cand.facebook ? `<a href="https://facebook.com/${cand.facebook}" target="_blank" onclick="event.stopPropagation()" class="leader-social-btn lb-fb" title="Facebook page">f</a>` : '',
-        cand.email    ? `<a href="mailto:${cand.email}" onclick="event.stopPropagation()" class="leader-social-btn lb-em" title="Send email">✉</a>` : '',
+        cand.email    ? `<a href="mailto:${cand.email}" onclick="event.stopPropagation()" class="leader-social-btn lb-em" title="Send email">✉ Email</a>` : '',
       ].filter(Boolean).join('');
 
       const contactRow = socialBtns
-        ? `<div class="leader-card-socials">${socialBtns}<span class="leader-card-contact-hint">${currentLang==='sw'?'Wasiliana moja kwa moja':'Contact directly'}</span></div>`
+        ? `<div class="leader-card-socials">${socialBtns}</div>`
         : `<div class="leader-card-socials" style="color:#9ca3af;font-size:0.72rem;">${currentLang==='sw'?'Mawasiliano yaliyothibitishwa bado hayapatikani':'No verified contacts yet'}</div>`;
 
       return `
@@ -5323,9 +5375,7 @@
 
     grid.innerHTML = cands.map((cand, i) => {
       const socialBtns = [
-        cand.twitter  ? `<a href="https://x.com/${cand.twitter}" target="_blank" onclick="event.stopPropagation()" class="leader-social-btn lb-x" title="X/Twitter">𝕏</a>` : '',
-        cand.facebook ? `<a href="https://facebook.com/${cand.facebook}" target="_blank" onclick="event.stopPropagation()" class="leader-social-btn lb-fb" title="Facebook">f</a>` : '',
-        cand.email    ? `<a href="mailto:${cand.email}" onclick="event.stopPropagation()" class="leader-social-btn lb-em" title="Email">✉</a>` : '',
+        cand.email    ? `<a href="mailto:${cand.email}" onclick="event.stopPropagation()" class="leader-social-btn lb-em" title="Email">✉ Email</a>` : '',
       ].filter(Boolean).join('');
 
       const packed = JSON.stringify({ lookupKey: key, idx: i });
