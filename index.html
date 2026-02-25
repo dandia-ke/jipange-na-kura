@@ -75,9 +75,14 @@
       white-space: nowrap; letter-spacing: 0.03em;
     }
     .nav-lang-btn:hover, .nav-lang-btn.sw-active { background: var(--green); color: white; border-color: var(--green); }
-    @media(max-width: 400px) {
-      .nav-dir-btn, .nav-cand-btn { font-size: 0.7rem; padding: 5px 7px; }
+    @media(max-width: 520px) {
+      .nav-dir-btn, .nav-cand-btn, .nav-watch-btn, .nav-lang-btn { font-size: 0.7rem; padding: 5px 7px; }
+      .nav-right { gap: 4px; }
       .nav-flag { display: none; }
+    }
+    @media(max-width: 380px) {
+      .nav-dir-btn, .nav-cand-btn, .nav-watch-btn { font-size: 0.65rem; padding: 4px 6px; }
+      .nav-lang-btn { display: none; }
     }
 
     /* ── SCREENS ── */
