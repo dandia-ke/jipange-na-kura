@@ -78,7 +78,7 @@
     @media(max-width: 600px) {
       nav { flex-direction: column; align-items: stretch; padding: 8px 16px 10px; gap: 8px; }
       .nav-right { width: 100%; justify-content: center; gap: 6px; flex-shrink: 1; }
-      .nav-dir-btn, .nav-cand-btn, .nav-watch-btn, .nav-lang-btn { font-size: 0.72rem; padding: 6px 10px; flex: 1; justify-content: center; text-align: center; }
+      .nav-dir-btn, .nav-cand-btn, .nav-watch-btn, .nav-vote-btn, .nav-lang-btn { font-size: 0.62rem; padding: 5px 6px; flex: 1; justify-content: center; text-align: center; }
       .nav-flag { display: none; }
       .screen { padding-top: 88px; }
       #screen-2 { padding-top: 88px; }
@@ -373,7 +373,15 @@
       border: none; cursor: pointer; transition: background 0.15s;
     }
     .btn-manual-go:hover { background: var(--green-light); }
-    #screen-3 { background: var(--cream); }
+    #screen-3 { background: var(--cream); transition: background 0.35s ease; }
+    .seat-theme-band {
+      position: fixed; top: 0; left: 0; right: 0; height: 5px; z-index: 200;
+      transition: background 0.35s ease;
+    }
+    .seat-header {
+      border-radius: 14px; padding: 20px 22px; margin-bottom: 28px;
+      border: 2px solid transparent; transition: background 0.35s, border-color 0.35s;
+    }
     .selector-wrap {
       max-width: 780px; width: 95%; margin: 0 auto; padding: 48px 20px;
     }
@@ -390,6 +398,15 @@
       border-radius: 10px; transition: width 0.4s ease;
     }
     .seat-header { margin-bottom: 32px; }
+    .seat-ballot-strip {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+    }
+    .seat-ballot-swatch {
+      width: 20px; height: 20px; border-radius: 4px;
+      border: 1.5px solid rgba(0,0,0,0.15); flex-shrink: 0;
+    }
+    .seat-ballot-lbl { color: var(--grey); }
     .seat-tag {
       display: inline-block; background: #fff3cd; color: #856404;
       font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
@@ -607,31 +624,46 @@
     .ballot-meta-item { }
     .ballot-meta-item .k { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); }
     .ballot-meta-item .v { font-size: 0.9rem; font-weight: 600; }
-    .ballot-seats { padding: 0 32px 32px; }
-    .ballot-seat-section { margin-top: 28px; }
-    .ballot-seat-label {
-      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-      color: var(--green); border-bottom: 2px solid var(--green);
-      padding-bottom: 6px; margin-bottom: 14px;
+    .ballot-seats { padding: 0 24px 32px; display: flex; flex-direction: column; gap: 16px; }
+    .ballot-seat-section {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      border: 1.5px solid transparent;
+      break-inside: avoid; page-break-inside: avoid;
     }
+    /* Themed header band per ballot paper */
+    .ballot-seat-label {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px;
+      font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.8px;
+      color: white;
+    }
+    .ballot-seat-label-swatch {
+      width: 16px; height: 16px; border-radius: 3px;
+      background: rgba(255,255,255,0.3); border: 1.5px solid rgba(255,255,255,0.5);
+      flex-shrink: 0;
+    }
+    .ballot-seat-label-form {
+      margin-left: auto; font-size: 0.62rem; opacity: 0.75; font-weight: 600; letter-spacing: 0.5px;
+    }
+    /* Choice row below the coloured header */
     .ballot-choice {
       display: flex; align-items: center; gap: 16px;
-      background: var(--grey-light); border-radius: 8px; padding: 14px 18px;
-      border: 1px solid var(--border);
+      background: white; padding: 14px 18px;
+      border-top: none;
     }
     .ballot-checkbox {
-      width: 28px; height: 28px; border: 2px solid var(--black);
+      width: 28px; height: 28px; border: 2px solid #ccc;
       border-radius: 3px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
     }
-    .ballot-checkbox.marked { background: var(--green); border-color: var(--green); }
-    .ballot-checkbox.marked::after { content: '✓'; color: white; font-size: 0.9rem; font-weight: 700; }
+    .ballot-checkbox.marked::after { content: '✓'; font-size: 0.9rem; font-weight: 900; }
     .ballot-checkbox.skipped { border-style: dashed; border-color: #ccc; }
     .ballot-choice-info { flex: 1; }
     .ballot-choice-name { font-weight: 700; font-size: 0.95rem; }
-    .ballot-choice-party { font-size: 0.8rem; color: var(--grey); }
-    .ballot-choice-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--border); }
-    .ballot-skipped { color: var(--grey); font-style: italic; font-size: 0.85rem; }
+    .ballot-choice-party { font-size: 0.8rem; color: var(--grey); margin-top: 2px; }
+    .ballot-choice-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; }
+    .ballot-skipped { color: #aaa; font-style: italic; font-size: 0.85rem; }
     .ballot-footer-bar {
       background: var(--black); padding: 16px 32px;
       display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
@@ -657,9 +689,9 @@
     }
     .btn-restart:hover { background: var(--green-light); }
     .disclaimer {
-      text-align: center; margin-top: 20px; padding: 14px 24px;
+      text-align: center; margin-top: 24px; padding: 14px 20px;
       background: #fff8e1; border-radius: 8px; border: 1px solid #ffe082;
-      font-size: 0.82rem; color: #7d5a00; line-height: 1.6;
+      font-size: 0.78rem; color: #7d5a00; line-height: 1.6;
     }
 
     /* ── TOAST ── */
@@ -672,9 +704,47 @@
     .toast.show { transform: translateX(-50%) translateY(0); }
 
     @media print {
-      nav, .ballot-actions, .btn-row, .disclaimer { display: none !important; }
-      #screen-4 { padding-top: 0 !important; }
-      .ballot-official { box-shadow: none; }
+      /* Hide interactive UI */
+      nav, .ballot-actions, .share-row, .btn-row,
+      .visitor-counter, #screen-4 > .ballot-wrap > div:last-of-type { display: none !important; }
+
+      /* Reset layout for clean print */
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body, html { margin: 0; padding: 0; background: white !important; }
+      .screen { display: none !important; }
+      #screen-4 { display: block !important; padding: 0 !important; }
+      .ballot-wrap { padding: 0 !important; max-width: 100% !important; }
+
+      /* Ballot card */
+      .ballot-official {
+        box-shadow: none !important; border-radius: 0 !important;
+        break-inside: avoid; page-break-inside: avoid;
+        width: 100% !important; margin: 0 !important;
+      }
+
+      /* Each seat row — never break mid-row */
+      .ballot-seat-section {
+        break-inside: avoid; page-break-inside: avoid;
+        margin-top: 16px !important;
+      }
+      .ballot-choice {
+        break-inside: avoid; page-break-inside: avoid;
+      }
+
+      /* Seats list */
+      .ballot-seats { padding: 0 20px 20px !important; }
+
+      /* Disclaimer — show on print */
+      .disclaimer {
+        display: block !important;
+        break-inside: avoid; page-break-inside: avoid;
+        border-top: 1px solid #ffe082; border-radius: 0 !important;
+        margin: 0 !important;
+      }
+
+      /* Header area */
+      .ballot-header { break-after: avoid; page-break-after: avoid; }
+      .ballot-top { break-inside: avoid; page-break-inside: avoid; }
     }
 
     /* entrance animation */
@@ -1108,6 +1178,55 @@
 
     /* ── ELECTION WATCH (Feature 3) ── */
     #screen-6 { background: var(--cream); }
+    #screen-7 { background: var(--cream); }
+    .htv-wrap { max-width: 820px; margin: 0 auto; padding: 28px 20px 80px; }
+    .htv-back { display:inline-flex; align-items:center; gap:6px; background:white;
+      border:1.5px solid var(--border); border-radius:8px; padding:8px 14px;
+      font-size:0.8rem; font-weight:600; cursor:pointer; color:var(--black);
+      margin-bottom:24px; transition:all 0.15s; font-family:'DM Sans',sans-serif; }
+    .htv-back:hover { border-color:var(--green); color:var(--green); }
+    .htv-header { text-align:center; margin-bottom:32px; }
+    .htv-header h2 { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; margin-bottom:8px; }
+    .htv-header p { color:var(--grey); font-size:0.88rem; max-width:540px; margin:0 auto; line-height:1.65; }
+    .htv-section-title { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:800; margin-bottom:16px; }
+    .htv-ballots { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-bottom:36px; }
+    .htv-bcard { background:white; border-radius:13px; overflow:hidden; border:2px solid transparent;
+      box-shadow:0 2px 10px rgba(0,0,0,0.07); transition:transform 0.15s,box-shadow 0.15s; }
+    .htv-bcard:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,0.12); }
+    .htv-bcard-head { padding:13px 15px; display:flex; align-items:center; gap:11px; }
+    .htv-bnum { width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.18);
+      font-weight:900; font-size:0.95rem; display:flex; align-items:center; justify-content:center;
+      color:white; flex-shrink:0; }
+    .htv-bcard-title { font-weight:800; font-size:0.92rem; color:white; line-height:1.2; }
+    .htv-bcard-sub { font-size:0.7rem; color:rgba(255,255,255,0.78); margin-top:2px; }
+    .htv-bcard-body { padding:13px 15px; }
+    .htv-bcard-desc { font-size:0.8rem; color:var(--grey); line-height:1.6; margin-bottom:9px; }
+    .htv-bcard-rule { font-size:0.76rem; font-weight:700; background:#f4f4f4; border-radius:7px; padding:8px 11px; color:var(--black); }
+    .htv-steps-list { margin-bottom:36px; }
+    .htv-step { display:flex; gap:13px; align-items:flex-start; margin-bottom:12px;
+      background:white; border-radius:11px; padding:13px 15px; box-shadow:0 1px 6px rgba(0,0,0,0.06); }
+    .htv-snum { width:30px; height:30px; border-radius:50%; background:var(--green); color:white;
+      font-weight:900; font-size:0.88rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .htv-stext { font-size:0.83rem; line-height:1.65; color:var(--black); padding-top:4px; }
+    .htv-stext strong { color:var(--green); }
+    .htv-marks { margin-bottom:32px; }
+    .htv-marks-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .htv-mark { background:white; border:2px solid var(--green); border-radius:9px;
+      padding:9px 14px; text-align:center; min-width:65px; box-shadow:0 1px 5px rgba(0,0,0,0.06); }
+    .htv-mark span { display:block; font-size:0.68rem; color:var(--grey); margin-top:2px; font-weight:600; }
+    .htv-warn { background:#fffbeb; border:1.5px solid #fcd34d; border-radius:11px;
+      padding:13px 15px; font-size:0.81rem; line-height:1.65; color:#92400e; margin-top:14px; }
+    .htv-warn strong { color:#78350f; }
+    .htv-source { text-align:center; margin-top:24px; font-size:0.73rem; color:var(--grey);
+      padding:12px; background:white; border-radius:9px; border:1px solid var(--border); }
+    @media(max-width:600px){ .htv-ballots{ grid-template-columns:1fr; } }
+    .nav-vote-btn {
+      background: #1565c0; color: white; border: 1.5px solid #1565c0;
+      border-radius: 6px; padding: 6px 10px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem; font-weight: 700; cursor: pointer;
+      transition: all 0.15s; white-space: nowrap;
+    }
+    .nav-vote-btn:hover { background: #0d47a1; border-color: #0d47a1; }
     .nav-watch-btn {
       background: var(--red); color: white; border: none; border-radius: 6px;
       padding: 7px 12px; font-family: 'DM Sans',sans-serif; font-weight: 700;
@@ -1115,65 +1234,97 @@
       display: flex; align-items: center; gap: 5px;
     }
     .nav-watch-btn:hover { background: #c0392b; }
-    .watch-wrap {
-      max-width: 1100px; margin: 0 auto; padding: 80px 20px 40px;
-    }
-    .watch-header {
-      text-align: center; margin-bottom: 28px;
-    }
+    .watch-wrap { max-width: 860px; margin: 0 auto; padding: 80px 20px 60px; }
+
+    /* ── Header ── */
+    .watch-header { text-align: center; margin-bottom: 24px; }
     .watch-badge {
-      display: inline-block; background: var(--red); color: white;
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-      padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #1a1a1a; color: #ef4444; border: 1.5px solid #ef444440;
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
     }
-    .watch-title {
-      font-family: 'Playfair Display',serif; font-size: 2rem; font-weight: 900;
-      margin-bottom: 8px;
-    }
-    .watch-sub { font-size: 0.88rem; color: var(--grey); max-width: 520px; margin: 0 auto; }
+    .watch-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #ef4444; animation: watchPulse 1.4s infinite; }
+    @keyframes watchPulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.4; transform:scale(0.7); } }
+    .watch-title { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; margin-bottom:8px; }
+    .watch-sub { font-size:0.88rem; color:var(--grey); max-width:500px; margin:0 auto; line-height:1.6; }
+
+    /* ── Countdown bar ── */
     .watch-countdown {
-      background: var(--black); color: white; border-radius: 12px;
-      padding: 16px 24px; margin: 20px 0; display: flex;
-      align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      background: var(--black); color: white; border-radius: 14px;
+      padding: 18px 24px; margin-bottom: 24px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
     }
-    .watch-countdown-label { font-size: 0.72rem; color: #9ca3af; letter-spacing: 0.06em; text-transform: uppercase; }
-    .watch-countdown-value { font-size: 1.6rem; font-weight: 900; font-family: 'Playfair Display',serif; color: var(--gold); }
-    .watch-layout { display: grid; grid-template-columns: 1fr 340px; gap: 20px; }
-    @media(max-width:860px){ .watch-layout { grid-template-columns: 1fr; } }
-    .watch-map-box {
-      background: white; border-radius: 12px; overflow: hidden;
-      border: 1.5px solid var(--border); min-height: 420px; position: relative;
+    .watch-countdown-label { font-size: 0.68rem; color: #9ca3af; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+    .watch-countdown-value { font-size: 1.7rem; font-weight: 900; font-family:'Playfair Display',serif; color: var(--gold); line-height: 1; }
+
+    /* ── Main 2-col layout ── */
+    .watch-body { display: grid; grid-template-columns: 1fr 300px; gap: 16px; align-items: start; }
+    @media(max-width:720px){ .watch-body { grid-template-columns: 1fr; } }
+
+    /* ── How it works card ── */
+    .watch-how-card {
+      background: white; border-radius: 14px; border: 1.5px solid var(--border);
+      overflow: hidden;
     }
-    .watch-map-placeholder {
-      position: absolute; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; color: var(--grey);
-      font-size: 0.84rem; text-align: center; padding: 20px; gap: 10px;
+    .watch-how-header {
+      background: #0f0f0f; color: white; padding: 16px 20px;
+      font-weight: 800; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em;
     }
-    .watch-sidebar { display: flex; flex-direction: column; gap: 16px; }
+    .watch-how-body { padding: 20px; }
+    .watch-how-step {
+      display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start;
+    }
+    .watch-how-step:last-child { margin-bottom: 0; }
+    .watch-how-num {
+      width: 28px; height: 28px; border-radius: 50%; background: var(--black);
+      color: white; font-weight: 900; font-size: 0.8rem; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .watch-how-text { font-size: 0.83rem; line-height: 1.6; color: var(--black); }
+    .watch-how-text strong { color: var(--black); }
+
+    /* ── Status chips ── */
+    .watch-status-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); }
+    .watch-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px; border-radius: 20px; font-size: 0.73rem; font-weight: 600;
+      border: 1.5px solid;
+    }
+    .watch-chip-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Right sidebar ── */
+    .watch-sidebar { display: flex; flex-direction: column; gap: 14px; }
     .watch-card {
-      background: white; border-radius: 12px; padding: 18px 20px;
+      background: white; border-radius: 14px; padding: 18px 20px;
       border: 1.5px solid var(--border);
     }
-    .watch-card-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .watch-card-title { font-weight: 800; font-size: 0.88rem; margin-bottom: 12px; }
+
+    /* Submit report */
     .watch-report-btn {
-      width: 100%; padding: 13px; background: var(--red); color: white; border: none;
-      border-radius: 8px; font-family: 'DM Sans',sans-serif; font-weight: 700;
-      font-size: 0.9rem; cursor: pointer; transition: all 0.2s; margin-top: 4px;
+      width: 100%; padding: 12px; background: #dc2626; color: white; border: none;
+      border-radius: 9px; font-family:'DM Sans',sans-serif; font-weight: 700;
+      font-size: 0.88rem; cursor: pointer; transition: all 0.2s; margin-top: 10px;
     }
-    .watch-report-btn:hover { background: #c0392b; transform: translateY(-1px); }
-    .watch-cat-list { display: grid; gap: 7px; margin-bottom: 14px; }
-    .watch-cat-item {
-      display: flex; align-items: center; gap: 10px; font-size: 0.8rem; padding: 8px 10px;
-      border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer;
-      transition: all 0.15s;
+    .watch-report-btn:hover { background: #b91c1c; transform: translateY(-1px); }
+
+    /* Contacts */
+    .watch-contact-item {
+      padding: 10px 0; border-bottom: 1px solid #f3f4f6;
+      display: flex; flex-direction: column; gap: 2px;
     }
-    .watch-cat-item:hover { border-color: var(--green); background: #f0faf4; }
-    .watch-cat-item.selected { border-color: var(--green); background: #f0faf4; font-weight: 600; }
+    .watch-contact-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .watch-contact-org { font-size: 0.72rem; color: var(--grey); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .watch-contact-num { font-size: 1.05rem; font-weight: 900; color: var(--green); text-decoration: none; letter-spacing: 0.02em; }
+    .watch-contact-note { font-size: 0.68rem; color: #9ca3af; }
+
+    /* legacy compat */
     .watch-cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .watch-stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-    .watch-stat { text-align: center; padding: 10px 6px; }
-    .watch-stat-val { font-size: 1.4rem; font-weight: 800; color: var(--green); }
-    .watch-stat-lbl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--grey); margin-top: 2px; }
+    .watch-cat-item { display:flex; align-items:center; gap:8px; font-size:0.8rem; padding:7px 0; }
+    .watch-cat-item.selected { font-weight:700; }
+    .watch-stats-grid,.watch-stat-val,.watch-stat-lbl { display:none; }
+    .watch-map-box,.watch-map-placeholder { display:none; }
     /* Report form overlay */
     .report-overlay {
       display: none; position: fixed; inset: 0; z-index: 9000;
@@ -1218,9 +1369,10 @@
 <nav>
   <div class="logo" onclick="restart()" style="cursor:pointer;">Jipange Na <span>Kura</span></div>
   <div class="nav-right">
-    <button class="nav-lang-btn" id="nav-lang-btn" onclick="toggleLang()">🇰🇪 SW</button>
     <button class="nav-cand-btn" onclick="showCandidates()" data-en="🗳 Candidates" data-sw="🗳 Wagombea">🗳 Candidates</button>
+    <button class="nav-vote-btn" onclick="showHowToVote()" data-en="📋 How to Vote" data-sw="📋 Jinsi ya Kupiga Kura">📋 How to Vote</button>
     <button class="nav-watch-btn" onclick="showElectionWatch()" data-en="🔴 Watch" data-sw="🔴 Angalia" title="Election Day Reporting">🔴 Watch</button>
+    <button class="nav-lang-btn" id="nav-lang-btn" onclick="toggleLang()">🇰🇪 SW</button>
     <div class="nav-flag">
       <div class="f-black"></div>
       <div class="f-red"></div>
@@ -1462,9 +1614,6 @@
           </select>
         </div>
       </div>
-      <button class="btn-manual-go" id="btn-confirm-manual" onclick="applyManualLocation()">
-        <span data-en="Confirm Location →" data-sw="Thibitisha Mahali →">Confirm Location →</span>
-      </button>
     </div>
 
     <!-- IEBC Verification Panel -->
@@ -1539,7 +1688,10 @@
     <!-- Confirm & Load button — shown after GPS finds or manual confirms location -->
     <div id="gps-load-wrap" style="display:none; margin-top:16px;">
       <button class="btn-primary" id="btn-confirm-location" style="width:100%;justify-content:center;" onclick="confirmLocation()">
-        <span data-en="Confirm & Load Candidates →" data-sw="Thibitisha na Pakia Wagombea →">Confirm & Load Candidates →</span>
+        <span style="display:flex;flex-direction:column;align-items:center;line-height:1.3;">
+          <span data-en="Confirm Location" data-sw="Thibitisha Mahali">Confirm Location</span>
+          <span style="font-size:0.8em;opacity:0.85;" data-en="& Load Candidates →" data-sw="& Pakia Wagombea →">& Load Candidates →</span>
+        </span>
       </button>
     </div>
   </div>
@@ -1548,6 +1700,7 @@
 
 <!-- SCREEN 3: SEAT SELECTOR -->
 <section id="screen-3" class="screen">
+  <div class="seat-theme-band" id="seat-theme-band"></div>
   <div class="selector-wrap">
     <div class="progress-bar-wrap">
       <div class="progress-labels">
@@ -1560,6 +1713,7 @@
     </div>
 
     <div class="seat-header">
+      <div id="seat-ballot-strip" class="seat-ballot-strip" style="display:none;"></div>
       <div class="seat-tag" id="seat-tag">Presidential</div>
       <h2 class="seat-title" id="seat-title">Choose your President</h2>
       <p class="seat-desc" id="seat-desc">The President leads the executive branch and serves a 5-year term.</p>
@@ -1638,9 +1792,7 @@
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Share on WhatsApp
       </a>
-      <button class="btn-copy-link" onclick="copyBallotLink(this)">
-        🔗 Copy Link
-      </button>
+
     </div>
 
     <!-- WhatsApp community nudge -->
@@ -1651,9 +1803,6 @@
       </a>
     </div>
 
-    <div class="disclaimer">
-      ⚠️ <strong data-en="This is NOT an official ballot paper." data-sw="Hii SI karatasi rasmi ya kura.">This is NOT an official ballot paper.</strong> Jipange Na Kura is an independent civic planning tool to help you prepare before visiting your polling station. Always follow official IEBC guidance on Election Day. Candidate data shown is for demonstration purposes — integrate live IEBC data for production use.
-    </div>
   </div>
 </section>
 
@@ -2960,10 +3109,17 @@
   // ══════════════════════════════════════════════════
   // NAVIGATION
   // ══════════════════════════════════════════════════
+  let _prevScreen = 1;
   function showScreen(id) {
+    const cur = document.querySelector('.screen.active');
+    if (cur) _prevScreen = parseInt(cur.id.replace('screen-', '')) || 1;
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('screen-' + id).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+  function goBack() {
+    showScreen(_prevScreen);
+    applyLang();
   }
 
   function showToast(msg, duration = 2500) {
@@ -3997,21 +4153,7 @@
       focusWardOnMap();
     }
     // else: loadWardLayer() will call focusWardOnMap() when the GeoJSON finishes loading
-    showToast(`Ward selected: ${ward}`);
-    // Refresh polling stations immediately so the list updates as soon as ward is chosen
-    showPollingStations();
-
-    // Reset confirm button so user can re-confirm if they change their mind
-    const confirmBtn = document.getElementById('btn-confirm-manual');
-    if (confirmBtn && confirmBtn.disabled) {
-      confirmBtn.disabled = false;
-      confirmBtn.style.opacity = '';
-      confirmBtn.style.background = '';
-      confirmBtn.innerHTML = '<span data-en="Confirm Location →" data-sw="Thibitisha Mahali →">' +
-        (currentLang === 'sw' ? 'Thibitisha Mahali →' : 'Confirm Location →') + '</span>';
-      const loadWrap = document.getElementById('gps-load-wrap');
-      if (loadWrap) loadWrap.style.display = 'none';
-    }
+    applyManualLocation();
   }
 
   function applyManualLocation() {
@@ -4078,9 +4220,91 @@
     document.getElementById('progress-label').textContent = isSw
       ? `Kiti ${state.currentSeat + 1} kati ya ${SEATS.length}`
       : `Seat ${state.currentSeat + 1} of ${SEATS.length}`;
-    document.getElementById('seat-tag').textContent   = isSw ? (seat.label_sw || seat.label) : seat.label;
-    document.getElementById('seat-title').textContent = isSw ? (seat.title_sw || seat.title) : seat.title;
+    const { ward, constituency, county } = state.location;
+    const seatTag = (() => {
+      if (isSw) {
+        if (seat.key === 'mca'       && ward)         return `MCA wa ${ward}`;
+        if (seat.key === 'mp'        && constituency) return `Mbunge · ${constituency}`;
+        if (seat.key === 'senator'   && county)       return `Seneta · ${county}`;
+        if (seat.key === 'governor'  && county)       return `Gavana · ${county}`;
+        if (seat.key === 'women_rep' && county)       return `Wanawake · ${county}`;
+        return seat.label_sw || seat.label;
+      } else {
+        if (seat.key === 'mca'       && ward)         return `${ward} MCA`;
+        if (seat.key === 'mp'        && constituency) return `${constituency} MP`;
+        if (seat.key === 'senator'   && county)       return `${county} Senator`;
+        if (seat.key === 'governor'  && county)       return `${county} Governor`;
+        if (seat.key === 'women_rep' && county)       return `${county} Women Rep`;
+        return seat.label;
+      }
+    })();
+    const seatTitle = (() => {
+      if (isSw) {
+        if (seat.key === 'mca'       && ward)         return `Chagua MCA wa ${ward}`;
+        if (seat.key === 'mp'        && constituency) return `Chagua Mbunge wa ${constituency}`;
+        if (seat.key === 'senator'   && county)       return `Chagua Seneta wa ${county}`;
+        if (seat.key === 'governor'  && county)       return `Chagua Gavana wa ${county}`;
+        if (seat.key === 'women_rep' && county)       return `Chagua Mwakilishi wa Wanawake wa ${county}`;
+        return seat.title_sw || seat.title;
+      } else {
+        if (seat.key === 'mca'       && ward)         return `Choose your ${ward} MCA`;
+        if (seat.key === 'mp'        && constituency) return `Choose your ${constituency} MP`;
+        if (seat.key === 'senator'   && county)       return `Choose your ${county} Senator`;
+        if (seat.key === 'governor'  && county)       return `Choose your ${county} Governor`;
+        if (seat.key === 'women_rep' && county)       return `Choose your ${county} Women Representative`;
+        return seat.title;
+      }
+    })();
+    document.getElementById('seat-tag').textContent   = seatTag;
+    document.getElementById('seat-title').textContent = seatTitle;
     document.getElementById('seat-desc').textContent  = isSw ? (seat.desc_sw  || seat.desc)  : seat.desc;
+    // ── Ballot colour strip (official IEBC colours) ──
+    const _bc = {
+      president: { bg:'#9e9e9e', label:'White Ballot',   sw:'Kura Nyeupe',        form:'Form 30' },
+      mp:        { bg:'#2e7d32', label:'Green Ballot',   sw:'Kura ya Kijani',     form:'Form 26' },
+      women_rep: { bg:'#7b1fa2', label:'Purple Ballot',  sw:'Kura ya Zambarau',   form:'Form 27' },
+      senator:   { bg:'#f9a825', label:'Yellow Ballot',  sw:'Kura ya Njano',      form:'Form 28' },
+      governor:  { bg:'#1565c0', label:'Blue Ballot',    sw:'Kura ya Bluu',       form:'Form 29' },
+      mca:       { bg:'#a0522d', label:'Beige Ballot',   sw:'Kura ya Kahawa',     form:'Form 25' },
+    };
+    const _b = _bc[seat.key];
+    const _strip = document.getElementById('seat-ballot-strip');
+    if (_strip && _b) {
+      _strip.style.display = 'flex';
+      _strip.innerHTML = `<div class="seat-ballot-swatch" style="background:${_b.bg};"></div>
+        <span class="seat-ballot-lbl">${isSw ? _b.sw : _b.label} &mdash; ${_b.form}</span>`;
+    }
+
+    // ── Colour-theme the whole seat screen ──
+    const _s3 = document.getElementById('screen-3');
+    const _band = document.getElementById('seat-theme-band');
+    const _header = document.querySelector('#screen-3 .seat-header');
+    if (_b) {
+      // Only theme the header banner — leave screen background alone
+      if (_s3)   _s3.style.background = '';
+      if (_band) _band.style.background = 'transparent';
+      if (_header) {
+        _header.style.background   = _b.bg;
+        _header.style.borderColor  = 'transparent';
+      }
+      // Tag pill — white ghost on coloured bg
+      const _tagEl = document.getElementById('seat-tag');
+      if (_tagEl) {
+        _tagEl.style.background   = 'rgba(255,255,255,0.22)';
+        _tagEl.style.borderColor  = 'rgba(255,255,255,0.45)';
+        _tagEl.style.color        = '#fff';
+      }
+      // Title and desc readable on solid colour
+      const _titleEl = document.getElementById('seat-title');
+      const _descEl  = document.getElementById('seat-desc');
+      if (_titleEl) _titleEl.style.color = '#fff';
+      if (_descEl)  _descEl.style.color  = 'rgba(255,255,255,0.82)';
+      // Ballot strip label + swatch border
+      const _lbl = _strip && _strip.querySelector('.seat-ballot-lbl');
+      if (_lbl) _lbl.style.color = 'rgba(255,255,255,0.78)';
+      const _sw = _strip && _strip.querySelector('.seat-ballot-swatch');
+      if (_sw) { _sw.style.borderColor = 'rgba(255,255,255,0.4)'; _sw.style.background = 'rgba(255,255,255,0.3)'; }
+    }
     document.getElementById('btn-back').style.visibility = state.currentSeat === 0 ? 'hidden' : 'visible';
 
     const grid = document.getElementById('candidates-grid');
@@ -4234,36 +4458,84 @@
     const container = document.getElementById('ballot-seats-list');
     container.innerHTML = '';
 
+    // Official IEBC ballot paper colours
+    const BALLOT_THEMES = {
+      president:  { bg: '#616161', form: 'Form 30', label_en: 'White Ballot',   label_sw: 'Kura Nyeupe'       },
+      mp:         { bg: '#2e7d32', form: 'Form 26', label_en: 'Green Ballot',   label_sw: 'Kura ya Kijani'    },
+      women_rep:  { bg: '#7b1fa2', form: 'Form 27', label_en: 'Purple Ballot',  label_sw: 'Kura ya Zambarau'  },
+      senator:    { bg: '#c8920a', form: 'Form 28', label_en: 'Yellow Ballot',  label_sw: 'Kura ya Njano'     },
+      governor:   { bg: '#1565c0', form: 'Form 29', label_en: 'Blue Ballot',    label_sw: 'Kura ya Bluu'      },
+      mca:        { bg: '#a0522d', form: 'Form 25', label_en: 'Beige Ballot',   label_sw: 'Kura ya Kahawa'    },
+    };
+
     SEATS.forEach(seat => {
-      const cand = state.selections[seat.key];
+      const cand   = state.selections[seat.key];
+      const isSw   = typeof currentLang !== 'undefined' && currentLang === 'sw';
+      const { ward, constituency, county } = state.location;
+      const theme  = BALLOT_THEMES[seat.key] || { bg: '#333', form: '', label_en: seat.label, label_sw: seat.label_sw || seat.label };
+
+      // Location-aware label
+      const seatLabel = (() => {
+        if (isSw) {
+          if (seat.key === 'mca'       && ward)         return 'MCA · ' + ward;
+          if (seat.key === 'mp'        && constituency) return 'Mbunge · ' + constituency;
+          if (seat.key === 'senator'   && county)       return 'Seneta · ' + county;
+          if (seat.key === 'governor'  && county)       return 'Gavana · ' + county;
+          if (seat.key === 'women_rep' && county)       return 'Wanawake · ' + county;
+          if (seat.key === 'president')                 return 'Urais';
+        } else {
+          if (seat.key === 'mca'       && ward)         return ward + ' MCA';
+          if (seat.key === 'mp'        && constituency) return constituency + ' MP';
+          if (seat.key === 'senator'   && county)       return county + ' Senator';
+          if (seat.key === 'governor'  && county)       return county + ' Governor';
+          if (seat.key === 'women_rep' && county)       return county + ' Women Rep';
+          if (seat.key === 'president')                 return 'Presidential';
+        }
+        return isSw ? (seat.label_sw || seat.label) : seat.label;
+      })();
+
+      const ballotName = isSw ? theme.label_sw : theme.label_en;
+      const checkColor = theme.bg;
+
       const section = document.createElement('div');
       section.className = 'ballot-seat-section';
-      
+      section.style.borderColor = theme.bg + '55';
+
+      const headerHtml = `
+        <div class="ballot-seat-label" style="background:${theme.bg};">
+          <div class="ballot-seat-label-swatch"></div>
+          <span>${seatLabel}</span>
+          <span class="ballot-seat-label-form">${ballotName} · ${theme.form}</span>
+        </div>`;
+
       if (cand) {
-        section.innerHTML = `
-          <div class="ballot-seat-label">${(typeof currentLang !== "undefined" && currentLang === "sw" && seat.label_sw) ? seat.label_sw : seat.label}</div>
+        section.innerHTML = headerHtml + `
           <div class="ballot-choice">
-            <div class="ballot-checkbox marked"></div>
+            <div class="ballot-checkbox marked" style="background:${checkColor};border-color:${checkColor};color:white;"></div>
             <div class="ballot-choice-info">
               <div class="ballot-choice-name">${cand.name}</div>
               <div class="ballot-choice-party">${cand.party}</div>
             </div>
-            <div class="ballot-choice-num">${cand.number}</div>
-          </div>
-        `;
+            <div class="ballot-choice-num" style="color:${checkColor};">${cand.number}</div>
+          </div>`;
       } else {
-        section.innerHTML = `
-          <div class="ballot-seat-label">${(typeof currentLang !== "undefined" && currentLang === "sw" && seat.label_sw) ? seat.label_sw : seat.label}</div>
+        section.innerHTML = headerHtml + `
           <div class="ballot-choice">
             <div class="ballot-checkbox skipped"></div>
             <div class="ballot-choice-info">
-              <div class="ballot-skipped">— No selection made for this seat —</div>
+              <div class="ballot-skipped">${isSw ? '— Hakuna chaguo lililofanywa —' : '— No selection made for this seat —'}</div>
             </div>
-          </div>
-        `;
+          </div>`;
       }
       container.appendChild(section);
     });
+
+    // Disclaimer always last — inside the ballot card, visible on print
+    const disclaimerDiv = document.createElement('div');
+    disclaimerDiv.className = 'disclaimer';
+    const isSw2 = typeof currentLang !== 'undefined' && currentLang === 'sw';
+    disclaimerDiv.innerHTML = `⚠️ <strong>${isSw2 ? 'Hii SI karatasi rasmi ya kura.' : 'This is NOT an official ballot paper.'}</strong> ${isSw2 ? 'Jipange Na Kura ni zana ya kujitegemea ya uraia kukusaidia kujiandaa kabla ya kwenda kwenye kituo chako cha kupigia kura. Fuata mwongozo rasmi wa IEBC Siku ya Uchaguzi.' : 'Jipange Na Kura is an independent civic planning tool to help you prepare before visiting your polling station. Always follow official IEBC guidance on Election Day.'}`;
+    container.appendChild(disclaimerDiv);
   }
 
   function restart() {
@@ -5296,9 +5568,11 @@
     ];
 
     let activeSeat = 'mp';
+    const safeCounty = county.replace(/'/g, "&#39;");
     const tabsHtml = CONST_SEATS.map(s =>
       `<button class="const-seat-tab ${s.key === activeSeat ? 'active' : ''}"
-        onclick="switchConstSeat('${s.key}', '${county}')">${s.label}</button>`
+        data-seat="${s.key}" data-county="${safeCounty}"
+        onclick="switchConstSeat(this.dataset.seat, this.dataset.county)">${s.label}</button>`
     ).join('');
 
     section.innerHTML = `
@@ -5313,7 +5587,8 @@
       <!-- Constituency selector -->
       <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px;">
         <select class="dir-select" id="const-picker" style="flex:1;min-width:200px;"
-          onchange="renderConstCandidates('${county}')">
+          data-county="${county.replace(/'/g, '&#39;')}"
+          onchange="renderConstCandidates(this.dataset.county)">
           <option value="">${currentLang==='sw'?'— Chagua Jimbo —':'— Select Constituency —'}</option>
           ${consts.map(c => `<option value="${c}"${preselConst===c?' selected':''}>` + c + '</option>').join('')}
         </select>
@@ -5893,12 +6168,16 @@
   function applyLang() {
     const isSw = currentLang === 'sw';
 
-    // 1. All elements with data-en / data-sw — set textContent
+    // 1. All elements with data-en / data-sw
     document.querySelectorAll('[data-en]').forEach(el => {
-      // Skip elements that contain child elements (only translate leaf nodes)
-      if (el.children.length > 0) return;
       const target = isSw ? el.dataset.sw : el.dataset.en;
-      if (target) el.textContent = target;
+      if (!target) return;
+      // Use innerHTML if the translation contains HTML tags (bold, em etc), else textContent
+      if (target.includes('<')) {
+        el.innerHTML = target;
+      } else if (el.children.length === 0) {
+        el.textContent = target;
+      }
     });
 
     // 2. Translate select options
@@ -5929,7 +6208,7 @@
   function translateTextNodes(root, isSw) {
     // Only translate known static UI containers — avoid translating candidate names
     const staticSelectors = [
-      '.step-item', '.screen-title', '.screen-subtitle', '.ballot-seat-label',
+      '.step-item', '.screen-title', '.screen-subtitle', '.ballot-seat-label', '.htv-bcard-title', '.htv-bcard-sub', '.htv-bcard-desc', '.htv-bcard-rule', '.htv-stext', '.htv-mark span', '.htv-section-title', '.htv-source span',
       '.dir-hero-text p', '.dir-hero-stat-lbl', '.dir-context-bar',
       '.dir-label', 'label', '.nav-dir-btn', '.nav-cand-btn',
       '.profile-stat-label', '.profile-section-title', '.dir-back-btn',
@@ -6365,6 +6644,11 @@
   let watchReports = [];
   let selectedReportCat = null;
 
+  function showHowToVote() {
+    showScreen(7);
+    applyLang();
+  }
+
   function showElectionWatch() {
     showScreen(6);
     initWatchMap();
@@ -6501,6 +6785,11 @@
     constSel.innerHTML = '<option value="">— Select Constituency —</option>';
     wardSel.innerHTML  = '<option value="">— Select Constituency first —</option>';
     staSel.innerHTML   = '<option value="">— Select Ward first —</option>';
+    const _fb = document.getElementById('rf-station-fallback');
+    if (_fb) _fb.style.display = 'none';
+    const _ti = document.getElementById('rf-station');
+    if (_ti) { _ti.value = ''; }
+    staSel.style.display = '';
     constSel.disabled  = !county;
     wardSel.disabled   = true;
     staSel.disabled    = true;
@@ -6535,25 +6824,44 @@
   function rfOnWardChange() {
     const constituency = document.getElementById('rf-const')?.value;
     const ward = document.getElementById('rf-ward')?.value;
-    const staSel = document.getElementById('rf-station-sel');
+    const staSel     = document.getElementById('rf-station-sel');
+    const fallback   = document.getElementById('rf-station-fallback');
+    const textInp    = document.getElementById('rf-station');
+    const hiddenInp  = document.getElementById('rf-station-hidden');
+
     staSel.innerHTML = '<option value="">— Select Station —</option>';
-    staSel.disabled  = !ward;
-    if (document.getElementById('rf-station')) document.getElementById('rf-station').value = '';
+    staSel.disabled  = true;
+    if (staSel) staSel.style.display = '';
+    if (fallback) fallback.style.display = 'none';
+    if (textInp) textInp.value = '';
+    if (hiddenInp) hiddenInp.value = '';
+
     if (!ward || !constituency) return;
+
     const allStations = POLLING_STATIONS[constituency] || POLLING_STATIONS[constituency.toUpperCase()] || [];
     const wardUpper = ward.toUpperCase();
     const filtered = allStations.filter(s => (s.ward||'').toUpperCase() === wardUpper);
     const source = filtered.length ? filtered : allStations;
-    source.slice().sort((a,b) => (a.name||'').localeCompare(b.name||'')).forEach(s => {
-      const o = document.createElement('option');
-      o.value = s.name; o.textContent = s.name;
-      staSel.appendChild(o);
-    });
-    staSel.disabled = false;
-    staSel.onchange = () => {
-      const inp = document.getElementById('rf-station');
-      if (inp) inp.value = staSel.value;
-    };
+
+    if (source.length > 0) {
+      // We have station data — use dropdown
+      source.slice().sort((a,b) => (a.name||'').localeCompare(b.name||'')).forEach(s => {
+        const o = document.createElement('option');
+        o.value = s.name; o.textContent = s.name;
+        staSel.appendChild(o);
+      });
+      staSel.disabled = false;
+      staSel.style.display = '';
+      if (fallback) fallback.style.display = 'none';
+      staSel.onchange = () => {
+        if (hiddenInp) hiddenInp.value = staSel.value;
+      };
+    } else {
+      // No station data loaded yet — show text input fallback
+      staSel.style.display = 'none';
+      if (fallback) fallback.style.display = '';
+      if (textInp) textInp.focus();
+    }
   }
 
   function closeWatchReportForm(e) {
@@ -6572,8 +6880,12 @@
   function submitWatchReport() {
     const cat = document.getElementById('rf-cat-val').value;
     // Station: prefer dropdown selection, fall back to typed text
-    const staSel = document.getElementById('rf-station-sel');
-    const station = (staSel && staSel.value ? staSel.value : document.getElementById('rf-station')?.value || '').trim();
+    const staSel   = document.getElementById('rf-station-sel');
+    const hiddenInp = document.getElementById('rf-station-hidden');
+    const textInp  = document.getElementById('rf-station');
+    const station  = (staSel?.value && staSel.style.display !== 'none'
+      ? staSel.value
+      : hiddenInp?.value || textInp?.value || '').trim();
     const constName = document.getElementById('rf-const')?.value.trim();
     const county = document.getElementById('rf-county')?.value.trim();
     const ward = document.getElementById('rf-ward')?.value.trim();
@@ -6637,113 +6949,129 @@
 <!-- SCREEN 6: ELECTION WATCH -->
 <section id="screen-6" class="screen">
   <div class="watch-wrap">
+
     <button class="dir-back-btn" onclick="closeElectionWatch()" data-en="← Back" data-sw="← Rudi">← Back</button>
 
+    <!-- ── Header ── -->
     <div class="watch-header">
-      <div class="watch-badge" data-en="🔴 LIVE — Election Day Watch" data-sw="🔴 MOJA KWA MOJA — Angalizo la Siku ya Uchaguzi">🔴 LIVE — Election Day Watch</div>
+      <div class="watch-badge">
+        <span class="watch-badge-dot"></span>
+        <span data-en="ELECTION DAY WATCH · 2027" data-sw="ANGALIZO LA UCHAGUZI · 2027">ELECTION DAY WATCH · 2027</span>
+      </div>
       <h2 class="watch-title" data-en="Uchaguzi Watch 2027" data-sw="Angalizo la Uchaguzi 2027">Uchaguzi Watch 2027</h2>
-      <p class="watch-sub" data-en="Citizens across Kenya reporting in real time. See what's happening at polling stations near you — and submit your own report." data-sw="Wananchi kote Kenya wanaripoti wakati huo huo. Angalia kinachoendelea kwenye vituo vya kupigia kura karibu nawe — na wasilisha ripoti yako.">Citizens across Kenya reporting in real time. See what's happening at polling stations near you — and submit your own report.</p>
+      <p class="watch-sub" data-en="On Election Day, citizens across Kenya report live from polling stations. See every station's status in real time — and submit your own report from the ground." data-sw="Siku ya Uchaguzi, wananchi kote Kenya wanaripoti moja kwa moja kutoka vituo vya kupigia kura. Angalia hali ya kila kituo wakati huo huo — na wasilisha ripoti yako kutoka uwanjani.">On Election Day, citizens across Kenya report live from polling stations. See every station's status in real time — and submit your own report from the ground.</p>
     </div>
 
-    <!-- Countdown to election day -->
+    <!-- ── Countdown ── -->
     <div class="watch-countdown">
       <div>
-        <div class="watch-countdown-label" data-en="Time to Election Day" data-sw="Muda Hadi Siku ya Uchaguzi">Time to Election Day</div>
+        <div class="watch-countdown-label" data-en="Days until Election Day" data-sw="Siku hadi Siku ya Uchaguzi">Days until Election Day</div>
         <div class="watch-countdown-value" id="watch-countdown-val">—</div>
       </div>
       <div style="text-align:right;">
-        <div class="watch-countdown-label" data-en="Kenya General Election" data-sw="Uchaguzi Mkuu wa Kenya">Kenya General Election</div>
-        <div style="font-weight:700;color:white;font-size:0.95rem;">August 12, 2027</div>
-        <div style="font-size:0.72rem;color:#9ca3af;margin-top:2px;" data-en="Polls open 6:00 AM – 5:00 PM" data-sw="Sanduku la kura linafunguliwa 6:00 asubuhi – 5:00 jioni">Polls open 6:00 AM – 5:00 PM</div>
+        <div style="font-weight:800;color:white;font-size:1.05rem;font-family:'Playfair Display',serif;">August 12, 2027</div>
+        <div style="font-size:0.75rem;color:#9ca3af;margin-top:4px;" data-en="Kenya General Election · Polls open 6 AM – 5 PM" data-sw="Uchaguzi Mkuu wa Kenya · Kura 6 asubuhi – 5 jioni">Kenya General Election · Polls open 6 AM – 5 PM</div>
       </div>
     </div>
 
-    <!-- Stats bar -->
-    <div class="watch-card" style="margin-bottom:20px;">
-      <div class="watch-stats-grid">
-        <div class="watch-stat">
-          <div class="watch-stat-val" id="ws-total">0</div>
-          <div class="watch-stat-lbl" data-en="Reports Submitted" data-sw="Ripoti Zilizowasilishwa">Reports Submitted</div>
-        </div>
-        <div class="watch-stat">
-          <div class="watch-stat-val" id="ws-counties">0</div>
-          <div class="watch-stat-lbl" data-en="Counties Covered" data-sw="Kaunti Zilizofunikwa">Counties Covered</div>
-        </div>
-        <div class="watch-stat">
-          <div class="watch-stat-val" id="ws-normal">0%</div>
-          <div class="watch-stat-lbl" data-en="Stations Normal" data-sw="Vituo vya Kawaida">Stations Normal</div>
+    <!-- ── Body: How it works + sidebar ── -->
+    <div class="watch-body">
+
+      <!-- LEFT: How the watch works -->
+      <div class="watch-how-card">
+        <div class="watch-how-header" data-en="How Uchaguzi Watch works" data-sw="Jinsi Angalizo la Uchaguzi inavyofanya kazi">How Uchaguzi Watch works</div>
+        <div class="watch-how-body">
+
+          <div class="watch-how-step">
+            <div class="watch-how-num">1</div>
+            <div class="watch-how-text" data-en="<strong>You go to vote</strong> at your polling station on August 12, 2027. Polls are open 6:00 AM to 5:00 PM — if you're in the queue by 5 PM you will vote." data-sw="<strong>Unakwenda kupiga kura</strong> kwenye kituo chako cha kupigia kura tarehe 12 Agosti 2027. Masanduku yanafunguliwa 6:00 asubuhi hadi 5:00 jioni."><strong>You go to vote</strong> at your polling station on August 12, 2027. Polls are open 6:00 AM to 5:00 PM — if you're in the queue by 5 PM you will vote.</div>
+          </div>
+
+          <div class="watch-how-step">
+            <div class="watch-how-num">2</div>
+            <div class="watch-how-text" data-en="<strong>While you're there, open Jipange Na Kura</strong> and tap 🔴 Watch. Hit <em>Submit a Report</em> to tell us what you see at your station — took 30 seconds." data-sw="<strong>Ukiwa huko, fungua Jipange Na Kura</strong> na uguse 🔴 Angalia. Bonyeza <em>Wasilisha Ripoti</em> kutuambia unachokiona kituoni — inachukua sekunde 30."><strong>While you're there, open Jipange Na Kura</strong> and tap 🔴 Watch. Hit <em>Submit a Report</em> to tell us what you see at your station — takes 30 seconds.</div>
+          </div>
+
+          <div class="watch-how-step">
+            <div class="watch-how-num">3</div>
+            <div class="watch-how-text" data-en="<strong>Every report is reviewed</strong> before going live. Once approved, it appears on the live map and helps other Kenyans know what to expect." data-sw="<strong>Kila ripoti inakaguliwa</strong> kabla ya kuonekana. Baada ya kukubaliwa, inaonekana kwenye ramani ya moja kwa moja na kusaidia Wakenya wengine kujua wanachotarajia."><strong>Every report is reviewed</strong> before going live. Once approved, it appears on the live map and helps other Kenyans know what to expect.</div>
+          </div>
+
+          <div class="watch-how-step">
+            <div class="watch-how-num">4</div>
+            <div class="watch-how-text" data-en="<strong>After polls close</strong>, the map shows results boards being posted station by station across all 47 counties — a real-time picture of democracy in action." data-sw="<strong>Baada ya masanduku kufungwa</strong>, ramani inaonyesha bodi za matokeo zikiwekwa kituo baada ya kituo kote kaunti 47 — picha ya moja kwa moja ya demokrasia inayofanya kazi."><strong>After polls close</strong>, the map shows results boards being posted station by station across all 47 counties — a real-time picture of democracy in action.</div>
+          </div>
+
+          <!-- Status chips -->
+          <div class="watch-status-chips">
+            <div class="watch-chip" style="background:#f0fdf4;border-color:#86efac;color:#166534;">
+              <div class="watch-chip-dot" style="background:#22c55e;"></div>
+              <span data-en="Normal" data-sw="Kawaida">Normal</span>
+            </div>
+            <div class="watch-chip" style="background:#fffbeb;border-color:#fcd34d;color:#92400e;">
+              <div class="watch-chip-dot" style="background:#f59e0b;"></div>
+              <span data-en="Long Queue" data-sw="Foleni Ndefu">Long Queue</span>
+            </div>
+            <div class="watch-chip" style="background:#fff7ed;border-color:#fdba74;color:#9a3412;">
+              <div class="watch-chip-dot" style="background:#f97316;"></div>
+              <span data-en="Late / Missing" data-sw="Kuchelewa / Kukosekana">Late / Missing</span>
+            </div>
+            <div class="watch-chip" style="background:#eff6ff;border-color:#93c5fd;color:#1e3a8a;">
+              <div class="watch-chip-dot" style="background:#3b82f6;"></div>
+              <span data-en="Results Posted" data-sw="Matokeo Yamewekwa">Results Posted</span>
+            </div>
+            <div class="watch-chip" style="background:#fef2f2;border-color:#fca5a5;color:#991b1b;">
+              <div class="watch-chip-dot" style="background:#ef4444;"></div>
+              <span data-en="Incident" data-sw="Tukio">Incident</span>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
 
-    <div class="watch-layout">
-      <!-- MAP -->
-      <div class="watch-map-box" id="watch-map-box">
-        <div id="watch-map" style="width:100%;height:100%;min-height:420px;"></div>
-      </div>
-
-      <!-- SIDEBAR -->
+      <!-- RIGHT: Submit + Contacts -->
       <div class="watch-sidebar">
 
-        <!-- Report categories legend -->
+        <!-- Submit a report -->
+        <div class="watch-card" style="border-color:#fca5a5;">
+          <div class="watch-card-title">📣 <span data-en="Submit a Report" data-sw="Wasilisha Ripoti">Submit a Report</span></div>
+          <p style="font-size:0.78rem;color:var(--grey);line-height:1.6;margin-bottom:0;" data-en="At a polling station on Election Day? Open this form, pick a status, and tell us what you see. Takes under a minute." data-sw="Uko kituoni Siku ya Uchaguzi? Fungua fomu hii, chagua hali, na tuambie unachokiona. Inachukua chini ya dakika moja.">At a polling station on Election Day? Open this form, pick a status, and tell us what you see. Takes under a minute.</p>
+          <button class="watch-report-btn" onclick="openWatchReportForm()" data-en="+ Submit a Report" data-sw="+ Wasilisha Ripoti">+ Submit a Report</button>
+        </div>
+
+        <!-- Key contacts -->
         <div class="watch-card">
-          <div class="watch-card-title" data-en="📍 Report Categories" data-sw="📍 Aina za Ripoti">📍 Report Categories</div>
-          <div class="watch-cat-list" id="watch-cat-filter">
-            <div class="watch-cat-item" data-cat="all" onclick="filterWatchReports('all',this)">
-              <div class="watch-cat-dot" style="background:#6b7280;"></div>
-              <span data-en="All Reports" data-sw="Ripoti Zote">All Reports</span>
+          <div class="watch-card-title">📞 <span data-en="Key Contacts" data-sw="Mawasiliano Muhimu">Key Contacts</span></div>
+          <div>
+            <div class="watch-contact-item">
+              <div class="watch-contact-org" data-en="IEBC Voter Helpline" data-sw="Msaada wa Mpigakura wa IEBC">IEBC Voter Helpline</div>
+              <a href="tel:0800724243" class="watch-contact-num">0800 724 243</a>
+              <div class="watch-contact-note" data-en="Toll free · Available Election Day" data-sw="Bila malipo · Inapatikana Siku ya Uchaguzi">Toll free · Available Election Day</div>
             </div>
-            <div class="watch-cat-item" data-cat="normal" onclick="filterWatchReports('normal',this)">
-              <div class="watch-cat-dot" style="background:#22c55e;"></div>
-              <span data-en="✅ Station Functioning Normally" data-sw="✅ Kituo Kinafanya Kazi Kawaida">✅ Station Functioning Normally</span>
+            <div class="watch-contact-item">
+              <div class="watch-contact-org" data-en="Kenya Red Cross" data-sw="Msalaba Mwekundu Kenya">Kenya Red Cross</div>
+              <a href="tel:1199" class="watch-contact-num">1199</a>
+              <div class="watch-contact-note" data-en="Emergency assistance" data-sw="Msaada wa dharura">Emergency assistance</div>
             </div>
-            <div class="watch-cat-item" data-cat="queues" onclick="filterWatchReports('queues',this)">
-              <div class="watch-cat-dot" style="background:#f59e0b;"></div>
-              <span data-en="⏳ Long Queues" data-sw="⏳ Foleni Ndefu">⏳ Long Queues</span>
-            </div>
-            <div class="watch-cat-item" data-cat="delay" onclick="filterWatchReports('delay',this)">
-              <div class="watch-cat-dot" style="background:#f97316;"></div>
-              <span data-en="🕐 Late Opening / Materials Missing" data-sw="🕐 Kufunguliwa Kuchelewa / Vifaa Vimekosekana">🕐 Late Opening / Materials Missing</span>
-            </div>
-            <div class="watch-cat-item" data-cat="results" onclick="filterWatchReports('results',this)">
-              <div class="watch-cat-dot" style="background:#3b82f6;"></div>
-              <span data-en="📋 Results Board Posted" data-sw="📋 Bodi ya Matokeo Imewekwa">📋 Results Board Posted</span>
-            </div>
-            <div class="watch-cat-item" data-cat="incident" onclick="filterWatchReports('incident',this)">
-              <div class="watch-cat-dot" style="background:#ef4444;"></div>
-              <span data-en="⚠️ Incident / Irregularity" data-sw="⚠️ Tukio / Tatizo">⚠️ Incident / Irregularity</span>
+            <div class="watch-contact-item">
+              <div class="watch-contact-org" data-en="Police Emergency" data-sw="Dharura ya Polisi">Police Emergency</div>
+              <a href="tel:999" class="watch-contact-num">999 / 112</a>
+              <div class="watch-contact-note" data-en="For serious incidents at polling stations" data-sw="Kwa matukio makubwa vituo vya kupigia kura">For serious incidents at polling stations</div>
             </div>
           </div>
         </div>
 
-        <!-- Submit report CTA -->
-        <div class="watch-card">
-          <div class="watch-card-title" data-en="📣 Submit a Report" data-sw="📣 Wasilisha Ripoti">📣 Submit a Report</div>
-          <p style="font-size:0.8rem;color:var(--grey);margin-bottom:12px;line-height:1.5;" data-en="Are you at a polling station? Report what you see. Every report is verified before appearing on the map." data-sw="Je, uko kwenye kituo cha kupigia kura? Ripoti unachokiona. Kila ripoti inakaguliwa kabla ya kuonekana kwenye ramani.">
-            Are you at a polling station? Report what you see. Every report is verified before appearing on the map.
-          </p>
-          <button class="watch-report-btn" onclick="openWatchReportForm()" data-en="+ Submit Report Now" data-sw="+ Wasilisha Ripoti Sasa">+ Submit Report Now</button>
-        </div>
-
-        <!-- Recent reports feed -->
-        <div class="watch-card">
-          <div class="watch-card-title" data-en="🕐 Recent Reports" data-sw="🕐 Ripoti za Hivi Karibuni">🕐 Recent Reports</div>
-          <div id="watch-feed" style="font-size:0.8rem;color:var(--grey);line-height:1.7;" data-en="Reports will appear here on Election Day 2027." data-sw="Ripoti zitaonekana hapa Siku ya Uchaguzi 2027.">
-            Reports will appear here on Election Day 2027.
-          </div>
-        </div>
-
-        <!-- Useful contacts -->
-        <div class="watch-card">
-          <div class="watch-card-title" data-en="📞 Key Contacts" data-sw="📞 Mawasiliano Muhimu">📞 Key Contacts</div>
-          <div style="font-size:0.8rem;line-height:1.9;">
-            <div><strong data-en="IEBC Voter Helpline" data-sw="Msaada wa Mpigakura wa IEBC">IEBC Voter Helpline</strong><br><a href="tel:0800724243" style="color:var(--green);font-weight:600;">0800 724 243</a> <span style="color:var(--grey);" data-en="(toll free)" data-sw="(bila malipo)">(toll free)</span></div>
-            <div style="margin-top:8px;"><strong data-en="Kenya Red Cross" data-sw="Msalaba Mwekundu Kenya">Kenya Red Cross</strong><br><a href="tel:1199" style="color:var(--green);font-weight:600;">1199</a></div>
-            <div style="margin-top:8px;"><strong data-en="Police Emergency" data-sw="Dharura ya Polisi">Police Emergency</strong><br><a href="tel:999" style="color:var(--green);font-weight:600;">999 / 112</a></div>
-          </div>
-        </div>
       </div>
+    </div><!-- end .watch-body -->
+
+    <!-- Hidden stubs for JS compatibility -->
+    <div style="display:none;" aria-hidden="true">
+      <div id="watch-map"></div><div id="ws-total">0</div>
+      <div id="ws-counties">0</div><div id="ws-normal">0%</div>
+      <div id="watch-feed"></div><div id="watch-cat-filter"></div>
+      <div id="watch-map-box"></div>
     </div>
+
   </div>
 </section>
 
@@ -6807,11 +7135,17 @@
 
         <div>
           <label class="cq-label">Polling Station Name *</label>
+          <!-- Dropdown: shown when station data is loaded for this constituency -->
           <select id="rf-station-sel" class="dir-select" style="width:100%;margin-bottom:6px;" disabled>
             <option value="">— Select Ward first —</option>
           </select>
-          <input id="rf-station" type="text" placeholder="Or type station name if not listed"
-            style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;">
+          <!-- Text fallback: shown when no station data is available -->
+          <div id="rf-station-fallback" style="display:none;">
+            <input id="rf-station" type="text" placeholder="Type your polling station name (e.g. Bokianga Primary School)"
+              style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:0.85rem;font-family:'DM Sans',sans-serif;box-sizing:border-box;">
+            <div style="font-size:0.7rem;color:#9ca3af;margin-top:5px;line-height:1.4;">📋 <span data-en="Station list not yet loaded for this area. Type the station name as shown on your voter card." data-sw="Orodha ya vituo bado haijapakiwa kwa eneo hili. Andika jina la kituo kama inavyoonyeshwa kwenye kadi yako ya mpigakura.">Station list not yet loaded for this area. Type the station name as shown on your voter card.</span></div>
+          </div>
+          <input id="rf-station-hidden" type="hidden">
         </div>
 
         <div>
@@ -6841,5 +7175,149 @@
   </div>
 </div>
 
+
+<!-- SCREEN 7: HOW TO VOTE -->
+<section id="screen-7" class="screen">
+  <div class="htv-wrap">
+
+    <button class="htv-back" onclick="goBack()">
+      ← <span data-en="Back" data-sw="Rudi">Back</span>
+    </button>
+
+    <div class="htv-header">
+      <div class="card-label" data-en="🗳️ Civic Education" data-sw="🗳️ Elimu ya Uraia">🗳️ Civic Education</div>
+      <h2 data-en="How to Vote in Kenya" data-sw="Jinsi ya Kupiga Kura Kenya">How to Vote in Kenya</h2>
+      <p data-en="Everything you need before the polling booth — the 6 ballot papers, how to mark them, and what happens step by step." data-sw="Kila unachohitaji kabla ya kibanda cha kupiga kura — karatasi 6 za kura, jinsi ya kuziweka alama, na kinachofuata hatua kwa hatua.">Everything you need before the polling booth — the 6 ballot papers, how to mark them, and what happens step by step.</p>
+    </div>
+
+    <!-- 6 Ballot Papers -->
+    <div class="htv-section-title" data-en="Your 6 Ballot Papers" data-sw="Karatasi Zako 6 za Kura">Your 6 Ballot Papers</div>
+    <p style="font-size:0.82rem;color:var(--grey);margin-bottom:16px;margin-top:-10px;"
+      data-en="Each election has its own colour — so you always know which paper is which."
+      data-sw="Kila uchaguzi una rangi yake — ili ujue kila wakati karatasi ipi ni ipi.">Each election has its own colour — so you always know which paper is which.</p>
+
+    <div class="htv-ballots">
+
+      <div class="htv-bcard" style="border-color:#9e9e9e;">
+        <div class="htv-bcard-head" style="background:#616161;">
+          <div class="htv-bnum">1</div>
+          <div>
+            <div class="htv-bcard-title" data-en="Presidential Ballot" data-sw="Kura ya Urais">Presidential Ballot</div>
+            <div class="htv-bcard-sub" data-en="⬜ White — Form 30" data-sw="⬜ Nyeupe — Fomu 30">⬜ White — Form 30</div>
+          </div>
+        </div>
+        <div class="htv-bcard-body">
+          <div class="htv-bcard-desc" data-en="Vote for the President &amp; Deputy President as a pair. Every registered Kenyan votes for the same national candidates." data-sw="Piga kura kwa Rais na Naibu Rais kama jozi. Kila Mkenya aliyesajiliwa anapiga kura kwa wagombea sawa wa kitaifa.">Vote for the President &amp; Deputy President as a pair. Every registered Kenyan votes for the same national candidates.</div>
+          <div class="htv-bcard-rule" data-en="✓ Mark ONE candidate pair only" data-sw="✓ Weka alama kwa jozi MOJA tu">✓ Mark ONE candidate pair only</div>
+        </div>
+      </div>
+
+      <div class="htv-bcard" style="border-color:#2e7d32;">
+        <div class="htv-bcard-head" style="background:#2e7d32;">
+          <div class="htv-bnum">2</div>
+          <div>
+            <div class="htv-bcard-title" data-en="MP — National Assembly" data-sw="Mbunge — Bunge la Taifa">MP — National Assembly</div>
+            <div class="htv-bcard-sub" data-en="🟩 Green — Form 26" data-sw="🟩 Kijani — Fomu 26">🟩 Green — Form 26</div>
+          </div>
+        </div>
+        <div class="htv-bcard-body">
+          <div class="htv-bcard-desc" data-en="Vote for your constituency MP. They represent you in Parliament and oversee the NG-CDF fund for local development." data-sw="Piga kura kwa Mbunge wa jimbo lako. Anakuwakilisha Bungeni na kusimamia mfuko wa NG-CDF kwa maendeleo ya ndani.">Vote for your constituency MP. They represent you in Parliament and oversee the NG-CDF fund for local development.</div>
+          <div class="htv-bcard-rule" data-en="✓ Mark ONE candidate" data-sw="✓ Weka alama kwa mgombea MMOJA">✓ Mark ONE candidate</div>
+        </div>
+      </div>
+
+      <div class="htv-bcard" style="border-color:#7b1fa2;">
+        <div class="htv-bcard-head" style="background:#7b1fa2;">
+          <div class="htv-bnum">3</div>
+          <div>
+            <div class="htv-bcard-title" data-en="County Women Representative" data-sw="Mwakilishi wa Wanawake wa Kaunti">County Women Representative</div>
+            <div class="htv-bcard-sub" data-en="🟪 Purple — Form 27" data-sw="🟪 Zambarau — Fomu 27">🟪 Purple — Form 27</div>
+          </div>
+        </div>
+        <div class="htv-bcard-body">
+          <div class="htv-bcard-desc" data-en="Vote for the Women Rep for your whole county. She sits in the National Assembly championing women, youth and persons with disabilities." data-sw="Piga kura kwa Mwakilishi wa Wanawake wa kaunti yako yote. Anakaa Bungeni akiwatetea wanawake, vijana na watu wenye ulemavu.">Vote for the Women Rep for your whole county. She sits in the National Assembly championing women, youth and persons with disabilities.</div>
+          <div class="htv-bcard-rule" data-en="✓ Mark ONE candidate" data-sw="✓ Weka alama kwa mgombea MMOJA">✓ Mark ONE candidate</div>
+        </div>
+      </div>
+
+      <div class="htv-bcard" style="border-color:#f9a825;">
+        <div class="htv-bcard-head" style="background:#c8920a;">
+          <div class="htv-bnum">4</div>
+          <div>
+            <div class="htv-bcard-title" data-en="Senator" data-sw="Seneta">Senator</div>
+            <div class="htv-bcard-sub" data-en="🟨 Yellow — Form 28" data-sw="🟨 Njano — Fomu 28">🟨 Yellow — Form 28</div>
+          </div>
+        </div>
+        <div class="htv-bcard-body">
+          <div class="htv-bcard-desc" data-en="Vote for your county Senator. They represent your county in the Senate and safeguard devolution funds and county rights." data-sw="Piga kura kwa Seneta wa kaunti yako. Anawakilisha kaunti yako Senatini na kulinda fedha za ugatuzi na haki za kaunti.">Vote for your county Senator. They represent your county in the Senate and safeguard devolution funds and county rights.</div>
+          <div class="htv-bcard-rule" data-en="✓ Mark ONE candidate" data-sw="✓ Weka alama kwa mgombea MMOJA">✓ Mark ONE candidate</div>
+        </div>
+      </div>
+
+      <div class="htv-bcard" style="border-color:#1565c0;">
+        <div class="htv-bcard-head" style="background:#1565c0;">
+          <div class="htv-bnum">5</div>
+          <div>
+            <div class="htv-bcard-title" data-en="Governor" data-sw="Gavana">Governor</div>
+            <div class="htv-bcard-sub" data-en="🟦 Blue — Form 29" data-sw="🟦 Bluu — Fomu 29">🟦 Blue — Form 29</div>
+          </div>
+        </div>
+        <div class="htv-bcard-body">
+          <div class="htv-bcard-desc" data-en="Vote for your county Governor &amp; Deputy Governor as a pair. They run county services — health, roads, agriculture and local infrastructure." data-sw="Piga kura kwa Gavana na Naibu Gavana wa kaunti yako kama jozi. Wanaendesha huduma za kaunti — afya, barabara, kilimo na miundombinu ya ndani.">Vote for your county Governor &amp; Deputy Governor as a pair. They run county services — health, roads, agriculture and local infrastructure.</div>
+          <div class="htv-bcard-rule" data-en="✓ Mark ONE candidate pair" data-sw="✓ Weka alama kwa jozi MOJA ya mgombea">✓ Mark ONE candidate pair</div>
+        </div>
+      </div>
+
+      <div class="htv-bcard" style="border-color:#a0522d;">
+        <div class="htv-bcard-head" style="background:#a0522d;">
+          <div class="htv-bnum">6</div>
+          <div>
+            <div class="htv-bcard-title" data-en="Ward MCA" data-sw="MCA wa Kata">Ward MCA</div>
+            <div class="htv-bcard-sub" data-en="🟫 Beige — Form 25" data-sw="🟫 Kahawa — Fomu 25">🟫 Beige — Form 25</div>
+          </div>
+        </div>
+        <div class="htv-bcard-body">
+          <div class="htv-bcard-desc" data-en="Vote for your Ward MCA — your most local rep. They sit in the county assembly and control the Ward Development Fund (WDF) for your immediate community." data-sw="Piga kura kwa MCA wa kata yako — mwakilishi wako wa karibu zaidi. Anakaa bunge la kaunti na kusimamia Mfuko wa Maendeleo ya Kata (WDF) kwa jamii yako.">Vote for your Ward MCA — your most local rep. They sit in the county assembly and control the Ward Development Fund (WDF) for your immediate community.</div>
+          <div class="htv-bcard-rule" data-en="✓ Mark ONE candidate" data-sw="✓ Weka alama kwa mgombea MMOJA">✓ Mark ONE candidate</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Step by step at polling station -->
+    <div class="htv-section-title" data-en="At the Polling Station — Step by Step" data-sw="Kituo cha Kupigia Kura — Hatua kwa Hatua">At the Polling Station — Step by Step</div>
+    <div class="htv-steps-list">
+      <div class="htv-step"><div class="htv-snum">1</div><div class="htv-stext" data-en="Arrive with your <strong>original National ID or Passport</strong>. Photocopies are not accepted." data-sw="Fika na <strong>Kitambulisho chako cha asili cha Taifa au Pasipoti</strong>. Nakala hazikubaliwi.">Arrive with your <strong>original National ID or Passport</strong>. Photocopies are not accepted.</div></div>
+      <div class="htv-step"><div class="htv-snum">2</div><div class="htv-stext" data-en="Queue at your specific stream — assigned by ID number. Check the notice board outside." data-sw="Simama foleni kwenye mkondo wako maalum — umegawiwa kulingana na nambari ya kitambulisho. Angalia ubao nje.">Queue at your specific stream — assigned by ID number. Check the notice board outside.</div></div>
+      <div class="htv-step"><div class="htv-snum">3</div><div class="htv-stext" data-en="The presiding officer verifies your ID and fingerprint. Your name is ticked off the register." data-sw="Afisa mkuu anathibitisha kitambulisho chako na kidole gumba. Jina lako linawekwa alama kwenye daftari.">The presiding officer verifies your ID and fingerprint. Your name is ticked off the register.</div></div>
+      <div class="htv-step"><div class="htv-snum">4</div><div class="htv-stext" data-en="You receive <strong>6 ballot papers</strong> — one per election. Confirm you have all 6 before entering the booth." data-sw="Unapewa <strong>karatasi 6 za kura</strong> — moja kwa kila uchaguzi. Hakikisha una zote 6 kabla ya kuingia kwenye kibanda.">You receive <strong>6 ballot papers</strong> — one per election. Confirm you have all 6 before entering the booth.</div></div>
+      <div class="htv-step"><div class="htv-snum">5</div><div class="htv-stext" data-en="In the private booth, place <strong>ONE mark</strong> on each ballot beside your chosen candidate. A tick ✓, cross ✗, or thumbprint — all are valid." data-sw="Kwenye kibanda cha siri, weka <strong>alama MOJA</strong> kwenye kila karatasi karibu na mgombea uliyemchagua. Tiki ✓, msalaba ✗, au kidole gumba — vyote vinakubalika.">In the private booth, place <strong>ONE mark</strong> on each ballot beside your chosen candidate. A tick ✓, cross ✗, or thumbprint — all are valid.</div></div>
+      <div class="htv-step"><div class="htv-snum">6</div><div class="htv-stext" data-en="<strong>Fold each ballot</strong> from left to right through the centre to hide your vote, then drop it into the correct box." data-sw="<strong>Kunja kila karatasi</strong> kutoka kushoto kwenda kulia katikati ili kuficha kura yako, kisha tumbukiza kwenye sanduku sahihi."><strong>Fold each ballot</strong> from left to right through the centre to hide your vote, then drop it into the correct box.</div></div>
+      <div class="htv-step"><div class="htv-snum">7</div><div class="htv-stext" data-en="Your finger is marked with <strong>indelible ink</strong> to prevent double voting. Polls close at <strong>5:00 PM</strong> — if you are in the queue by 5 PM you will be allowed to vote." data-sw="Kidole chako kinawekwa <strong>wino usioondoka</strong> kuzuia kupiga kura mara mbili. Sanduku linafungwa saa <strong>11:00 jioni</strong> — ukiwa foleni kabla ya saa 11, utaruhusiwa kupiga kura.">Your finger is marked with <strong>indelible ink</strong> to prevent double voting. Polls close at <strong>5:00 PM</strong> — if you are in the queue by 5 PM you will be allowed to vote.</div></div>
+    </div>
+
+    <!-- Valid marks -->
+    <div class="htv-marks">
+      <div class="htv-section-title" data-en="Any of These Marks = Valid Vote" data-sw="Yoyote ya Alama Hizi = Kura Halali">Any of These Marks = Valid Vote</div>
+      <div class="htv-marks-row">
+        <div class="htv-mark">✓<span data-en="Tick" data-sw="Tiki">Tick</span></div>
+        <div class="htv-mark">✗<span data-en="Cross" data-sw="Msalaba">Cross</span></div>
+        <div class="htv-mark">👍<span data-en="Thumbprint" data-sw="Kidole gumba">Thumbprint</span></div>
+        <div class="htv-mark">·<span data-en="Any mark" data-sw="Alama yoyote">Any mark</span></div>
+      </div>
+      <div class="htv-warn">
+        ⚠️ <strong data-en="Spoilt ballot:" data-sw="Kura iliyoharibika:">Spoilt ballot:</strong>
+        <span data-en="If you mark more than one candidate on a ballot, or write anything else on the paper, that vote will not be counted. It does NOT affect your other 5 ballots." data-sw="Ukiweka alama zaidi ya mgombea mmoja kwenye karatasi, au kuandika kitu kingine, kura hiyo haitahesabiwa. HAZIATHIRI karatasi zako nyingine 5.">If you mark more than one candidate on a ballot, or write anything else on the paper, that vote will not be counted. It does NOT affect your other 5 ballots.</span>
+      </div>
+    </div>
+
+    <div class="htv-source">
+      <strong>IEBC Helpline:</strong> <a href="tel:0800724243" style="color:var(--green);font-weight:700;">0800 724 243</a> (toll free) &nbsp;|&nbsp;
+      <a href="https://www.iebc.or.ke" target="_blank" rel="noopener" style="color:var(--green);">www.iebc.or.ke</a><br>
+      <span style="display:block;margin-top:4px;" data-en="Source: Official IEBC Correctly Marked Ballot Papers Poster" data-sw="Chanzo: Bango Rasmi la IEBC la Karatasi za Kura Zilizowekwa Alama Vizuri">Source: Official IEBC Correctly Marked Ballot Papers Poster</span>
+    </div>
+
+  </div>
+</section>
 </body>
 </html>
