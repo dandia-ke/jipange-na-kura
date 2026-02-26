@@ -704,47 +704,56 @@
     .toast.show { transform: translateX(-50%) translateY(0); }
 
     @media print {
-      /* Hide interactive UI */
-      nav, .ballot-actions, .share-row, .btn-row,
-      .visitor-counter, #screen-4 > .ballot-wrap > div:last-of-type { display: none !important; }
+      /* Hide all interactive and non-ballot UI */
+      nav, .ballot-actions, .share-row, .btn-row, .visitor-counter,
+      .toast, #toast, .report-overlay, .kys-modal,
+      #screen-4 > .ballot-wrap > div:last-of-type { display: none !important; }
 
-      /* Reset layout for clean print */
-      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      body, html { margin: 0; padding: 0; background: white !important; }
+      /* Force colour rendering */
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+      /* Full-width, no scroll, clean white */
+      html, body { margin: 0 !important; padding: 0 !important; background: white !important; width: 100% !important; }
+
+      /* Hide all screens except ballot */
       .screen { display: none !important; }
-      #screen-4 { display: block !important; padding: 0 !important; }
-      .ballot-wrap { padding: 0 !important; max-width: 100% !important; }
+      #screen-4 { display: block !important; padding: 0 !important; margin: 0 !important; }
+      .ballot-wrap { padding: 0 !important; max-width: 100% !important; margin: 0 !important; }
 
-      /* Ballot card */
+      /* Ballot card: no shadow, full width, no border-radius */
       .ballot-official {
         box-shadow: none !important; border-radius: 0 !important;
-        break-inside: avoid; page-break-inside: avoid;
-        width: 100% !important; margin: 0 !important;
+        width: 100% !important; margin: 0 !important; padding: 0 !important;
+        border: none !important;
       }
 
-      /* Each seat row — never break mid-row */
+      /* Header */
+      .ballot-header { break-after: avoid !important; page-break-after: avoid !important; }
+      .ballot-top { break-inside: avoid !important; page-break-inside: avoid !important; }
+
+      /* Seats: compact gap, never split across page */
+      .ballot-seats { padding: 12px 20px 20px !important; display: flex !important; flex-direction: column !important; gap: 10px !important; }
       .ballot-seat-section {
-        break-inside: avoid; page-break-inside: avoid;
-        margin-top: 16px !important;
+        break-inside: avoid !important; page-break-inside: avoid !important;
+        margin: 0 !important; border-radius: 8px !important;
+        border: 1px solid #e5e7eb !important;
       }
       .ballot-choice {
-        break-inside: avoid; page-break-inside: avoid;
+        break-inside: avoid !important; page-break-inside: avoid !important;
+        padding: 10px 14px !important;
       }
+      .ballot-seat-label { padding: 8px 14px !important; font-size: 0.65rem !important; }
 
-      /* Seats list */
-      .ballot-seats { padding: 0 20px 20px !important; }
-
-      /* Disclaimer — show on print */
+      /* Disclaimer */
       .disclaimer {
         display: block !important;
-        break-inside: avoid; page-break-inside: avoid;
-        border-top: 1px solid #ffe082; border-radius: 0 !important;
-        margin: 0 !important;
+        break-inside: avoid !important; page-break-inside: avoid !important;
+        border-radius: 6px !important; margin: 12px 20px 20px !important;
+        padding: 12px 16px !important;
       }
 
-      /* Header area */
-      .ballot-header { break-after: avoid; page-break-after: avoid; }
-      .ballot-top { break-inside: avoid; page-break-inside: avoid; }
+      /* Footer */
+      .ballot-footer-bar { padding: 12px 20px !important; }
     }
 
     /* entrance animation */
@@ -1498,7 +1507,7 @@
 
   <!-- LEFT: MAP PANEL -->
   <div class="loc-map-panel">
-    <div class="map-overlay-badge" id="map-badge">📡 Detecting your location…</div>
+    <div class="map-overlay-badge" id="map-badge" style="display:none;">📡 Detecting your location…</div>
     <div id="kenya-map"></div>
   </div>
 
@@ -1523,26 +1532,39 @@
 
     <!-- GPS Panel -->
     <div class="loc-panel active" id="panel-gps">
-      <div class="loc-display">
-        <div class="loc-row">
-          <span class="loc-key" data-en="County" data-sw="Kaunti">County</span>
-          <span class="loc-val" id="loc-county"><span class="spinner"></span></span>
+
+      <!-- Idle state: shown before user requests GPS -->
+      <div id="gps-idle" style="text-align:center;padding:24px 16px;">
+        <div style="font-size:2.4rem;margin-bottom:12px;">📡</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:8px;" data-en="Detect my location" data-sw="Gundua mahali nilipo">Detect my location</div>
+        <p style="font-size:0.82rem;color:var(--grey);line-height:1.6;margin-bottom:20px;" data-en="Your browser will ask for permission to access your GPS. Your location is never stored or shared." data-sw="Kivinjari chako kitaomba ruhusa ya kufikia GPS yako. Mahali ulipo haihifadhiwi wala kushirikiwa.">Your browser will ask for permission to access your GPS. Your location is never stored or shared.</p>
+        <button id="gps-request-btn" onclick="requestGPS()" style="background:var(--green);color:white;border:none;border-radius:10px;padding:13px 28px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;">
+          📡 <span data-en="Allow Location Access" data-sw="Ruhusu Ufikiaji wa Mahali">Allow Location Access</span>
+        </button>
+        <div style="font-size:0.68rem;color:#9ca3af;margin-top:12px;" data-en="🔒 Stays in your browser only" data-sw="🔒 Hubaki kwenye kivinjari chako tu">🔒 Stays in your browser only</div>
+      </div>
+
+      <!-- Detecting state: shown while GPS is running -->
+      <div id="gps-detecting" style="display:none;">
+        <div class="loc-display">
+          <div class="loc-row">
+            <span class="loc-key" data-en="County" data-sw="Kaunti">County</span>
+            <span class="loc-val" id="loc-county">—</span>
+          </div>
+          <div class="loc-row">
+            <span class="loc-key" data-en="Constituency" data-sw="Jimbo">Constituency</span>
+            <span class="loc-val" id="loc-constituency">—</span>
+          </div>
+          <div class="loc-row">
+            <span class="loc-key" data-en="Ward" data-sw="Kata">Ward</span>
+            <span class="loc-val" id="loc-ward">—</span>
+          </div>
         </div>
-        <div class="loc-row">
-          <span class="loc-key" data-en="Constituency" data-sw="Jimbo">Constituency</span>
-          <span class="loc-val" id="loc-constituency"><span class="spinner"></span></span>
-        </div>
-        <div class="loc-row">
-          <span class="loc-key" data-en="Ward" data-sw="Kata">Ward</span>
-          <span class="loc-val" id="loc-ward"><span class="spinner"></span></span>
+        <div class="loc-status" id="loc-status">
+          <span class="spinner"></span> <span data-en="Fetching your location from GPS…" data-sw="Inatafuta mahali ulipo kwa GPS…">Fetching your location from GPS…</span>
         </div>
       </div>
-      <div class="loc-status" id="loc-status">
-        <span class="spinner"></span> <span data-en="Fetching your location from GPS…" data-sw="Inatafuta mahali ulipo kwa GPS…">Fetching your location from GPS…</span>
-      </div>
-      <div id="gps-privacy-note" style="display:none;font-size:0.72rem;color:var(--grey);text-align:center;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:4px;">
-        <span data-en="🔒 Your location stays in your browser — never stored or shared" data-sw="🔒 Mahali ulipo hubaki kwenye kivinjari chako — haihifadhiwi wala kushirikiwa">🔒 Your location stays in your browser — never stored or shared</span>
-      </div>
+
     </div>
 
     <!-- Manual Panel -->
@@ -3136,8 +3158,25 @@
     showScreen(2);
     setTimeout(() => {
       initMap(null, null);
-      detectLocation(); // auto-start GPS on the GPS tab (default)
+      switchTab('manual'); // default to manual entry — user selects their location
     }, 100);
+  }
+
+  function requestGPS() {
+    // User explicitly tapped "Allow Location Access" — now safe to request permission
+    const idle = document.getElementById('gps-idle');
+    const detecting = document.getElementById('gps-detecting');
+    const btn = document.getElementById('gps-request-btn');
+    const badge = document.getElementById('map-badge');
+    if (idle) idle.style.display = 'none';
+    if (detecting) detecting.style.display = '';
+    if (badge) { badge.style.display = ''; badge.textContent = '📡 Detecting your location…'; }
+    // Set spinners while we wait
+    ['loc-county','loc-constituency','loc-ward'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<span class="spinner"></span>';
+    });
+    detectLocation();
   }
 
   function detectLocation() {
@@ -3665,11 +3704,8 @@
     }
 
     if (tab === 'gps') {
-      // Re-trigger detection if not already done
-      const county = document.getElementById('loc-county');
-      if (county && county.querySelector('.spinner')) {
-        detectLocation();
-      }
+      // Show idle prompt — user must explicitly tap the button to trigger GPS
+      // (no auto-detection; permission is only requested on user action)
     }
   }
 
@@ -4185,18 +4221,6 @@
 
     showPollingStations();
     showToast(`✓ Location confirmed: ${constituency}, ${county}`);
-
-    // Update confirm button to show confirmed state
-    const confirmBtn = document.getElementById('btn-confirm-manual');
-    if (confirmBtn) {
-      confirmBtn.style.background = 'var(--green)';
-      confirmBtn.innerHTML = '<span>✓ ' + (currentLang === 'sw' ? 'Mahali Limethibitishwa' : 'Location Confirmed') + '</span>';
-      confirmBtn.disabled = true;
-      confirmBtn.style.opacity = '0.8';
-    }
-
-    const loadWrapManual = document.getElementById('manual-load-wrap');
-    if (loadWrapManual) loadWrapManual.style.display = '';
   }
 
   function loadCandidatesFromManual() {
@@ -6447,19 +6471,44 @@
   // SHARE BALLOT — WhatsApp + Copy Link
   // ══════════════════════════════════════════════════
   function buildWaShareLink(el) {
-    const county = (state.location && state.location.county) || 'Kenya';
-    const constituency = (state.location && state.location.constituency) || '';
-    const lines = Object.entries(state.selections || {}).map(function(entry) {
-      var sk = entry[0], cand = entry[1];
-      var seat = SEATS ? SEATS.find(function(s){ return s.key===sk; }) : null;
-      var label = seat ? seat.title.replace('Choose your ','') : sk;
-      return label + ': ' + cand.name;
-    });
-    var selText = lines.length ? lines.join('%0A') : 'Ballot not yet filled';
-    var header = '\uD83C\uDDF0\uD83C\uDDEA My Jipange Na Kura Ballot Plan\n\n' +
-      '\uD83D\uDCCD ' + county + (constituency ? ' \u00B7 ' + constituency : '') + '\n\nMy choices:\n';
-    var msg = encodeURIComponent(header) + selText + encodeURIComponent('\n\nPlan yours at jipangenakura.co.ke');
-    el.href = 'https://wa.me/?text=' + msg;
+    const loc = state.location || {};
+    const county = loc.county || 'Kenya';
+    const constituency = loc.constituency || '';
+    const ward = loc.ward || '';
+
+    // Seat-level location labels matching the ballot
+    const SEAT_LOC = {
+      mca:       ward       ? ward + ' Ward'         : county,
+      mp:        constituency ? constituency + ' Constituency' : county,
+      women_rep: county     ? county + ' County'     : county,
+      senator:   county     ? county + ' County'     : county,
+      governor:  county     ? county + ' County'     : county,
+      president: 'National',
+    };
+    const SEAT_EMOJI = {
+      mca: '🏘', mp: '🏛', women_rep: '♀️', senator: '🏛', governor: '🏛', president: '🇰🇪'
+    };
+
+    const lines = SEATS
+      ? SEATS.map(function(seat) {
+          const cand = (state.selections || {})[seat.key];
+          const loc_label = SEAT_LOC[seat.key] || county;
+          const emoji = SEAT_EMOJI[seat.key] || '🗳';
+          if (cand) {
+            return emoji + ' ' + loc_label + ' — ' + cand.name + ' (' + cand.party + ')';
+          } else {
+            return emoji + ' ' + loc_label + ' — Undecided';
+          }
+        })
+      : [];
+
+    const pollingStation = state.selectedPollingStation ? '\n🏫 ' + state.selectedPollingStation.name : '';
+    const header = '🇰🇪 My Jipange Na Kura Ballot Plan — 2027\n' +
+      '📍 ' + county + (constituency ? ' · ' + constituency : '') + (ward ? ' · ' + ward : '') +
+      pollingStation + '\n\n';
+    const footer = '\n\nPlan yours 👉 jipangenakura.co.ke';
+    const body = lines.join('\n');
+    el.href = 'https://wa.me/?text=' + encodeURIComponent(header + body + footer);
     return true;
   }
 
