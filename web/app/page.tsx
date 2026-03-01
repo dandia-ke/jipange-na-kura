@@ -3,12 +3,11 @@
 import Link from 'next/link'
 import NavBar from '@/components/NavBar'
 import KnowYourSeat, { type SeatKey } from '@/components/KnowYourSeat'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useLang } from '@/lib/LangContext'
 
 export default function HomePage() {
   const { t } = useLang()
-  const [count, setCount] = useState<string | null>(null)
   const [kysOpen, setKysOpen] = useState(false)
   const [kysSeat, setKysSeat] = useState<SeatKey>('president')
 
@@ -20,13 +19,6 @@ export default function HomePage() {
     { label: t('MP',        'Mbunge'),     key: 'mp'        },
     { label: 'MCA',                        key: 'mca'       },
   ]
-
-  useEffect(() => {
-    fetch('https://api.countapi.xyz/hit/jipangenakura.co.ke/visitors')
-      .then(r => r.json())
-      .then(d => setCount((d.value || 0).toLocaleString('en-KE')))
-      .catch(() => {})
-  }, [])
 
   return (
     <main className="hero-main" style={{
@@ -50,23 +42,6 @@ export default function HomePage() {
       }} />
 
       <div className="hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', maxWidth: 680, padding: '60px 32px' }}>
-
-        {/* Visitor counter */}
-        {count && (
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.18)',
-            borderRadius: 30, padding: '6px 14px', marginBottom: 16,
-            fontSize: '0.75rem', fontWeight: 600, color: 'rgba(255,255,255,0.8)',
-          }}>
-            <div style={{
-              width: 7, height: 7, borderRadius: '50%', background: '#4ade80',
-              boxShadow: '0 0 6px #4ade80', animation: 'pulseDot 2s infinite',
-            }} />
-            <span style={{ color: '#fff', fontSize: '0.88rem', fontWeight: 800 }}>{count}</span>
-            <span>{t('Kenyans planning their vote', 'Wakenya wanaopanga kura yao')}</span>
-          </div>
-        )}
 
         {/* Hero badge */}
         <div style={{

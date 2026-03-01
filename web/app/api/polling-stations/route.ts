@@ -19,16 +19,42 @@ const COUNTY_CSV: Record<string, string> = {
   'Uasin Gishu':       'UASIN-GISHU',
 }
 
-function countyToCsvFile(county: string): string {
-  return COUNTY_CSV[county] ?? county.toUpperCase()
-}
-
 function normalize(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9]/g, '')
 }
 
 function toTitleCase(str: string): string {
   return str.toLowerCase().replace(/\b\w/g, ch => ch.toUpperCase())
+}
+
+// In-memory index: countyFile → wardNorm → centreCode → { name, streams }
+// Built once on first request per county, then served from RAM on all subsequent requests.
+type CentreInfo = { name: string; streams: number }
+type WardIndex  = Map<string, Map<string, CentreInfo>>
+const countyIndex = new Map<string, WardIndex>()
+
+function buildIndex(file: string): WardIndex {
+  const filePath = join(process.cwd(), 'public', 'polling-stations', `${file}.csv`)
+  const lines    = readFileSync(filePath, 'utf-8').split('\n').slice(1)
+  const index: WardIndex = new Map()
+
+  for (const line of lines) {
+    if (!line.trim()) continue
+    const cols       = line.split(',')
+    if (cols.length < 8) continue
+    const wardName   = cols[5]?.trim()
+    const centreCode = cols[6]?.trim()
+    const centreName = cols[7]?.trim()
+    if (!wardName || !centreCode || !centreName) continue
+
+    const wardNorm = normalize(wardName)
+    if (!index.has(wardNorm)) index.set(wardNorm, new Map())
+    const centreMap = index.get(wardNorm)!
+    const existing  = centreMap.get(centreCode)
+    if (existing) existing.streams += 1
+    else centreMap.set(centreCode, { name: centreName, streams: 1 })
+  }
+  return index
 }
 
 export async function GET(request: NextRequest) {
@@ -40,41 +66,14 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const file     = countyToCsvFile(county)
-    const filePath = join(process.cwd(), 'public', 'polling-stations', `${file}.csv`)
-    const text     = readFileSync(filePath, 'utf-8')
-    const lines    = text.split('\n').slice(1) // skip header
+    const file = COUNTY_CSV[county] ?? county.toUpperCase()
 
-    // Pass 1: find IEBC ward code by normalized name
-    const wardNorm = normalize(ward)
-    let targetWardCode: string | null = null
-    for (const line of lines) {
-      if (!line.trim()) continue
-      const cols = line.split(',')
-      if (cols.length < 6) continue
-      const cawCode = cols[4]?.trim()
-      const cawName = cols[5]?.trim()
-      if (cawCode && cawName && normalize(cawName) === wardNorm) {
-        targetWardCode = cawCode
-        break
-      }
+    if (!countyIndex.has(file)) {
+      countyIndex.set(file, buildIndex(file))
     }
-    if (!targetWardCode) return NextResponse.json([])
 
-    // Pass 2: group streams by registration centre, filtered by ward code
-    const centreMap = new Map<string, { name: string; streams: number }>()
-    for (const line of lines) {
-      if (!line.trim()) continue
-      const cols = line.split(',')
-      if (cols.length < 8) continue
-      const cawCode    = cols[4]?.trim()
-      const centreCode = cols[6]?.trim()
-      const centreName = cols[7]?.trim()
-      if (cawCode !== targetWardCode || !centreCode || !centreName) continue
-      const existing = centreMap.get(centreCode)
-      if (existing) existing.streams += 1
-      else centreMap.set(centreCode, { name: centreName, streams: 1 })
-    }
+    const centreMap = countyIndex.get(file)!.get(normalize(ward))
+    if (!centreMap) return NextResponse.json([])
 
     const result = Array.from(centreMap.values()).map(c => ({
       name:    toTitleCase(c.name),

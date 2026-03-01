@@ -35,7 +35,7 @@ export default function CandidatesPage() {
 
   // fetch candidate submissions according to filters
   async function loadCandidates() {
-    let query = supabase.from('candidate_submissions').select('*')
+    let query = supabase.from('candidate_submissions').select('*').limit(50)
     if (filterCounty) query = query.eq('county', filterCounty)
     if (filterConst) query = query.eq('constituency', filterConst)
     if (filterSeat) query = query.eq('seat_type', filterSeat)
