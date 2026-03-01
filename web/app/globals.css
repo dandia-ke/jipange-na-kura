@@ -1,0 +1,337 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #faf7f2;
+  --color-foreground: #0a0a0a;
+  --color-green:      #1a6b3c;
+  --color-green-light: #2d9b5a;
+  --color-red:        #c0392b;
+  --color-gold:       #d4a017;
+  --color-cream:      #faf7f2;
+  --color-grey:       #6b7280;
+  --color-grey-light: #f3f0eb;
+  --color-border:     #e2ddd6;
+  --font-display: var(--font-playfair);
+  --font-sans:    var(--font-dm-sans);
+}
+
+body {
+  background: #faf7f2;
+  color: #0a0a0a;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.3); }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(26,107,60,0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(26,107,60,0); }
+  100% { box-shadow: 0 0 0 0 rgba(26,107,60,0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+/* ── NavBar responsive ── */
+.nav-root {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; background: #0a0a0a;
+  border-bottom: 3px solid #1a6b3c; min-height: 52px;
+}
+.nav-right {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+}
+.nav-btn {
+  font-family: 'DM Sans', var(--font-dm-sans), sans-serif;
+  font-size: 0.75rem; font-weight: 600; white-space: nowrap;
+  border-radius: 6px; padding: 6px 10px; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.nav-flag { display: flex; gap: 3px; align-items: center; }
+
+@media (max-width: 600px) {
+  .nav-root {
+    flex-direction: column; align-items: stretch;
+    padding: 8px 16px 10px !important; gap: 8px;
+    min-height: unset !important;
+  }
+  .nav-right {
+    width: 100%; justify-content: center; gap: 6px; flex-shrink: 1;
+  }
+  .nav-btn {
+    font-size: 0.62rem !important; padding: 5px 6px !important;
+    flex: 1; justify-content: center; text-align: center;
+  }
+  .nav-flag { display: none !important; }
+}
+
+/* ── Hero main — push content below fixed navbar ── */
+.hero-main { padding-top: 56px; }
+
+/* ── Hero responsive ── */
+@media (max-width: 600px) {
+  .hero-main { padding-top: 88px !important; }
+  .hero-content {
+    padding: 40px 20px !important;
+  }
+  .hero-steps {
+    gap: 16px !important;
+  }
+  .hero-seat-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ── Planner layout responsive ── */
+.planner-map-col  { display: flex; flex: 1; }
+.planner-form-col { width: 420px; min-width: 340px; height: calc(100vh - 72px); overflow-y: auto; }
+
+@media (max-width: 768px) {
+  .planner-map-col  { flex: none !important; height: 260px !important; width: 100% !important; }
+  .planner-form-col {
+    width: 100% !important; min-width: unset !important; height: auto !important;
+    border-left: none !important;
+    padding: 28px 20px !important;
+  }
+  .planner-root {
+    height: auto !important;
+    min-height: calc(100vh - 52px) !important;
+    margin-top: 52px !important;
+    flex-direction: column !important;
+  }
+}
+
+/* Leaflet tooltip override */
+.constituency-tooltip {
+  background: rgba(26,60,107,0.88) !important;
+  color: white !important;
+  border: none !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important;
+}
+.constituency-tooltip::before { display: none !important; }
+
+/* ── PRINT CSS ── */
+@media print {
+  /* scale entire page moderately */
+  body { transform: scale(0.85); transform-origin: top left; }
+  /* Force colour rendering */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  /* Hide interactive UI and non-summary content */
+  nav, button, .btn-row, .share-row, .visitor-counter, #toast { display: none !important; }
+
+  /* Hide page heading and instructions */
+  main > div > div:first-child { display: none !important; }
+  
+  /* Hide social share buttons at bottom */
+  a[href*="wa.me"] { display: none !important; }
+
+  /* Clean background */
+  html, body { 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    background: white !important; 
+  }
+
+  /* Force single page */
+  main { 
+    background: white !important; 
+    page-break-after: avoid !important;
+  }
+
+  /* Outer wrapper */
+  div[style*="maxWidth: 860"] {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 6px 8px !important;
+  }
+
+  /* Card container */
+  div[style*="background: 'white', borderRadius: 16"] {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Header section */
+  div[style*="background: '#0a0a0a', padding: '24px 32px'"] {
+    padding: 4px 6px !important;
+  }
+
+  /* Title */
+  div[style*="fontFamily: \"'Playfair Display'"] {
+    font-size: 1.1rem !important;
+    margin: 0 !important;
+  }
+  div[style*="fontSize: '0.75rem', color: '#9ca3af'"] {
+    font-size: 0.62rem !important;
+  }
+
+  /* Info row */
+  div[style*="background: '#f3f0eb', padding: '14px 32px'"] {
+    padding: 6px 8px !important;
+    gap: 15px !important;
+  }
+
+  div[style*="fontSize: '0.7rem'"] {
+    font-size: 0.63rem !important;
+  }
+
+  div[style*="fontSize: '0.9rem', fontWeight: 600"] {
+    font-size: 0.83rem !important;
+  }
+
+  /* Seats container */
+  div[style*="padding: '16px 24px 32px', display: 'flex', flexDirection: 'column'"] {
+    padding: 3px 3px !important;
+    gap: 0 !important;
+  }
+
+  /* Each seat card */
+  div[style*="borderRadius: 12, overflow: 'hidden'"] {
+    margin: 0 !important;
+    page-break-inside: avoid !important;
+    transform: none !important;
+    transform-origin: top left !important;
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Remove any internal spacing inside cards and their immediate children */
+  div[style*="borderRadius: 12, overflow: 'hidden'"] *,
+  div[style*="padding: '14px 18px', display: 'flex', alignItems: 'center'"] *,
+  div[style*="padding: '10px 16px'"] * {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    line-height: 1 !important;
+  }
+
+  /* Ensure seat container has no gaps or extra padding */
+  div[style*="padding: '16px 24px 32px', display: 'flex', flexDirection: 'column'"] {
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  /* Make candidate rows stack tightly */
+  div[style*="padding: '14px 18px', display: 'flex', alignItems: 'center'"] {
+    padding: 0 !important;
+    gap: 0 !important;
+    align-items: stretch !important;
+  }
+
+  /* Tighten header and info rows */
+  div[style*="padding: '10px 16px'"] {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Force checkbox/circle and ballot number to have no extra margin */
+  div[style*="width: 28, height: 28"] { margin: 0 !important; }
+  div[style*="fontFamily: \"'Playfair Display'\", fontSize: '1.6rem'"] { margin: 0 !important; }
+
+  /* Seat header bar */
+  div[style*="padding: '10px 16px'"] {
+    padding: 2px 4px !important;
+    font-size: 0.6rem !important;
+  }
+
+  /* Seat content row */
+  div[style*="padding: '14px 18px', display: 'flex', alignItems: 'center'"] {
+    padding: 3px 4px !important;
+    gap: 4px !important;
+  }
+
+  /* Checkbox */
+  div[style*="width: 28, height: 28"] {
+    width: 14px !important;
+    height: 14px !important;
+    font-size: 0.6rem !important;
+  }
+
+  /* Candidate name */
+  div[style*="fontWeight: 700, fontSize: '0.95rem'"] {
+    font-size: 0.75rem !important;
+    margin: 0 !important;
+  }
+
+  /* Candidate party/info */
+  div[style*="fontSize: '0.8rem', color: '#6b7280'"] {
+    font-size: 0.65rem !important;
+  }
+
+  /* Ballot number */
+  div[style*="fontFamily: \"'Playfair Display'\", fontSize: '1.6rem'"] {
+    font-size: 1rem !important;
+  }
+  /* Warning disclaimer */
+  div[style*="background: '#fff8e1'"] {
+    padding: 6px 8px !important;
+    font-size: 0.71rem !important;
+    line-height: 1.43 !important;
+  }
+
+  /* Footer bar */
+  div[style*="background: '#0a0a0a', padding: '16px 32px'"] {
+    padding: 4px 8px !important;
+    font-size: 0.62rem !important;
+  }
+
+  /* president restored - but will already be shrunk by scale */
+  .president-seat { display: block !important; }
+
+  p { margin: 0 !important; }
+}
+/* ── Candidates page filter controls ── */
+.candidates-filter-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .candidates-filter-controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .candidates-filter-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+.candidates-filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.candidates-filter-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}

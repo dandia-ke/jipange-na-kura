@@ -2257,6 +2257,10 @@
       maxZoom: 18,
     }).addTo(kenyaMap);
 
+    // Show loading indicator while GeoJSON fetches
+    const geoLoadBadge = document.getElementById('map-badge');
+    if (geoLoadBadge) { geoLoadBadge.style.display = ''; geoLoadBadge.textContent = '⏳ Loading map data…'; }
+
     // Load all GeoJSON layers
     loadCountyLayer();
     loadConstituencyLayer();
@@ -2319,7 +2323,12 @@
           if (found) applyGpsResult(found);
         }
       })
-      .catch(() => console.warn('Constituency GeoJSON not found — place ken_admin2.geojson next to the HTML file'));
+      .then(() => {
+        // Both layers loaded — hide the loading badge
+        const b = document.getElementById('map-badge');
+        if (b) b.style.display = 'none';
+      })
+      .catch(() => { console.warn('Constituency GeoJSON not found — place ken_admin2.geojson next to the HTML file'); const b = document.getElementById('map-badge'); if (b) b.style.display = 'none'; });
   }
 
   function defaultConstStyle() {
@@ -2418,68 +2427,9 @@
     });
   }
 
-  // ── LOAD WARD LAYER ──
-  function loadWardLayer() {
-    // Ward GeoJSON disabled — ward dropdowns use CONSTITUENCY_WARDS built into JS
-    // GPS/click detection uses county+constituency layers (lighter, already loaded)
-    return;
-    fetch('kenya_wards.geojson')
-      .then(r => r.json())
-      .then(data => {
-        // Build constituency → wards lookup for dropdown population
-        data.features.forEach(f => {
-          const key = f.properties.constituency_name.replace(/\s+/g, ' ').trim().toUpperCase();
-          if (!WARD_GEO_LOOKUP[key]) WARD_GEO_LOOKUP[key] = new Set();
-          // Title-case the ward name for display
-          const display = f.properties.ward_name.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
-          WARD_GEO_LOOKUP[key].add(display);
-        });
-        // Convert sets to sorted arrays
-        Object.keys(WARD_GEO_LOOKUP).forEach(k => {
-          WARD_GEO_LOOKUP[k] = [...WARD_GEO_LOOKUP[k]].sort();
-        });
-
-        geoWardLayer = L.geoJSON(data, {
-          style: defaultWardStyle,
-          onEachFeature: (feature, layer) => {
-            const p    = feature.properties;
-            const name = p.ward_name.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
-            // Build O(1) lookup table
-            wardLayerLookup[buildWardKey(p.constituency_name, p.ward_name)] = layer;
-            layer.bindTooltip(name, { sticky: true, className: 'constituency-tooltip', direction: 'top' });
-            layer.on('mouseover', () => {
-              if (layer !== highlightedWardLayer) layer.setStyle({ fillColor: '#d4a017', fillOpacity: 0.25, weight: 1, opacity: 1 });
-            });
-            layer.on('mouseout', () => {
-              if (layer !== highlightedWardLayer) layer.setStyle(defaultWardStyle());
-            });
-          }
-        }).addTo(kenyaMap);
-        updateWardLayerVisibility();
-        if (state.location.ward) focusWardOnMap();
-        // If GPS fired before ward layer was ready, upgrade to ward-level precision now
-        if (pendingGpsCoords) {
-          const found = findLocationByPoint(pendingGpsCoords.lat, pendingGpsCoords.lng);
-          if (found) applyGpsResult(found);
-        }
-        // If a map click fired before ward layer was ready, upgrade to the correct ward now
-        if (pendingClickCoords) {
-          const found = findLocationByPoint(pendingClickCoords.lat, pendingClickCoords.lng);
-          if (found) {
-            pendingClickCoords = null;
-            state.location.ward = found.ward;
-            focusWardOnMap();
-            updateLocationUI();
-            populateDropdownsFromState();
-          }
-        }
-      })
-      .catch(err => {
-        wardLayerLoaded = false; // allow retry
-        console.warn('Ward GeoJSON not found:', err);
-        showToast('Ward map unavailable — check kenya_wards.geojson is uploaded', 4000);
-      });
-  }
+  // ── WARD LAYER: removed (kenya_wards.geojson was too large for 3G) ──
+  // Ward names come from the built-in CONSTITUENCY_WARDS lookup table instead.
+  function loadWardLayer() { /* no-op — wards loaded from static JS table */ }
 
   function defaultWardStyle() {
     return { color: '#d4a017', weight: 0.6, fillColor: '#d4a017', fillOpacity: 0.0, opacity: 0.0 };
@@ -4221,6 +4171,18 @@
 
     showPollingStations();
     showToast(`✓ Location confirmed: ${constituency}, ${county}`);
+
+    // Update confirm button to show confirmed state
+    const confirmBtn = document.getElementById('btn-confirm-manual');
+    if (confirmBtn) {
+      confirmBtn.style.background = 'var(--green)';
+      confirmBtn.innerHTML = '<span>✓ ' + (currentLang === 'sw' ? 'Mahali Limethibitishwa' : 'Location Confirmed') + '</span>';
+      confirmBtn.disabled = true;
+      confirmBtn.style.opacity = '0.8';
+    }
+
+    const loadWrapManual = document.getElementById('manual-load-wrap');
+    if (loadWrapManual) loadWrapManual.style.display = '';
   }
 
   function loadCandidatesFromManual() {
