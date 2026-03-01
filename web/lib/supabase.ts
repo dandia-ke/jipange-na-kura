@@ -25,4 +25,4 @@ export const supabase = createClient(url, key)
 
 /** True once the user has filled in real credentials */
 export const supabaseReady =
-  url !== '' && !url.includes('your-project')
+  url !== '' && !url.includes('your-project') && !url.includes('placeholder')
