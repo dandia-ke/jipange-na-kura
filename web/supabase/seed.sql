@@ -24,6 +24,11 @@ ALTER TABLE current_leaders DROP CONSTRAINT IF EXISTS current_leaders_unique;
 ALTER TABLE current_leaders ADD CONSTRAINT current_leaders_unique
   UNIQUE NULLS NOT DISTINCT (seat_type, county, constituency, ward, name);
 
+-- Indexes for fast filtering
+CREATE INDEX IF NOT EXISTS idx_leaders_county      ON current_leaders (county);
+CREATE INDEX IF NOT EXISTS idx_leaders_seat_type   ON current_leaders (seat_type);
+CREATE INDEX IF NOT EXISTS idx_leaders_county_seat ON current_leaders (county, seat_type);
+
 -- Allow public read on current_leaders
 ALTER TABLE current_leaders ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Public read leaders" ON current_leaders;

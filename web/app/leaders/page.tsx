@@ -33,15 +33,19 @@ export default function LeadersPage({ searchParams }: Props) {
   const [constituency, setConstituency]   = useState('')
   const [ward, setWard]                   = useState('')
   const [locationSearch, setLocationSearch] = useState('')
-  const [countyLeaders, setCountyLeaders] = useState<Leader[]>([])
-  const [mp, setMp]                       = useState<Leader | null>(null)
-  const [mca, setMca]                     = useState<Leader | null>(null)
+  const [allCountyLeaders, setAllCountyLeaders] = useState<Leader[]>([])
 
   // ── Browse All state ──────────────────────────────────────
   const [browseSeat, setBrowseSeat]       = useState('governor')
   const [browseSearch, setBrowseSearch]   = useState('')
   const [browseLeaders, setBrowseLeaders] = useState<Leader[]>([])
   const [browseLoading, setBrowseLoading] = useState(false)
+  const [browseHasMore, setBrowseHasMore] = useState(false)
+  const [browseOffset, setBrowseOffset]   = useState(0)
+  const BROWSE_PAGE = 50
+
+  // ── By Location loading ───────────────────────────────────
+  const [locationLoading, setLocationLoading] = useState(false)
 
   // ── Drawer ────────────────────────────────────────────────
   const [selected, setSelected] = useState<Leader | null>(null)
@@ -69,79 +73,82 @@ export default function LeadersPage({ searchParams }: Props) {
     ),
   }
 
-  // ── By Location: load county leaders ─────────────────────
+  // ── By Location: single query for all county leaders ──────
   useEffect(() => {
-    if (supabaseReady && county) {
-      supabase
-        .from('current_leaders')
-        .select('*')
-        .eq('county', county)
-        .in('seat_type', ['governor', 'senator', 'womenrep'])
-        .then(({ data }) => {
-          if (data) {
-            setCountyLeaders(
-              (data as Leader[]).sort(
-                (a, b) => SEAT_ORDER.indexOf(a.seat_type) - SEAT_ORDER.indexOf(b.seat_type)
-              )
-            )
-          }
-        })
-    } else {
-      setCountyLeaders([])
-    }
     setConstituency('')
     setWard('')
-    setMp(null)
-    setMca(null)
+    setAllCountyLeaders([])
+    if (supabaseReady && county) {
+      setLocationLoading(true)
+      supabase
+        .from('current_leaders')
+        .select('*')
+        .eq('county', county)
+        .then(({ data }) => {
+          if (data) setAllCountyLeaders(data as Leader[])
+          setLocationLoading(false)
+        })
+    }
   }, [county])
 
-  useEffect(() => {
-    if (supabaseReady && county && constituency) {
-      supabase
-        .from('current_leaders')
-        .select('*')
-        .eq('county', county)
-        .eq('constituency', constituency)
-        .eq('seat_type', 'mp')
-        .single()
-        .then(({ data }) => setMp(data as Leader | null))
-    } else {
-      setMp(null)
-    }
-    setWard('')
-    setMca(null)
-  }, [county, constituency])
+  // Reset ward when constituency changes
+  useEffect(() => { setWard('') }, [constituency])
 
-  useEffect(() => {
-    if (supabaseReady && county && constituency && ward) {
-      supabase
-        .from('current_leaders')
-        .select('*')
-        .eq('county', county)
-        .eq('constituency', constituency)
-        .ilike('ward', ward)
-        .eq('seat_type', 'mca')
-        .maybeSingle()
-        .then(({ data }) => setMca(data as Leader | null))
-    } else {
-      setMca(null)
-    }
-  }, [county, constituency, ward])
+  // ── Derived from allCountyLeaders (no extra queries) ──────
+  const countyLeaders = allCountyLeaders
+    .filter(l => ['governor', 'senator', 'womenrep'].includes(l.seat_type))
+    .sort((a, b) => SEAT_ORDER.indexOf(a.seat_type) - SEAT_ORDER.indexOf(b.seat_type))
 
-  // ── Browse All: load leaders for selected seat type ───────
+  const mp = constituency
+    ? allCountyLeaders.find(l => l.seat_type === 'mp' && l.constituency === constituency) ?? null
+    : null
+
+  const mca = ward
+    ? allCountyLeaders.find(l => l.seat_type === 'mca' && l.ward?.toLowerCase() === ward.toLowerCase()) ?? null
+    : null
+
+  // ── Browse All: paginated load ────────────────────────────
   useEffect(() => {
     if (mode !== 'all' || !supabaseReady) return
     setBrowseLoading(true)
+    setBrowseLeaders([])
+    setBrowseOffset(0)
+    setBrowseHasMore(false)
+    supabase
+      .from('current_leaders')
+      .select('*', { count: 'exact' })
+      .eq('seat_type', browseSeat)
+      .order('county')
+      .range(0, BROWSE_PAGE - 1)
+      .then(({ data, count }) => {
+        setBrowseLeaders((data as Leader[]) ?? [])
+        setBrowseOffset(BROWSE_PAGE)
+        setBrowseHasMore((count ?? 0) > BROWSE_PAGE)
+        setBrowseLoading(false)
+      })
+  }, [mode, browseSeat])
+
+  function loadMoreBrowse() {
     supabase
       .from('current_leaders')
       .select('*')
       .eq('seat_type', browseSeat)
       .order('county')
+      .range(browseOffset, browseOffset + BROWSE_PAGE - 1)
       .then(({ data }) => {
-        setBrowseLeaders(data as Leader[] ?? [])
-        setBrowseLoading(false)
+        const rows = (data as Leader[]) ?? []
+        setBrowseLeaders(prev => [...prev, ...rows])
+        setBrowseOffset(prev => prev + BROWSE_PAGE)
+        setBrowseHasMore(rows.length === BROWSE_PAGE)
       })
-  }, [mode, browseSeat])
+  }
+
+  // ── Escape key closes drawer ──────────────────────────────
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSelected(null) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   const constituencies = county ? (COUNTY_CONSTITUENCIES[county] ?? []) : []
   const wards          = constituency ? (CONSTITUENCY_WARDS[constituency] ?? []) : []
@@ -285,13 +292,22 @@ export default function LeadersPage({ searchParams }: Props) {
                       <LeaderCard
                         key={leader.id}
                         leader={leader}
-                        roleDesc={CONSTITUTIONAL_ROLES[leader.seat_type]}
                         onClick={() => setSelected(leader)}
                       />
                     ))}
                   </div>
                 </div>
               ))
+            )}
+            {browseHasMore && !browseLoading && (
+              <div className="text-center mt-6 mb-2">
+                <button
+                  onClick={loadMoreBrowse}
+                  className="px-6 py-2.5 rounded-xl border border-[#1a6b3c] text-[#1a6b3c] text-sm font-semibold hover:bg-[#f0faf4] transition-colors"
+                >
+                  {t('Load more', 'Pakia zaidi')} →
+                </button>
+              </div>
             )}
           </div>
 
@@ -369,6 +385,19 @@ export default function LeadersPage({ searchParams }: Props) {
                 <p className="font-semibold text-[#0a0a0a] mb-1">{t('Select a county above', 'Chagua kaunti hapo juu')}</p>
                 <p className="text-sm">{t('to see its Governor, Senator and Women Representative', 'kuona Gavana, Seneta na Mwakilishi wa Wanawake wake')}</p>
               </div>
+            ) : locationLoading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="bg-white rounded-[14px] overflow-hidden border-[1.5px] border-[#e2ddd6]">
+                    <div className="h-[200px] bg-[#f3f0eb] animate-pulse" />
+                    <div className="px-4 py-4 flex flex-col gap-2.5">
+                      <div className="h-4 bg-[#e2ddd6] rounded animate-pulse w-3/4" />
+                      <div className="h-3 bg-[#e2ddd6] rounded animate-pulse w-1/3" />
+                      <div className="h-3 bg-[#e2ddd6] rounded animate-pulse w-1/2" />
+                    </div>
+                  </div>
+                ))}
+              </div>
             ) : (
               <>
                 {/* County Leaders */}
@@ -388,7 +417,6 @@ export default function LeadersPage({ searchParams }: Props) {
                         <LeaderCard
                           key={leader.id}
                           leader={leader}
-                          roleDesc={CONSTITUTIONAL_ROLES[leader.seat_type]}
                           onClick={() => setSelected(leader)}
                         />
                       ))}
@@ -411,7 +439,6 @@ export default function LeadersPage({ searchParams }: Props) {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                       <LeaderCard
                         leader={mp}
-                        roleDesc={CONSTITUTIONAL_ROLES['mp']}
                         onClick={() => setSelected(mp)}
                       />
                     </div>
@@ -433,7 +460,6 @@ export default function LeadersPage({ searchParams }: Props) {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                       <LeaderCard
                         leader={mca}
-                        roleDesc={CONSTITUTIONAL_ROLES['mca']}
                         onClick={() => setSelected(mca)}
                       />
                     </div>
@@ -493,7 +519,7 @@ export default function LeadersPage({ searchParams }: Props) {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: '1px solid #e2ddd6' }}>
               {[
                 { label: t('Age', 'Umri'), value: selected.age || '—' },
-                { label: t('Ballot No.', 'Nambari'), value: selected.ballot_no != null ? `#${selected.ballot_no}` : '—' },
+                { label: t('County', 'Kaunti'), value: selected.county || '—' },
                 { label: t('Prev. Seats', 'Viti vya awali'), value: selected.prev_seats || '—' },
               ].map((stat, i, arr) => (
                 <div key={stat.label} style={{ textAlign: 'center', padding: '12px 8px', borderRight: i < arr.length - 1 ? '1px solid #e2ddd6' : undefined }}>
@@ -505,6 +531,11 @@ export default function LeadersPage({ searchParams }: Props) {
 
             {/* Body sections */}
             <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {CONSTITUTIONAL_ROLES[selected.seat_type] && (
+                <div style={{ fontSize: '0.8rem', color: '#374151', lineHeight: 1.55, background: '#f9fafb', borderRadius: 8, padding: '10px 12px', borderLeft: '3px solid #1a6b3c' }}>
+                  {CONSTITUTIONAL_ROLES[selected.seat_type]}
+                </div>
+              )}
               <div>
                 <div style={{ fontSize: '0.63rem', fontWeight: 700, color: '#1a6b3c', textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 4 }}>{t('Party & Affiliation', 'Chama')}</div>
                 <div style={{ fontSize: '0.88rem', color: selected.party ? '#0a0a0a' : '#9ca3af', fontStyle: selected.party ? 'normal' : 'italic' }}>

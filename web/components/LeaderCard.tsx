@@ -14,11 +14,10 @@ const ROLE_BADGE: Record<string, string> = {
 
 type Props = {
   leader: Leader
-  roleDesc?: string
   onClick?: () => void
 }
 
-export default function LeaderCard({ leader, roleDesc, onClick }: Props) {
+export default function LeaderCard({ leader, onClick }: Props) {
   const [imgError, setImgError] = useState(false)
 
   const photoSrc =
@@ -34,6 +33,8 @@ export default function LeaderCard({ leader, roleDesc, onClick }: Props) {
     .join('')
     .slice(0, 2)
     .toUpperCase()
+
+  const subLocation = leader.ward ?? leader.constituency
 
   return (
     <div onClick={onClick} className="bg-white rounded-[14px] overflow-hidden border-[1.5px] border-[#e2ddd6] transition-all duration-[150ms] cursor-pointer hover:shadow-[0_8px_24px_rgba(0,0,0,0.10)] hover:-translate-y-0.5 flex flex-col">
@@ -69,14 +70,11 @@ export default function LeaderCard({ leader, roleDesc, onClick }: Props) {
         <span className="inline-flex items-center gap-1 text-[0.68rem] font-bold text-[#1d9bf0] mb-1.5">
           ✓ IEBC 2022
         </span>
-        <p className="text-[0.78rem] text-[#6b7280] mb-3">
+        <p className="text-[0.78rem] text-[#6b7280] mb-0.5">
           {leader.party}
         </p>
-
-        {roleDesc && (
-          <div className="text-[0.75rem] text-[#374151] leading-relaxed bg-[#f9fafb] rounded-lg px-2.5 py-2 border-l-[3px] border-[#1a6b3c] mb-3">
-            {roleDesc}
-          </div>
+        {subLocation && (
+          <p className="text-[0.73rem] text-[#9ca3af] mb-2">{subLocation}</p>
         )}
 
         {/* Contacts */}
