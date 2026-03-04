@@ -119,9 +119,9 @@ export default function LeadersPage({ searchParams }: Props) {
         .select('*')
         .eq('county', county)
         .eq('constituency', constituency)
-        .eq('ward', ward)
+        .ilike('ward', ward)
         .eq('seat_type', 'mca')
-        .single()
+        .maybeSingle()
         .then(({ data }) => setMca(data as Leader | null))
     } else {
       setMca(null)

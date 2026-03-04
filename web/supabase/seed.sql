@@ -19,8 +19,14 @@ CREATE TABLE IF NOT EXISTS current_leaders (
   manifesto   text[]
 );
 
+-- Unique constraint (NULLS NOT DISTINCT so NULL cols don't bypass dedup on re-run)
+ALTER TABLE current_leaders DROP CONSTRAINT IF EXISTS current_leaders_unique;
+ALTER TABLE current_leaders ADD CONSTRAINT current_leaders_unique
+  UNIQUE NULLS NOT DISTINCT (seat_type, county, constituency, ward, name);
+
 -- Allow public read on current_leaders
 ALTER TABLE current_leaders ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public read leaders" ON current_leaders;
 CREATE POLICY "Public read leaders" ON current_leaders FOR SELECT USING (true);
 
 -- Polling stations table (already defined earlier for planner migration)
@@ -52,7 +58,9 @@ CREATE TABLE IF NOT EXISTS watch_reports (
 
 -- Row Level Security: allow public SELECT and anon INSERT on watch_reports
 ALTER TABLE watch_reports ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public read reports" ON watch_reports;
 CREATE POLICY "Public read reports" ON watch_reports FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Anon insert reports" ON watch_reports;
 CREATE POLICY "Anon insert reports" ON watch_reports FOR INSERT WITH CHECK (true);
 
 -- Candidate submissions (profile requests by potential candidates)
@@ -70,6 +78,7 @@ CREATE TABLE IF NOT EXISTS candidate_submissions (
 
 -- allow anonymous inserts (for form)
 ALTER TABLE candidate_submissions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "anon insert candidates" ON candidate_submissions;
 CREATE POLICY "anon insert candidates" ON candidate_submissions FOR INSERT WITH CHECK (auth.role() = 'anon');
 
 
@@ -277,4 +286,5 @@ VALUES
 -- ── NAIROBI ──
 ('Johnson Sakaja','UDA','governor','Nairobi','photos/governors/nairobi.png',true,1,'—','Elected 2022','SakajaJohnson','SakajaJohnson',ARRAY['Serving Nairobi County 2022–2027']),
 ('Edwin Sifuna','ODM','senator','Nairobi','photos/senators/nairobi.png',true,1,'—','Elected 2022','EdwinSifuna','EdwinSifuna',ARRAY['Senator for Nairobi County 2022–2027']),
-('Esther Passaris','Jubilee','womenrep','Nairobi','photos/women-reps/nairobi.png',true,1,'—','Elected 2022','EstherPassaris','EstherPassaris',ARRAY['Women Representative for Nairobi County 2022–2027']);
+('Esther Passaris','Jubilee','womenrep','Nairobi','photos/women-reps/nairobi.png',true,1,'—','Elected 2022','EstherPassaris','EstherPassaris',ARRAY['Women Representative for Nairobi County 2022–2027'])
+ON CONFLICT DO NOTHING;

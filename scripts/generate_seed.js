@@ -254,12 +254,28 @@ const sql = `-- Jipange Na Kura — MPs + MCAs seed
 -- Photos: ${photoCount} of ${rows.length}
 -- Run in Supabase SQL Editor AFTER seed.sql
 
--- Ensure ward column exists (not in original CREATE TABLE)
+-- Ensure columns exist and relax constraints for partial data
+ALTER TABLE current_leaders ADD COLUMN IF NOT EXISTS constituency text;
 ALTER TABLE current_leaders ADD COLUMN IF NOT EXISTS ward text;
+ALTER TABLE current_leaders ALTER COLUMN party DROP NOT NULL;
+
+-- Deduplicate existing rows before adding unique constraint
+WITH ranked AS (
+  SELECT id, ROW_NUMBER() OVER (
+    PARTITION BY seat_type, county, COALESCE(constituency, ''), COALESCE(ward, ''), name
+    ORDER BY id
+  ) AS rn FROM current_leaders
+)
+DELETE FROM current_leaders WHERE id IN (SELECT id FROM ranked WHERE rn > 1);
 
 -- Add unique constraint to prevent duplicate runs
-ALTER TABLE current_leaders
-  ADD CONSTRAINT IF NOT EXISTS current_leaders_unique UNIQUE (seat_type, county, constituency, ward, name);
+ALTER TABLE current_leaders DROP CONSTRAINT IF EXISTS current_leaders_unique;
+ALTER TABLE current_leaders ADD CONSTRAINT current_leaders_unique UNIQUE NULLS NOT DISTINCT (seat_type, county, constituency, ward, name);
+
+-- Expand seat_type check constraint to include mp and mca
+ALTER TABLE current_leaders DROP CONSTRAINT IF EXISTS current_leaders_seat_type_check;
+ALTER TABLE current_leaders ADD CONSTRAINT current_leaders_seat_type_check
+  CHECK (seat_type IN ('governor', 'senator', 'womenrep', 'mp', 'mca'));
 
 ${chunks.join('\n')}
 `
