@@ -1,0 +1,767 @@
+[
+  {
+    "id": "km1",
+    "name": "Joseph Mwangi Kibuu",
+    "type": "Elected",
+    "ward": "Chania",
+    "constituency": "Gatundu North",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/joseph_mwangi_kibuu.jpg"
+  },
+  {
+    "id": "km2",
+    "name": "Moses Kiarie Munyua",
+    "type": "Elected",
+    "ward": "Githobokoni",
+    "constituency": "Gatundu North",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/moses_kiarie_munyua.jpg"
+  },
+  {
+    "id": "km3",
+    "name": "ancis Murima Wanyiri",
+    "type": "Elected",
+    "ward": "Gituamba",
+    "constituency": "Gatundu North",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/ancis_murima_wanyiri.jpg"
+  },
+  {
+    "id": "km4",
+    "name": "Patrick Mwangi Mburu",
+    "type": "Elected",
+    "ward": "Mang'U",
+    "constituency": "Gatundu North",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/patrick_mwangi_mburu.jpg"
+  },
+  {
+    "id": "km5",
+    "name": "Kungu Smart Wanjiku",
+    "type": "Elected",
+    "ward": "Kiamwangi",
+    "constituency": "Gatundu South",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/kungu_smart_wanjiku.jpg"
+  },
+  {
+    "id": "km6",
+    "name": "Julius Kahura Waweru",
+    "type": "Elected",
+    "ward": "Kiganjo",
+    "constituency": "Gatundu South",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/julius_kahura_waweru.jpg"
+  },
+  {
+    "id": "km7",
+    "name": "John Njinu Ndiba",
+    "type": "Elected",
+    "ward": "Ndarugu",
+    "constituency": "Gatundu South",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/john_njinu_ndiba.jpg"
+  },
+  {
+    "id": "km8",
+    "name": "Joe Githui Kigara",
+    "type": "Elected",
+    "ward": "Ngenda",
+    "constituency": "Gatundu South",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/joe_githui_kigara.jpg"
+  },
+  {
+    "id": "km9",
+    "name": "Ruth Waithira Wanjiku",
+    "type": "Elected",
+    "ward": "Githiga",
+    "constituency": "Githunguri",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/ruth_waithira_wanjiku.jpg"
+  },
+  {
+    "id": "km10",
+    "name": "Joseph Muhinja Kamau",
+    "type": "Elected",
+    "ward": "Githunguri",
+    "constituency": "Githunguri",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/joseph_muhinja_kamau.jpg"
+  },
+  {
+    "id": "km11",
+    "name": "Cedric Gachunga Thuo",
+    "type": "Elected",
+    "ward": "Ikinu",
+    "constituency": "Githunguri",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/cedric_gachunga_thuo.jpg"
+  },
+  {
+    "id": "km12",
+    "name": "Waweru Wanyutu",
+    "type": "Elected",
+    "ward": "Komothai",
+    "constituency": "Githunguri",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/waweru_wanyutu.jpg"
+  },
+  {
+    "id": "km13",
+    "name": "Charles Kangethe Gitau",
+    "type": "Elected",
+    "ward": "Ngewa",
+    "constituency": "Githunguri",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/charles_kangethe_gitau.jpg"
+  },
+  {
+    "id": "km14",
+    "name": "Jeremiah Kiama Mwangi",
+    "type": "Elected",
+    "ward": "Juja",
+    "constituency": "Juja",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/jeremiah_kiama_mwangi.jpg"
+  },
+  {
+    "id": "km15",
+    "name": "Godfrey Waiyaki Mucheke",
+    "type": "Elected",
+    "ward": "Kalimoni",
+    "constituency": "Juja",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/godfrey_waiyaki_mucheke.jpg"
+  },
+  {
+    "id": "km16",
+    "name": "Moses Ngatha Wambiri",
+    "type": "Elected",
+    "ward": "Murera",
+    "constituency": "Juja",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/moses_ngatha_wambiri.jpg"
+  },
+  {
+    "id": "km17",
+    "name": "Moses Muiruri Munana",
+    "type": "Elected",
+    "ward": "Theta",
+    "constituency": "Juja",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/moses_muiruri_munana.jpg"
+  },
+  {
+    "id": "km18",
+    "name": "Patrick Mwiberi Ngugi",
+    "type": "Elected",
+    "ward": "Witeithie",
+    "constituency": "Juja",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/patrick_mwiberi_ngugi.jpg"
+  },
+  {
+    "id": "km19",
+    "name": "Jane Thogori Karanja",
+    "type": "Elected",
+    "ward": "Gitaru",
+    "constituency": "Kabete",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/jane_thogori_karanja.jpg"
+  },
+  {
+    "id": "km20",
+    "name": "Grace Wanjiru Hinga",
+    "type": "Elected",
+    "ward": "Kabete",
+    "constituency": "Kabete",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/grace_wanjiru_hinga.jpg"
+  },
+  {
+    "id": "km21",
+    "name": "Peter Thumbi Kamau",
+    "type": "Elected",
+    "ward": "Muguga",
+    "constituency": "Kabete",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/peter_thumbi_kamau.jpg"
+  },
+  {
+    "id": "km22",
+    "name": "Edward Kinyanjui Ngugi",
+    "type": "Elected",
+    "ward": "Nyadhuna",
+    "constituency": "Kabete",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/edward_kinyanjui_ngugi.jpg"
+  },
+  {
+    "id": "km23",
+    "name": "Erick Warugu Ndung’u",
+    "type": "Elected",
+    "ward": "Uthiru",
+    "constituency": "Kabete",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/erick_warugu_ndung_u.jpg"
+  },
+  {
+    "id": "km24",
+    "name": "Joseph Koigi Kienjeku",
+    "type": "Elected",
+    "ward": "Cianda",
+    "constituency": "Kiambaa",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/joseph_koigi_kienjeku.jpg"
+  },
+  {
+    "id": "km25",
+    "name": "Peter Njoroge Wainaina",
+    "type": "Elected",
+    "ward": "Karuri",
+    "constituency": "Kiambaa",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/peter_njoroge_wainaina.jpg"
+  },
+  {
+    "id": "km26",
+    "name": "John Ngure Muthondu",
+    "type": "Elected",
+    "ward": "Kihara",
+    "constituency": "Kiambaa",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/john_ngure_muthondu.jpg"
+  },
+  {
+    "id": "km27",
+    "name": "Kenneth Karanja Kamau",
+    "type": "Elected",
+    "ward": "Muchatha",
+    "constituency": "Kiambaa",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/kenneth_karanja_kamau.jpg"
+  },
+  {
+    "id": "km28",
+    "name": "David Mwaura Wanjiru",
+    "type": "Elected",
+    "ward": "Ndenderu",
+    "constituency": "Kiambaa",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/david_mwaura_wanjiru.jpg"
+  },
+  {
+    "id": "km29",
+    "name": "David Chogi Nyokabi",
+    "type": "Elected",
+    "ward": "Ndumberi",
+    "constituency": "Kiambu",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/david_chogi_nyokabi.jpg"
+  },
+  {
+    "id": "km30",
+    "name": "Hezron Mwangi Gachui",
+    "type": "Elected",
+    "ward": "Riabai",
+    "constituency": "Kiambu",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/hezron_mwangi_gachui.jpg"
+  },
+  {
+    "id": "km31",
+    "name": "Lawrence Mwaura",
+    "type": "Elected",
+    "ward": "Ting'Ang'A",
+    "constituency": "Kiambu",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/lawrence_mwaura.jpg"
+  },
+  {
+    "id": "km32",
+    "name": "ancis Koina Wanjiru",
+    "type": "Elected",
+    "ward": "Township",
+    "constituency": "Kiambu",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/ancis_koina_wanjiru.jpg"
+  },
+  {
+    "id": "km33",
+    "name": "Samuel Njoroge Icembe",
+    "type": "Elected",
+    "ward": "Karai",
+    "constituency": "Kikuyu",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/samuel_njoroge_icembe.jpg"
+  },
+  {
+    "id": "km34",
+    "name": "James Boro Kamau",
+    "type": "Elected",
+    "ward": "Kikuyu",
+    "constituency": "Kikuyu",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/james_boro_kamau.jpg"
+  },
+  {
+    "id": "km35",
+    "name": "Evans Muigu Kimani",
+    "type": "Elected",
+    "ward": "Kinoo",
+    "constituency": "Kikuyu",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/evans_muigu_kimani.jpg"
+  },
+  {
+    "id": "km36",
+    "name": "George Njoroge Kimani",
+    "type": "Elected",
+    "ward": "Nachu",
+    "constituency": "Kikuyu",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/george_njoroge_kimani.jpg"
+  },
+  {
+    "id": "km37",
+    "name": "Naphtaly Ngugi Munyaka",
+    "type": "Elected",
+    "ward": "Sigona",
+    "constituency": "Kikuyu",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/naphtaly_ngugi_munyaka.jpg"
+  },
+  {
+    "id": "km38",
+    "name": "Samuel Mbeere Wainaina",
+    "type": "Elected",
+    "ward": "Kamburu",
+    "constituency": "Lari",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/samuel_mbeere_wainaina.jpg"
+  },
+  {
+    "id": "km39",
+    "name": "Stephen Nyutu Wamwere",
+    "type": "Elected",
+    "ward": "Kijabe",
+    "constituency": "Lari",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/stephen_nyutu_wamwere.jpg"
+  },
+  {
+    "id": "km40",
+    "name": "Dominic Kiranga Mbugua",
+    "type": "Elected",
+    "ward": "Kinale",
+    "constituency": "Lari",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/dominic_kiranga_mbugua.jpg"
+  },
+  {
+    "id": "km41",
+    "name": "Josephat Kinyanjui Githinga",
+    "type": "Elected",
+    "ward": "Lari/Kirenga",
+    "constituency": "Lari",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/josephat_kinyanjui_githinga.jpg"
+  },
+  {
+    "id": "km42",
+    "name": "Beth Wanjiku Chege",
+    "type": "Elected",
+    "ward": "Nyanduma",
+    "constituency": "Lari",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/beth_wanjiku_chege.jpg"
+  },
+  {
+    "id": "km43",
+    "name": "Christopher Ireri Kamau",
+    "type": "Elected",
+    "ward": "Bibirioni",
+    "constituency": "Limuru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/christopher_ireri_kamau.jpg"
+  },
+  {
+    "id": "km44",
+    "name": "Josephine Muongi Nduta",
+    "type": "Elected",
+    "ward": "Limuru Central",
+    "constituency": "Limuru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/josephine_muongi_nduta.jpg"
+  },
+  {
+    "id": "km45",
+    "name": "Paul Macharia Wambui",
+    "type": "Elected",
+    "ward": "Limuru East",
+    "constituency": "Limuru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/paul_macharia_wambui.jpg"
+  },
+  {
+    "id": "km46",
+    "name": "Nelson Munga Mbuiyu",
+    "type": "Elected",
+    "ward": "Ndeiya",
+    "constituency": "Limuru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/nelson_munga_mbuiyu.jpg"
+  },
+  {
+    "id": "km47",
+    "name": "Patrick Kimani Ngaruiya",
+    "type": "Elected",
+    "ward": "Ngecha Tigoni",
+    "constituency": "Limuru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/patrick_kimani_ngaruiya.jpg"
+  },
+  {
+    "id": "km48",
+    "name": "Kimani Nduta",
+    "type": "Elected",
+    "ward": "Biashara",
+    "constituency": "Ruiru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/kimani_nduta.jpg"
+  },
+  {
+    "id": "km49",
+    "name": "Daniel Gitau Kuria",
+    "type": "Elected",
+    "ward": "Gatongora",
+    "constituency": "Ruiru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/daniel_gitau_kuria.jpg"
+  },
+  {
+    "id": "km50",
+    "name": "John Njogu Kamande",
+    "type": "Elected",
+    "ward": "Gitothua",
+    "constituency": "Ruiru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/john_njogu_kamande.jpg"
+  },
+  {
+    "id": "km51",
+    "name": "Kennedy Odhiambo Obudho",
+    "type": "Elected",
+    "ward": "Kahawa Sukari",
+    "constituency": "Ruiru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/kennedy_odhiambo_obudho.jpg"
+  },
+  {
+    "id": "km52",
+    "name": "Sinne Brian Simiyu",
+    "type": "Elected",
+    "ward": "Kahawa Wendani",
+    "constituency": "Ruiru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/sinne_brian_simiyu.jpg"
+  },
+  {
+    "id": "km53",
+    "name": "Zacharia Macharia Mbugua",
+    "type": "Elected",
+    "ward": "Kiuu",
+    "constituency": "Ruiru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/zacharia_macharia_mbugua.jpg"
+  },
+  {
+    "id": "km54",
+    "name": "George Gikanga Ng'ang'a",
+    "type": "Elected",
+    "ward": "Mwihoko",
+    "constituency": "Ruiru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/george_gikanga_ng_ang_a.jpg"
+  },
+  {
+    "id": "km55",
+    "name": "Donna Kendi Anampiu",
+    "type": "Elected",
+    "ward": "Mwiki",
+    "constituency": "Ruiru",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/donna_kendi_anampiu.jpg"
+  },
+  {
+    "id": "km56",
+    "name": "Jackson Karanja Kung'u",
+    "type": "Elected",
+    "ward": "Gatuanyaga",
+    "constituency": "Thika Town",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/jackson_karanja_kung_u.jpg"
+  },
+  {
+    "id": "km57",
+    "name": "John Njiru Njue",
+    "type": "Elected",
+    "ward": "Hospital",
+    "constituency": "Thika Town",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/john_njiru_njue.jpg"
+  },
+  {
+    "id": "km58",
+    "name": "Peter Mburu Mungai",
+    "type": "Elected",
+    "ward": "Kamenu",
+    "constituency": "Thika Town",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/peter_mburu_mungai.jpg"
+  },
+  {
+    "id": "km59",
+    "name": "Joachim Mwangi Njama",
+    "type": "Elected",
+    "ward": "Ngoliba",
+    "constituency": "Thika Town",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/joachim_mwangi_njama.jpg"
+  },
+  {
+    "id": "km60",
+    "name": "Kennedy Kentams Mwangi",
+    "type": "Elected",
+    "ward": "Township",
+    "constituency": "Thika Town",
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/kennedy_kentams_mwangi.jpg"
+  },
+  {
+    "id": "km61",
+    "name": "Lucy Wanjiku Gichana",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/lucy_wanjiku_gichana.jpg"
+  },
+  {
+    "id": "km62",
+    "name": "Susan Wanjiru Mwaura",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/susan_wanjiru_mwaura.jpg"
+  },
+  {
+    "id": "km63",
+    "name": "Ann Wacera Kariuki",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/ann_wacera_kariuki.jpg"
+  },
+  {
+    "id": "km64",
+    "name": "Josephine Wangui Agingu",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/josephine_wangui_agingu.jpg"
+  },
+  {
+    "id": "km65",
+    "name": "Jacinta Wambui Bacha",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/jacinta_wambui_bacha.jpg"
+  },
+  {
+    "id": "km66",
+    "name": "Gladys Wambui Chege",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/gladys_wambui_chege.jpg"
+  },
+  {
+    "id": "km67",
+    "name": "Juliana Wangeci Gateru",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/juliana_wangeci_gateru.jpg"
+  },
+  {
+    "id": "km68",
+    "name": "Sheilla Wangui Gathoni",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/sheilla_wangui_gathoni.jpg"
+  },
+  {
+    "id": "km69",
+    "name": "Esther Muthoni Irungu",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/esther_muthoni_irungu.jpg"
+  },
+  {
+    "id": "km70",
+    "name": "Alice Wangui Kamau",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/alice_wangui_kamau.jpg"
+  },
+  {
+    "id": "km71",
+    "name": "Rebecca Nyaruai Kiai",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/rebecca_nyaruai_kiai.jpg"
+  },
+  {
+    "id": "km72",
+    "name": "Monica Wanjiru Kiguru",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/monica_wanjiru_kiguru.jpg"
+  },
+  {
+    "id": "km73",
+    "name": "Jane Wambui Kinuthia",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/jane_wambui_kinuthia.jpg"
+  },
+  {
+    "id": "km74",
+    "name": "Margaret Njambi Kinyanjui",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/margaret_njambi_kinyanjui.jpg"
+  },
+  {
+    "id": "km75",
+    "name": "Susan Njeri Mburu",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/susan_njeri_mburu.jpg"
+  },
+  {
+    "id": "km76",
+    "name": "Stephen Churu Mungai",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/stephen_churu_mungai.jpg"
+  },
+  {
+    "id": "km77",
+    "name": "Priscah Wanjiku Muturi",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/priscah_wanjiku_muturi.jpg"
+  },
+  {
+    "id": "km78",
+    "name": "Rahab Wanjiku Mwaura",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/rahab_wanjiku_mwaura.jpg"
+  },
+  {
+    "id": "km79",
+    "name": "Zipporah Wanjiru Ndua",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/zipporah_wanjiru_ndua.jpg"
+  },
+  {
+    "id": "km80",
+    "name": "Celestine Ngure Wanjiru",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/celestine_ngure_wanjiru.jpg"
+  },
+  {
+    "id": "km81",
+    "name": "Tabitha Wangui Njeri",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/tabitha_wangui_njeri.jpg"
+  },
+  {
+    "id": "km82",
+    "name": "Anne Wairimu Njoroge",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/anne_wairimu_njoroge.jpg"
+  },
+  {
+    "id": "km83",
+    "name": "Esther Wambui Nyaga",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/esther_wambui_nyaga.jpg"
+  },
+  {
+    "id": "km84",
+    "name": "Lucy Pacifica Ongecha",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/lucy_pacifica_ongecha.jpg"
+  },
+  {
+    "id": "km85",
+    "name": "Winnie Wambui Wanjiru",
+    "type": "Nominated",
+    "ward": null,
+    "constituency": null,
+    "county": "Kiambu",
+    "photo": "photos/mcas/kiambu/winnie_wambui_wanjiru.jpg"
+  }
+]

@@ -1,0 +1,322 @@
+[
+  {
+    "name": "Victor Siywat",
+    "ward": "Endugh",
+    "constituency": "Kapenguria",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KANU",
+    "photo_url": "/photos/mcas/west-pokot/victor_siywat.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Martin Komong&#8217;Iro",
+    "ward": "Sook",
+    "constituency": "Kapenguria",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/martin_komong_8217_iro.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Peter Lokor",
+    "ward": "Kapchok",
+    "constituency": "Kacheliba",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KUP",
+    "photo_url": "/photos/mcas/west-pokot/peter_lokor.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Giratum John Bosco",
+    "ward": "Alale",
+    "constituency": "Kacheliba",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/giratum_john_bosco.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Samwel Timtim Korinyang",
+    "ward": "Tapach",
+    "constituency": "Pokot South",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KUP",
+    "photo_url": "/photos/mcas/west-pokot/samwel_timtim_korinyang.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "David Alukulem",
+    "ward": "Riwo",
+    "constituency": "Kapenguria",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/david_alukulem.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Jane Mengich Chepaty",
+    "ward": "Sekerr",
+    "constituency": "Sigor",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KUP",
+    "photo_url": "/photos/mcas/west-pokot/jane_mengich_chepaty.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Francis Krop Losia",
+    "ward": "Kasei",
+    "constituency": "Kacheliba",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/francis_krop_losia.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Rashid Shariff Kiptalam",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KUP",
+    "photo_url": "/photos/mcas/west-pokot/rashid_shariff_kiptalam.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Jacob Toung&#8217;Ole",
+    "ward": "Lomut",
+    "constituency": "Sigor",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": null,
+    "nominated": false
+  },
+  {
+    "name": "David Moiben",
+    "ward": "Weiwei",
+    "constituency": "Sigor",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/west-pokot/david_moiben.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Esther Serem",
+    "ward": "Siyoi",
+    "constituency": "Kapenguria",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/esther_serem.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Richard Mastaluk",
+    "ward": "Kapenguria",
+    "constituency": "Kapenguria",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/richard_mastaluk.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Richard Todosia",
+    "ward": "Mnagei",
+    "constituency": "Kapenguria",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/richard_todosia.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Joshua Chumel",
+    "ward": "Kiwawa",
+    "constituency": "Kacheliba",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KUP",
+    "photo_url": "/photos/mcas/west-pokot/joshua_chumel.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Patrick Lokomol",
+    "ward": "Chepareria",
+    "constituency": "Pokot South",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KUP",
+    "photo_url": "/photos/mcas/west-pokot/patrick_lokomol.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Emmanuel Akasile",
+    "ward": "Suam",
+    "constituency": "Kacheliba",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/west-pokot/emmanuel_akasile.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Wilson Chekeruk",
+    "ward": "Masool",
+    "constituency": "Sigor",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/west-pokot/wilson_chekeruk.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "James Kapeli",
+    "ward": "Lelan",
+    "constituency": "Pokot South",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "INDEPENDENT",
+    "photo_url": "/photos/mcas/west-pokot/james_kapeli.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Yusuf Long&#8217;Iro",
+    "ward": "Batei",
+    "constituency": "Pokot South",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/yusuf_long_8217_iro.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Paul Loktary",
+    "ward": "Kodich",
+    "constituency": "Kacheliba",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KANU",
+    "photo_url": "/photos/mcas/west-pokot/paul_loktary.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Agneta Kelepo",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/agneta_kelepo.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Esther Chepution",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/esther_chepution.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Mary Joshua Cherop",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/mary_joshua_cherop.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Elijah Kaseuseu",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/elijah_kaseuseu.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Bruno Lomweno",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KANU",
+    "photo_url": "/photos/mcas/west-pokot/bruno_lomweno.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Mary Mariach",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KANU",
+    "photo_url": "/photos/mcas/west-pokot/mary_mariach.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Marshana Cheruto",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "KUP",
+    "photo_url": "/photos/mcas/west-pokot/marshana_cheruto.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Veronica Loria",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": null,
+    "nominated": true
+  },
+  {
+    "name": "Grace Loupa",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/west-pokot/grace_loupa.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Gladys Korii",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/west-pokot/gladys_korii.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Paulina Cheptoyo",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "West Pokot",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": null,
+    "nominated": true
+  }
+]

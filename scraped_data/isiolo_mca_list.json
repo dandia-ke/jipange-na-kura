@@ -1,0 +1,92 @@
+[
+  {
+    "name": "David Lemantile",
+    "ward": "OLDO/NYIRO",
+    "constituency": "Isiolo North",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/oldo_nyiro.jpg"
+  },
+  {
+    "name": "Abdinur Dima Jillo",
+    "ward": "KINNA",
+    "constituency": "Isiolo South",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/kinna.jpg"
+  },
+  {
+    "name": "David Waithaka Nyooro",
+    "ward": "BULLA PESA",
+    "constituency": "Isiolo North",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/bulla_pesa.jpg"
+  },
+  {
+    "name": "Nicholas Lorot",
+    "ward": "BURAT",
+    "constituency": "Isiolo North",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/burat.jpg"
+  },
+  {
+    "name": "Halima Gole Abgudo",
+    "ward": "CHERAB",
+    "constituency": "Isiolo North",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/cherab.jpg"
+  },
+  {
+    "name": "Diba Abdirashid",
+    "ward": "GARBATULLA",
+    "constituency": "Isiolo South",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/garbatulla.jpg"
+  },
+  {
+    "name": "Abubakar Abdi",
+    "ward": "SERICHO",
+    "constituency": "Isiolo South",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/sericho.jpg"
+  },
+  {
+    "name": "Meja Golicha",
+    "ward": "CHARI",
+    "constituency": "Isiolo North",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/chari.jpg"
+  },
+  {
+    "name": "Peter Losu",
+    "ward": "NGARE MARA",
+    "constituency": "Isiolo North",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/ngare_mara.jpg"
+  },
+  {
+    "name": "Selasio Kiambi",
+    "ward": "WABERA",
+    "constituency": "Isiolo North",
+    "county": "ISIOLO",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/isiolo/wabera.jpg"
+  }
+]

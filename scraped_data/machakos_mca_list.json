@@ -1,0 +1,572 @@
+[
+  {
+    "name": "Dickson Maundu",
+    "ward": "KANGUNDO CENTRAL",
+    "constituency": "Kangundo",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kangundo_central.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Everlyn Kavila",
+    "ward": "KANGUNDO EAST",
+    "constituency": "Kangundo",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kangundo_east.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Wilson M. Ndunda",
+    "ward": "KANGUNDO NORTH",
+    "constituency": "Kangundo",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kangundo_north.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Charles Mbuva",
+    "ward": "KANGUNDO WEST",
+    "constituency": "Kangundo",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kangundo_west.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Dominic Ndambuki",
+    "ward": "KATHIANI CENTRAL",
+    "constituency": "Kathiani",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kathiani_central.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Benjamin Kyule",
+    "ward": "LOWER KAEWA/KAANI",
+    "constituency": "Kathiani",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/lower_kaewa_kaani.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Vincent Mutie",
+    "ward": "UPPER KAEWA/IVETI",
+    "constituency": "Kathiani",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/upper_kaewa_iveti.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Boniface Maeke",
+    "ward": "KALAMA",
+    "constituency": "Machakos Town",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kalama.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Eric Wambua Musembi",
+    "ward": "KOLA",
+    "constituency": "Machakos Town",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kola.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Nicholas Nzioka",
+    "ward": "MACHAKOS CENTRAL",
+    "constituency": "Machakos Town",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/machakos_central.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Francis Mwaniki Ngunga",
+    "ward": "MUA",
+    "constituency": "Machakos Town",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/mua.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Johana Munyao",
+    "ward": "MUTITUNI",
+    "constituency": "Machakos Town",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/mutituni.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Joseph Musyoki Mulinge",
+    "ward": "MUVUTI/KIIMA-KIMWE",
+    "constituency": "Machakos Town",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/muvuti_kiimakimwe.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Stephen Mwanthi",
+    "ward": "EKALAKALA",
+    "constituency": "Masinga",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/ekalakala.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Alphonce Mutinda",
+    "ward": "KIVAA",
+    "constituency": "Masinga",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kivaa.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Joshua Mwonga",
+    "ward": "MASINGA CENTRAL",
+    "constituency": "Masinga",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/masinga_central.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Daniel Musyoka",
+    "ward": "MUTHESYA",
+    "constituency": "Masinga",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/muthesya.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Muoki Musila",
+    "ward": "NDITHINI",
+    "constituency": "Masinga",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/ndithini.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Grace Bahati",
+    "ward": "KYELENI",
+    "constituency": "Matungulu",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kyeleni.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Julius Munywoki",
+    "ward": "MATUNGULU EAST",
+    "constituency": "Matungulu",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/matungulu_east.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Mathias Muasya",
+    "ward": "MATUNGULU NORTH",
+    "constituency": "Matungulu",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/matungulu_north.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Raphael Lucky Nzau",
+    "ward": "MATUNGULU WEST",
+    "constituency": "Matungulu",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/matungulu_west.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Jackson Ndaka",
+    "ward": "TALA",
+    "constituency": "Matungulu",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/tala.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Jeremiah Kaloi",
+    "ward": "ATHI RIVER",
+    "constituency": "Mavoko",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/athi_river.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Francis Wambua Kavyu",
+    "ward": "KINANIE",
+    "constituency": "Mavoko",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kinanie.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Dominic Maitha",
+    "ward": "MUTHWANI",
+    "constituency": "Mavoko",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/muthwani.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Daniel Ndwiki",
+    "ward": "SYOKIMAU/MULOLONGO",
+    "constituency": "Mavoko",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/syokimau_mulolongo.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Paul Wambua",
+    "ward": "KIBAUNI",
+    "constituency": "Mwala",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kibauni.jpg",
+    "nominated": false
+  },
+  {
+    "name": "John Brian Kisila",
+    "ward": "MAKUTANO/ MWALA",
+    "constituency": "Mwala",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/makutano_mwala.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Douglas Muema",
+    "ward": "MASII",
+    "constituency": "Mwala",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/masii.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Peter Kilonzo Kaviti",
+    "ward": "MBIUNI",
+    "constituency": "Mwala",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/mbiuni.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Boniface Katiti",
+    "ward": "MUTHETHENI",
+    "constituency": "Mwala",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/muthetheni.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Justus Mulwa Mutuku",
+    "ward": "WAMUNYU",
+    "constituency": "Mwala",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/wamunyu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Fredrick Muia",
+    "ward": "IKOMBE",
+    "constituency": "Yatta",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/ikombe.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Felix Ngui",
+    "ward": "KATANGI",
+    "constituency": "Yatta",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/katangi.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Paul Mwanzia",
+    "ward": "KITHIMANI",
+    "constituency": "Yatta",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/kithimani.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Judas Mbili Ndawa",
+    "ward": "MATUU",
+    "constituency": "Yatta",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/matuu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Francis Kitaka",
+    "ward": "NDALANI",
+    "constituency": "Yatta",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/ndalani.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Caroline Mutuku",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/caroline_mutuku.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Catherine Kyee",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/catherine_kyee.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Penninah Kisangai",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/penninah_kisangai.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Mercy Njagi",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/mercy_njagi.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Loyd Mutua",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/loyd_mutua.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Annastacia Mutevu",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/annastacia_mutevu.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Anne Ndilo",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/anne_ndilo.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Constance Mbula",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/constance_mbula.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Hellen Ndeti",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/hellen_ndeti.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Irene Mulu",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/irene_mulu.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Mary Kituku",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/mary_kituku.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Phoebe Mawa",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/phoebe_mawa.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Catherine Mutio",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/catherine_mutio.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Rose Wavinya",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/rose_wavinya.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Winfred Mutua",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/winfred_mutua.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Margaret Ndalana",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/margaret_ndalana.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Ruth Wanjiru",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/ruth_wanjiru.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Farhijah Abdi",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/farhijah_abdi.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Dee Mutisya Kivuva",
+    "ward": "Nominated",
+    "constituency": "Machakos",
+    "county": "Machakos",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/machakos/dee_mutisya_kivuva.jpg",
+    "nominated": true
+  }
+]

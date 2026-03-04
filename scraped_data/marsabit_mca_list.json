@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Daud Tamasot Arakhole",
+    "ward": "KORR/NGURUNIT",
+    "constituency": "Laisamis",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "JP",
+    "photo_url": "/photos/mcas/marsabit/korr_ngurunit.jpg"
+  },
+  {
+    "name": "Amos Wako Guyo",
+    "ward": "SAGANTE/JALDESA",
+    "constituency": "Saku",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/marsabit/sagante_jaldesa.jpg"
+  },
+  {
+    "name": "Michal Siba Haila",
+    "ward": "HEILLU/MANYATTA",
+    "constituency": "Moyale",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "ODM",
+    "photo_url": "/photos/mcas/marsabit/heillu_manyatta.jpg"
+  },
+  {
+    "name": "Dida Adhi Edin",
+    "ward": "GOLBO",
+    "constituency": "Moyale",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "KANU",
+    "photo_url": "/photos/mcas/marsabit/golbo.jpg"
+  },
+  {
+    "name": "Emojo Daniel Musa",
+    "ward": "LOIYANGALANI",
+    "constituency": "Laisamis",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/marsabit/loiyangalani.jpg"
+  },
+  {
+    "name": "Halkano Sora Rare",
+    "ward": "OBBU",
+    "constituency": "Moyale",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UDM",
+    "photo_url": "/photos/mcas/marsabit/obbu.jpg"
+  },
+  {
+    "name": "Ibrahim Mohammed Isack",
+    "ward": "MOYALE TOWNSHIP",
+    "constituency": "Moyale",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UPIA",
+    "photo_url": "/photos/mcas/marsabit/moyale_township.jpg"
+  },
+  {
+    "name": "Hapicha Dida Omar",
+    "ward": "BUTIYE",
+    "constituency": "Moyale",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/marsabit/butiye.jpg"
+  },
+  {
+    "name": "Joseph Admen Leruk",
+    "ward": "KARARE",
+    "constituency": "Saku",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UPIA",
+    "photo_url": "/photos/mcas/marsabit/karare.jpg"
+  },
+  {
+    "name": "Jacob Elisha Godana",
+    "ward": "MARSABIT CENTRAL",
+    "constituency": "Saku",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UPIA",
+    "photo_url": "/photos/mcas/marsabit/marsabit_central.jpg"
+  },
+  {
+    "name": "Galgallo Huka Mamo",
+    "ward": "TURBI",
+    "constituency": "North Horr",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "JP",
+    "photo_url": "/photos/mcas/marsabit/turbi.jpg"
+  },
+  {
+    "name": "Buke Diba",
+    "ward": "MAIKONA",
+    "constituency": "North Horr",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UPIA",
+    "photo_url": "/photos/mcas/marsabit/maikona.jpg"
+  },
+  {
+    "name": "Adan Boru",
+    "ward": "DUKANA",
+    "constituency": "North Horr",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UPIA",
+    "photo_url": "/photos/mcas/marsabit/dukana.jpg"
+  },
+  {
+    "name": "Leakono Bernard",
+    "ward": "LOGO LOGO",
+    "constituency": "Laisamis",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UPIA",
+    "photo_url": "/photos/mcas/marsabit/logo_logo.jpg"
+  },
+  {
+    "name": "Burcha Daniel",
+    "ward": "LAISAMIS",
+    "constituency": "Laisamis",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "JP",
+    "photo_url": "/photos/mcas/marsabit/laisamis.jpg"
+  },
+  {
+    "name": "Korie James",
+    "ward": "ILLERET",
+    "constituency": "North Horr",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UDM",
+    "photo_url": "/photos/mcas/marsabit/illeret.jpg"
+  },
+  {
+    "name": "Ruru Elema",
+    "ward": "NORTH HORR",
+    "constituency": "North Horr",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "KANU",
+    "photo_url": "/photos/mcas/marsabit/north_horr.jpg"
+  },
+  {
+    "name": "Christopher Ogom",
+    "ward": "KARGI/SOUTH HORR",
+    "constituency": "Laisamis",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UDM",
+    "photo_url": "/photos/mcas/marsabit/kargi_south_horr.jpg"
+  },
+  {
+    "name": "Halkano Konso",
+    "ward": "URAN",
+    "constituency": "Moyale",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/marsabit/uran.jpg"
+  },
+  {
+    "name": "Boru Huka",
+    "ward": "SOLOLO",
+    "constituency": "Moyale",
+    "county": "Marsabit",
+    "seat_type": "mca",
+    "party": "FORD-K",
+    "photo_url": "/photos/mcas/marsabit/sololo.jpg"
+  }
+]

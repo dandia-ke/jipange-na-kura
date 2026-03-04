@@ -1,0 +1,442 @@
+[
+  {
+    "name": "Sarah Malel",
+    "ward": "Kimumu",
+    "constituency": "Moiben",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/sarah_malel.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Julius Sang",
+    "ward": "Megun",
+    "constituency": "Kapseret",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/julius_sang.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Ng'Etich Jonathan Kiprop",
+    "ward": "Kaptagat",
+    "constituency": "Ainabkoi",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/ng_etich_jonathan_kiprop.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Julius Songok",
+    "ward": "Tulwet/Chuiyat",
+    "constituency": "Kesses",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/julius_songok.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Francis Muya Mwangi",
+    "ward": "Langas",
+    "constituency": "Kapseret",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/francis_muya_mwangi.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Gilbert Kipsang Kosgei",
+    "ward": "Cheptiret/Kipchamo",
+    "constituency": "Kesses",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/gilbert_kipsang_kosgei.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Benjamin Natui",
+    "ward": "Ngenyilel",
+    "constituency": "Turbo",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/benjamin_natui.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Kiptanui Amos Kimeli",
+    "ward": "Racecourse",
+    "constituency": "Kesses",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/kiptanui_amos_kimeli.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Thomas Yego",
+    "ward": "Tarakwa",
+    "constituency": "Kesses",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/thomas_yego.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Isaac Kibet Samoei",
+    "ward": "Kapsaos",
+    "constituency": "Turbo",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/isaac_kibet_samoei.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Evans Kapkea",
+    "ward": "Tembelio",
+    "constituency": "Moiben",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/evans_kapkea.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Hillary Kipchumba Toroitich",
+    "ward": "Moiben",
+    "constituency": "Moiben",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/hillary_kipchumba_toroitich.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Keitany David Kibiwot",
+    "ward": "Sergoit",
+    "constituency": "Moiben",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/keitany_david_kibiwot.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Gilbert Kiptoo Chepkonga",
+    "ward": "Ainabkoi/Olare",
+    "constituency": "Ainabkoi",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/gilbert_kiptoo_chepkonga.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Kemboi Isaac Kirwa",
+    "ward": "Kapsoya",
+    "constituency": "Ainabkoi",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/kemboi_isaac_kirwa.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Peter Kimani Wanjohi",
+    "ward": "Huruma",
+    "constituency": "Turbo",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/peter_kimani_wanjohi.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Richard Kering",
+    "ward": "Ngeria",
+    "constituency": "Kapseret",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/richard_kering.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "David Kimeli Leting",
+    "ward": "Kipkenyo",
+    "constituency": "Kapseret",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/david_kimeli_leting.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Nicholas Kipruto Bitok",
+    "ward": "Tapsagoi",
+    "constituency": "Turbo",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/nicholas_kipruto_bitok.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Samuel Sawe",
+    "ward": "Kamagut",
+    "constituency": "Turbo",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/samuel_sawe.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Rebecca Jepchirchir Magut",
+    "ward": "Kuinet/Kapsuswa",
+    "constituency": "Soy",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/rebecca_jepchirchir_magut.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Patrick Kimeli Kimaiyo",
+    "ward": "Moi'S Bridge",
+    "constituency": "Soy",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/patrick_kimeli_kimaiyo.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Tarus David Kiptoo",
+    "ward": "Kapkures",
+    "constituency": "Soy",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/tarus_david_kiptoo.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Nathan Malamoch Maina",
+    "ward": "Segero/Barsombe",
+    "constituency": "Soy",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/nathan_malamoch_maina.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Marygoreti Boroswa",
+    "ward": "Kipsomba",
+    "constituency": "Soy",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/marygoreti_boroswa.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Ezekiel Ngeti Kodi",
+    "ward": "Ziwa",
+    "constituency": "Soy",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/ezekiel_ngeti_kodi.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Isaac Kiptanui Chirchir",
+    "ward": "Soy",
+    "constituency": "Soy",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/isaac_kiptanui_chirchir.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Gilbert Kipchumba Lagat",
+    "ward": "Kiplombe",
+    "constituency": "Turbo",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/gilbert_kipchumba_lagat.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Moses Kipchumba Kebenei",
+    "ward": "Simat/Kapseret",
+    "constituency": "Kapseret",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/moses_kipchumba_kebenei.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "James Serem",
+    "ward": "Karuna/Meibeki",
+    "constituency": "Moiben",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/james_serem.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Tirop Evarlyne Chepkoech",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/tirop_evarlyne_chepkoech.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Sharon Jewel Kogo",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/sharon_jewel_kogo.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Caroline Jeptanui",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/caroline_jeptanui.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Wambui Tabitha",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/wambui_tabitha.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Kering Robert Kiptanui",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/kering_robert_kiptanui.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Burgei Veronica Chepkemboi",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/burgei_veronica_chepkemboi.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Serem Naomi Chepkemboi",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/serem_naomi_chepkemboi.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Cherono Caroline",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/cherono_caroline.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Mutai Celestine Chepchirchir",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/mutai_celestine_chepchirchir.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Ng'Etich Pamela Jemutai",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/ng_etich_pamela_jemutai.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Mercy Jepkurui",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/mercy_jepkurui.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Chumba Reginah Chepkemboi",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/chumba_reginah_chepkemboi.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Rebecca Jerop",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/rebecca_jerop.jpeg",
+    "nominated": true
+  },
+  {
+    "name": "Kiplagat Gerald",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Uasin Gishu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/uasin-gishu/kiplagat_gerald.jpeg",
+    "nominated": true
+  }
+]

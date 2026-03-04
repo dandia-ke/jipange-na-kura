@@ -13,197 +13,37 @@ type Props = {
 
 const SEAT_ORDER = ['governor', 'senator', 'womenrep', 'mp', 'mca']
 
-// ── Rating helpers (localStorage — ported from original HTML) ──
-type RatingData = { votes: number[]; userVoted: boolean; userVal?: number }
-type Comment    = { text: string; name: string; rating: number | null; time: string }
-
-function ratingKey(leader: Leader) {
-  const scope = leader.county || ''
-  return (scope + '|' + leader.seat_type).toUpperCase().replace(/\s+/g, ' ')
-}
-function getRatingData(key: string): RatingData {
-  try {
-    const raw = localStorage.getItem('jnk_rating_' + key)
-    return raw ? JSON.parse(raw) : { votes: [0,0,0,0,0], userVoted: false }
-  } catch { return { votes: [0,0,0,0,0], userVoted: false } }
-}
-function saveRatingData(key: string, data: RatingData) {
-  try { localStorage.setItem('jnk_rating_' + key, JSON.stringify(data)) } catch {}
-}
-function getComments(key: string): Comment[] {
-  try {
-    const raw = localStorage.getItem('jnk_comments_' + key)
-    return raw ? JSON.parse(raw) : []
-  } catch { return [] }
-}
-function saveComments(key: string, comments: Comment[]) {
-  try { localStorage.setItem('jnk_comments_' + key, JSON.stringify(comments.slice(-20))) } catch {}
-}
-
-// ── Rating section (ported from showRatingSection in original HTML) ──
-function RatingSection({ leader }: { leader: Leader }) {
-  const { t } = useLang()
-  const key = ratingKey(leader)
-  const [data, setData]         = useState<RatingData>(() => getRatingData(key))
-  const [comments, setComments] = useState<Comment[]>(() => getComments(key))
-  const [hovered, setHovered]   = useState(0)
-  const [cName, setCName]       = useState('')
-  const [cText, setCText]       = useState('')
-  const [cStatus, setCStatus]   = useState('')
-
-  const total = data.votes.reduce((a, b) => a + b, 0)
-  const avg   = total ? (data.votes.reduce((s, v, i) => s + v * (i + 1), 0) / total).toFixed(1) : null
-
-  function rate(val: number) {
-    if (data.userVoted) return
-    const next = { ...data, votes: data.votes.map((v, i) => i === val - 1 ? v + 1 : v), userVoted: true, userVal: val }
-    saveRatingData(key, next)
-    setData(next)
-  }
-
-  function submitComment() {
-    if (!cText.trim()) { setCStatus(t('Please write a comment.', 'Tafadhali andika maoni.')); return }
-    const comment: Comment = {
-      text: cText.trim(),
-      name: cName.trim() || t('Anonymous', 'Bila jina'),
-      rating: data.userVoted ? (data.userVal ?? null) : null,
-      time: new Date().toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' }),
-    }
-    const next = [...comments, comment]
-    saveComments(key, next)
-    setComments(next)
-    setCText('')
-    setCStatus(t('✓ Comment posted!', '✓ Maoni yalitumwa!'))
-    setTimeout(() => setCStatus(''), 2000)
-  }
-
-  return (
-    <div style={{ borderTop: '1px solid #e2ddd6', marginTop: 20, paddingTop: 18 }}>
-      {/* Stars */}
-      <div style={{ marginBottom: 12 }}>
-        <div style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', color: '#6b7280', marginBottom: 8 }}>
-          {t('Rate this leader', 'Pima kiongozi huyu')}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          {[1,2,3,4,5].map(val => (
-            <button
-              key={val}
-              disabled={data.userVoted}
-              onClick={() => rate(val)}
-              onMouseEnter={() => setHovered(val)}
-              onMouseLeave={() => setHovered(0)}
-              style={{
-                background: 'none', border: 'none', cursor: data.userVoted ? 'default' : 'pointer',
-                fontSize: '1.6rem', padding: '2px 1px', lineHeight: 1,
-                color: (hovered ? val <= hovered : data.userVoted && val <= (data.userVal ?? 0))
-                  ? '#f59e0b' : '#d1d5db',
-                transition: 'color 0.1s',
-              }}
-            >★</button>
-          ))}
-          {avg && (
-            <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0a0a0a', marginLeft: 6 }}>
-              {avg} / 5
-            </span>
-          )}
-          <span style={{ fontSize: '0.72rem', color: '#9ca3af', marginLeft: 2 }}>
-            {total ? `(${total} ${total === 1 ? t('rating','tathmini') : t('ratings','tathmini')})` : t('Be the first to rate','Kuwa wa kwanza kupima')}
-          </span>
-        </div>
-        {data.userVoted && (
-          <div style={{ fontSize: '0.72rem', color: '#1a6b3c', fontWeight: 600, marginTop: 4 }}>
-            {t('Thank you for your rating!', 'Asante kwa tathmini yako!')}
-          </div>
-        )}
-      </div>
-
-      {/* Breakdown bars */}
-      {total > 0 && (
-        <div style={{ marginBottom: 16 }}>
-          {[5,4,3,2,1].map(star => {
-            const count = data.votes[star - 1]
-            const pct   = Math.round(count / total * 100)
-            return (
-              <div key={star} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-                <span style={{ fontSize: '0.72rem', width: 12, textAlign: 'right', color: '#374151' }}>{star}</span>
-                <span style={{ fontSize: '0.8rem', color: '#f59e0b' }}>★</span>
-                <div style={{ flex: 1, height: 6, background: '#e5e7eb', borderRadius: 3, overflow: 'hidden' }}>
-                  <div style={{ width: `${pct}%`, height: '100%', background: '#f59e0b', borderRadius: 3 }} />
-                </div>
-                <span style={{ fontSize: '0.68rem', width: 30, color: '#6b7280' }}>{pct}%</span>
-              </div>
-            )
-          })}
-        </div>
-      )}
-
-      {/* Comments list */}
-      <div style={{ marginBottom: 12 }}>
-        {comments.length > 0 && (
-          <div style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#6b7280', marginBottom: 8 }}>
-            {t('Comments', 'Maoni')} ({comments.length})
-          </div>
-        )}
-        {comments.length === 0 ? (
-          <div style={{ fontSize: '0.76rem', color: '#9ca3af', fontStyle: 'italic', padding: '6px 0' }}>
-            {t('No comments yet. Be the first to share your experience.', 'Hakuna maoni bado. Kuwa wa kwanza kushiriki uzoefu wako.')}
-          </div>
-        ) : (
-          [...comments].reverse().map((c, i) => (
-            <div key={i} style={{ padding: '8px 10px', background: '#f9fafb', borderRadius: 8, marginBottom: 6, border: '1px solid #e2ddd6' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#0a0a0a' }}>{c.name}</span>
-                <span style={{ fontSize: '0.68rem', color: '#9ca3af' }}>{c.time}</span>
-                {c.rating && <span style={{ fontSize: '0.72rem', color: '#f59e0b', marginLeft: 'auto' }}>{'★'.repeat(c.rating)}</span>}
-              </div>
-              <div style={{ fontSize: '0.8rem', color: '#374151', lineHeight: 1.5 }}>{c.text}</div>
-            </div>
-          ))
-        )}
-      </div>
-
-      {/* Comment form */}
-      <div style={{ display: 'grid', gap: 8 }}>
-        <input
-          type="text"
-          value={cName}
-          onChange={e => setCName(e.target.value)}
-          placeholder={t('Your name (optional)', 'Jina lako (hiari)')}
-          style={{ width: '100%', padding: '8px 10px', border: '1.5px solid #e2ddd6', borderRadius: 8, fontSize: '0.82rem', fontFamily: "'DM Sans', sans-serif", boxSizing: 'border-box' }}
-        />
-        <textarea
-          value={cText}
-          onChange={e => setCText(e.target.value)}
-          rows={3}
-          placeholder={t('Share your experience or opinion…', 'Shiriki uzoefu au maoni yako…')}
-          style={{ width: '100%', padding: '8px 10px', border: '1.5px solid #e2ddd6', borderRadius: 8, fontSize: '0.82rem', fontFamily: "'DM Sans', sans-serif", resize: 'vertical', boxSizing: 'border-box' }}
-        />
-        {cStatus && (
-          <div style={{ fontSize: '0.78rem', fontWeight: 600, color: cStatus.startsWith('✓') ? '#1a6b3c' : '#c0392b' }}>
-            {cStatus}
-          </div>
-        )}
-        <button
-          onClick={submitComment}
-          style={{ padding: '9px 16px', background: '#0a0a0a', color: 'white', border: 'none', borderRadius: 8, fontSize: '0.82rem', fontWeight: 700, cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}
-        >
-          {t('Post Comment →', 'Tuma Maoni →')}
-        </button>
-      </div>
-    </div>
-  )
+const SEAT_LABELS: Record<string, { en: string; sw: string }> = {
+  governor:  { en: 'Governor',       sw: 'Gavana' },
+  senator:   { en: 'Senator',        sw: 'Seneta' },
+  womenrep:  { en: 'Women Rep',      sw: 'Mwakilishi' },
+  mp:        { en: 'MP',             sw: 'Mbunge' },
+  mca:       { en: 'MCA',            sw: 'MCA' },
 }
 
 export default function LeadersPage({ searchParams }: Props) {
   const { county: initialCounty = '' } = use(searchParams)
   const { t } = useLang()
 
-  const [county, setCounty] = useState(initialCounty)
-  const [constituency, setConstituency] = useState('')
-  const [ward, setWard] = useState('')
+  // ── Mode toggle ───────────────────────────────────────────
+  const [mode, setMode] = useState<'location' | 'all'>('location')
+
+  // ── By Location state ─────────────────────────────────────
+  const [county, setCounty]               = useState(initialCounty)
+  const [constituency, setConstituency]   = useState('')
+  const [ward, setWard]                   = useState('')
+  const [locationSearch, setLocationSearch] = useState('')
   const [countyLeaders, setCountyLeaders] = useState<Leader[]>([])
-  const [mp, setMp] = useState<Leader | null>(null)
-  const [mca, setMca] = useState<Leader | null>(null)
+  const [mp, setMp]                       = useState<Leader | null>(null)
+  const [mca, setMca]                     = useState<Leader | null>(null)
+
+  // ── Browse All state ──────────────────────────────────────
+  const [browseSeat, setBrowseSeat]       = useState('governor')
+  const [browseSearch, setBrowseSearch]   = useState('')
+  const [browseLeaders, setBrowseLeaders] = useState<Leader[]>([])
+  const [browseLoading, setBrowseLoading] = useState(false)
+
+  // ── Drawer ────────────────────────────────────────────────
   const [selected, setSelected] = useState<Leader | null>(null)
 
   const CONSTITUTIONAL_ROLES: Record<string, string> = {
@@ -229,9 +69,9 @@ export default function LeadersPage({ searchParams }: Props) {
     ),
   }
 
+  // ── By Location: load county leaders ─────────────────────
   useEffect(() => {
     if (supabaseReady && county) {
-      // Load county-level leaders (governor, senator, women rep)
       supabase
         .from('current_leaders')
         .select('*')
@@ -239,16 +79,16 @@ export default function LeadersPage({ searchParams }: Props) {
         .in('seat_type', ['governor', 'senator', 'womenrep'])
         .then(({ data }) => {
           if (data) {
-            const sorted = (data as Leader[]).sort(
-              (a, b) => SEAT_ORDER.indexOf(a.seat_type) - SEAT_ORDER.indexOf(b.seat_type)
+            setCountyLeaders(
+              (data as Leader[]).sort(
+                (a, b) => SEAT_ORDER.indexOf(a.seat_type) - SEAT_ORDER.indexOf(b.seat_type)
+              )
             )
-            setCountyLeaders(sorted)
           }
         })
     } else {
       setCountyLeaders([])
     }
-    // Reset lower levels when county changes
     setConstituency('')
     setWard('')
     setMp(null)
@@ -257,7 +97,6 @@ export default function LeadersPage({ searchParams }: Props) {
 
   useEffect(() => {
     if (supabaseReady && county && constituency) {
-      // Load MP for the constituency
       supabase
         .from('current_leaders')
         .select('*')
@@ -265,20 +104,16 @@ export default function LeadersPage({ searchParams }: Props) {
         .eq('constituency', constituency)
         .eq('seat_type', 'mp')
         .single()
-        .then(({ data }) => {
-          setMp(data as Leader | null)
-        })
+        .then(({ data }) => setMp(data as Leader | null))
     } else {
       setMp(null)
     }
-    // Reset ward when constituency changes
     setWard('')
     setMca(null)
   }, [county, constituency])
 
   useEffect(() => {
     if (supabaseReady && county && constituency && ward) {
-      // Load MCA for the ward
       supabase
         .from('current_leaders')
         .select('*')
@@ -287,16 +122,51 @@ export default function LeadersPage({ searchParams }: Props) {
         .eq('ward', ward)
         .eq('seat_type', 'mca')
         .single()
-        .then(({ data }) => {
-          setMca(data as Leader | null)
-        })
+        .then(({ data }) => setMca(data as Leader | null))
     } else {
       setMca(null)
     }
   }, [county, constituency, ward])
 
+  // ── Browse All: load leaders for selected seat type ───────
+  useEffect(() => {
+    if (mode !== 'all' || !supabaseReady) return
+    setBrowseLoading(true)
+    supabase
+      .from('current_leaders')
+      .select('*')
+      .eq('seat_type', browseSeat)
+      .order('county')
+      .then(({ data }) => {
+        setBrowseLeaders(data as Leader[] ?? [])
+        setBrowseLoading(false)
+      })
+  }, [mode, browseSeat])
+
   const constituencies = county ? (COUNTY_CONSTITUENCIES[county] ?? []) : []
-  const wards = constituency ? (CONSTITUENCY_WARDS[constituency] ?? []) : []
+  const wards          = constituency ? (CONSTITUENCY_WARDS[constituency] ?? []) : []
+
+  // ── Browse All: filter + group by county ──────────────────
+  const filteredBrowse = browseSearch.trim()
+    ? browseLeaders.filter(l =>
+        l.name.toLowerCase().includes(browseSearch.toLowerCase()) ||
+        (l.constituency ?? '').toLowerCase().includes(browseSearch.toLowerCase()) ||
+        (l.ward ?? '').toLowerCase().includes(browseSearch.toLowerCase())
+      )
+    : browseLeaders
+
+  const browseByCounty = filteredBrowse.reduce<Record<string, Leader[]>>((acc, l) => {
+    const key = l.county || 'Unknown'
+    if (!acc[key]) acc[key] = []
+    acc[key].push(l)
+    return acc
+  }, {})
+
+  // ── By Location: name filter ──────────────────────────────
+  const filterByName = <T extends Leader>(list: T[]) =>
+    locationSearch.trim()
+      ? list.filter(l => l.name.toLowerCase().includes(locationSearch.toLowerCase()))
+      : list
 
   return (
     <main className="min-h-screen bg-[#faf7f2] pb-16">
@@ -314,7 +184,10 @@ export default function LeadersPage({ searchParams }: Props) {
               Kenya <em className="not-italic text-[#d4a017]">{t('Leaders', 'Viongozi')}</em> {t('Directory', 'Saraka')}
             </h2>
             <p className="text-[#9ca3af] text-sm max-w-[400px] leading-relaxed">
-              {t('Serving Kenya 2022–2027 — 141 current officeholders across all 47 counties and 290 constituencies.', 'Wakihudumia Kenya 2022–2027 — wahudumu 141 wa sasa katika kaunti zote 47 na majimbo 290.')}
+              {t(
+                'Serving Kenya 2022–2027 — officeholders across all 47 counties and 290 constituencies.',
+                'Wakihudumia Kenya 2022–2027 — wahudumu wa sasa katika kaunti zote 47 na majimbo 290.'
+              )}
             </p>
           </div>
           <div className="flex gap-6 flex-wrap justify-end">
@@ -333,193 +206,301 @@ export default function LeadersPage({ searchParams }: Props) {
           </div>
         </div>
 
-        {/* All Three Filters - Visible on landing */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {/* County */}
-          <div>
-            <label className="block text-[0.72rem] font-bold text-[#6b7280] uppercase tracking-widest mb-2">
-              {t('County', 'Kaunti')}
-            </label>
-            <select
-              value={county}
-              onChange={(e) => setCounty(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-[#e2ddd6] bg-white text-[#0a0a0a] text-sm font-medium focus:outline-none focus:border-[#1a6b3c]"
+        {/* Mode toggle tabs */}
+        <div className="flex gap-2 mb-6">
+          {(['location', 'all'] as const).map((m) => (
+            <button
+              key={m}
+              onClick={() => setMode(m)}
+              className={`px-5 py-2.5 rounded-xl text-[0.82rem] font-bold transition-all ${
+                mode === m
+                  ? 'bg-[#0a0a0a] text-white'
+                  : 'bg-white text-[#6b7280] border border-[#e2ddd6] hover:border-[#0a0a0a]'
+              }`}
             >
-              <option value="">{t('Select a county…', 'Chagua kaunti…')}</option>
-              {COUNTIES.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Constituency */}
-          <div>
-            <label className="block text-[0.72rem] font-bold text-[#6b7280] uppercase tracking-widest mb-2">
-              {t('Constituency', 'Jimbo')}
-            </label>
-            <select
-              value={constituency}
-              onChange={(e) => setConstituency(e.target.value)}
-              disabled={!county}
-              className="w-full px-4 py-3 rounded-xl border border-[#e2ddd6] bg-white text-[#0a0a0a] text-sm font-medium focus:outline-none focus:border-[#1a6b3c] disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <option value="">{county ? t('Select a constituency…', 'Chagua jimbo…') : t('Select county first', 'Chagua kaunti kwanza')}</option>
-              {constituencies.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Ward */}
-          <div>
-            <label className="block text-[0.72rem] font-bold text-[#6b7280] uppercase tracking-widest mb-2">
-              {t('Ward', 'Kata')}
-            </label>
-            <select
-              value={ward}
-              onChange={(e) => setWard(e.target.value)}
-              disabled={!constituency}
-              className="w-full px-4 py-3 rounded-xl border border-[#e2ddd6] bg-white text-[#0a0a0a] text-sm font-medium focus:outline-none focus:border-[#1a6b3c] disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <option value="">{constituency ? t('Select a ward…', 'Chagua kata…') : t('Select constituency first', 'Chagua jimbo kwanza')}</option>
-              {wards.map((w) => (
-                <option key={w} value={w}>{w}</option>
-              ))}
-            </select>
-          </div>
+              {m === 'location' ? t('By Location', 'Kwa Eneo') : t('Browse All', 'Vinjari Wote')}
+            </button>
+          ))}
         </div>
 
-        {/* Content */}
         {!supabaseReady ? (
           <div className="text-center py-20 text-[#6b7280]">
             <p className="text-3xl mb-3">🔌</p>
             <p className="font-semibold mb-2">{t('Supabase not configured yet', 'Supabase haijasanidiwa bado')}</p>
-            <p className="text-sm">{t('Add your credentials to', 'Ongeza hati zako kwenye')}{' '}
+            <p className="text-sm">
+              {t('Add your credentials to', 'Ongeza hati zako kwenye')}{' '}
               <code className="bg-[#f3f0eb] px-1.5 py-0.5 rounded">web/.env.local</code>
             </p>
           </div>
-        ) : !county ? (
-          <div className="text-center py-20 text-[#6b7280]">
-            <p className="text-4xl mb-4">🗺️</p>
-            <p className="font-semibold text-[#0a0a0a] mb-1">{t('Select a county above', 'Chagua kaunti hapo juu')}</p>
-            <p className="text-sm">{t('to see its Governor, Senator and Women Representative', 'kuona Gavana, Seneta na Mwakilishi wa Wanawake wake')}</p>
-          </div>
-        ) : (
-          <>
-            {/* County Leaders */}
-            {countyLeaders.length > 0 && (
-              <>
-                <div className="bg-[#0a0a0a] text-white rounded-xl px-5 py-4 mb-5 flex items-center gap-3">
-                  <span className="text-2xl">🏛</span>
-                  <div>
-                    <div className="font-bold text-[1.1rem] font-[family-name:var(--font-playfair)]">
-                      {county} {t('County', 'Kaunti')}
-                    </div>
-                    <div className="text-[0.75rem] text-[#9ca3af]">{t('Currently serving 2022 – 2027', 'Wakihudumia sasa 2022 – 2027')}</div>
-                  </div>
-                </div>
+        ) : mode === 'all' ? (
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                  {countyLeaders.map((leader) => (
-                    <LeaderCard
-                      key={leader.id}
-                      leader={leader}
-                      roleDesc={CONSTITUTIONAL_ROLES[leader.seat_type]}
-                      onClick={() => setSelected(leader)}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
+          /* ── BROWSE ALL ─────────────────────────────────── */
+          <div>
+            {/* Seat type pills */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {(['governor', 'senator', 'womenrep', 'mp', 'mca'] as const).map((seat) => (
+                <button
+                  key={seat}
+                  onClick={() => { setBrowseSeat(seat); setBrowseSearch('') }}
+                  className={`px-4 py-2 rounded-full text-[0.78rem] font-bold transition-all ${
+                    browseSeat === seat
+                      ? 'bg-[#1a6b3c] text-white'
+                      : 'bg-white text-[#374151] border border-[#e2ddd6] hover:border-[#1a6b3c]'
+                  }`}
+                >
+                  {t(SEAT_LABELS[seat].en, SEAT_LABELS[seat].sw)}
+                </button>
+              ))}
+            </div>
 
+            {/* Search */}
+            <div className="relative mb-6">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9ca3af] text-[0.9rem]">🔍</span>
+              <input
+                type="text"
+                value={browseSearch}
+                onChange={(e) => setBrowseSearch(e.target.value)}
+                placeholder={t('Search by name, constituency or ward…', 'Tafuta kwa jina, jimbo au kata…')}
+                className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#e2ddd6] bg-white text-[#0a0a0a] text-sm focus:outline-none focus:border-[#1a6b3c]"
+              />
+            </div>
 
-
-            {/* MP */}
-            {mp && (
-              <>
-                <div className="bg-[#1a6b3c] text-white rounded-xl px-5 py-4 mb-5 flex items-center gap-3 mt-6">
-                  <span className="text-2xl">🎤</span>
-                  <div>
-                    <div className="font-bold text-[1.1rem] font-[family-name:var(--font-playfair)]">
-                      {constituency} {t('Constituency', 'Jimbo')}
-                    </div>
-                    <div className="text-[0.75rem] text-[#9ca3af]">{t('Member of Parliament', 'Mbunge')}</div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                  <LeaderCard
-                    leader={mp}
-                    roleDesc={CONSTITUTIONAL_ROLES['mp']}
-                    onClick={() => setSelected(mp)}
-                  />
-                </div>
-              </>
-            )}
-
-            {/* MCA */}
-            {mca && (
-              <>
-                <div className="bg-[#d4a017] text-white rounded-xl px-5 py-4 mb-5 flex items-center gap-3 mt-6">
-                  <span className="text-2xl">🗣️</span>
-                  <div>
-                    <div className="font-bold text-[1.1rem] font-[family-name:var(--font-playfair)]">
-                      {ward} {t('Ward', 'Kata')}
-                    </div>
-                    <div className="text-[0.75rem] text-[#0a0a0a]">{t('Member of County Assembly', 'Mwanabunge wa Kaunti')}</div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                  <LeaderCard
-                    leader={mca}
-                    roleDesc={CONSTITUTIONAL_ROLES['mca']}
-                    onClick={() => setSelected(mca)}
-                  />
-                </div>
-              </>
-            )}
-
-            {/* No leaders found message */}
-            {county && countyLeaders.length === 0 && (
+            {browseLoading ? (
+              <div className="text-center py-20 text-[#6b7280] text-sm">{t('Loading…', 'Inapakia…')}</div>
+            ) : filteredBrowse.length === 0 ? (
               <div className="text-center py-20 text-[#6b7280]">
-                <p className="text-3xl mb-3">📋</p>
-                <p className="font-semibold">{t('No leaders found for', 'Hakuna viongozi waliopatikana kwa')} {county}</p>
+                <p className="text-3xl mb-3">🔍</p>
+                <p className="font-semibold">{t('No results found', 'Hakuna matokeo')}</p>
               </div>
+            ) : (
+              Object.entries(browseByCounty).map(([cty, leaders]) => (
+                <div key={cty} className="mb-8">
+                  <div className="text-[0.72rem] font-bold text-[#6b7280] uppercase tracking-widest mb-3 flex items-center gap-2">
+                    <span className="h-px flex-1 bg-[#e2ddd6]" />
+                    {cty} {t('County', 'Kaunti')}
+                    <span className="h-px flex-1 bg-[#e2ddd6]" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {leaders.map((leader) => (
+                      <LeaderCard
+                        key={leader.id}
+                        leader={leader}
+                        roleDesc={CONSTITUTIONAL_ROLES[leader.seat_type]}
+                        onClick={() => setSelected(leader)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+        ) : (
+
+          /* ── BY LOCATION ────────────────────────────────── */
+          <>
+            {/* Filters */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              {/* County */}
+              <div>
+                <label className="block text-[0.72rem] font-bold text-[#6b7280] uppercase tracking-widest mb-2">
+                  {t('County', 'Kaunti')}
+                </label>
+                <select
+                  value={county}
+                  onChange={(e) => setCounty(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ddd6] bg-white text-[#0a0a0a] text-sm font-medium focus:outline-none focus:border-[#1a6b3c]"
+                >
+                  <option value="">{t('Select a county…', 'Chagua kaunti…')}</option>
+                  {COUNTIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+
+              {/* Constituency */}
+              <div>
+                <label className="block text-[0.72rem] font-bold text-[#6b7280] uppercase tracking-widest mb-2">
+                  {t('Constituency', 'Jimbo')}
+                </label>
+                <select
+                  value={constituency}
+                  onChange={(e) => setConstituency(e.target.value)}
+                  disabled={!county}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ddd6] bg-white text-[#0a0a0a] text-sm font-medium focus:outline-none focus:border-[#1a6b3c] disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <option value="">{county ? t('Select a constituency…', 'Chagua jimbo…') : t('Select county first', 'Chagua kaunti kwanza')}</option>
+                  {constituencies.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+
+              {/* Ward */}
+              <div>
+                <label className="block text-[0.72rem] font-bold text-[#6b7280] uppercase tracking-widest mb-2">
+                  {t('Ward', 'Kata')}
+                </label>
+                <select
+                  value={ward}
+                  onChange={(e) => setWard(e.target.value)}
+                  disabled={!constituency}
+                  className="w-full px-4 py-3 rounded-xl border border-[#e2ddd6] bg-white text-[#0a0a0a] text-sm font-medium focus:outline-none focus:border-[#1a6b3c] disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <option value="">{constituency ? t('Select a ward…', 'Chagua kata…') : t('Select constituency first', 'Chagua jimbo kwanza')}</option>
+                  {wards.map((w) => <option key={w} value={w}>{w}</option>)}
+                </select>
+              </div>
+            </div>
+
+            {/* Name search */}
+            {county && (
+              <div className="relative mb-6">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9ca3af] text-[0.9rem]">🔍</span>
+                <input
+                  type="text"
+                  value={locationSearch}
+                  onChange={(e) => setLocationSearch(e.target.value)}
+                  placeholder={t('Filter by name…', 'Chuja kwa jina…')}
+                  className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#e2ddd6] bg-white text-[#0a0a0a] text-sm focus:outline-none focus:border-[#1a6b3c]"
+                />
+              </div>
+            )}
+
+            {!county ? (
+              <div className="text-center py-20 text-[#6b7280]">
+                <p className="text-4xl mb-4">🗺️</p>
+                <p className="font-semibold text-[#0a0a0a] mb-1">{t('Select a county above', 'Chagua kaunti hapo juu')}</p>
+                <p className="text-sm">{t('to see its Governor, Senator and Women Representative', 'kuona Gavana, Seneta na Mwakilishi wa Wanawake wake')}</p>
+              </div>
+            ) : (
+              <>
+                {/* County Leaders */}
+                {filterByName(countyLeaders).length > 0 && (
+                  <>
+                    <div className="bg-[#0a0a0a] text-white rounded-xl px-5 py-4 mb-5 flex items-center gap-3">
+                      <span className="text-2xl">🏛</span>
+                      <div>
+                        <div className="font-bold text-[1.1rem] font-[family-name:var(--font-playfair)]">
+                          {county} {t('County', 'Kaunti')}
+                        </div>
+                        <div className="text-[0.75rem] text-[#9ca3af]">{t('Currently serving 2022 – 2027', 'Wakihudumia sasa 2022 – 2027')}</div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                      {filterByName(countyLeaders).map((leader) => (
+                        <LeaderCard
+                          key={leader.id}
+                          leader={leader}
+                          roleDesc={CONSTITUTIONAL_ROLES[leader.seat_type]}
+                          onClick={() => setSelected(leader)}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {/* MP */}
+                {mp && filterByName([mp]).length > 0 && (
+                  <>
+                    <div className="bg-[#1a6b3c] text-white rounded-xl px-5 py-4 mb-5 flex items-center gap-3 mt-6">
+                      <span className="text-2xl">🎤</span>
+                      <div>
+                        <div className="font-bold text-[1.1rem] font-[family-name:var(--font-playfair)]">
+                          {constituency} {t('Constituency', 'Jimbo')}
+                        </div>
+                        <div className="text-[0.75rem] text-[#9ca3af]">{t('Member of Parliament', 'Mbunge')}</div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                      <LeaderCard
+                        leader={mp}
+                        roleDesc={CONSTITUTIONAL_ROLES['mp']}
+                        onClick={() => setSelected(mp)}
+                      />
+                    </div>
+                  </>
+                )}
+
+                {/* MCA */}
+                {mca && filterByName([mca]).length > 0 && (
+                  <>
+                    <div className="bg-[#d4a017] text-white rounded-xl px-5 py-4 mb-5 flex items-center gap-3 mt-6">
+                      <span className="text-2xl">🗣️</span>
+                      <div>
+                        <div className="font-bold text-[1.1rem] font-[family-name:var(--font-playfair)]">
+                          {ward} {t('Ward', 'Kata')}
+                        </div>
+                        <div className="text-[0.75rem] text-[#0a0a0a]">{t('Member of County Assembly', 'Mwanabunge wa Kaunti')}</div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                      <LeaderCard
+                        leader={mca}
+                        roleDesc={CONSTITUTIONAL_ROLES['mca']}
+                        onClick={() => setSelected(mca)}
+                      />
+                    </div>
+                  </>
+                )}
+
+                {county && countyLeaders.length === 0 && (
+                  <div className="text-center py-20 text-[#6b7280]">
+                    <p className="text-3xl mb-3">📋</p>
+                    <p className="font-semibold">{t('No leaders found for', 'Hakuna viongozi waliopatikana kwa')} {county}</p>
+                  </div>
+                )}
+              </>
             )}
           </>
         )}
       </div>
 
-      {/* Profile drawer overlay */}
+      {/* Profile drawer */}
       {selected && (
         <div
           style={{ position: 'fixed', inset: 0, zIndex: 9000, background: 'rgba(0,0,0,0.65)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           onClick={(e) => { if (e.target === e.currentTarget) setSelected(null) }}
         >
           <div style={{ background: 'white', borderRadius: 14, maxWidth: 600, width: '90%', maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
-            <button onClick={() => setSelected(null)} style={{ position: 'absolute', top: 12, right: 16, background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: '#6b7280' }}>✕</button>
+            <button
+              onClick={() => setSelected(null)}
+              style={{ position: 'absolute', top: 12, right: 16, background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: '#6b7280' }}
+            >✕</button>
             <div style={{ padding: 24, paddingTop: 40 }}>
               <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.6rem', fontWeight: 900, marginBottom: 8 }}>{selected.name}</h2>
               <div style={{ fontSize: '0.82rem', color: '#6b7280', marginBottom: 12 }}>{selected.party}</div>
-              <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 12 }}><strong>{t('Age', 'Umri')}:</strong> {selected.age || '—'}</div>
-              <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 12 }}><strong>{t('Previous seats', 'Viti vya awali')}:</strong> {selected.prev_seats || '—'}</div>
-              {selected.manifesto && selected.manifesto.length > 0 && (
-                <div style={{ marginBottom: 12 }}>
-                  <strong>{t('Manifesto / notes', 'Ilani / maelezo')}</strong>
-                  <ul style={{ paddingLeft: 18, marginTop: 4 }}>
-                    {selected.manifesto.map((m, i) => <li key={i} style={{ fontSize: '0.75rem', color: '#374151' }}>{m}</li>)}
-                  </ul>
+              {selected.constituency && (
+                <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 6 }}>
+                  <strong>{t('Constituency', 'Jimbo')}:</strong> {selected.constituency}
+                </div>
+              )}
+              {selected.ward && (
+                <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 6 }}>
+                  <strong>{t('Ward', 'Kata')}:</strong> {selected.ward}
                 </div>
               )}
               <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 12 }}>
-                <strong>{t('Verified contacts', 'Mawasiliano yaliyothibitishwa')}:</strong>{' '}
-                {selected.twitter ? <a href={`https://x.com/${selected.twitter}`} target="_blank" rel="noopener noreferrer" style={{ color: '#1d9bf0' }}>𝕏 @{selected.twitter}</a> : t('None', 'Hakuna')}
-                {selected.facebook ? <> / <a href={selected.facebook} target="_blank" rel="noopener noreferrer" style={{ color: '#1d9bf0' }}>Facebook</a></> : null}
+                <strong>{t('Age', 'Umri')}:</strong> {selected.age || '—'}
               </div>
-
-              {/* Rating section — ported from showRatingSection() in original HTML */}
-              <RatingSection leader={selected} />
+              <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 12 }}>
+                <strong>{t('Previous seats', 'Viti vya awali')}:</strong> {selected.prev_seats || '—'}
+              </div>
+              {selected.manifesto && selected.manifesto.length > 0 && (
+                <div style={{ marginBottom: 12 }}>
+                  <strong style={{ fontSize: '0.75rem' }}>{t('Manifesto / notes', 'Ilani / maelezo')}</strong>
+                  <ul style={{ paddingLeft: 18, marginTop: 4 }}>
+                    {selected.manifesto.map((m, i) => (
+                      <li key={i} style={{ fontSize: '0.75rem', color: '#374151' }}>{m}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <div style={{ fontSize: '0.75rem', color: '#374151' }}>
+                <strong>{t('Verified contacts', 'Mawasiliano yaliyothibitishwa')}:</strong>{' '}
+                {selected.twitter
+                  ? <a href={`https://x.com/${selected.twitter}`} target="_blank" rel="noopener noreferrer" style={{ color: '#1d9bf0' }}>𝕏 @{selected.twitter}</a>
+                  : t('None', 'Hakuna')}
+                {selected.facebook && (
+                  <> / <a href={selected.facebook} target="_blank" rel="noopener noreferrer" style={{ color: '#1d9bf0' }}>Facebook</a></>
+                )}
+              </div>
             </div>
           </div>
         </div>

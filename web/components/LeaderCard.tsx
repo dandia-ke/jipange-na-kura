@@ -8,6 +8,8 @@ const ROLE_BADGE: Record<string, string> = {
   governor: '🏛 GOVERNOR',
   senator:  '🏛 SENATOR',
   womenrep: '♀ WOMEN REP',
+  mp: '🎤 MP',
+  mca: '🗣️ MCA',
 }
 
 type Props = {

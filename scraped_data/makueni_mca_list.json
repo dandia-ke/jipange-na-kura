@@ -1,0 +1,302 @@
+[
+  {
+    "name": "Jonathan Musyoki Muthoka",
+    "ward": "ILIMA",
+    "constituency": "Kaiti",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/ilima.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Urbanus Manzu Yulu",
+    "ward": "KEE",
+    "constituency": "Kaiti",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/kee.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Joseph Matheka Mbindyo",
+    "ward": "KILUNGU",
+    "constituency": "Kaiti",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/kilungu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Jackson Ndolo Kimunyi",
+    "ward": "UKIA",
+    "constituency": "Kaiti",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Muungano Party",
+    "photo_url": "/photos/mcas/makueni/ukia.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Harrison Mwanzia Mutie",
+    "ward": "IVINGONI/NZAMBANI",
+    "constituency": "Kibwezi East",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Muungano Party",
+    "photo_url": "/photos/mcas/makueni/ivingoni_nzambani.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Bryan Kyalo Nzoka",
+    "ward": "MASONGALENI",
+    "constituency": "Kibwezi East",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Independent",
+    "photo_url": "/photos/mcas/makueni/masongaleni.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Francis Mulwa Mwania",
+    "ward": "MTITO ANDEI",
+    "constituency": "Kibwezi East",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/mtito_andei.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Erick Musyoki Katumo",
+    "ward": "THANGE",
+    "constituency": "Kibwezi East",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Muungano Party",
+    "photo_url": "/photos/mcas/makueni/thange.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Cosmas Mutunga Kaleli",
+    "ward": "EMALI/MULALA",
+    "constituency": "Kibwezi West",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "MCCP",
+    "photo_url": "/photos/mcas/makueni/emali_mulala.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Jackson Muema Mbalu",
+    "ward": "KIKUMBULYU NORTH",
+    "constituency": "Kibwezi West",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "MCCP",
+    "photo_url": "/photos/mcas/makueni/kikumbulyu_north.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Jades Kalunda Muema",
+    "ward": "KIKUMBULYU SOUTH",
+    "constituency": "Kibwezi West",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Muungano Party",
+    "photo_url": "/photos/mcas/makueni/kikumbulyu_south.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Steve Nzivo Kilonzo",
+    "ward": "MAKINDU",
+    "constituency": "Kibwezi West",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Independent",
+    "photo_url": "/photos/mcas/makueni/makindu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Daniel Kivuva Musau",
+    "ward": "NGUU/MASUMBA",
+    "constituency": "Kibwezi West",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/makueni/nguu_masumba.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Meshack Muthiani Mwangangi",
+    "ward": "NGUUMO",
+    "constituency": "Kibwezi West",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/nguumo.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Reuben Musau Kavai",
+    "ward": "KASIKEU",
+    "constituency": "Kilome",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Muungano Party",
+    "photo_url": "/photos/mcas/makueni/kasikeu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Justus Mwanzia Muema",
+    "ward": "KIIMA KIU/KALANZONI",
+    "constituency": "Kilome",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Ward Wiper Democratic Movement (WDM)",
+    "photo_url": "",
+    "nominated": false
+  },
+  {
+    "name": "Joseph Muthini Muema",
+    "ward": "MUKAA",
+    "constituency": "Kilome",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Independent",
+    "photo_url": "/photos/mcas/makueni/mukaa.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Bendict Kennedy Maneno",
+    "ward": "KATHONZWENI",
+    "constituency": "Makueni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/kathonzweni.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Sebastian Muli Munguti",
+    "ward": "KITISE/KITHUKI",
+    "constituency": "Makueni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/kitise_kithuki.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Jonathan Muunda Kimongo",
+    "ward": "MAVINDINI",
+    "constituency": "Makueni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Muungano Party",
+    "photo_url": "/photos/mcas/makueni/mavindini.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Benard Tivu Mutua",
+    "ward": "MBITINI",
+    "constituency": "Makueni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Independent",
+    "photo_url": "/photos/mcas/makueni/mbitini.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Elizabeth Kawembe Mutinda",
+    "ward": "MUVAU/KIKUUMINI",
+    "constituency": "Makueni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Muungano Party",
+    "photo_url": "/photos/mcas/makueni/muvau_kikuumini.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Francis Munyao Mutuku",
+    "ward": "NZAUI/KILILI/KALAMBA",
+    "constituency": "Makueni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/nzaui_kilili_kalamba.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Felix Mateso Boniface",
+    "ward": "WOTE",
+    "constituency": "Makueni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/wote.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Meshack Kalii Ndambuki",
+    "ward": "KALAWA",
+    "constituency": "Mbooni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Muungano Party",
+    "photo_url": "/photos/mcas/makueni/kalawa.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Darius Kioko Mainga",
+    "ward": "KITETA/KISAU",
+    "constituency": "Mbooni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Independent",
+    "photo_url": "/photos/mcas/makueni/kiteta_kisau.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kisungi Kyalo Mulinge Wa Katete",
+    "ward": "KITHUNGO/KITUNDU",
+    "constituency": "Mbooni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/kithungo_kitundu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Alexander Mulemba",
+    "ward": "MBOONI",
+    "constituency": "Mbooni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/mbooni.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kyalo Mumo",
+    "ward": "TULIMANI",
+    "constituency": "Mbooni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/tulimani.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Dennis Mutinda Musyoka",
+    "ward": "WAIA-KAKO",
+    "constituency": "Mbooni",
+    "county": "Makueni",
+    "seat_type": "mca",
+    "party": "Wiper Democratic Movement (WDM)",
+    "photo_url": "/photos/mcas/makueni/waiakako.jpg",
+    "nominated": false
+  }
+]

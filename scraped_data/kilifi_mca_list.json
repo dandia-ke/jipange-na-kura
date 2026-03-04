@@ -1,0 +1,317 @@
+[
+  {
+    "name": "Emmanuel Karisa Baya",
+    "ward": "MARAFA",
+    "constituency": "Magarini",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/marafa.jpg"
+  },
+  {
+    "name": "Ibrahim Abdi",
+    "ward": "WATAMU",
+    "constituency": "Kilifi North",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/watamu.jpg"
+  },
+  {
+    "name": "Hassan Mohammed",
+    "ward": "MATSANGONI",
+    "constituency": "Kilifi North",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/matsangoni.jpg"
+  },
+  {
+    "name": "Harrison Thaura",
+    "ward": "SOKOKE",
+    "constituency": "Ganze",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/sokoke.jpg"
+  },
+  {
+    "name": "Morgan Mwagawe Kubo",
+    "ward": "KAMBE/RIBE",
+    "constituency": "Rabai",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/kambe_ribe.jpg"
+  },
+  {
+    "name": "Martha K. Musyoki",
+    "ward": "MARIAKANI",
+    "constituency": "Kaloleni",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/mariakani.png"
+  },
+  {
+    "name": "Haron Tete Ndundi",
+    "ward": "SHIMO LA TEWA",
+    "constituency": "Kilifi South",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/shimo_la_tewa.jpg"
+  },
+  {
+    "name": "Edward Kazungu",
+    "ward": "MWANAMWINGA",
+    "constituency": "Kaloleni",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/mwanamwinga.jpg"
+  },
+  {
+    "name": "Brown Kahindi",
+    "ward": "MTEPENI",
+    "constituency": "Kilifi South",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/mtepeni.jpg"
+  },
+  {
+    "name": "Kalama Mumba",
+    "ward": "MWAWESA",
+    "constituency": "Rabai",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/mwawesa.jpg"
+  },
+  {
+    "name": "Agnes Sidi",
+    "ward": "KAYAFUNGO",
+    "constituency": "Kaloleni",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/kayafungo.jpg"
+  },
+  {
+    "name": "Juma Chengo",
+    "ward": "MNARANI",
+    "constituency": "Kilifi North",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/mnarani.jpg"
+  },
+  {
+    "name": "Jonathan Birya",
+    "ward": "KALOLENI",
+    "constituency": "Kaloleni",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/kaloleni.jpg"
+  },
+  {
+    "name": "Hamisi Mumbo",
+    "ward": "JILORE",
+    "constituency": "Malindi",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/jilore.jpg"
+  },
+  {
+    "name": "Emmanuel Changawa",
+    "ward": "DABASO",
+    "constituency": "Kilifi North",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/dabaso.jpg"
+  },
+  {
+    "name": "Cantona Mae",
+    "ward": "RABAI/KISURUTINI",
+    "constituency": "Rabai",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/rabai_kisurutini.jpg"
+  },
+  {
+    "name": "Paul Charo",
+    "ward": "MAGARINI",
+    "constituency": "Magarini",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/magarini.jpg"
+  },
+  {
+    "name": "Theophilus Fondo",
+    "ward": "GARASHI",
+    "constituency": "Magarini",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/garashi.jpg"
+  },
+  {
+    "name": "Saidi Juma",
+    "ward": "JUNJU",
+    "constituency": "Kilifi South",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/junju.jpg"
+  },
+  {
+    "name": "Rashid Odhiambo",
+    "ward": "MALINDI TOWN",
+    "constituency": "Malindi",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/malindi_town.jpg"
+  },
+  {
+    "name": "Stephen Baya",
+    "ward": "GONGONI",
+    "constituency": "Magarini",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/gongoni.jpg"
+  },
+  {
+    "name": "Thomas Chengo",
+    "ward": "TEZO",
+    "constituency": "Kilifi North",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/tezo.jpg"
+  },
+  {
+    "name": "Oscar Wanje",
+    "ward": "GANDA",
+    "constituency": "Malindi",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/ganda.jpg"
+  },
+  {
+    "name": "Morris Kitsao Hinzano",
+    "ward": "KAKUYUNI",
+    "constituency": "Malindi",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/kakuyuni.jpg"
+  },
+  {
+    "name": "Moses Keah",
+    "ward": "KIBARANI",
+    "constituency": "Kilifi North",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/kibarani.jpg"
+  },
+  {
+    "name": "Mwambire Mohamed",
+    "ward": "BAMBA",
+    "constituency": "Ganze",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/bamba.jpg"
+  },
+  {
+    "name": "Naphtali Nyae",
+    "ward": "RURUMA",
+    "constituency": "Rabai",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/ruruma.jpg"
+  },
+  {
+    "name": "Peter Safari Shehe",
+    "ward": "JARIBUNI",
+    "constituency": "Ganze",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/jaribuni.jpg"
+  },
+  {
+    "name": "Ray Mwaro",
+    "ward": "SOKONI",
+    "constituency": "Kilifi North",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/sokoni.jpg"
+  },
+  {
+    "name": "Ronald Kazungu",
+    "ward": "CHASIMBA",
+    "constituency": "Kilifi South",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/chasimba.jpg"
+  },
+  {
+    "name": "Rose Baraka",
+    "ward": "SABAKI",
+    "constituency": "Magarini",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/sabaki.jpg"
+  },
+  {
+    "name": "Samson Zia",
+    "ward": "ADU",
+    "constituency": "Magarini",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/adu.jpg"
+  },
+  {
+    "name": "Stallone Humphrey",
+    "ward": "MWARAKAYA",
+    "constituency": "Kilifi South",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/mwarakaya.jpg"
+  },
+  {
+    "name": "Benson Karisa Ngirani",
+    "ward": "GANZE",
+    "constituency": "Ganze",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/ganze.jpg"
+  },
+  {
+    "name": "Twaher Abdulkarim",
+    "ward": "SHELLA",
+    "constituency": "Malindi",
+    "county": "KILIFI",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/kilifi/shella.jpg"
+  }
+]

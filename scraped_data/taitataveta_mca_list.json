@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Anthony Mng'ambwa",
+    "ward": "BURA",
+    "constituency": "Mwatate",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/bura.jpg"
+  },
+  {
+    "name": "Newton Kifuso",
+    "ward": "WUMINGU/KISHUSHE",
+    "constituency": "Wundanyi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/wumingu_kishushe.jpeg"
+  },
+  {
+    "name": "Anselm Mwadime",
+    "ward": "MWANDA/MGANGE",
+    "constituency": "Wundanyi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/mwanda_mgange.jpg"
+  },
+  {
+    "name": "Lawrence Mzugha",
+    "ward": "MBOLOLO",
+    "constituency": "Voi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/mbololo.jpg"
+  },
+  {
+    "name": "Amos Makalo",
+    "ward": "KASIGAU",
+    "constituency": "Voi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/kasigau.jpg"
+  },
+  {
+    "name": "Jones Solomon",
+    "ward": "NGOLIA",
+    "constituency": "Voi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/ngolia.jpg"
+  },
+  {
+    "name": "Dorcas Mlughu",
+    "ward": "RONG'E",
+    "constituency": "Mwatate",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/ronge.jpg"
+  },
+  {
+    "name": "Stephen Nzai",
+    "ward": "MARUNGU",
+    "constituency": "Voi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/marungu.jpg"
+  },
+  {
+    "name": "Duncan Wangama",
+    "ward": "WUSI/KISHAMBA",
+    "constituency": "Mwatate",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/wusi_kishamba.jpg"
+  },
+  {
+    "name": "Crispus Tondoo",
+    "ward": "BOMANI",
+    "constituency": "Taveta",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/bomani.jpg"
+  },
+  {
+    "name": "Azhar Din",
+    "ward": "KALOLENI",
+    "constituency": "Voi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/kaloleni.jpg"
+  },
+  {
+    "name": "Jimmy Mwamidi",
+    "ward": "WUNDANYI/MBALE",
+    "constituency": "Wundanyi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/wundanyi_mbale.jpg"
+  },
+  {
+    "name": "Joseph Mwalegha",
+    "ward": "MWATATE",
+    "constituency": "Mwatate",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/mwatate.jpg"
+  },
+  {
+    "name": "Joseph Mabishi",
+    "ward": "CHAWIA",
+    "constituency": "Mwatate",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/chawia.jpg"
+  },
+  {
+    "name": "Brayson Mwambi",
+    "ward": "SAGALLA",
+    "constituency": "Voi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/sagalla.jpg"
+  },
+  {
+    "name": "Halifa Taraya",
+    "ward": "MBOGHONI",
+    "constituency": "Taveta",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/mboghoni.jpg"
+  },
+  {
+    "name": "Genard Mwandau",
+    "ward": "WERUGHA",
+    "constituency": "Wundanyi",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/werugha.jpg"
+  },
+  {
+    "name": "Daniel Kimuyu",
+    "ward": "MAHOO",
+    "constituency": "Taveta",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/mahoo.jpg"
+  },
+  {
+    "name": "Isaac Matolo",
+    "ward": "MATA",
+    "constituency": "Taveta",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/mata.jpg"
+  },
+  {
+    "name": "Anthony Kinyili",
+    "ward": "CHALA",
+    "constituency": "Taveta",
+    "county": "TAITA TAVETA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/taita_taveta/chala.jpg"
+  }
+]

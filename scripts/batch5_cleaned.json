@@ -1,0 +1,1472 @@
+{
+  "Bungoma": [
+    {
+      "name": "Stephen Wamalwa",
+      "ward": "Mitua/Soysambu",
+      "constituency": "Tongaren",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Stephen%20Wamalwa.JPG"
+    },
+    {
+      "name": "Joseph Juma Nyongesa",
+      "ward": "Marakaru/Tuuti Ward",
+      "constituency": "Kanduyi",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Joseph%20Juma%20Nyongesa.JPG"
+    },
+    {
+      "name": "Vitalis Wangila",
+      "ward": "Kabula Ward",
+      "constituency": "Bumula",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Vitalis%20Wangila.JPG"
+    },
+    {
+      "name": "Ali Machani",
+      "ward": "Maraka",
+      "constituency": "Webuye East",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Ali%20Machani.JPG"
+    },
+    {
+      "name": "Joan Kirong",
+      "ward": "Kapkateny",
+      "constituency": "Mt. Elgon",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Joan%20Kirong.JPG"
+    },
+    {
+      "name": "Everlyne Mutiembu Naboelela",
+      "ward": "Malakisi/South Kulisiru ward",
+      "constituency": "Sirisia",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Hon%20Everlyne%20Mutiembu%20Naboelela%2C%20MCA%20Malakisi%20South%20Kulisiru.jpg"
+    },
+    {
+      "name": "Meshack Museveni Wekesa",
+      "ward": "Mukuyuni Ward",
+      "constituency": "Kabuchai",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Meshack%20Museveni%20Wekesa.JPG"
+    },
+    {
+      "name": "Aggrey Mulongo Waliaula",
+      "ward": "Kibingei Ward",
+      "constituency": "Kimilili",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon%20Agrey%20Mulongo%20Waliaula.JPG"
+    },
+    {
+      "name": "Isaiah Sudi Busolo",
+      "ward": "South Bukusu",
+      "constituency": "Bumula",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Isaiah%20Sudi%20Busolo.JPG"
+    },
+    {
+      "name": "Jack Kawa",
+      "ward": "Bokoli",
+      "constituency": "Webuye West",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Jack%20Kawa.JPG"
+    },
+    {
+      "name": "Violet Namaemba Makhanu",
+      "ward": "Mihuu",
+      "constituency": "Webuye East",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Hon%20Makhanu%20violet%20Namaemba%20Mihuu%20Ward%20.jpg"
+    },
+    {
+      "name": "Jackson Ouma Wambulwa",
+      "ward": "Kimaeti",
+      "constituency": "Bumula",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.Jack%20Wambulwa.JPG"
+    },
+    {
+      "name": "Hentry Nyongesa",
+      "ward": "Bumula",
+      "constituency": "Bumula",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Henry%20Nyongesa.JPG"
+    },
+    {
+      "name": "Francis Chemion",
+      "ward": "Kaptama",
+      "constituency": "Mt. Elgon",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Francis%20Chemion.JPG"
+    },
+    {
+      "name": "Tonny Barasa",
+      "ward": "Lwandanyi",
+      "constituency": "Sirisia",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Tonny%20Barasa.JPG"
+    },
+    {
+      "name": "Antony Namunyu Lusenaka",
+      "ward": "Bukemba West",
+      "constituency": "Kanduyi",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Antony%20Namunyu%20Luseneka.JPG"
+    },
+    {
+      "name": "Charles Nangulu",
+      "ward": "Namwela",
+      "constituency": "Sirisia",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Charles%20Nangulu.JPG"
+    },
+    {
+      "name": "Everton Nganga",
+      "ward": "East Sang'alo",
+      "constituency": "Kanduyi",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Everton%20Kanga.JPG"
+    },
+    {
+      "name": "Franklin Simotwo",
+      "ward": "Chepyuk",
+      "constituency": "Mt. Elgon",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Franklin%20Simotwo.JPG"
+    },
+    {
+      "name": "George Makari",
+      "ward": "Musikoma",
+      "constituency": "Kanduyi",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20George%20Makari.JPG"
+    },
+    {
+      "name": "Godfrey Mukhwana",
+      "ward": "West Sang'alo",
+      "constituency": "Kanduyi",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Godfrey%20Mukwana.JPG"
+    },
+    {
+      "name": "Grace Sundukwa",
+      "ward": "Sitikho",
+      "constituency": "Webuye West",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Grace%20Sundukwa.JPG"
+    },
+    {
+      "name": "Jerusa Aleu",
+      "ward": "Milima",
+      "constituency": "Tongaren",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Jerusa%20Aleu.JPG"
+    },
+    {
+      "name": "Masungo Miliah Nanyokia",
+      "ward": "Misikhu",
+      "constituency": "Webuye West",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Masungo%20Millah%20Nanyokia%20Misikhu%20ward.jpg"
+    },
+    {
+      "name": "Abraham Obama Kimungui",
+      "ward": "Kamukuywa",
+      "constituency": "Kimilili",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Abraham%20Obama%20Kimungui.JPG"
+    },
+    {
+      "name": "Alfred Wekesa Mukhanya",
+      "ward": "Ndivisi",
+      "constituency": "Webuye East",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Alfred%20Wekesa%20Mukhanya.JPG"
+    },
+    {
+      "name": "Benjamin Jeremiah Otsiulah",
+      "ward": "Khasoko",
+      "constituency": "Bumula",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Benjamin%20Jeremiah%20Otsiulah.JPG"
+    },
+    {
+      "name": "Peter Caleb Wanjala",
+      "ward": "Bukembe East",
+      "constituency": "Kanduyi",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Peter%20Caleb%20Wanjala.JPG"
+    },
+    {
+      "name": "Christine Cunera Mukhongo",
+      "ward": "Kimilili",
+      "constituency": "Kimilili",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Christine%20Cunera%20Mukhongo.JPG"
+    },
+    {
+      "name": "Cornelius Wanjala Makhanu",
+      "ward": "Khalaba",
+      "constituency": "Kanduyi",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.Cornelius%20Wanjala%20Makhanu.JPG"
+    },
+    {
+      "name": "Edwin Wekesa Opwora",
+      "ward": "Bwake/Luuya",
+      "constituency": "Kabuchai",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Edwin%20Wekesa%20Opwora.JPG"
+    },
+    {
+      "name": "George Kwemoi Tendet",
+      "ward": "Elgon",
+      "constituency": "Mt. Elgon",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20George%20Kwemoi%20Tendet.JPG"
+    },
+    {
+      "name": "Idd Chamawi Owongo",
+      "ward": "Maeni",
+      "constituency": "Kimilili",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Idd%20Chamawi%20Owongo.JPG"
+    },
+    {
+      "name": "Jacob Psero Marugaa",
+      "ward": "Chesikaki",
+      "constituency": "Mt. Elgon",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Jacob%20Psero%20Marugaa.JPG"
+    },
+    {
+      "name": "Jeremiah Kuloba",
+      "ward": "Township",
+      "constituency": "Kanduyi",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Jeremiah%20Kuloba.JPG"
+    },
+    {
+      "name": "Job Lumbwani Mukoyandali",
+      "ward": "West Bukusu",
+      "constituency": "Bumula",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Job%20Mukoyandali%20Lubwani.JPG"
+    },
+    {
+      "name": "Johnstone Okasida Ipara",
+      "ward": "Tongaren",
+      "constituency": "Tongaren",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Johnstone%20Ipara.JPG"
+    },
+    {
+      "name": "Martin Chemorion Cheseto",
+      "ward": "Cheptais",
+      "constituency": "Mt. Elgon",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.Martin%20%20Chemorion%20Cheseto.JPG"
+    },
+    {
+      "name": "Orize Wanjala Kundu",
+      "ward": "Siboti",
+      "constituency": "Bumula",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Orize%20Wanjala%20Kundu.JPG"
+    },
+    {
+      "name": "Polycarp Wandabusi Kimeta",
+      "ward": "West Nalondo",
+      "constituency": "Kabuchai",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Wandabusi%20Kimeta%20Polycarp.JPG"
+    },
+    {
+      "name": "Stephen Simiyu Kaiser",
+      "ward": "Matulo",
+      "constituency": "Webuye West",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.%20Stephen%20Simiyu%20Kaiser.JPG"
+    },
+    {
+      "name": "Timothy Chikati Chitekeyi",
+      "ward": "Ndalu/Tabani",
+      "constituency": "Tongaren",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Bungoma/MCA/Hon.Timothy%20Chikati%20Chitekeyi.JPG"
+    },
+    {
+      "name": "Waiti Wafula Waiti",
+      "ward": "Naitiri Kabuyefwe",
+      "constituency": "Tongaren",
+      "photoUrl": "https://www.bungomaassembly.go.ke/sites/default/files/Hon.%20Wafula%20Waiti%20Naitiri%20Kabuyefwe.jpg"
+    }
+  ],
+  "Siaya": [
+    {
+      "name": "Odongo Andericus Oduor",
+      "ward": "Ugenya West",
+      "constituency": "Ugenya",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Odongo-Andericus-Oduor-500x500.jpg"
+    },
+    {
+      "name": "Otieno Edwin Martin",
+      "ward": "Ugunja",
+      "constituency": "Ugunja",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Otieno-Edwin-Martin-500x500.jpg"
+    },
+    {
+      "name": "Bonyo Booker Washington",
+      "ward": "Uyoma North",
+      "constituency": "Rarieda",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Bonyo-Washington-Booker-2-500x500.jpg"
+    },
+    {
+      "name": "Odinga Truphosa Osewe",
+      "ward": "West Sakwa",
+      "constituency": "Bondo",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Odinga-Truphosa-Apondi-Osewe-2-500x500.jpg"
+    },
+    {
+      "name": "Baraka Seth Ochieng",
+      "ward": "East Gem",
+      "constituency": "Gem",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/HonOchieng-Seth-Baraka-500x500.jpg"
+    },
+    {
+      "name": "Okwirry Susan Achieng",
+      "ward": "West Gem",
+      "constituency": "Gem",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/hon.-susan-okwiri-1-500x500.jpg"
+    },
+    {
+      "name": "Omwende Andrew Omolo",
+      "ward": "Sigomre",
+      "constituency": "Ugunja",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Omolo-Andrew-Omwende-2-500x500.jpg"
+    },
+    {
+      "name": "Okeyo Mark Okeyo",
+      "ward": "West Asembo",
+      "constituency": "Rarieda",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Okeyo-Mark-Okeyo-2-500x500.jpg"
+    },
+    {
+      "name": "Achieng Eunice Rahel",
+      "ward": "South Sakwa",
+      "constituency": "Bondo",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Achieng-Eunice-Rahel-500x500.jpg"
+    },
+    {
+      "name": "Oluoch Philip Obonyo",
+      "ward": "North Gem",
+      "constituency": "Gem",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Abuba-Philip-Obonyo-Oluoch-500x500.jpg"
+    },
+    {
+      "name": "Odawa Vincent Otieno",
+      "ward": "North Alego",
+      "constituency": "Alego Usonga",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Odawa-Vincent-Otieno-500x500.jpg"
+    },
+    {
+      "name": "Otiato Francis Otieno",
+      "ward": "Yimbo East",
+      "constituency": "Bondo",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Otiato-500x500.jpg"
+    },
+    {
+      "name": "Anyango Silas Madingu",
+      "ward": "Central Gem",
+      "constituency": "Gem",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Anyango-Silas-Madingu-500x500.jpg"
+    },
+    {
+      "name": "Omoro Fredrick Oluoch",
+      "ward": "East Ugenya",
+      "constituency": "Ugenya",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Omoro-Fredrick-Oluoch-2-500x500.jpg"
+    },
+    {
+      "name": "Otare James Obiero",
+      "ward": "Siaya Township",
+      "constituency": "Alego Usonga",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Otare-James-Obiero-500x500.jpg"
+    },
+    {
+      "name": "Kinyanyi William Onyango",
+      "ward": "Yala Township",
+      "constituency": "Gem",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/HON.-WILLIAM-KINYANYI-ONYANGO-500x500.jpg"
+    },
+    {
+      "name": "Masidis Scolastica Madowo",
+      "ward": "South East Alego",
+      "constituency": "Alego Usonga",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Madowo-Scholastica-Masidis-Owoko-500x500.jpg"
+    },
+    {
+      "name": "Arika Oliver",
+      "ward": "North Sakwa",
+      "constituency": "Bondo",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-ArikaOliver-Otieno-500x500.jpg"
+    },
+    {
+      "name": "Okumu Felix Ouma",
+      "ward": "West Alego",
+      "constituency": "Alego Usonga",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/HON.-FELIX-OUMA-OKUMU-500x500.jpg"
+    },
+    {
+      "name": "Madialo Sylvester Otieno",
+      "ward": "Usonga",
+      "constituency": "Alego Usonga",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Madialo-Sylvester-Otieno-500x500.jpg"
+    },
+    {
+      "name": "Onguuru Gordon",
+      "ward": "East Asembo",
+      "constituency": "Rarieda",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Onguuru-Gordon-Onyango-500x500.jpg"
+    },
+    {
+      "name": "Angule Simeon",
+      "ward": "West Yimbo",
+      "constituency": "Bondo",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Angule-Simon-Otieno-2-500x500.jpg"
+    },
+    {
+      "name": "Apodo John Otieno",
+      "ward": "Sidindi",
+      "constituency": "Ugunja",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Apodo-John-Otieno-500x500.jpg"
+    },
+    {
+      "name": "Ragen David Omondi",
+      "ward": "Central Alego",
+      "constituency": "Alego Usonga",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/05/Hon.-Ragen-David-Omondi-2-500x500.jpg"
+    },
+    {
+      "name": "Otieno Joseph Bismarck Olang’o",
+      "ward": "Central Sakwa",
+      "constituency": "Bondo",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/09/Hon.-Otieno-Joseph-Bismarck-Olango-2-1-500x500.jpg"
+    },
+    {
+      "name": "Adalla Benard Onyango",
+      "ward": "North Ugenya",
+      "constituency": "Ugenya",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/09/Hon.-Adala-Benard-Onyango-500x500.jpg"
+    },
+    {
+      "name": "Oguta Justus Obuya",
+      "ward": "West Uyoma",
+      "constituency": "Rarieda",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/09/Hon.-Obuya-Justus-Oguta-2-500x500.jpg"
+    },
+    {
+      "name": "Adiala Michael Otieno",
+      "ward": "South Uyoma",
+      "constituency": "Rarieda",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/09/Hon.-Otieno-Michael-Omondi-2-500x500.jpg"
+    },
+    {
+      "name": "Oduor Joseph Peter Omondi",
+      "ward": "Ukwala",
+      "constituency": "Ugenya",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2020/09/Hon.-Omondi-Joseph-Peter-2-500x500.jpg"
+    },
+    {
+      "name": "Brian Chieng' Anyango Obiero",
+      "ward": "South Gem",
+      "constituency": "Gem",
+      "photoUrl": "https://siayaassembly.go.ke/wp-content/uploads/2023/02/WhatsApp-Image-2023-02-16-at-3.27.14-PM-500x500.jpeg"
+    }
+  ],
+  "Kisumu": [
+    {
+      "name": "Adega Benson",
+      "ward": "Kajulu",
+      "constituency": "Kisumu East",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2019/04/logo-5.png"
+    },
+    {
+      "name": "Biko Mildred",
+      "ward": "Central Seme",
+      "constituency": "Seme",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2020/02/mildred-biko-1.jpg"
+    },
+    {
+      "name": "Bill Oliver",
+      "ward": "Kobura",
+      "constituency": "Nyando",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/Bill-oliver.jpg"
+    },
+    {
+      "name": "Boitone Ratib",
+      "ward": "Nyalenda A",
+      "constituency": "Kisumu East",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/Boitone-ratib.jpg"
+    },
+    {
+      "name": "Dedeh Samuel",
+      "ward": "Kisumu North",
+      "constituency": "Kisumu West",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/dedeh-samuel.jpg"
+    },
+    {
+      "name": "Gard Olima",
+      "ward": "South West Nyakach",
+      "constituency": "Nyakach",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/olima-gad.jpg"
+    },
+    {
+      "name": "Habil Nyasuna",
+      "ward": "Masogo Nyangoma",
+      "constituency": "Muhoroni",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2020/02/habil-Nyasuna-2.jpg"
+    },
+    {
+      "name": "Joakim Oketch",
+      "ward": "Kondele",
+      "constituency": "Kisumu Central",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/omieno-oketch-joachim.jpg"
+    },
+    {
+      "name": "K'omudho Vitalis Oiewo",
+      "ward": "Muhoroni Koru",
+      "constituency": "Muhoroni",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/komudho-vitalis-1.jpg"
+    },
+    {
+      "name": "Maurice Ngeta",
+      "ward": "Awasi/Onjiko",
+      "constituency": "Nyando",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/Ngeta-Maurice.jpg"
+    },
+    {
+      "name": "Nyaoke Tom",
+      "ward": "North Nyakach",
+      "constituency": "Nyakach",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2020/02/adega.jpg"
+    },
+    {
+      "name": "Obuya Vincent",
+      "ward": "Central Nyakach",
+      "constituency": "Nyakach",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/vincent.jpg"
+    },
+    {
+      "name": "Ochele Moses Odhiambo",
+      "ward": "East Kano Wawidhi",
+      "constituency": "Nyando",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/ochele-moses.jpg"
+    },
+    {
+      "name": "Odari Fredrick",
+      "ward": "Chemelil",
+      "constituency": "Muhoroni",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2020/02/frdrick-odari.jpg"
+    },
+    {
+      "name": "Odhiambo Caren",
+      "ward": "Shaurimoyo",
+      "constituency": "Kisumu Central",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/carren-.jpg"
+    },
+    {
+      "name": "Okoth Kevin",
+      "ward": "Kolwa Central",
+      "constituency": "Kisumu East",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/okoth-kevin-odhiambo.jpg"
+    },
+    {
+      "name": "Okoyo Zacharia",
+      "ward": "Central Kisumu",
+      "constituency": "Kisumu West",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2020/02/Okoyo-Zacharia-1.jpg"
+    },
+    {
+      "name": "Omollo James",
+      "ward": "West Nyakach",
+      "constituency": "Nyakach",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/james-omolo.jpg"
+    },
+    {
+      "name": "Omollo Samuel",
+      "ward": "Railways",
+      "constituency": "Kisumu Central",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/omolo-samuel-onyango.jpg"
+    },
+    {
+      "name": "Omuya Millicent",
+      "ward": "North Seme",
+      "constituency": "Seme",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/omuya-Millicent.jpg"
+    },
+    {
+      "name": "Onditi Tom",
+      "ward": "Ombeyi",
+      "constituency": "Muhoroni",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2020/02/onditi-tom.jpg"
+    },
+    {
+      "name": "Othuthu George Abaja",
+      "ward": "West Seme",
+      "constituency": "Seme",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2020/02/hon-abaja.jpg"
+    },
+    {
+      "name": "Ouko Kennedy",
+      "ward": "West Kisumu",
+      "constituency": "Kisumu West",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/ouko-kennedy.jpg"
+    },
+    {
+      "name": "Oyoo Pamela",
+      "ward": "Migosi",
+      "constituency": "Kisumu Central",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/oyoo-pamela.jpg"
+    },
+    {
+      "name": "Rakwach Reuben",
+      "ward": "Kolwa",
+      "constituency": "Kisumu East",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/Rakwack.jpg"
+    },
+    {
+      "name": "Seth Ochieng Kanga",
+      "ward": "Market Milimani",
+      "constituency": "Tongaren",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/seth-ochieng.jpg"
+    },
+    {
+      "name": "Seth Okumu",
+      "ward": "East Seme",
+      "constituency": "Seme",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/okumu-seth-ogutu-1.jpg"
+    },
+    {
+      "name": "Warindo Geofrey",
+      "ward": "Miwani",
+      "constituency": "Muhoroni",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/warido-geofrey.jpg"
+    },
+    {
+      "name": "Were James",
+      "ward": "Nyalenda B",
+      "constituency": "Kisumu Central",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/were-james.jpg"
+    },
+    {
+      "name": "Oiko Pete",
+      "ward": "Kabonyo/Kanyagwal",
+      "constituency": "Nyando",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2020/02/oiko-pete.jpg"
+    },
+    {
+      "name": "Vincent Jagongo",
+      "ward": "North West Kisumu",
+      "constituency": "Kisumu West",
+      "photoUrl": "https://kisumuassembly.go.ke/wp-content/uploads/2022/10/jagogo-vincent.jpg"
+    }
+  ],
+  "Migori": [
+    {
+      "name": "Collins Osewe",
+      "ward": "North Kamagambo",
+      "constituency": "Rongo",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Collins-Osewe-MCA-North-Kamagambo-Ward.jpg"
+    },
+    {
+      "name": "Jacob Calebs Akal",
+      "ward": "Central Kamagambo",
+      "constituency": "Rongo",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Jacob-Calebs-Akal-MCA-Central-Kamagambo-Ward.jpg"
+    },
+    {
+      "name": "Simon Nyaoke",
+      "ward": "East Kamagambo",
+      "constituency": "Rongo",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Simon-Nyaoke-MCA-East-Kamagambo-Ward.jpg"
+    },
+    {
+      "name": "Collins Ochieng Agai",
+      "ward": "South Kamagambo",
+      "constituency": "Rongo",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Collins-Ochieng-Agai-MCA-South-Kamagambo-Ward.jpg"
+    },
+    {
+      "name": "William O. Mikwaya",
+      "ward": "North Sakwa",
+      "constituency": "Awendo",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-William-O.-Mikwaya-MCA-North-Sakwa-Ward.jpg"
+    },
+    {
+      "name": "Edward Ouma Ooro",
+      "ward": "South Sakwa",
+      "constituency": "Awendo",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2020/04/Hon.-Edward-Ouma-Ooro-MCA-South-Sakwa-Ward.jpg"
+    },
+    {
+      "name": "Nestory Otieno Owiyo",
+      "ward": "West Sakwa",
+      "constituency": "Awendo",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Nestory-Otieno-Owiyo-MCA-West-Sakwa-Ward.jpg"
+    },
+    {
+      "name": "Esther Auma Migose",
+      "ward": "Central Sakwa",
+      "constituency": "Awendo",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Esther-Auma-Migose-MCA-Central-Sakwa-Ward.jpg"
+    },
+    {
+      "name": "Rev. Charles Onyando Koyoo",
+      "ward": "God Jope",
+      "constituency": "Suna East",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Rev.-Charles-Onyando-Koyoo-MCA-God-Jope-Ward.jpg"
+    },
+    {
+      "name": "Samwel OBrien Ochieng",
+      "ward": "Suna Central",
+      "constituency": "Suna East",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Samwel-OBrien-Ochieng-MCA-Suna-Central-Ward.jpg"
+    },
+    {
+      "name": "Tobius Okelo Martine",
+      "ward": "Kakrao",
+      "constituency": "Suna East",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Tobius-Okelo-Martine-MCA-Kakrao-Ward.jpg"
+    },
+    {
+      "name": "Caleb Owuor Ongele",
+      "ward": "KWA",
+      "constituency": "Suna East",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Caleb-Owuor-Ongele-MCA-KWA-Ward.jpg"
+    },
+    {
+      "name": "Erickson Odhiambo Omondi",
+      "ward": "Wasweta 11",
+      "constituency": "Suna West",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Erickson-Odhiambo-Omondi-MCA-Wasweta-11-Ward.jpg"
+    },
+    {
+      "name": "Beatrice Akomo Onyancha",
+      "ward": "Ragana Oruba",
+      "constituency": "Suna West",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Beatrice-Akomo-Onyancha-MCA-Ragana-Oruba-Ward-1.jpg"
+    },
+    {
+      "name": "Mirimbo Julius Otieno",
+      "ward": "Wasimbete",
+      "constituency": "Suna West",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Mirimbo-Julius-Otieno-MCA-Wasimbete-Ward.jpg"
+    },
+    {
+      "name": "Peter Mijungu",
+      "ward": "West Kanyamkago",
+      "constituency": "Uriri",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Peter-Mijungu-MCA-West-Kanyamkago-Ward.jpeg"
+    },
+    {
+      "name": "George Okinyi Omamba",
+      "ward": "North Kanyamkago",
+      "constituency": "Uriri",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-George-Okinyi-Omamba-MCA-North-Kanyamkago-Ward.jpg"
+    },
+    {
+      "name": "Odii Eunice Apiyo",
+      "ward": "Central Kanyamkago",
+      "constituency": "Uriri",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Odii-Eunice-Apiyo-MCA-Central-Kanyamkago-Ward.jpg"
+    },
+    {
+      "name": "Graham Kagali Angogo",
+      "ward": "South Kanyamkago",
+      "constituency": "Uriri",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Graham-Kagali-Angogo-MCA-South-Kanyamkago-Ward.jpg"
+    },
+    {
+      "name": "Ogolla Norman Otieno",
+      "ward": "East Kanyamkago",
+      "constituency": "Uriri",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Ogolla-Norman-Otieno-MCA-East-Kanyamkago.jpg"
+    },
+    {
+      "name": "Brian Odhiambo Osodo",
+      "ward": "Kachieng",
+      "constituency": "Nyatike",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Brian-Odhiambo-Osodo-MCA-Kachieng-Ward-1.jpg"
+    },
+    {
+      "name": "Paul Ndiege Okeyo",
+      "ward": "Kanyasa",
+      "constituency": "Nyatike",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Paul-Ndiege-Okeyo-MCA-Kanyasa-Wrd.jpg"
+    },
+    {
+      "name": "Samson Olima Obonyo",
+      "ward": "North Kadem",
+      "constituency": "Nyatike",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Samson-Olima-Obonyo-MCA-North-Kadem-Ward..jpeg"
+    },
+    {
+      "name": "Felix Okwanyo",
+      "ward": "Macalder Kanyarwanda",
+      "constituency": "Nyatike",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Felix-Okwanyo-MCA-Macalder-Kanyarwanda-Ward.jpg"
+    },
+    {
+      "name": "Thomas Akungo",
+      "ward": "Kaler",
+      "constituency": "Nyatike",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Thomas-Akungo-MCA-Kaler-Ward.jpg"
+    },
+    {
+      "name": "Calvince Seko",
+      "ward": "Got Kachola",
+      "constituency": "Nyatike",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Calvince-Seko-MCA-Got-Kachola-Ward.jpg"
+    },
+    {
+      "name": "Lawrence MaguboJeremiah",
+      "ward": "Muhuru",
+      "constituency": "Nyatike",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Lawrence-MaguboJeremiah-MCA-Muhuru-Ward.jpg"
+    },
+    {
+      "name": "Johnson G. Tibaya",
+      "ward": "Bukira Central Ikerege",
+      "constituency": "Kuria West",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Johnson-G.-Tibaya-MCA-Bukira-Central-Ikerege-Ward.jpg"
+    },
+    {
+      "name": "Pius Ichobwe Nyamohanga",
+      "ward": "Isibania",
+      "constituency": "Kuria West",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Pius-Ichobwe-Nyamohanga-MCA-Isibania-Ward.jpg"
+    },
+    {
+      "name": "Marwa Patrick",
+      "ward": "Makerero",
+      "constituency": "Kuria West",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Marwa-Patrick-MCA-Makerero-Ward.jpg"
+    },
+    {
+      "name": "Mohono Clackson Mwita",
+      "ward": "Masaba",
+      "constituency": "Kuria West",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Mohono-Clackson-Mwita-MCA-Masaba-Ward.jpg"
+    },
+    {
+      "name": "Moses Magwe",
+      "ward": "Tagare",
+      "constituency": "Kuria West",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Moses-Magwe-MCA-Tagare-Ward.jpg"
+    },
+    {
+      "name": "Joseph Machumbe Rioba",
+      "ward": "Nyamosense Komosoko",
+      "constituency": "Kuria West",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Joseph-Machumbe-Rioba-MCA-Nyamosense-Komosoko-Ward.jpg"
+    },
+    {
+      "name": "Bageni Nildad Joseph",
+      "ward": "Gokeharaka Getambwega",
+      "constituency": "Kuria East",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Bageni-Nildad-Joseph-MCA-Gokeharaka-Getambwega-Ward.jpg"
+    },
+    {
+      "name": "Wambura Caleb",
+      "ward": "Ntimaru West",
+      "constituency": "Kuria East",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Wambura-Caleb-MCA-Ntimaru-West.jpg"
+    },
+    {
+      "name": "Wansima James Nyamosi",
+      "ward": "Ntimaru East",
+      "constituency": "Kuria East",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Wansima-James-Nyamosi-MCA-Ntimaru-East-Ward.jpg"
+    },
+    {
+      "name": "Nyamohanga Daniel Maroa",
+      "ward": "Nyabasi East",
+      "constituency": "Kuria East",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-Nyamohanga-Daniel-Maroa-MCA-Nyabasi-East.jpg"
+    },
+    {
+      "name": "David Magige Sararaa",
+      "ward": "Nyabasi West",
+      "constituency": "Kuria East",
+      "photoUrl": "https://migoriassembly.go.ke/wp-content/uploads/2022/10/Hon.-David-Magige-Sararaa-MCA-Nyabasi-West-Ward.jpg"
+    }
+  ],
+  "Nyamira": [
+    {
+      "name": "Gisesa Emmanuel Nyambega",
+      "ward": "Rigoma",
+      "constituency": "Kitutu Masaba",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/gisesa.jpg"
+    },
+    {
+      "name": "Obwaya Henry Osinyo",
+      "ward": "Gachuba",
+      "constituency": "Kitutu Masaba",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/obwaya.jpg"
+    },
+    {
+      "name": "Nyachaki James Mating'a",
+      "ward": "Kemera",
+      "constituency": "Kitutu Masaba",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/matinga.jpg"
+    },
+    {
+      "name": "Miinda Reuben Riechi",
+      "ward": "Magombo",
+      "constituency": "Kitutu Masaba",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/miinda.jpg"
+    },
+    {
+      "name": "Nyameino Kenneth Atuti",
+      "ward": "Gesima",
+      "constituency": "Kitutu Masaba",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/nyameino.jpg"
+    },
+    {
+      "name": "Christopher Moturi Osiemo",
+      "ward": "Nyamaiya",
+      "constituency": "West Mugirango",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/chris_nyamaiya.jpeg"
+    },
+    {
+      "name": "Keganda Charles Nyarang'o",
+      "ward": "Bosamaro",
+      "constituency": "West Mugirango",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/keganda.JPG"
+    },
+    {
+      "name": "Matwere Julius Kimwomi",
+      "ward": "Bonyamatuta",
+      "constituency": "West Mugirango",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/matwere.jpg"
+    },
+    {
+      "name": "Nyangana Julius Obonyo",
+      "ward": "Bomwagamo",
+      "constituency": "North Mugirango",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/Nyangana.jpg"
+    },
+    {
+      "name": "Nyang'au Joel Ombongi",
+      "ward": "Bokeira",
+      "constituency": "North Mugirango",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/ombongi.jpg"
+    },
+    {
+      "name": "Mose Abel Mokaya",
+      "ward": "Magwagwa",
+      "constituency": "North Mugirango",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/Abel.jpg"
+    },
+    {
+      "name": "Sikweya Lameck Nyakianga",
+      "ward": "Itibo",
+      "constituency": "North Mugirango",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/sikweya.jpg"
+    },
+    {
+      "name": "Jeremiah Njenga Ongaro",
+      "ward": "Ekerenyo",
+      "constituency": "North Mugirango",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/Ongaro.jpeg"
+    },
+    {
+      "name": "Alfayo Ngeresa Mabera",
+      "ward": "Mekenene",
+      "constituency": "Borabu",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/ngereza.JPG"
+    },
+    {
+      "name": "Mang'era Josiah Obegi",
+      "ward": "Esise",
+      "constituency": "Borabu",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/mangera.jpg"
+    },
+    {
+      "name": "Benecha Thomas Vincent",
+      "ward": "Kiabonyoru",
+      "constituency": "Borabu",
+      "photoUrl": "https://www.nyamiraassembly.go.ke/images/MCAs/3rd_Assembly/benecha.jpg"
+    }
+  ],
+  "Nairobi": [
+    {
+      "name": "Paul Kados Kiguathi Muiruri",
+      "ward": "Mihango",
+      "constituency": "Embakasi East",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Kados-Paul-Muiruri-Kiguathi.jpg"
+    },
+    {
+      "name": "Anthony Kiragu Karanja",
+      "ward": "Waithaka",
+      "constituency": "Dagoretti South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Hon-Kiragu...Waithaka-ward.jpg"
+    },
+    {
+      "name": "Jateso Peter Imwatok",
+      "ward": "Makongeni",
+      "constituency": "Makadara",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Peter-Anyule-Imwatok.jpg"
+    },
+    {
+      "name": "Kennedy Okeyo Ng'ondi",
+      "ward": "Kariobangi South",
+      "constituency": "Embakasi West",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Kennedy-Ngondi-Okeyo.jpg"
+    },
+    {
+      "name": "Peter Wahinya Njau",
+      "ward": "Pangani",
+      "constituency": "Starehe",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Peter-Wahinya-Njau.jpg"
+    },
+    {
+      "name": "Wilfred Oluoch Odalo",
+      "ward": "Mabatini",
+      "constituency": "Mathare",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Wilfred-Oluoch-Odalo.jpg"
+    },
+    {
+      "name": "Fredrick Njogu Njoroge",
+      "ward": "Kawangware",
+      "constituency": "Dagoretti North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Hon-Njogu..Kawangware.jpg"
+    },
+    {
+      "name": "Mwaura Chege",
+      "ward": "Ngara",
+      "constituency": "Starehe",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/HON-CHEGE..NGARA_.jpg"
+    },
+    {
+      "name": "Clarence Kipkemboi Munga",
+      "ward": "Kabiro",
+      "constituency": "Dagoretti North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Clarence-K-Munga.jpg"
+    },
+    {
+      "name": "Alvin Olando Palapala",
+      "ward": "Kitisuru",
+      "constituency": "Westlands",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Hon-Palapala.jpg"
+    },
+    {
+      "name": "Moses Nyangaresi Ogeto",
+      "ward": "Kilimani",
+      "constituency": "Dagoretti North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/hon-ogeto-final.jpg"
+    },
+    {
+      "name": "Jane Muasya",
+      "ward": "Makina",
+      "constituency": "Kibra",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Jane-Muasya.jpg"
+    },
+    {
+      "name": "Jeremiah Karani Themendu",
+      "ward": "Kayole Central",
+      "constituency": "Embakasi Central",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/themedu-scaled.jpg"
+    },
+    {
+      "name": "Samora Wacira Mwaura",
+      "ward": "Clay City",
+      "constituency": "Kasarani",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Hon-Samora..Clay-City.jpg"
+    },
+    {
+      "name": "Fuad Hussein Mohamed",
+      "ward": "Airbase",
+      "constituency": "Kamukunji",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Hon-Fuad..Airbase.jpg"
+    },
+    {
+      "name": "Joyce Muthoni Kamau",
+      "ward": "Baba Dogo",
+      "constituency": "Ruaraka",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Hon-Joyce-Kamau...Nominated.jpg"
+    },
+    {
+      "name": "Silas Matara Ongwae",
+      "ward": "Dandora Area II",
+      "constituency": "Embakasi North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Silas-Matara-Ongwae.jpg"
+    },
+    {
+      "name": "Kennedy Odhiambo Oyugi",
+      "ward": "Nyayo Highrise",
+      "constituency": "Langata",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Kennedy-Odhiambo-Oyugi.jpg"
+    },
+    {
+      "name": "Jared Ondieki Akama",
+      "ward": "Mugumu-Ini",
+      "constituency": "Langata",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/akama-scaled.jpg"
+    },
+    {
+      "name": "Esther Waithera Chege",
+      "ward": "Nairobi South",
+      "constituency": "Starehe",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Hon-Waithira-Chege.jpg"
+    },
+    {
+      "name": "Asli Muhamud Mohamed",
+      "ward": "Mountain View",
+      "constituency": "Westlands",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Asli-Muhamud-Mohamed.jpg"
+    },
+    {
+      "name": "Mary Wanjiku Kariuki",
+      "ward": "Upper Savannah",
+      "constituency": "Embakasi East",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/WhatsApp-Image-2022-11-08-at-1.43.18-PM.jpeg"
+    },
+    {
+      "name": "Susan Makungu Kavaya",
+      "ward": "Mlango Kubwa",
+      "constituency": "Mathare",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Susan-Mukungu-Kavanga.jpg"
+    },
+    {
+      "name": "Mark Ronaldo Mugambi",
+      "ward": "Umoja I",
+      "constituency": "Embakasi West",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/hon-mark.jpg"
+    },
+    {
+      "name": "Antony Kimemia Gathumbi",
+      "ward": "Harambee",
+      "constituency": "Makadara",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Antony-Kimemia-Gathumbi.jpg"
+    },
+    {
+      "name": "Paul Ndungu Irungu",
+      "ward": "Pumwani",
+      "constituency": "Kamukunji",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/DSC_3350-scaled.jpg"
+    },
+    {
+      "name": "Redson Otieno Onyango",
+      "ward": "Ngei",
+      "constituency": "Mathare",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/hon-recky..ngei_-scaled.jpg"
+    },
+    {
+      "name": "Lawrence Otieno Odhiambo",
+      "ward": "Sarangombe",
+      "constituency": "Kibra",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Lawrence-Otieno-Odhiambo.jpg"
+    },
+    {
+      "name": "Patrick Karani",
+      "ward": "Utawala",
+      "constituency": "Embakasi East",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2018/02/Patrick-Karani.jpg"
+    },
+    {
+      "name": "Stephen Gitau Ndegwa",
+      "ward": "Parklands Highridge",
+      "constituency": "Westlands",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Stephen-Gitau..Parklands.jpg"
+    },
+    {
+      "name": "Kamau Thuo Fiunifiu",
+      "ward": "Karura",
+      "constituency": "Westlands",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/WhatsApp-Image-2023-01-26-at-11.24.11.jpeg"
+    },
+    {
+      "name": "Hamisi Suleiman Maleya",
+      "ward": "Kangemi",
+      "constituency": "Westlands",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/suleiman-scaled.jpg"
+    },
+    {
+      "name": "Kennedy Swaka",
+      "ward": "Gatina",
+      "constituency": "Dagoretti North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Sakwa...Gatina.jpg"
+    },
+    {
+      "name": "Robert Alai Onyango",
+      "ward": "Kileleshwa",
+      "constituency": "Dagoretti North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Alai..Kileleshwa.jpg"
+    },
+    {
+      "name": "Martin Mbugua Mwangi",
+      "ward": "Mutu-Ini",
+      "constituency": "Dagoretti South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/mutuini-scaled.jpg"
+    },
+    {
+      "name": "Cyrus Mugo Mubea",
+      "ward": "Ngando",
+      "constituency": "Dagoretti South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/hon-cyrus..ngando-scaled.jpg"
+    },
+    {
+      "name": "Eric Kiogora Murigu",
+      "ward": "Riruta",
+      "constituency": "Dagoretti South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/DSC_3347-scaled.jpg"
+    },
+    {
+      "name": "Peter Maina Mwangi",
+      "ward": "Uthiru Ruthimitu",
+      "constituency": "Dagoretti South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/uthiru.jpg"
+    },
+    {
+      "name": "Antony Maragu Muthoni",
+      "ward": "Karen",
+      "constituency": "Langata",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/DSC_3349-scaled.jpg"
+    },
+    {
+      "name": "John Rex Omolleh",
+      "ward": "Nairobi West",
+      "constituency": "Langata",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/IMG-20241016-WA0001-e1729077071683.jpg"
+    },
+    {
+      "name": "Abass Ibrahim Khalif",
+      "ward": "South C",
+      "constituency": "Langata",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/abbas.jpg"
+    },
+    {
+      "name": "John Ndile Musila",
+      "ward": "Laini Saba",
+      "constituency": "Kibra",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/musila.jpg"
+    },
+    {
+      "name": "Samson Ochieng’ Jera Ooko",
+      "ward": "Lindi",
+      "constituency": "Kibra",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/lindi-scaled.jpg"
+    },
+    {
+      "name": "Davidson DNG Ngibuini",
+      "ward": "Woodley Kenyatta Golf Course",
+      "constituency": "Kibra",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon.-DNG..Woodley.jpg"
+    },
+    {
+      "name": "Deonysias Mwangi Waithira",
+      "ward": "Githurai",
+      "constituency": "Roysambu",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/DSC_3345-scaled.jpg"
+    },
+    {
+      "name": "Clement Nganga Kamaru",
+      "ward": "Kahawa West",
+      "constituency": "Roysambu",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Clement..Kahawa-West.jpg"
+    },
+    {
+      "name": "Stephen Mugo Kimani",
+      "ward": "Zimmerman",
+      "constituency": "Roysambu",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Stephen-Mugo...Zimmerman.jpg"
+    },
+    {
+      "name": "Sospeter Gathahu Mumbi",
+      "ward": "Roysambu",
+      "constituency": "Roysambu",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Sospeter..Roysambu.jpg"
+    },
+    {
+      "name": "Eutychus Mukiri Muriuki",
+      "ward": "Kahawa",
+      "constituency": "Roysambu",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Muriuki...Kahawa.jpg"
+    },
+    {
+      "name": "Samuel Kanyi Kago",
+      "ward": "Mwiki",
+      "constituency": "Kasarani",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/DSC_2344-scaled.jpg"
+    },
+    {
+      "name": "Anthony Mburu Jasho Ngaruiyah",
+      "ward": "Kasarani",
+      "constituency": "Kasarani",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Ngaruiya.jpg"
+    },
+    {
+      "name": "Carrington Gichunji Heho",
+      "ward": "Njiru",
+      "constituency": "Kasarani",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/HEHO.jpg"
+    },
+    {
+      "name": "James Karanja Kariuki",
+      "ward": "Ruai",
+      "constituency": "Kasarani",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/hon-karis.jpg"
+    },
+    {
+      "name": "Abel Osumba Atito",
+      "ward": "Utalii",
+      "constituency": "Ruaraka",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/hon-Abel-Osumba...Utalii.jpg"
+    },
+    {
+      "name": "Oscar Otieno Lore",
+      "ward": "Mathare North",
+      "constituency": "Ruaraka",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Oscar..Mathare.jpg"
+    },
+    {
+      "name": "Victor Omondi Ochola",
+      "ward": "Lucky Summer",
+      "constituency": "Ruaraka",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/ringo-scaled.jpg"
+    },
+    {
+      "name": "Absalom Odhiambo Onyango",
+      "ward": "Korogocho",
+      "constituency": "Ruaraka",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/matach-scaled.jpg"
+    },
+    {
+      "name": "Evans Okaru Nyangicha",
+      "ward": "Imara Daima",
+      "constituency": "Embakasi South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Nyangicha...Imara-Daima.jpg"
+    },
+    {
+      "name": "Scolastica Muthoni Mande",
+      "ward": "Kwa Reuben",
+      "constituency": "Embakasi South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/scholar-stica-scaled.jpg"
+    },
+    {
+      "name": "Musango Maithya",
+      "ward": "Pipeline",
+      "constituency": "Embakasi South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/musango.jpg"
+    },
+    {
+      "name": "Moses Mutinda Kitema",
+      "ward": "Kware",
+      "constituency": "Embakasi South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/kware.jpg"
+    },
+    {
+      "name": "Joel Munuve Kimanzi",
+      "ward": "Kariobangi North",
+      "constituency": "Embakasi North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Munuve.jpg"
+    },
+    {
+      "name": "Allan Maina Gathuku",
+      "ward": "Dandora Area I",
+      "constituency": "Embakasi North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/HON-ALLAN.jpg"
+    },
+    {
+      "name": "Paul Mathu Njambi",
+      "ward": "Dandora Area III",
+      "constituency": "Embakasi North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Mathu..Dandora-3.jpg"
+    },
+    {
+      "name": "Daniel Oria Odhiambo",
+      "ward": "Dandora Area IV",
+      "constituency": "Embakasi North",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Dan-Oria..Dandora-iv.jpg"
+    },
+    {
+      "name": "Paul Wachira Kariuki",
+      "ward": "Kayole North",
+      "constituency": "Embakasi Central",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Macharia..Kayole-North.jpg"
+    },
+    {
+      "name": "Colins Omondi Ogenga",
+      "ward": "Kayole South",
+      "constituency": "Embakasi Central",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/hon-collins-scaled.jpg"
+    },
+    {
+      "name": "Chris Wanjohi Githinji Mutumishi",
+      "ward": "Komarock",
+      "constituency": "Embakasi Central",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Mtumishi..Komarock.jpg"
+    },
+    {
+      "name": "James Koria Karanja",
+      "ward": "Matopeni Spring Valley",
+      "constituency": "Embakasi Central",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon.-James-Koria..Matopeni.jpg"
+    },
+    {
+      "name": "David Magoba Odhiambo",
+      "ward": "Lower Savannah",
+      "constituency": "Embakasi East",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Magoba..Lower-Savannah.jpg"
+    },
+    {
+      "name": "Ricardo Nyantika Billy",
+      "ward": "Embakasi",
+      "constituency": "Embakasi East",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/NYANTIKA.jpg"
+    },
+    {
+      "name": "Shadrack Namunyu Machanje",
+      "ward": "Umoja II",
+      "constituency": "Embakasi West",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/shady-scaled.jpg"
+    },
+    {
+      "name": "Martin Wairobi Waithaka",
+      "ward": "Mowlem",
+      "constituency": "Embakasi West",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Warobi...Mowlem.jpg"
+    },
+    {
+      "name": "Patrick Mwangi Macharia",
+      "ward": "Maringo Hamza",
+      "constituency": "Makadara",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon.-Patrick..Hamza-Maringo.jpg"
+    },
+    {
+      "name": "Aaron Kangara Wangare",
+      "ward": "Viwandani",
+      "constituency": "Makadara",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/DSC_3346-scaled.jpg"
+    },
+    {
+      "name": "Dabar Ahmedqadar Mohamed",
+      "ward": "Eastleigh North",
+      "constituency": "Kamukunji",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/DABAR-scaled.jpg"
+    },
+    {
+      "name": "Nicholas Juma Okwacho",
+      "ward": "Eastleigh South",
+      "constituency": "Kamukunji",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/okwacho-1.jpg"
+    },
+    {
+      "name": "Athman Hashim Kamau",
+      "ward": "California",
+      "constituency": "Kamukunji",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Hashim..Carlifonia.jpg"
+    },
+    {
+      "name": "John Mwaniki Kwenya",
+      "ward": "Nairobi Central",
+      "constituency": "Starehe",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Kwenya....Nairobi-Central.jpg"
+    },
+    {
+      "name": "Gerald Irungu Mukuru",
+      "ward": "Ziwani Kariokor",
+      "constituency": "Starehe",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Gerald...Ziwani.jpg"
+    },
+    {
+      "name": "Simon Maina Mugo",
+      "ward": "Landimawe",
+      "constituency": "Starehe",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/landimawe-scaled.jpg"
+    },
+    {
+      "name": "Mark Thiga Ruyi",
+      "ward": "Hospital",
+      "constituency": "Mathare",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/DSC_3402-scaled.jpg"
+    },
+    {
+      "name": "Peter Owera Oluoch",
+      "ward": "Huruma",
+      "constituency": "Mathare",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/DSC_3310-scaled.jpg"
+    },
+    {
+      "name": "Joseph Karanja Ndung’u",
+      "ward": "Kiamaiko",
+      "constituency": "Mathare",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/Hon-Joseph..Kiamaiko.jpg"
+    },
+    {
+      "name": "Umuro Kame Adano",
+      "ward": "Kwa Njenga",
+      "constituency": "Embakasi South",
+      "photoUrl": "https://nairobiassembly.go.ke/ncca/wp-content/uploads/2022/10/WhatsApp-Image-2023-01-17-at-17.32.01-1.jpeg"
+    }
+  ]
+}

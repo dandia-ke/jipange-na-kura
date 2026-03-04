@@ -1,0 +1,302 @@
+[
+  {
+    "name": "Swaleh Ibrahim",
+    "ward": "KIRIMARI",
+    "constituency": "Manyatta",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/embu/kirimari.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Nyaga Peter Muriithi",
+    "ward": "MBETI NORTH",
+    "constituency": "Manyatta",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/embu/mbeti_north.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Mbaka John Ngari",
+    "ward": "MAVURIA",
+    "constituency": "Mbeere South",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "DEP",
+    "photo_url": "/photos/mcas/embu/mavuria.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Njiru Edwin Muriithi",
+    "ward": "CENTRAL WARD",
+    "constituency": "Runyenjes",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "TSP",
+    "photo_url": "/photos/mcas/embu/central_ward.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Munyambu Job Itumo",
+    "ward": "MWEA",
+    "constituency": "Mbeere South",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "PNU",
+    "photo_url": "/photos/mcas/embu/mwea.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Mbuchi Terry C. Wanja",
+    "ward": "KYENI NORTH",
+    "constituency": "Runyenjes",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "UDA",
+    "photo_url": "/photos/mcas/embu/kyeni_north.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Gakungugu Agnes Wanjiru",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/gakungugu_agnes_wanjiru.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Karuri Julius Njagi",
+    "ward": "KITHIMU",
+    "constituency": "Manyatta",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/kithimu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Augustin James Njeru",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/augustin_james_njeru.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Nyaga Maureen Kagendo",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/nyaga_maureen_kagendo.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Mati Yvonne Karambu",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/mati_yvonne_karambu.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Mbui Duncan Ireri",
+    "ward": "EVURORE",
+    "constituency": "Mbeere North",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/evurore.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Ndwiga Newton Kariuki",
+    "ward": "MUMINJI",
+    "constituency": "Mbeere North",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/muminji.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Njiru Muchangi Paul",
+    "ward": "GATURI NORTH",
+    "constituency": "Runyenjes",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/gaturi_north.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Gatumu Fredrick Mugendi",
+    "ward": "GATURI SOUTH",
+    "constituency": "Manyatta",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/gaturi_south.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Nzangi Philip Kinyutu",
+    "ward": "MAKIMA",
+    "constituency": "Mbeere South",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/makima.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Muriuki Masters Leonard Mwaniki",
+    "ward": "KIAMBERE",
+    "constituency": "Mbeere South",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/kiambere.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kiura Muriithi Njagi",
+    "ward": "MBETI SOUTH",
+    "constituency": "Mbeere South",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/mbeti_south.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Muturi Harrison Sammy",
+    "ward": "RUGURU/NGANDORI",
+    "constituency": "Manyatta",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/ruguru_ngandori.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Nyaga Susan Wairimu",
+    "ward": "KAGAARI SOUTH",
+    "constituency": "Runyenjes",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/kagaari_south.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Githinji Maurice Macharia",
+    "ward": "NGINDA",
+    "constituency": "Manyatta",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/nginda.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Githumbu Samuel Njeru",
+    "ward": "NTHAWA",
+    "constituency": "Mbeere North",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/nthawa.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Njuki Johnson Mucangi",
+    "ward": "KAGAARI NORTH",
+    "constituency": "Runyenjes",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/kagaari_north.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kanyua Barbanas Njama",
+    "ward": "KYENI SOUTH",
+    "constituency": "Runyenjes",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/kyeni_south.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Njiru Anne Lily",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/njiru_anne_lily.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Kavinda Mary Igoki",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/kavinda_mary_igoki.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Njued Jane Karimi",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/njued_jane_karimi.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Githinji Daniel",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/githinji_daniel.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Jimiah Jennifer",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/jimiah_jennifer.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Muthoni Susan Mwende",
+    "ward": "Nominated",
+    "constituency": "Embu",
+    "county": "Embu",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/embu/muthoni_susan_mwende.jpg",
+    "nominated": true
+  }
+]

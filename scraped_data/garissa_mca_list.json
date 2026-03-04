@@ -1,0 +1,272 @@
+[
+  {
+    "name": "MUSDAF ABDIRASHID AHMED",
+    "ward": "IFTIN",
+    "constituency": "Garissa Township",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/iftin.jpg"
+  },
+  {
+    "name": "MOHAMED ABDI FARAH",
+    "ward": "DADAAB",
+    "constituency": "Dadaab",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/dadaab.jpg"
+  },
+  {
+    "name": "ABUBAKAR HAJI SUGOW",
+    "ward": "WABERI",
+    "constituency": "Garissa Township",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/waberi.jpg"
+  },
+  {
+    "name": "HUSSEIN MOHAMED DAGANE",
+    "ward": "TOWNSHIP",
+    "constituency": "Garissa Township",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/township.jpg"
+  },
+  {
+    "name": "ADOW OMAR SAID",
+    "ward": "HULUGHO",
+    "constituency": "Ijara",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/hulugho.jpg"
+  },
+  {
+    "name": "YUNUS ABDI IBRAHIM",
+    "ward": "MASALANI",
+    "constituency": "Ijara",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/masalani.jpg"
+  },
+  {
+    "name": "ABUBAKAR MOHAMED KHALIF",
+    "ward": "GALBET",
+    "constituency": "Garissa Township",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/galbet.jpg"
+  },
+  {
+    "name": "AHMED ABDIRAHMAN",
+    "ward": "LIBOI",
+    "constituency": "Dadaab",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/liboi.jpg"
+  },
+  {
+    "name": "ADEN HASSAN ODHOWA",
+    "ward": "DERTU",
+    "constituency": "Dadaab",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/dertu.jpg"
+  },
+  {
+    "name": "ADEN HUSSEIN DUROW",
+    "ward": "JARA JARA",
+    "constituency": "Balambala",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/jara_jara.jpg"
+  },
+  {
+    "name": "ISSA ADEN ABDI",
+    "ward": "SABENA",
+    "constituency": "Lagdera",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/sabena.jpg"
+  },
+  {
+    "name": "HAJIR MAHAD FARAH",
+    "ward": "MAALIMIN",
+    "constituency": "Lagdera",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/maalimin.jpg"
+  },
+  {
+    "name": "Hassan Kalosho",
+    "ward": "FAFI",
+    "constituency": "Fafi",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/fafi.jpeg"
+  },
+  {
+    "name": "ABDI MUHIDIN ABDI",
+    "ward": "SANGAILU",
+    "constituency": "Ijara",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/sangailu.jpg"
+  },
+  {
+    "name": "AHMED NOOR ADEN",
+    "ward": "DEKAHARIA",
+    "constituency": "Fafi",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/dekaharia.jpg"
+  },
+  {
+    "name": "HASSAN DAHIR NOOR",
+    "ward": "BARAKI",
+    "constituency": "Lagdera",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/baraki.jpg"
+  },
+  {
+    "name": "IDRIS ISMAIL ADEN",
+    "ward": "DANYERE",
+    "constituency": "Balambala",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/danyere.jpg"
+  },
+  {
+    "name": "ABDILLAHI IBRAHIM SIGAT",
+    "ward": "NANIGHI",
+    "constituency": "Fafi",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/nanighi.jpg"
+  },
+  {
+    "name": "MOHAMED SHEIKH ABDISALAT",
+    "ward": "LABASIGALE",
+    "constituency": "Dadaab",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/labasigale.jpg"
+  },
+  {
+    "name": "ABDIWELI ADEN ABDI",
+    "ward": "SAKA",
+    "constituency": "Balambala",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/saka.jpg"
+  },
+  {
+    "name": "HAJIR DAHIYE",
+    "ward": "ABAKAILE",
+    "constituency": "Dadaab",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/abakaile.jpg"
+  },
+  {
+    "name": "ABDIRAHMAN MOHAMED ALI",
+    "ward": "SANKURI",
+    "constituency": "Balambala",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/sankuri.jpg"
+  },
+  {
+    "name": "MAHAT ABDIKADIR",
+    "ward": "MODOGASHE",
+    "constituency": "Lagdera",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/modogashe.jpeg"
+  },
+  {
+    "name": "ABDIRAHMAN MUKTAR",
+    "ward": "IJARA",
+    "constituency": "Ijara",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/ijara.jpeg"
+  },
+  {
+    "name": "ABDIHAKIM",
+    "ward": "BURA",
+    "constituency": "Fafi",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/bura.jpeg"
+  },
+  {
+    "name": "NOOR",
+    "ward": "JARAJILA",
+    "constituency": "Fafi",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/jarajila.jpeg"
+  },
+  {
+    "name": "OMAR",
+    "ward": "DAMAJALE",
+    "constituency": "Dadaab",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/damajale.jpeg"
+  },
+  {
+    "name": "DAAR",
+    "ward": "BALAMBALA",
+    "constituency": "Balambala",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/balambala.jpeg"
+  },
+  {
+    "name": "ABDIQAYUM",
+    "ward": "BENANE",
+    "constituency": "Lagdera",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/benane.jpeg"
+  },
+  {
+    "name": "FAKHRUDIN",
+    "ward": "GOREALE",
+    "constituency": "Lagdera",
+    "county": "GARISSA",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/garissa/goreale.jpeg"
+  }
+]

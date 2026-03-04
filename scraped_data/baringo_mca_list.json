@@ -1,0 +1,432 @@
+[
+  {
+    "name": "Lawi Kipchumba",
+    "ward": "Lembus Kwen",
+    "constituency": "Eldama Ravine",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/lawi_kipchumba.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Lourien Sam",
+    "ward": "Tirioko",
+    "constituency": "Tiaty",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/lourien_sam.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Jacob Cheboiwo",
+    "ward": "Kisanana",
+    "constituency": "Mogotio",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/jacob_cheboiwo.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Daniel Tuwit",
+    "ward": "Ribkwo",
+    "constituency": "Tiaty",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/daniel_tuwit.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Benjamin Koech",
+    "ward": "Lembus",
+    "constituency": "Eldama Ravine",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/benjamin_koech.jpg",
+    "nominated": false
+  },
+  {
+    "name": "John Aengwo",
+    "ward": "Saimo Kipsaraman",
+    "constituency": "Baringo North",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/john_aengwo.jpg",
+    "nominated": false
+  },
+  {
+    "name": "John Tarus",
+    "ward": "Sacho",
+    "constituency": "Baringo Central",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/john_tarus.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Ernest Kibet",
+    "ward": "Kabarnet",
+    "constituency": "Baringo Central",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/ernest_kibet.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kipruto Kimosop",
+    "ward": "Mochongoi",
+    "constituency": "Baringo South",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/kipruto_kimosop.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Marial Losile",
+    "ward": "Loiyamorock",
+    "constituency": "Tiaty",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/marial_losile.JPG",
+    "nominated": false
+  },
+  {
+    "name": "Nixon Lemlem",
+    "ward": "Marigat",
+    "constituency": "Baringo South",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/nixon_lemlem.JPG",
+    "nominated": false
+  },
+  {
+    "name": "Shadrack Mailuk",
+    "ward": "Tangulbei/Korossi",
+    "constituency": "Tiaty",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/shadrack_mailuk.JPG",
+    "nominated": false
+  },
+  {
+    "name": "Solomon Makal",
+    "ward": "Kolowa",
+    "constituency": "Tiaty",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/solomon_makal.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Alex Kiprono Kuru",
+    "ward": "Kapropita",
+    "constituency": "Baringo Central",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/alex_kiprono_kuru.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Ayub Kibet Keitany",
+    "ward": "Ewalel/Chapchap",
+    "constituency": "Baringo Central",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/ayub_kibet_keitany.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Clement Lomaringoria",
+    "ward": "Silale",
+    "constituency": "Tiaty",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/clement_lomaringoria.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Simon Kimuge Kiplagat",
+    "ward": "Kabartonjo",
+    "constituency": "Baringo North",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/simon_kimuge_kiplagat.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Wesley Lekakimon",
+    "ward": "Ilchamus",
+    "constituency": "Baringo South",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/wesley_lekakimon.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Robert Kipsang Kiplagat",
+    "ward": "Koibatek",
+    "constituency": "Eldama Ravine",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/robert_kipsang_kiplagat.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Henry Kipkurui Kigen",
+    "ward": "Tenges",
+    "constituency": "Baringo Central",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/henry_kipkurui_kigen.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Diana Siriti",
+    "ward": "Churo/Amaya",
+    "constituency": "Tiaty",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/diana_siriti.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Purity Tallam",
+    "ward": "Emining",
+    "constituency": "Mogotio",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/purity_tallam.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Sitoi Telieny",
+    "ward": "Bartabwa",
+    "constituency": "Baringo North",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/sitoi_telieny.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Josphat Lokorio",
+    "ward": "Barwessa",
+    "constituency": "Baringo South",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/josphat_lokorio.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Paul Lolgisoi",
+    "ward": "Mukutani",
+    "constituency": "Baringo South",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/paul_lolgisoi.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kennedy Kiprono",
+    "ward": "Lembus/Perkerra",
+    "constituency": "Eldama Ravine",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/kennedy_kiprono.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Michael Chepkeres Chebon",
+    "ward": "Saimo Soi",
+    "constituency": "Baringo North",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/michael_chepkeres_chebon.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Mark Sialo",
+    "ward": "Mogotio",
+    "constituency": "Mogotio",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/mark_sialo.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Solomon Kuria",
+    "ward": "Mumberes/Maji Mazuri",
+    "constituency": "Eldama Ravine",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/solomon_kuria.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Julius Ngotie",
+    "ward": "Ravine",
+    "constituency": "Eldama Ravine",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/julius_ngotie.jpeg",
+    "nominated": false
+  },
+  {
+    "name": "Mary Katurkan",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/mary_katurkan.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Repher Jepkoech Rotich",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/repher_jepkoech_rotich.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Sharon Jerotich Keter",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/sharon_jerotich_keter.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Venaline Jerop",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/venaline_jerop.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Seurei Evans Kipyegon",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/seurei_evans_kipyegon.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Robert Cheruiyot Kiplagat",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/robert_cheruiyot_kiplagat.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Cynthia Jerotich Kiptui",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/cynthia_jerotich_kiptui.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Everlyne Jepkoech Korir",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/everlyne_jepkoech_korir.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Ivy Jeruto Kiptalla",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/ivy_jeruto_kiptalla.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Juiliah Kumbelel",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/juiliah_kumbelel.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Linah Chebet Sote",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/linah_chebet_sote.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Loice Jepkorir Kipseba",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/loice_jepkorir_kipseba.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Caroline Lesaaya Sumerian",
+    "ward": "Nominated",
+    "constituency": "UNKNOWN",
+    "county": "Baringo",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/baringo/caroline_lesaaya_sumerian.jpg",
+    "nominated": true
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "name": "Rhoda Khatisha I",
+    "ward": "GARSEN SOUTH",
+    "constituency": "Garsen",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/garsen_south.jpg"
+  },
+  {
+    "name": "Abubakar Mohamed Athman",
+    "ward": "KIPINI EAST",
+    "constituency": "Garsen",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/kipini_east.jpg"
+  },
+  {
+    "name": "Eliza Semi Dumba",
+    "ward": "GARSEN NORTH",
+    "constituency": "Garsen",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/garsen_north.jpg"
+  },
+  {
+    "name": "Hamid Babusa Salim",
+    "ward": "KINAKOMBA",
+    "constituency": "Galole",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/kinakomba.jpg"
+  },
+  {
+    "name": "Ismael Bodha Kodobo",
+    "ward": "HIRIMANI",
+    "constituency": "Bura",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/hirimani.jpg"
+  },
+  {
+    "name": "Jibril Mahamud Farah",
+    "ward": "BANGALE",
+    "constituency": "Bura",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/bangale.jpg"
+  },
+  {
+    "name": "Juma Ali Dido",
+    "ward": "MADOGO",
+    "constituency": "Bura",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/madogo.jpg"
+  },
+  {
+    "name": "Mahmud Ali Barrow",
+    "ward": "SALA",
+    "constituency": "Bura",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/sala.jpeg"
+  },
+  {
+    "name": "Mahmud Gabo",
+    "ward": "GARSEN WEST",
+    "constituency": "Garsen",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/garsen_west.jpg"
+  },
+  {
+    "name": "Maka Jarso",
+    "ward": "WAYU",
+    "constituency": "Galole",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/wayu.jpg"
+  },
+  {
+    "name": "Maka Maimuna Mohamed",
+    "ward": "GARSEN CENTRAL",
+    "constituency": "Garsen",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/garsen_central.jpg"
+  },
+  {
+    "name": "Musa Wario",
+    "ward": "KIPINI WEST",
+    "constituency": "Garsen",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/kipini_west.jpg"
+  },
+  {
+    "name": "Paul Maro Samwel",
+    "ward": "MIKINDUNI",
+    "constituency": "Galole",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/mikinduni.jpg"
+  },
+  {
+    "name": "Yusuf Abdi Bile",
+    "ward": "CHEWELE",
+    "constituency": "Bura",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/chewele.jpg"
+  },
+  {
+    "name": "Hamisi Deye Iddi",
+    "ward": "CHEWANI",
+    "constituency": "Galole",
+    "county": "TANA RIVER",
+    "seat_type": "mca",
+    "party": "TBD",
+    "photo_url": "photos/mcas/tana_river/chewani.jpg"
+  }
+]

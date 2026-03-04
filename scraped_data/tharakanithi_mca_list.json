@@ -1,0 +1,232 @@
+[
+  {
+    "name": "Kithuka Gitonga Leonard",
+    "ward": "NKONDI",
+    "constituency": "Tharaka",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/nkondi.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Marengo Luke Nyaga",
+    "ward": "MUKOTHIMA",
+    "constituency": "Tharaka",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/mukothima.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kiriko Jacob Ndeke",
+    "ward": "MUGWE",
+    "constituency": "Chuka/Igambang'Ombe",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/mugwe.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kabii Jones Kinegeni",
+    "ward": "MWIMBI",
+    "constituency": "Maara",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/mwimbi.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Karuku Wanja",
+    "ward": "Nominated",
+    "constituency": "Tharaka-Nithi",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/karuku_wanja.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Ntwiga Nevert",
+    "ward": "MITHERU",
+    "constituency": "Maara",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/mitheru.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Purity Wanja M'Rithaa",
+    "ward": "Nominated",
+    "constituency": "Tharaka-Nithi",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/purity_wanja_m_rithaa.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Murungi Rael Fatuma",
+    "ward": "Nominated",
+    "constituency": "Tharaka-Nithi",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/murungi_rael_fatuma.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Riungu Nancy Muthoni",
+    "ward": "Nominated",
+    "constituency": "Tharaka-Nithi",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/riungu_nancy_muthoni.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Anita Karimi Mbae",
+    "ward": "MARIANI",
+    "constituency": "Chuka/Igambang'Ombe",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/mariani.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Nyaga Frankline Mawira",
+    "ward": "CHOGORIA",
+    "constituency": "Maara",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/chogoria.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Gitonga Morris Maugu",
+    "ward": "MUTHAMBI",
+    "constituency": "Maara",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/muthambi.jpg",
+    "nominated": false
+  },
+  {
+    "name": "John Joseph Njeru",
+    "ward": "IGAMBANG'OMBE",
+    "constituency": "Chuka/Igambang'Ombe",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/igambang_ombe.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kamunyu Kennedy",
+    "ward": "MARIMANTI",
+    "constituency": "Tharaka",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/marimanti.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Kathuni Risper Gakii",
+    "ward": "Nominated",
+    "constituency": "Tharaka-Nithi",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/kathuni_risper_gakii.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Mbae Lysbeth Gateria",
+    "ward": "GANGA",
+    "constituency": "Maara",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/ganga.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Njagi Joseph Kinyua",
+    "ward": "CHIAKARIGA",
+    "constituency": "Tharaka",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/chiakariga.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Lucy Muthoni Ndiga",
+    "ward": "Nominated",
+    "constituency": "Tharaka-Nithi",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/lucy_muthoni_ndiga.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Justin Kithinji Nderi",
+    "ward": "MAGUMONI",
+    "constituency": "Chuka/Igambang'Ombe",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/magumoni.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Godfrey Murithi Muchiri",
+    "ward": "KARINGANI",
+    "constituency": "Chuka/Igambang'Ombe",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/karingani.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Mugao Salvestas Kanyaru",
+    "ward": "GATUNGA",
+    "constituency": "Tharaka",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/gatunga.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Mwaura Joel Mwangi",
+    "ward": "Nominated",
+    "constituency": "Tharaka-Nithi",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/mwaura_joel_mwangi.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Njagi Zachariah Mwaniki",
+    "ward": "Nominated",
+    "constituency": "Tharaka-Nithi",
+    "county": "Tharaka-Nithi",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/tharaka_nithi/njagi_zachariah_mwaniki.jpg",
+    "nominated": true
+  }
+]

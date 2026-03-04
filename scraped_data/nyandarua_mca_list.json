@@ -1,0 +1,412 @@
+[
+  {
+    "name": "James Mwangi Gichuki",
+    "ward": "ENGINEER",
+    "constituency": "Kinangop",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/engineer.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Geoffrey Waruiru Kamwana",
+    "ward": "GATHARA",
+    "constituency": "Kinangop",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/gathara.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Samuel Rimui Kaiyani",
+    "ward": "GITHABAI",
+    "constituency": "Kinangop",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/githabai.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Hussein Ndung’u Kassana",
+    "ward": "MAGUMU",
+    "constituency": "Kinangop",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/magumu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Ebrahim Mwangi Maina",
+    "ward": "MURUNGARU",
+    "constituency": "Kinangop",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/murungaru.jpg",
+    "nominated": false
+  },
+  {
+    "name": "James Kiiru Gachomba",
+    "ward": "NJABINI/KIBURU",
+    "constituency": "Kinangop",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/njabini_kiburu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Edinald Wambugu King’ori",
+    "ward": "NORTH KINANGOP",
+    "constituency": "Kinangop",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/north_kinangop.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Zachary Mwangi Njeru",
+    "ward": "NYAKIO",
+    "constituency": "Kinangop",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/nyakio.png",
+    "nominated": false
+  },
+  {
+    "name": "Samuel Chege Gathirimu",
+    "ward": "GETA",
+    "constituency": "Kipipiri",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/geta.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Isaac Mbae Kamau",
+    "ward": "GITHIORO",
+    "constituency": "Kipipiri",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/githioro.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Paul Ngeche Wambaire",
+    "ward": "KIPIPIRI",
+    "constituency": "Kipipiri",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/kipipiri.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Isaac Kung’u Wanjiru",
+    "ward": "WANJOHI",
+    "constituency": "Kipipiri",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/wanjohi.png",
+    "nominated": false
+  },
+  {
+    "name": "Peter Maina Mwangi",
+    "ward": "CENTRAL",
+    "constituency": "Ndaragwa",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/central.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Milka Wanjiru Ndirangu",
+    "ward": "KIRIITA",
+    "constituency": "Ndaragwa",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/kiriita.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Peter Gathungu Kamau",
+    "ward": "LESHAU/PONDO",
+    "constituency": "Ndaragwa",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/leshau_pondo.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Reuben Gitau Karanja",
+    "ward": "SHAMATA",
+    "constituency": "Ndaragwa",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/shamata.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Paul Kiruka Mburu",
+    "ward": "CHARAGITA",
+    "constituency": "Ol Jorok",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/charagita.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Joseph Kuria Thuo",
+    "ward": "GATHANJI",
+    "constituency": "Ol Jorok",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/gathanji.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Duncan Chege Githinji",
+    "ward": "GATIMU",
+    "constituency": "Ol Jorok",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/gatimu.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Simon Mbogo Mburu",
+    "ward": "WERU",
+    "constituency": "Ol Jorok",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/weru.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Elijah Mwangi Nyaga",
+    "ward": "KAIMBAGA",
+    "constituency": "Ol Kalou",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/kaimbaga.jpg",
+    "nominated": false
+  },
+  {
+    "name": "John Thuo Gachino",
+    "ward": "KANJUIRI RANGE",
+    "constituency": "Ol Kalou",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/kanjuiri_range.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Daniel Gitau Ndung’u",
+    "ward": "KARAU",
+    "constituency": "Ol Kalou",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/karau.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Samuel Mathu Wainaina",
+    "ward": "MIRANGINE",
+    "constituency": "Ol Kalou",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/mirangine.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Peter Thinji Kiriga",
+    "ward": "RURII",
+    "constituency": "Ol Kalou",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/rurii.jpg",
+    "nominated": false
+  },
+  {
+    "name": "Mary Wanjiku Kabiru",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/mary_wanjiku_kabiru.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Sasha Sarah Ngima Wamae",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/sasha_sarah_ngima_wamae.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Patrick Muhindi Kariuki",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/patrick_muhindi_kariuki.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Benson Kiarie Njoki",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/benson_kiarie_njoki.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Babu Juliana Mugure",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/babu_juliana_mugure.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Cathryn Nyawira Mathenge",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/cathryn_nyawira_mathenge.png",
+    "nominated": true
+  },
+  {
+    "name": "Joyce Wanjiru Munyua",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/joyce_wanjiru_munyua.png",
+    "nominated": true
+  },
+  {
+    "name": "Stephen Muriithi Matimu",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/stephen_muriithi_matimu.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Milka Nyambura Mwangi",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/milka_nyambura_mwangi.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Esther Waithera Wangari",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/esther_waithera_wangari.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Carolyne Wangu Njarara",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/carolyne_wangu_njarara.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Maureen Wairimu Mugaki",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/maureen_wairimu_mugaki.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Lucy Kageni Kithinji",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/lucy_kageni_kithinji.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Naomi Muthoni Ngatia",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/naomi_muthoni_ngatia.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Patience Nyambura Manga",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/patience_nyambura_manga.jpg",
+    "nominated": true
+  },
+  {
+    "name": "Jane Gathira Njoroge",
+    "ward": "Nominated",
+    "constituency": "Nyandarua",
+    "county": "Nyandarua",
+    "seat_type": "mca",
+    "party": "",
+    "photo_url": "/photos/mcas/nyandarua/jane_gathira_njoroge.jpg",
+    "nominated": true
+  }
+]
