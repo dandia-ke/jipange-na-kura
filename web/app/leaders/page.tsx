@@ -455,52 +455,98 @@ export default function LeadersPage({ searchParams }: Props) {
       {/* Profile drawer */}
       {selected && (
         <div
-          style={{ position: 'fixed', inset: 0, zIndex: 9000, background: 'rgba(0,0,0,0.65)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          style={{ position: 'fixed', inset: 0, zIndex: 9000, background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(3px)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           onClick={(e) => { if (e.target === e.currentTarget) setSelected(null) }}
         >
-          <div style={{ background: 'white', borderRadius: 14, maxWidth: 600, width: '90%', maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
-            <button
-              onClick={() => setSelected(null)}
-              style={{ position: 'absolute', top: 12, right: 16, background: 'none', border: 'none', fontSize: '1.4rem', cursor: 'pointer', color: '#6b7280' }}
-            >✕</button>
-            <div style={{ padding: 24, paddingTop: 40 }}>
-              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.6rem', fontWeight: 900, marginBottom: 8 }}>{selected.name}</h2>
-              <div style={{ fontSize: '0.82rem', color: '#6b7280', marginBottom: 12 }}>{selected.party}</div>
-              {selected.constituency && (
-                <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 6 }}>
-                  <strong>{t('Constituency', 'Jimbo')}:</strong> {selected.constituency}
-                </div>
-              )}
-              {selected.ward && (
-                <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 6 }}>
-                  <strong>{t('Ward', 'Kata')}:</strong> {selected.ward}
-                </div>
-              )}
-              <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 12 }}>
-                <strong>{t('Age', 'Umri')}:</strong> {selected.age || '—'}
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#374151', marginBottom: 12 }}>
-                <strong>{t('Previous seats', 'Viti vya awali')}:</strong> {selected.prev_seats || '—'}
-              </div>
-              {selected.manifesto && selected.manifesto.length > 0 && (
-                <div style={{ marginBottom: 12 }}>
-                  <strong style={{ fontSize: '0.75rem' }}>{t('Manifesto / notes', 'Ilani / maelezo')}</strong>
-                  <ul style={{ paddingLeft: 18, marginTop: 4 }}>
-                    {selected.manifesto.map((m, i) => (
-                      <li key={i} style={{ fontSize: '0.75rem', color: '#374151' }}>{m}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              <div style={{ fontSize: '0.75rem', color: '#374151' }}>
-                <strong>{t('Verified contacts', 'Mawasiliano yaliyothibitishwa')}:</strong>{' '}
-                {selected.twitter
-                  ? <a href={`https://x.com/${selected.twitter}`} target="_blank" rel="noopener noreferrer" style={{ color: '#1d9bf0' }}>𝕏 @{selected.twitter}</a>
-                  : t('None', 'Hakuna')}
-                {selected.facebook && (
-                  <> / <a href={selected.facebook} target="_blank" rel="noopener noreferrer" style={{ color: '#1d9bf0' }}>Facebook</a></>
+          <div style={{ background: 'white', borderRadius: 14, maxWidth: 360, width: '90%', maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
+
+            {/* Dark header with photo */}
+            <div style={{ background: 'linear-gradient(135deg, #0a0a0a 0%, #1a3a1a 100%)', borderRadius: '14px 14px 0 0', position: 'relative' }}>
+              <button
+                onClick={() => setSelected(null)}
+                style={{ position: 'absolute', top: 10, right: 12, zIndex: 1, background: 'rgba(255,255,255,0.15)', border: 'none', borderRadius: '50%', width: 28, height: 28, fontSize: '1rem', lineHeight: 1, cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >✕</button>
+              {/* Full-width photo area */}
+              <div style={{ height: 220, overflow: 'hidden', borderRadius: '14px 14px 0 0', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {selected.photo_url ? (
+                  <img
+                    src={selected.photo_url.startsWith('http') ? selected.photo_url : `/${selected.photo_url}`}
+                    alt={selected.name}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }}
+                  />
+                ) : (
+                  <div style={{ color: '#4b5563', fontSize: '4rem', fontWeight: 700 }}>
+                    {selected.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+                  </div>
                 )}
               </div>
+              {/* Name + subtitle below photo */}
+              <div style={{ padding: '14px 24px 18px', textAlign: 'center' }}>
+                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.3rem', fontWeight: 900, color: 'white', margin: '0 0 4px' }}>{selected.name}</h2>
+                <div style={{ fontSize: '0.78rem', color: '#9ca3af' }}>
+                  {[selected.party, selected.constituency ?? selected.county].filter(Boolean).join(' · ')}
+                </div>
+              </div>
+            </div>
+
+            {/* Stat row */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: '1px solid #e2ddd6' }}>
+              {[
+                { label: t('Age', 'Umri'), value: selected.age || '—' },
+                { label: t('Ballot No.', 'Nambari'), value: selected.ballot_no != null ? `#${selected.ballot_no}` : '—' },
+                { label: t('Prev. Seats', 'Viti vya awali'), value: selected.prev_seats || '—' },
+              ].map((stat, i, arr) => (
+                <div key={stat.label} style={{ textAlign: 'center', padding: '12px 8px', borderRight: i < arr.length - 1 ? '1px solid #e2ddd6' : undefined }}>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: '1.05rem', color: '#0a0a0a' }}>{stat.value}</div>
+                  <div style={{ fontSize: '0.58rem', fontWeight: 700, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: 1, marginTop: 2 }}>{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Body sections */}
+            <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div>
+                <div style={{ fontSize: '0.63rem', fontWeight: 700, color: '#1a6b3c', textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 4 }}>{t('Party & Affiliation', 'Chama')}</div>
+                <div style={{ fontSize: '0.88rem', color: selected.party ? '#0a0a0a' : '#9ca3af', fontStyle: selected.party ? 'normal' : 'italic' }}>
+                  {selected.party || t('Not available', 'Haipatikani')}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: '0.63rem', fontWeight: 700, color: '#1a6b3c', textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 4 }}>{t('Previous Positions', 'Nafasi za Awali')}</div>
+                <div style={{ fontSize: '0.88rem', color: selected.prev_seats ? '#0a0a0a' : '#9ca3af', fontStyle: selected.prev_seats ? 'normal' : 'italic' }}>
+                  {selected.prev_seats || t('No previous positions on record', 'Hakuna rekodi ya nafasi za awali')}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: '0.63rem', fontWeight: 700, color: '#1a6b3c', textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 4 }}>{t('Key Manifesto Points', 'Pointi Kuu za Ilani')}</div>
+                {selected.manifesto && selected.manifesto.length > 0 ? (
+                  <ul style={{ paddingLeft: 16, margin: 0 }}>
+                    {selected.manifesto.map((m, i) => (
+                      <li key={i} style={{ fontSize: '0.84rem', color: '#374151', marginBottom: 4 }}>{m}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <div style={{ fontSize: '0.88rem', color: '#9ca3af', fontStyle: 'italic' }}>{t('Manifesto not available', 'Ilani haipatikani')}</div>
+                )}
+              </div>
+
+              {selected.twitter ? (
+                <a
+                  href={`https://x.com/${selected.twitter}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: 'block', padding: '13px', background: '#1a6b3c', color: 'white', borderRadius: 10, fontWeight: 700, fontSize: '0.92rem', fontFamily: "'DM Sans', sans-serif", textAlign: 'center', textDecoration: 'none', marginTop: 4 }}
+                >
+                  ✓ {t('View on', 'Angalia kwenye')} 𝕏 @{selected.twitter}
+                </a>
+              ) : (
+                <button
+                  onClick={() => setSelected(null)}
+                  style={{ width: '100%', padding: '13px', background: '#1a6b3c', color: 'white', border: 'none', borderRadius: 10, fontWeight: 700, fontSize: '0.92rem', fontFamily: "'DM Sans', sans-serif", cursor: 'pointer', marginTop: 4 }}
+                >
+                  ✓ {t('Close', 'Funga')}
+                </button>
+              )}
             </div>
           </div>
         </div>
