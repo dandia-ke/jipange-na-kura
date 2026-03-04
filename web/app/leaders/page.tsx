@@ -207,7 +207,7 @@ export default function LeadersPage({ searchParams }: Props) {
         </div>
 
         {/* Mode toggle tabs */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex flex-wrap gap-2 mb-6">
           {(['location', 'all'] as const).map((m) => (
             <button
               key={m}
@@ -218,7 +218,7 @@ export default function LeadersPage({ searchParams }: Props) {
                   : 'bg-white text-[#6b7280] border border-[#e2ddd6] hover:border-[#0a0a0a]'
               }`}
             >
-              {m === 'location' ? t('By Location', 'Kwa Eneo') : t('Browse All', 'Vinjari Wote')}
+              {m === 'location' ? `📍 ${t('By Location', 'Kwa Eneo')}` : `👥 ${t('Browse All Leaders', 'Vinjari Viongozi Wote')}`}
             </button>
           ))}
         </div>

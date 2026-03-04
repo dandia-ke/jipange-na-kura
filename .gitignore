@@ -29,8 +29,6 @@ __pycache__/
 # Temp / cache
 cache/
 
-# Preview assets (local only — not for production)
-leaders-preview.html
 # Root-level /photos/ is for local preview only (production photos live in web/public/photos/)
 /photos/
 # Root-level /public/ is a duplicate of web/public/ fragments (leading slash = root-only)

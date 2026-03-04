@@ -399,6 +399,14 @@ function main() {
     console.log(`  ✓ Fixed ${xIconFixes} corrupted 𝕏 icon(s)`)
   }
 
+  // ── Fix corrupted ● Browse All icon (U+25CF → E2 97 8F → mangled as U+00E2 U+2014 U+008F) ──
+  const CORRUPT_CIRCLE = '\u00E2\u2014\u008F'
+  const circleFixes = (html.split(CORRUPT_CIRCLE).length - 1)
+  if (circleFixes > 0) {
+    html = html.split(CORRUPT_CIRCLE).join('\u{1F465}')   // 👥
+    console.log(`  ✓ Fixed ${circleFixes} corrupted Browse All icon(s)`)
+  }
+
   // ── Update county <select> options (all 47 counties) ──
   const countySelectMarker = 'onchange="locationSetCounty(this.value)">'
   const csIdx = html.indexOf(countySelectMarker)
