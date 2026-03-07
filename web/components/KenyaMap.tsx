@@ -163,6 +163,7 @@ const KenyaMap = forwardRef<KenyaMapHandle, Props>(function KenyaMap(
         if (!mounted) return
         countyLayerRef.current = L.geoJSON(data, {
           style: defaultCountyStyle,
+          smoothFactor: 0,
           onEachFeature: (feature: any, layer: any) => {
             const displayName = PCODE_COUNTY[feature.properties.adm1_pcode] ?? feature.properties.adm1_name
             layer.bindTooltip(displayName, {
@@ -194,6 +195,7 @@ const KenyaMap = forwardRef<KenyaMapHandle, Props>(function KenyaMap(
 
         constLayerRef.current = L.geoJSON(data, {
           style: defaultConstStyle,
+          smoothFactor: 0,
           onEachFeature: (feature: any, layer: any) => {
             const displayName = PCODE_CONSTITUENCY[feature.properties.adm2_pcode] ?? feature.properties.adm2_name
             layer.bindTooltip(displayName, {

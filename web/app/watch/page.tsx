@@ -10,6 +10,12 @@ import { COUNTIES, COUNTY_CONSTITUENCIES, CONSTITUENCY_WARDS } from '@/lib/count
 import { fetchPollingStations, type PollingStation } from '@/lib/pollingStations'
 import { supabase, supabaseReady } from '@/lib/supabase'
 import { useLang } from '@/lib/LangContext'
+import { Turnstile } from '@marsidev/react-turnstile'
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ''
+const SUBMIT_REPORT_URL  = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/submit-report`
+  : ''
 
 const ELECTION_DATE = new Date('2027-08-12T06:00:00+03:00')
 
@@ -53,6 +59,8 @@ export default function WatchPage() {
   const [rfLng, setRfLng]             = useState<number | null>(null)
   const [rfStatus, setRfStatus]       = useState<{ msg: string; ok: boolean } | null>(null)
   const [submitting, setSubmitting]   = useState(false)
+  const [consented, setConsented]     = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const [reports, setReports]         = useState<any[]>([])
   const mapRef = useRef<KenyaMapHandle>(null)
 
@@ -106,7 +114,8 @@ export default function WatchPage() {
     if (!rfCounty || !rfConst) return setRfStatus({ msg: t('Please select county and constituency.', 'Tafadhali chagua kaunti na jimbo.'), ok: false })
     if (!rfDescription.trim()) return setRfStatus({ msg: t('Please describe what you observed.', 'Tafadhali elezea ulichokiona.'), ok: false })
     setSubmitting(true)
-    const payload: Record<string, unknown> = {
+    const payload = {
+      turnstileToken,
       category: reportCat,
       county: rfCounty,
       constituency: rfConst,
@@ -117,10 +126,28 @@ export default function WatchPage() {
       lat: rfLat,
       lng: rfLng,
     }
-    const { error } = await supabase.from('watch_reports').insert([payload])
+
+    let error: string | null = null
+    if (SUBMIT_REPORT_URL) {
+      // Use Edge Function (includes rate limiting + Turnstile verification)
+      const res = await fetch(SUBMIT_REPORT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        error = json.error ?? t('Error submitting report. Please try again.', 'Hitilafu ya kutuma ripoti. Tafadhali jaribu tena.')
+      }
+    } else {
+      // Fallback: direct Supabase insert (dev / no edge function)
+      const { error: sbErr } = await supabase.from('watch_reports').insert([payload])
+      if (sbErr) error = sbErr.message
+    }
+
     setSubmitting(false)
     if (error) {
-      setRfStatus({ msg: t('Error submitting report. Please try again.', 'Hitilafu ya kutuma ripoti. Tafadhali jaribu tena.'), ok: false })
+      setRfStatus({ msg: error, ok: false })
     } else {
       setRfStatus({ msg: t('✓ Report submitted! It will be reviewed before going live. Thank you.', '✓ Ripoti imetumwa! Itakaguliwa kabla ya kuonekana. Asante.'), ok: true })
       setReportCat('')
@@ -478,14 +505,44 @@ export default function WatchPage() {
                   </div>
                 )}
 
+                {/* Turnstile bot check */}
+                {TURNSTILE_SITE_KEY && (
+                  <Turnstile
+                    siteKey={TURNSTILE_SITE_KEY}
+                    onSuccess={setTurnstileToken}
+                    onExpire={() => setTurnstileToken(null)}
+                    options={{ theme: 'light', size: 'flexible' }}
+                  />
+                )}
+
+                {/* Consent */}
+                <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', cursor: 'pointer', fontSize: '0.78rem', color: '#374151', lineHeight: 1.5 }}>
+                  <input
+                    type="checkbox"
+                    checked={consented}
+                    onChange={e => setConsented(e.target.checked)}
+                    style={{ marginTop: 2, flexShrink: 0, accentColor: '#c0392b', width: 15, height: 15 }}
+                  />
+                  <span>
+                    {t(
+                      'I confirm that this report is based on my personal observation. I consent to my location data being used to verify this report in accordance with the ',
+                      'Nathibitisha kwamba ripoti hii inategemea uchunguzi wangu binafsi. Nakubaliana na matumizi ya data yangu ya mahali ili kuthibitisha ripoti hii kwa mujibu wa '
+                    )}
+                    <a href="/privacy" target="_blank" style={{ color: '#1a6b3c', fontWeight: 600 }}>
+                      {t('Privacy Policy', 'Sera ya Faragha')}
+                    </a>.
+                  </span>
+                </label>
+
                 <button
                   onClick={submitReport}
-                  disabled={submitting || rfStatus?.ok === true}
+                  disabled={submitting || rfStatus?.ok === true || !consented || (!!TURNSTILE_SITE_KEY && !turnstileToken)}
                   style={{
                     width: '100%', padding: 14, background: '#c0392b', color: 'white', border: 'none',
                     borderRadius: 10, fontWeight: 700, fontSize: '0.92rem',
-                    fontFamily: "'DM Sans', sans-serif", cursor: 'pointer',
-                    opacity: (submitting || rfStatus?.ok) ? 0.6 : 1,
+                    fontFamily: "'DM Sans', sans-serif",
+                    cursor: (consented && (!TURNSTILE_SITE_KEY || turnstileToken)) ? 'pointer' : 'not-allowed',
+                    opacity: (submitting || rfStatus?.ok || !consented || (!!TURNSTILE_SITE_KEY && !turnstileToken)) ? 0.6 : 1,
                   }}
                 >
                   {submitting ? t('Submitting…', 'Inawasilisha…') : t('Submit Report →', 'Wasilisha Ripoti →')}

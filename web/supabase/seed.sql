@@ -46,19 +46,26 @@ CREATE TABLE IF NOT EXISTS polling_stations (
   lng             numeric
 );
 
+-- RLS: polling_stations is read-only public data
+ALTER TABLE polling_stations ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public read polling_stations" ON polling_stations;
+CREATE POLICY "Public read polling_stations" ON polling_stations FOR SELECT USING (true);
+
 -- Election watch reports (used by the Watch page)
 CREATE TABLE IF NOT EXISTS watch_reports (
-  id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  county       text,
-  constituency text,
-  ward         text,
-  category     text,
-  description  text NOT NULL,
-  reporter     text,
-  phone        text,
-  lat          numeric,
-  lng          numeric,
-  created_at   timestamptz DEFAULT now()
+  id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  county          text,
+  constituency    text,
+  ward            text,
+  polling_station text,
+  category        text,
+  description     text NOT NULL,
+  reporter        text,
+  phone           text,
+  lat             numeric,
+  lng             numeric,
+  reporter_ip     text,
+  created_at      timestamptz DEFAULT now()
 );
 
 -- Row Level Security: allow public SELECT and anon INSERT on watch_reports
@@ -66,7 +73,7 @@ ALTER TABLE watch_reports ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Public read reports" ON watch_reports;
 CREATE POLICY "Public read reports" ON watch_reports FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Anon insert reports" ON watch_reports;
-CREATE POLICY "Anon insert reports" ON watch_reports FOR INSERT WITH CHECK (true);
+CREATE POLICY "Anon insert reports" ON watch_reports FOR INSERT WITH CHECK (auth.role() = 'anon');
 
 -- Candidate submissions (profile requests by potential candidates)
 CREATE TABLE IF NOT EXISTS candidate_submissions (

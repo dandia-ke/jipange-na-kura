@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
   },
   "dependencies": {
+    "@marsidev/react-turnstile": "^1.4.2",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.98.0",
     "@types/leaflet": "^1.9.21",
@@ -20,6 +23,7 @@
     "react-leaflet": "^5.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
