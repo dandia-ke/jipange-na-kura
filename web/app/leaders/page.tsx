@@ -44,6 +44,12 @@ export default function LeadersPage({ searchParams }: Props) {
   const [browseOffset, setBrowseOffset]   = useState(0)
   const BROWSE_PAGE = 50
 
+  // ── Browse All: additional filters ────────────────────────
+  const [browseCounty, setBrowseCounty] = useState('')
+  const [browseConst, setBrowseConst]   = useState('')
+  const [browseWard, setBrowseWard]     = useState('')
+  const [browseParty, setBrowseParty]   = useState('')
+
   // ── By Location loading ───────────────────────────────────
   const [locationLoading, setLocationLoading] = useState(false)
 
@@ -114,27 +120,32 @@ export default function LeadersPage({ searchParams }: Props) {
     setBrowseLeaders([])
     setBrowseOffset(0)
     setBrowseHasMore(false)
-    supabase
+    setBrowseConst('')
+    setBrowseWard('')
+    setBrowseParty('')
+    let q = supabase
       .from('current_leaders')
       .select('*', { count: 'exact' })
       .eq('seat_type', browseSeat)
       .order('county')
-      .range(0, BROWSE_PAGE - 1)
+    if (browseCounty) q = q.eq('county', browseCounty) as typeof q
+    q.range(0, BROWSE_PAGE - 1)
       .then(({ data, count }) => {
         setBrowseLeaders((data as Leader[]) ?? [])
         setBrowseOffset(BROWSE_PAGE)
         setBrowseHasMore((count ?? 0) > BROWSE_PAGE)
         setBrowseLoading(false)
       })
-  }, [mode, browseSeat])
+  }, [mode, browseSeat, browseCounty])
 
   function loadMoreBrowse() {
-    supabase
+    let q = supabase
       .from('current_leaders')
       .select('*')
       .eq('seat_type', browseSeat)
       .order('county')
-      .range(browseOffset, browseOffset + BROWSE_PAGE - 1)
+    if (browseCounty) q = q.eq('county', browseCounty) as typeof q
+    q.range(browseOffset, browseOffset + BROWSE_PAGE - 1)
       .then(({ data }) => {
         const rows = (data as Leader[]) ?? []
         setBrowseLeaders(prev => [...prev, ...rows])
@@ -154,13 +165,24 @@ export default function LeadersPage({ searchParams }: Props) {
   const wards          = constituency ? (CONSTITUENCY_WARDS[constituency] ?? []) : []
 
   // ── Browse All: filter + group by county ──────────────────
-  const filteredBrowse = browseSearch.trim()
-    ? browseLeaders.filter(l =>
-        l.name.toLowerCase().includes(browseSearch.toLowerCase()) ||
-        (l.constituency ?? '').toLowerCase().includes(browseSearch.toLowerCase()) ||
-        (l.ward ?? '').toLowerCase().includes(browseSearch.toLowerCase())
-      )
-    : browseLeaders
+  const browseConstituencies = browseCounty ? (COUNTY_CONSTITUENCIES[browseCounty] ?? []) : []
+  const browseWards          = browseConst  ? (CONSTITUENCY_WARDS[browseConst]      ?? []) : []
+  const uniqueParties        = [...new Set(browseLeaders.map(l => l.party).filter(Boolean))] as string[]
+
+  const filteredBrowse = browseLeaders.filter(l => {
+    if (browseSearch.trim()) {
+      const q = browseSearch.toLowerCase()
+      if (
+        !l.name.toLowerCase().includes(q) &&
+        !(l.constituency ?? '').toLowerCase().includes(q) &&
+        !(l.ward ?? '').toLowerCase().includes(q)
+      ) return false
+    }
+    if (browseConst && l.constituency !== browseConst) return false
+    if (browseWard  && (l.ward ?? '').toLowerCase() !== browseWard.toLowerCase()) return false
+    if (browseParty && l.party !== browseParty) return false
+    return true
+  })
 
   const browseByCounty = filteredBrowse.reduce<Record<string, Leader[]>>((acc, l) => {
     const key = l.county || 'Unknown'
@@ -248,7 +270,7 @@ export default function LeadersPage({ searchParams }: Props) {
               {(['governor', 'senator', 'womenrep', 'mp', 'mca'] as const).map((seat) => (
                 <button
                   key={seat}
-                  onClick={() => { setBrowseSeat(seat); setBrowseSearch('') }}
+                  onClick={() => { setBrowseSeat(seat); setBrowseSearch(''); setBrowseCounty(''); setBrowseConst(''); setBrowseWard(''); setBrowseParty('') }}
                   className={`px-4 py-2 rounded-full text-[0.78rem] font-bold transition-all ${
                     browseSeat === seat
                       ? 'bg-[#1a6b3c] text-white'
@@ -260,8 +282,44 @@ export default function LeadersPage({ searchParams }: Props) {
               ))}
             </div>
 
+            {/* Location cascade filter */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              <select
+                value={browseCounty}
+                onChange={e => { setBrowseCounty(e.target.value); setBrowseConst(''); setBrowseWard(''); setBrowseParty('') }}
+                className={`w-full px-3 py-2.5 rounded-xl border text-sm font-medium focus:outline-none focus:border-[#1a6b3c] ${browseCounty ? 'border-[#1a6b3c] bg-[#f0faf4] text-[#1a6b3c]' : 'border-[#e2ddd6] bg-white text-[#0a0a0a]'}`}
+              >
+                <option value="">{t('All Counties', 'Kaunti Zote')}</option>
+                {COUNTIES.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+
+              {(browseSeat === 'mp' || browseSeat === 'mca') && (
+                <select
+                  value={browseConst}
+                  onChange={e => { setBrowseConst(e.target.value); setBrowseWard('') }}
+                  disabled={!browseCounty}
+                  className={`w-full px-3 py-2.5 rounded-xl border text-sm font-medium focus:outline-none focus:border-[#1a6b3c] disabled:opacity-40 disabled:cursor-not-allowed ${browseConst ? 'border-[#1a6b3c] bg-[#f0faf4] text-[#1a6b3c]' : 'border-[#e2ddd6] bg-white text-[#0a0a0a]'}`}
+                >
+                  <option value="">{t('All Constituencies', 'Majimbo Yote')}</option>
+                  {browseConstituencies.sort().map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+              )}
+
+              {browseSeat === 'mca' && (
+                <select
+                  value={browseWard}
+                  onChange={e => setBrowseWard(e.target.value)}
+                  disabled={!browseConst}
+                  className={`w-full px-3 py-2.5 rounded-xl border text-sm font-medium focus:outline-none focus:border-[#1a6b3c] disabled:opacity-40 disabled:cursor-not-allowed ${browseWard ? 'border-[#1a6b3c] bg-[#f0faf4] text-[#1a6b3c]' : 'border-[#e2ddd6] bg-white text-[#0a0a0a]'}`}
+                >
+                  <option value="">{t('All Wards', 'Kata Zote')}</option>
+                  {browseWards.sort().map(w => <option key={w} value={w}>{w}</option>)}
+                </select>
+              )}
+            </div>
+
             {/* Search */}
-            <div className="relative mb-6">
+            <div className="relative mb-4">
               <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9ca3af] text-[0.9rem]">🔍</span>
               <input
                 type="text"
@@ -270,6 +328,41 @@ export default function LeadersPage({ searchParams }: Props) {
                 placeholder={t('Search by name, constituency or ward…', 'Tafuta kwa jina, jimbo au kata…')}
                 className="w-full pl-9 pr-4 py-3 rounded-xl border border-[#e2ddd6] bg-white text-[#0a0a0a] text-sm focus:outline-none focus:border-[#1a6b3c]"
               />
+            </div>
+
+            {/* Party pills */}
+            {uniqueParties.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-5">
+                {uniqueParties.map(party => (
+                  <button
+                    key={party}
+                    onClick={() => setBrowseParty(prev => prev === party ? '' : party)}
+                    className={`px-3 py-1.5 rounded-full text-[0.72rem] font-bold border transition-all ${
+                      browseParty === party
+                        ? 'bg-[#0a0a0a] text-white border-[#0a0a0a]'
+                        : 'bg-white text-[#374151] border-[#e2ddd6] hover:border-[#0a0a0a]'
+                    }`}
+                  >{party}</button>
+                ))}
+              </div>
+            )}
+
+            {/* Result count */}
+            <div className="flex items-center justify-between mb-4 text-[0.78rem] text-[#6b7280]">
+              <span>
+                {t('Showing', 'Inaonyesha')} <strong className="text-[#0a0a0a]">{filteredBrowse.length}</strong>{' '}
+                {SEAT_LABELS[browseSeat]?.en ?? browseSeat}
+                {browseCounty ? ` ${t('in', 'katika')} ${browseCounty}` : ''}
+                {browseConst  ? ` · ${browseConst}` : ''}
+                {browseWard   ? ` · ${browseWard}` : ''}
+                {browseParty  ? ` · ${browseParty}` : ''}
+              </span>
+              {(browseCounty || browseConst || browseWard || browseParty || browseSearch) && (
+                <button
+                  onClick={() => { setBrowseCounty(''); setBrowseConst(''); setBrowseWard(''); setBrowseParty(''); setBrowseSearch('') }}
+                  className="text-[#c0392b] font-semibold hover:underline"
+                >✕ {t('Clear', 'Futa')}</button>
+              )}
             </div>
 
             {browseLoading ? (

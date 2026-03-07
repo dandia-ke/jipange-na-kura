@@ -114,7 +114,7 @@
     "county": "GARISSA",
     "seat_type": "mca",
     "party": "TBD",
-    "photo_url": "photos/mcas/garissa/fafi.jpeg"
+    "photo_url": null
   },
   {
     "name": "ABDI MUHIDIN ABDI",
@@ -204,7 +204,7 @@
     "county": "GARISSA",
     "seat_type": "mca",
     "party": "TBD",
-    "photo_url": "photos/mcas/garissa/modogashe.jpeg"
+    "photo_url": null
   },
   {
     "name": "ABDIRAHMAN MUKTAR",
@@ -213,7 +213,7 @@
     "county": "GARISSA",
     "seat_type": "mca",
     "party": "TBD",
-    "photo_url": "photos/mcas/garissa/ijara.jpeg"
+    "photo_url": null
   },
   {
     "name": "ABDIHAKIM",
@@ -222,7 +222,7 @@
     "county": "GARISSA",
     "seat_type": "mca",
     "party": "TBD",
-    "photo_url": "photos/mcas/garissa/bura.jpeg"
+    "photo_url": null
   },
   {
     "name": "NOOR",
@@ -231,7 +231,7 @@
     "county": "GARISSA",
     "seat_type": "mca",
     "party": "TBD",
-    "photo_url": "photos/mcas/garissa/jarajila.jpeg"
+    "photo_url": null
   },
   {
     "name": "OMAR",
@@ -240,7 +240,7 @@
     "county": "GARISSA",
     "seat_type": "mca",
     "party": "TBD",
-    "photo_url": "photos/mcas/garissa/damajale.jpeg"
+    "photo_url": null
   },
   {
     "name": "DAAR",
@@ -249,7 +249,7 @@
     "county": "GARISSA",
     "seat_type": "mca",
     "party": "TBD",
-    "photo_url": "photos/mcas/garissa/balambala.jpeg"
+    "photo_url": null
   },
   {
     "name": "ABDIQAYUM",
@@ -258,7 +258,7 @@
     "county": "GARISSA",
     "seat_type": "mca",
     "party": "TBD",
-    "photo_url": "photos/mcas/garissa/benane.jpeg"
+    "photo_url": null
   },
   {
     "name": "FAKHRUDIN",
@@ -267,6 +267,6 @@
     "county": "GARISSA",
     "seat_type": "mca",
     "party": "TBD",
-    "photo_url": "photos/mcas/garissa/goreale.jpeg"
+    "photo_url": null
   }
 ]

@@ -1,0 +1,121 @@
+[
+  {
+    "name": "Ngahu Benson Waweru",
+    "ward": "Gathigiriri",
+    "constituency": "Mwea",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Njamumo Jinaro Namu",
+    "ward": "Mutithi",
+    "constituency": "Mwea",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Njiru Peter Gitonga",
+    "ward": "Wamumu",
+    "constituency": "Mwea",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "David Kinyua Wangui",
+    "ward": "Mutira",
+    "constituency": "Kirinyaga Central",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Gakuru Geoffrey Murimi",
+    "ward": "Kiine",
+    "constituency": "Kirinyaga Central",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Mbungu Daniel Muriithi",
+    "ward": "Ngariama",
+    "constituency": "Kirinyaga East",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Munyi David Mathenge",
+    "ward": "Baragwi",
+    "constituency": "Kirinyaga Central",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Waziri Moses Migwi",
+    "ward": "Kanyekiini",
+    "constituency": "Kirinyaga North",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Ndambiri Kenneth Mwendia",
+    "ward": "Nyangati",
+    "constituency": "Kirinyaga East",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Njiru James Wambu",
+    "ward": "Kangai",
+    "constituency": "Kirinyaga East",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Muthura Joseph Kiragu",
+    "ward": "Thiba",
+    "constituency": "Mwea",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Muriithi Caroline Wanjiku",
+    "ward": "Karumandi",
+    "constituency": "Kirinyaga North",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Mbogo Isaiah Muriithi",
+    "ward": "Kabare",
+    "constituency": "Kirinyaga North",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Muchina Eric Muriithi",
+    "ward": "Kerugoya",
+    "constituency": "Kirinyaga Central",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Karinga Peter Muthii",
+    "ward": "Tebere",
+    "constituency": "Mwea",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Kathuri Timothy Kariuki",
+    "ward": "Njukiini",
+    "constituency": "Kirinyaga North",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  },
+  {
+    "name": "Nyaga Charles Nyamu",
+    "ward": "Murinduko",
+    "constituency": "Kirinyaga East",
+    "county": "Kirinyaga",
+    "seat_type": "mca"
+  }
+]

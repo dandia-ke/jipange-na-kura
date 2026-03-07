@@ -58,6 +58,136 @@ const PLACEHOLDER_CANDIDATES: Candidate[] = [
   { name: 'Candidate 4', party: 'Wiper',   number: 4, age: '—', emoji: '👤', bg: '#f0fdf4' },
 ]
 
+// ── FPL pitch colours per party ──
+const PARTY_JERSEY: Record<string, { bg: string; color: string }> = {
+  'UDA':         { bg: 'linear-gradient(160deg,#f59e0b 40%,#78350f)', color: '#000' },
+  'ODM':         { bg: 'linear-gradient(160deg,#f97316 40%,#7c2d12)', color: '#fff' },
+  'JP':          { bg: 'linear-gradient(160deg,#ef4444 40%,#7f1d1d)', color: '#fff' },
+  'WDM-K':       { bg: 'linear-gradient(160deg,#fb923c 40%,#9a3412)', color: '#fff' },
+  'DAP-K':       { bg: 'linear-gradient(160deg,#3b82f6 40%,#1e3a8a)', color: '#fff' },
+  'FORD-K':      { bg: 'linear-gradient(160deg,#10b981 40%,#064e3b)', color: '#fff' },
+  'KANU':        { bg: 'linear-gradient(160deg,#dc2626 40%,#450a0a)', color: '#fff' },
+  'CCM':         { bg: 'linear-gradient(160deg,#0891b2 40%,#0c4a6e)', color: '#fff' },
+  'Jubilee':     { bg: 'linear-gradient(160deg,#7c3aed 40%,#2e1065)', color: '#fff' },
+  'Independent': { bg: 'linear-gradient(160deg,#6b7280 40%,#111827)', color: '#fff' },
+}
+const DEFAULT_JERSEY = { bg: 'linear-gradient(160deg,#37003c 40%,#0f0020)', color: '#fff' }
+
+function FplOverlay({ selections, county, constit, onClose, t }: {
+  selections: Record<string, Candidate | null>
+  county: string; constit: string
+  onClose: () => void
+  t: (en: string, sw: string) => string
+}) {
+  const pitchRef = useRef<HTMLDivElement>(null)
+
+  async function saveImage() {
+    if (!pitchRef.current) return
+    try {
+      const html2canvas = (await import('html2canvas')).default
+      const canvas = await html2canvas(pitchRef.current, { useCORS: true, scale: 2, backgroundColor: null })
+      const link = document.createElement('a')
+      link.download = 'my-ballot-squad.png'
+      link.href = canvas.toDataURL('image/png')
+      link.click()
+    } catch { /* silent fail — user can screenshot */ }
+  }
+
+  const rows = [
+    { seats: [{ key: 'president',  label: 'President' }] },
+    { seats: [{ key: 'governor', label: 'Governor' }, { key: 'senator', label: 'Senator' }, { key: 'women_rep', label: 'Women Rep' }] },
+    { seats: [{ key: 'mp',       label: 'MP' }] },
+    { seats: [{ key: 'mca',      label: 'MCA' }] },
+  ]
+
+  const filled = Object.values(selections).filter(Boolean).length
+  const loc = [constit, county].filter(Boolean).join(' · ')
+
+  function PlayerCard({ seatKey, label }: { seatKey: string; label: string }) {
+    const cand = selections[seatKey]
+    const jersey = cand ? (PARTY_JERSEY[cand.party] ?? DEFAULT_JERSEY) : DEFAULT_JERSEY
+    const surname = cand ? cand.name.split(' ').slice(-1)[0] : ''
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 72 }}>
+        <div style={{
+          width: 54, height: 54, borderRadius: '50%', background: cand ? jersey.bg : 'rgba(255,255,255,0.1)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: cand ? '1.4rem' : '1.2rem', border: '2px solid rgba(255,255,255,0.3)',
+          transition: 'transform 0.15s', position: 'relative', flexShrink: 0,
+        }}>
+          {cand?.photo_url
+            ? <img src={cand.photo_url.startsWith('http') ? cand.photo_url : `/${cand.photo_url}`} alt={cand.name}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+            : <span>{cand ? (cand.emoji || '👤') : '❓'}</span>
+          }
+          {seatKey === 'president' && cand && (
+            <div style={{ position: 'absolute', top: -4, right: -4, width: 18, height: 18, borderRadius: '50%', background: '#d4a017', color: '#000', fontSize: '0.55rem', fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>C</div>
+          )}
+        </div>
+        <div style={{ color: 'white', fontSize: '0.6rem', fontWeight: 700, textAlign: 'center', maxWidth: 68, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginTop: 4 }}>
+          {cand ? surname : t('No Pick', 'Hakuna')}
+        </div>
+        <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.52rem', textAlign: 'center' }}>{label}</div>
+        {cand && (
+          <div style={{ fontSize: '0.48rem', fontWeight: 700, color: 'white', background: 'rgba(0,0,0,0.45)', borderRadius: 4, padding: '1px 5px', marginTop: 2, maxWidth: 68, textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {cand.party}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  return (
+    <div
+      onClick={e => { if (e.target === e.currentTarget) onClose() }}
+      style={{ position: 'fixed', inset: 0, zIndex: 2000, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(6px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px' }}
+    >
+      <div style={{ width: '100%', maxWidth: 480 }}>
+        {/* Pitch */}
+        <div ref={pitchRef} style={{
+          position: 'relative', background: 'linear-gradient(180deg,#1a5c2a 0%,#1e7a30 40%,#1a5c2a 100%)',
+          borderRadius: 16, overflow: 'hidden', padding: '24px 16px 16px',
+          border: '2px solid rgba(255,255,255,0.2)',
+        }}>
+          {/* Pitch markings */}
+          <div style={{ position: 'absolute', top: '50%', left: '10%', right: '10%', height: 1, background: 'rgba(255,255,255,0.15)' }} />
+          <div style={{ position: 'absolute', top: '12%', left: '25%', right: '25%', bottom: '12%', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 4 }} />
+
+          {/* Title */}
+          <div style={{ textAlign: 'center', marginBottom: 20 }}>
+            <div style={{ color: 'white', fontFamily: "'Playfair Display', serif", fontWeight: 900, fontSize: '1.1rem', letterSpacing: 1 }}>
+              🇰🇪 {t('My Ballot Squad', 'Timu Yangu ya Kura')}
+            </div>
+            <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.65rem', marginTop: 2 }}>
+              {loc}{loc ? ' — ' : ''}{filled}/6 {t('picked', 'waliochaguliwa')}
+            </div>
+          </div>
+
+          {/* Formation rows */}
+          {rows.map((row, ri) => (
+            <div key={ri} style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: ri < rows.length - 1 ? 20 : 8 }}>
+              {row.seats.map(s => <PlayerCard key={s.key} seatKey={s.key} label={s.label} />)}
+            </div>
+          ))}
+
+          {/* Formation label */}
+          <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: '0.62rem', fontWeight: 700, letterSpacing: 2, marginTop: 4 }}>1-3-1-1</div>
+        </div>
+
+        {/* Actions */}
+        <div style={{ display: 'flex', gap: 10, marginTop: 14, justifyContent: 'center' }}>
+          <button onClick={saveImage} style={{ background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.3)', padding: '10px 22px', borderRadius: 8, fontFamily: 'inherit', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}>
+            📸 {t('Save Image', 'Hifadhi Picha')}
+          </button>
+          <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.15)', padding: '10px 22px', borderRadius: 8, fontFamily: 'inherit', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>
+            ✕ {t('Close', 'Funga')}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function PlannerPage() {
   const { t } = useLang()
   const [step, setStep]       = useState<Step>('location')
@@ -79,6 +209,7 @@ export default function PlannerPage() {
   const [toast, setToast]               = useState('')
   const [gpsStatus, setGpsStatus]       = useState<GpsStatus>('idle')
   const [gpsError, setGpsError]         = useState('')
+  const [showFpl, setShowFpl]           = useState(false)
   const [pollingOpen, setPollingOpen]         = useState(false)
   const [selectedStation, setSelectedStation] = useState<string>('')
   const [pollingStations, setPollingStations] = useState<PollingStation[]>([])
@@ -677,6 +808,7 @@ export default function PlannerPage() {
 
           <div style={{ display: 'flex', gap: 12, marginTop: 28, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button onClick={() => window.print()} style={{ background: '#0a0a0a', color: 'white', padding: '14px 28px', borderRadius: 6, fontFamily: 'inherit', fontWeight: 700, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.95rem' }}>🖨️ {t('Print Ballot Plan', 'Chapisha Mpango wa Kura')}</button>
+            <button onClick={() => setShowFpl(true)} style={{ background: 'linear-gradient(135deg, #37003c 0%, #6a0dad 100%)', color: 'white', padding: '14px 28px', borderRadius: 6, fontFamily: 'inherit', fontWeight: 700, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.95rem' }}>⚽ {t('FPL View', 'Mwonekano wa Timu')}</button>
             <button onClick={restart} style={{ background: '#1a6b3c', color: 'white', padding: '14px 28px', borderRadius: 6, fontFamily: 'inherit', fontWeight: 700, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.95rem' }}>↺ {t('Start Over', 'Anza Upya')}</button>
           </div>
 
@@ -695,6 +827,17 @@ export default function PlannerPage() {
           </div>
         </div>
       )}
+      {/* ── FPL VIEW OVERLAY ── */}
+      {showFpl && (
+        <FplOverlay
+          selections={selections}
+          county={county}
+          constit={constit}
+          onClose={() => setShowFpl(false)}
+          t={t}
+        />
+      )}
+
       {/* ── CANDIDATE PROFILE MODAL ── */}
       {profileCand && (
         <div

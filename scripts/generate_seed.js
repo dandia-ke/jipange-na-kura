@@ -123,14 +123,15 @@ for (const mp of mps) {
 }
 console.log(`MPs: ${mps.length} rows, ${mpPhotos} photos`)
 
-// ── 2. MCAs from scraped_data/ (21 county files) ─────────────────────────────
+// ── 2. MCAs from scraped_data/ (27 county files) ─────────────────────────────
 const SCRAPED_COUNTY_NAMES = {
-  baringo: 'Baringo', elgeyo_marakwet: 'Elgeyo-Marakwet', embu: 'Embu',
-  garissa: 'Garissa', isiolo: 'Isiolo', kiambu: 'Kiambu', kilifi: 'Kilifi',
-  kwale: 'Kwale', machakos: 'Machakos', makueni: 'Makueni', marsabit: 'Marsabit',
+  baringo: 'Baringo', bomet: 'Bomet', busia: 'Busia', elgeyo_marakwet: 'Elgeyo-Marakwet', embu: 'Embu',
+  garissa: 'Garissa', isiolo: 'Isiolo', kiambu: 'Kiambu', kilifi: 'Kilifi', kirinyaga: 'Kirinyaga',
+  kisii: 'Kisii', kwale: 'Kwale', laikipia: 'Laikipia', machakos: 'Machakos', makueni: 'Makueni',
+  mandera: 'Mandera', marsabit: 'Marsabit', muranga: 'Murang\'a',
   nyandarua: 'Nyandarua', nyeri: 'Nyeri', samburu: 'Samburu',
   taitataveta: 'Taita Taveta', tanariver: 'Tana River', tharakanithi: 'Tharaka-Nithi',
-  uasin_gishu: 'Uasin Gishu', west_pokot: 'West Pokot',
+  trans_nzoia: 'Trans Nzoia', uasin_gishu: 'Uasin Gishu', west_pokot: 'West Pokot',
 }
 
 for (const [fileKey, countyName] of Object.entries(SCRAPED_COUNTY_NAMES)) {
@@ -140,8 +141,8 @@ for (const [fileKey, countyName] of Object.entries(SCRAPED_COUNTY_NAMES)) {
   let added = 0
   for (const m of mcas) {
     if (!m.name || m.name.toLowerCase().includes('speaker')) continue
-    // photo_url in scraped data has leading slash — strip it
-    const rawPhoto = m.photo_url ? m.photo_url.replace(/^\//, '') : null
+    // photo_url or photo in scraped data may have leading slash — strip it
+    const rawPhoto = (m.photo_url || m.photo) ? (m.photo_url || m.photo).replace(/^\//, '') : findMcaPhoto(countyName, m.ward, m.name)
     rows.push({
       name: m.name, party: m.party || null,
       seat_type: 'mca', county: countyName,
@@ -231,6 +232,30 @@ for (const [fileKey, countyName] of Object.entries(SCRAPED_COUNTY_NAMES)) {
     added++
   }
   console.log(`  Turkana (members): ${added} MCAs`)
+}
+
+// ── 7. Photo-only counties (Bomet, Kajiado, Kericho, Laikipia) ───────────────
+// These counties have photos on disk named by person slug but no separate data file.
+// Names are reconstructed from filenames; ward/constituency filled in later.
+{
+  const PHOTO_ONLY_COUNTIES = [
+    { county: 'Kajiado',  folder: 'kajiado',  sep: '_' },
+    { county: 'Kericho',  folder: 'kericho',  sep: '_' },
+  ]
+  for (const { county, folder, sep } of PHOTO_ONLY_COUNTIES) {
+    const dir = path.join(ROOT, 'web/public/photos/mcas', folder)
+    if (!fs.existsSync(dir)) { console.warn(`  WARN: no photos folder for ${county}`); continue }
+    const files = fs.readdirSync(dir)
+    let added = 0
+    for (const file of files) {
+      const slug = file.replace(/\.(jpg|jpeg|png)$/i, '')
+      const name = slug.split(sep).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+      const photo_url = `photos/mcas/${folder}/${file}`
+      rows.push({ name, party: null, seat_type: 'mca', county, constituency: null, ward: null, photo_url })
+      added++
+    }
+    console.log(`  ${county} (photos): ${added} MCAs`)
+  }
 }
 
 // ─── Generate SQL ─────────────────────────────────────────────────────────────

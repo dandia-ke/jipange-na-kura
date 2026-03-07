@@ -40,16 +40,6 @@
     "nominated": false
   },
   {
-    "name": "Karuku Wanja",
-    "ward": "Nominated",
-    "constituency": "Tharaka-Nithi",
-    "county": "Tharaka-Nithi",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/tharaka_nithi/karuku_wanja.jpg",
-    "nominated": true
-  },
-  {
     "name": "Ntwiga Nevert",
     "ward": "MITHERU",
     "constituency": "Maara",
@@ -58,36 +48,6 @@
     "party": "",
     "photo_url": "/photos/mcas/tharaka_nithi/mitheru.jpg",
     "nominated": false
-  },
-  {
-    "name": "Purity Wanja M'Rithaa",
-    "ward": "Nominated",
-    "constituency": "Tharaka-Nithi",
-    "county": "Tharaka-Nithi",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/tharaka_nithi/purity_wanja_m_rithaa.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Murungi Rael Fatuma",
-    "ward": "Nominated",
-    "constituency": "Tharaka-Nithi",
-    "county": "Tharaka-Nithi",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/tharaka_nithi/murungi_rael_fatuma.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Riungu Nancy Muthoni",
-    "ward": "Nominated",
-    "constituency": "Tharaka-Nithi",
-    "county": "Tharaka-Nithi",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/tharaka_nithi/riungu_nancy_muthoni.jpg",
-    "nominated": true
   },
   {
     "name": "Anita Karimi Mbae",
@@ -140,16 +100,6 @@
     "nominated": false
   },
   {
-    "name": "Kathuni Risper Gakii",
-    "ward": "Nominated",
-    "constituency": "Tharaka-Nithi",
-    "county": "Tharaka-Nithi",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/tharaka_nithi/kathuni_risper_gakii.jpg",
-    "nominated": true
-  },
-  {
     "name": "Mbae Lysbeth Gateria",
     "ward": "GANGA",
     "constituency": "Maara",
@@ -168,16 +118,6 @@
     "party": "",
     "photo_url": "/photos/mcas/tharaka_nithi/chiakariga.jpg",
     "nominated": false
-  },
-  {
-    "name": "Lucy Muthoni Ndiga",
-    "ward": "Nominated",
-    "constituency": "Tharaka-Nithi",
-    "county": "Tharaka-Nithi",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/tharaka_nithi/lucy_muthoni_ndiga.jpg",
-    "nominated": true
   },
   {
     "name": "Justin Kithinji Nderi",
@@ -208,25 +148,5 @@
     "party": "",
     "photo_url": "/photos/mcas/tharaka_nithi/gatunga.jpg",
     "nominated": false
-  },
-  {
-    "name": "Mwaura Joel Mwangi",
-    "ward": "Nominated",
-    "constituency": "Tharaka-Nithi",
-    "county": "Tharaka-Nithi",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/tharaka_nithi/mwaura_joel_mwangi.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Njagi Zachariah Mwaniki",
-    "ward": "Nominated",
-    "constituency": "Tharaka-Nithi",
-    "county": "Tharaka-Nithi",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/tharaka_nithi/njagi_zachariah_mwaniki.jpg",
-    "nominated": true
   }
 ]

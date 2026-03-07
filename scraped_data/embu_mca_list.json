@@ -60,16 +60,6 @@
     "nominated": false
   },
   {
-    "name": "Gakungugu Agnes Wanjiru",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/gakungugu_agnes_wanjiru.jpg",
-    "nominated": true
-  },
-  {
     "name": "Karuri Julius Njagi",
     "ward": "KITHIMU",
     "constituency": "Manyatta",
@@ -78,36 +68,6 @@
     "party": "",
     "photo_url": "/photos/mcas/embu/kithimu.jpg",
     "nominated": false
-  },
-  {
-    "name": "Augustin James Njeru",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/augustin_james_njeru.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Nyaga Maureen Kagendo",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/nyaga_maureen_kagendo.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Mati Yvonne Karambu",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/mati_yvonne_karambu.jpg",
-    "nominated": true
   },
   {
     "name": "Mbui Duncan Ireri",
@@ -238,65 +198,5 @@
     "party": "",
     "photo_url": "/photos/mcas/embu/kyeni_south.jpg",
     "nominated": false
-  },
-  {
-    "name": "Njiru Anne Lily",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/njiru_anne_lily.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Kavinda Mary Igoki",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/kavinda_mary_igoki.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Njued Jane Karimi",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/njued_jane_karimi.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Githinji Daniel",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/githinji_daniel.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Jimiah Jennifer",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/jimiah_jennifer.jpg",
-    "nominated": true
-  },
-  {
-    "name": "Muthoni Susan Mwende",
-    "ward": "Nominated",
-    "constituency": "Embu",
-    "county": "Embu",
-    "seat_type": "mca",
-    "party": "",
-    "photo_url": "/photos/mcas/embu/muthoni_susan_mwende.jpg",
-    "nominated": true
   }
 ]
